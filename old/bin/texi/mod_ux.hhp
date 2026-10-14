@@ -1,0 +1,14 @@
+[OPTIONS]
+Compatibility=1.1 or later
+Compiled file=mod_ux.chm
+Contents file=mod_ux.hhc
+Default topic=mod_ux_title.htm
+Display compile progress=No
+Full-text search=Yes
+Index file=mod_ux.hhk
+Language=0x409 English (United States)
+Title=
+
+[FILES]
+mod_ux_title.htm
+[INFOTYPES]

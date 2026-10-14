@@ -1,25 +1,25 @@
 
 
 
-all : /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/lib/trial.a /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/dll/trial.so /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/texi/mod_trial.texi
+all : /workspace/old/bin/mod/lib/trial.a /workspace/old/bin/mod/dll/trial.so /workspace/old/bin/texi/mod_trial.texi
 
 
 
 
-/Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/lib/trial.a : /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/obj/trial/s_interface.o 
-	ar -r /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/lib/trial.a /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/obj/trial/s_interface.o  
+/workspace/old/bin/mod/lib/trial.a : /workspace/old/bin/mod/obj/trial/s_interface.o 
+	ar -r /workspace/old/bin/mod/lib/trial.a /workspace/old/bin/mod/obj/trial/s_interface.o  
 
-/Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/dll/trial.so : /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/obj/trial/interface.o 
-	ld -shared -Bstatic -o /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/dll/trial.so /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/obj/trial/interface.o  
+/workspace/old/bin/mod/dll/trial.so : /workspace/old/bin/mod/obj/trial/interface.o 
+	ld -shared -Bstatic -o /workspace/old/bin/mod/dll/trial.so /workspace/old/bin/mod/obj/trial/interface.o  
 
-/Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/obj/trial/interface.o : interface.c 
-	gcc -w -c -o /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/obj/trial/interface.o interface.c
+/workspace/old/bin/mod/obj/trial/interface.o : interface.c 
+	gcc -w -c -o /workspace/old/bin/mod/obj/trial/interface.o interface.c
 
-/Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/obj/trial/s_interface.o : interface.c 
-	gcc -w -DSTATIC_LINK=1 -c -o /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/obj/trial/s_interface.o interface.c
+/workspace/old/bin/mod/obj/trial/s_interface.o : interface.c 
+	gcc -w -DSTATIC_LINK=1 -c -o /workspace/old/bin/mod/obj/trial/s_interface.o interface.c
 
-/Users/verhasp/github/ScriptBasic/ScriptBasic/bin/texi/mod_trial.texi : manual.texi.jam
-	perl /Users/verhasp/github/ScriptBasic/ScriptBasic/jamal.pl manual.texi.jam /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/texi/mod_trial.texi
-	perl /Users/verhasp/github/ScriptBasic/ScriptBasic/t2h.pl /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/texi/mod_trial.texi
+/workspace/old/bin/texi/mod_trial.texi : manual.texi.jam
+	perl /workspace/old/jamal.pl manual.texi.jam /workspace/old/bin/texi/mod_trial.texi
+	perl /workspace/old/t2h.pl /workspace/old/bin/texi/mod_trial.texi
 
 

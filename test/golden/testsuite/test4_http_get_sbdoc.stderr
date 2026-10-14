@@ -1,0 +1,9 @@
+Status: 200 OK
+Content-Type: text/html
+
+<HTML><HEAD>
+<title>Error page, syntax error</title>
+</HEAD><BODY>
+<H1>Error has happened in the code</H1><pre>
+test/scripts/testsuite/curl/test4_http_get_sbdoc.bas(1): error &H3e:Include file is not found
+test/scripts/testsuite/curl/test4_http_get_sbdoc.bas(2): error &H3e:Include file is not found

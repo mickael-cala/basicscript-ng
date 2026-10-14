@@ -1,16 +1,1 @@
-# Artefacts de build (ancien et nouveau)
-*.o *.obj *.a *.lib *.so *.dll *.exe
-old/scriba old/scriba.exe
-_b/ zig-cache/ .zig-cache/ zig-out/
-
-# Fichiers générés (régénérables via les outils Perl du dépôt legacy)
-old/errcodes.h
-old/versioninfo.rc
-
-# Logs, temporaires
-*.log !.github/**/*.log
-*.tmp
-setup.log.local
-
-# Éditeurs / OS
-.vscode/ .idea/ *.swp .DS_Store Thumbs.db
+*.log

@@ -3,854 +3,1588 @@
   "module": "COMMAND",
   "kind": "",
   "id": "NOARRAY",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_NOARRAY",
-  "message": "en/Function can not return a whole array"
+  "message": "en/Function can not return a whole array",
+  "number": 2
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "DIV",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_DIV",
-  "message": "en/Division by zero or other calculation error"
+  "message": "en/Division by zero or other calculation error",
+  "number": 3
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "UNDEFOP",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_UNDEFOP",
-  "message": "en/Argument to operator is undefined"
+  "message": "en/Argument to operator is undefined",
+  "number": 4
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "BAD_CALL",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_BAD_CALL",
-  "message": "en/The command or sub was called the wrong way"
+  "message": "en/The command or sub was called the wrong way",
+  "number": 5
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "FEW_ARGS",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_FEW_ARGS",
-  "message": "en/There are not enough arguments of the module function."
+  "message": "en/There are not enough arguments of the module function.",
+  "number": 6
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "ARGUMENT_TYPE",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_ARGUMENT_TYPE",
-  "message": "en/The argument passed to a module function is not the needed type."
+  "message": "en/The argument passed to a module function is not the needed type.",
+  "number": 7
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "ARGUMENT_RANGE",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_ARGUMENT_RANGE",
-  "message": "en/The argument passed to a module function is out of the accepted range."
+  "message": "en/The argument passed to a module function is out of the accepted range.",
+  "number": 8
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "FILE_READ",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_FILE_READ",
-  "message": "en/The module experiences difficulties reading the file"
+  "message": "en/The module experiences difficulties reading the file",
+  "number": 9
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "FILE_WRITE",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_FILE_WRITE",
-  "message": "en/The module experiences difficulties writing the file."
+  "message": "en/The module experiences difficulties writing the file.",
+  "number": 10
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "FILE",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_FILE",
-  "message": "en/The module experiences handling the file."
+  "message": "en/The module experiences handling the file.",
+  "number": 11
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "CIRCULAR",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_CIRCULAR",
-  "message": "en/There is a circular reference in memory."
+  "message": "en/There is a circular reference in memory.",
+  "number": 12
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "MODULE_NOT_LOADED",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_MODULE_NOT_LOADED",
-  "message": "en/The module can not be unloaded, because it was not loaded."
+  "message": "en/The module can not be unloaded, because it was not loaded.",
+  "number": 13
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "PARTIAL_UNLOAD",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_PARTIAL_UNLOAD",
-  "message": "en/Some modules were active and could not be unloaded."
+  "message": "en/Some modules were active and could not be unloaded.",
+  "number": 14
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "MODULE_ACTIVE",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_MODULE_ACTIVE",
-  "message": "en/The module can not be unloaded, because it is currently active."
+  "message": "en/The module can not be unloaded, because it is currently active.",
+  "number": 15
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "MODULE_LOAD",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_MODULE_LOAD",
-  "message": "en/The requested module can not be loaded."
+  "message": "en/The requested module can not be loaded.",
+  "number": 16
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "MODULE_FUNCTION",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_MODULE_FUNCTION",
-  "message": "en/The requested function does not exist in the module."
+  "message": "en/The requested function does not exist in the module.",
+  "number": 17
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "MODULE_INITIALIZE",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_MODULE_INITIALIZE",
-  "message": "en/The module did not initialize correctly"
+  "message": "en/The module did not initialize correctly",
+  "number": 18
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "MODULE_VERSION",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_MODULE_VERSION",
-  "message": "en/The module was developed for a different version of ScriptBasic."
+  "message": "en/The module was developed for a different version of ScriptBasic.",
+  "number": 19
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "BAD_FILE_NUMBER",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_BAD_FILE_NUMBER",
-  "message": "en/File number is out of range, it should be between 1 and 512"
+  "message": "en/File number is out of range, it should be between 1 and 512",
+  "number": 20
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "FILE_NUMBER_IS_USED",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_FILE_NUMBER_IS_USED",
-  "message": "en/The file number is already used."
+  "message": "en/The file number is already used.",
+  "number": 21
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "FILE_CANNOT_BE_OPENED",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_FILE_CANNOT_BE_OPENED",
-  "message": "en/The file can not be opened."
+  "message": "en/The file can not be opened.",
+  "number": 22
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "FILE_IS_NOT_OPENED",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_FILE_IS_NOT_OPENED",
-  "message": "en/The file is not opened."
+  "message": "en/The file is not opened.",
+  "number": 23
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "INVALID_LOCK",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_INVALID_LOCK",
-  "message": "en/The lock type is invalid."
+  "message": "en/The lock type is invalid.",
+  "number": 24
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "PRINT_FAIL",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_PRINT_FAIL",
-  "message": "en/The print command failed. The file may be locked by another process."
+  "message": "en/The print command failed. The file may be locked by another process.",
+  "number": 25
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "MKDIR_FAIL",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_MKDIR_FAIL",
-  "message": "en/Directory can not be created."
+  "message": "en/Directory can not be created.",
+  "number": 26
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "DELETE_FAIL",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_DELETE_FAIL",
-  "message": "en/The directory or file could not be deleted."
+  "message": "en/The directory or file could not be deleted.",
+  "number": 27
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "NOTIMP",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_NOTIMP",
-  "message": "en/Command is not implemented and no currently loaded extension module defined behaviour for it"
+  "message": "en/Command is not implemented and no currently loaded extension module defined behaviour for it",
+  "number": 28
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "INVALID_JOKER",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_INVALID_JOKER",
-  "message": "en/The character can not be a joker or wild card character."
+  "message": "en/The character can not be a joker or wild card character.",
+  "number": 29
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "NO_RESUME",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_NO_RESUME",
-  "message": "en/The code tried to execute a resume while not being in error correction code."
+  "message": "en/The code tried to execute a resume while not being in error correction code.",
+  "number": 30
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "INV_DNAME",
+  "basic_alias": "InvalidDirectoryName",
+  "define": "COMMAND_ERROR_INV_DNAME",
+  "message": "en/The directory name in open directory is invalid.",
+  "number": 31
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "INV_DO_OPTION",
+  "basic_alias": "InvalidOptionDirOpen",
+  "define": "COMMAND_ERROR_INV_DO_OPTION",
+  "message": "en/Invalid option for directory open.",
+  "number": 32
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "DIR_NO_OPEN",
+  "basic_alias": "DirectoryNoOpen",
+  "define": "COMMAND_ERROR_DIR_NO_OPEN",
+  "message": "en/The directory can not be opened.",
+  "number": 33
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "BAD_RECORD_LENGTH",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_BAD_RECORD_LENGTH",
-  "message": "en/The record length is invalid in the open statements (undefined, zero or negative)"
+  "message": "en/The record length is invalid in the open statements (undefined, zero or negative)",
+  "number": 34
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "CURDIR",
+  "basic_alias": "NoCurrentDirectory",
+  "define": "COMMAND_ERROR_CURDIR",
+  "message": "en/The current directory can not be retrieved for some reason.",
+  "number": 35
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "UNDEF_DIR",
+  "basic_alias": "ChDirUndef",
+  "define": "COMMAND_ERROR_UNDEF_DIR",
+  "message": "en/The directory name in chdir can not be undef.",
+  "number": 36
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "CHDIR",
+  "basic_alias": "ChDir",
+  "define": "COMMAND_ERROR_CHDIR",
+  "message": "en/Cannot change the current working directory to the desired directory.",
+  "number": 37
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "RETURN_WITHOUT_GOSUB",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_RETURN_WITHOUT_GOSUB",
-  "message": "en/The command RETURN can not be executed, because there is no where to return."
+  "message": "en/The command RETURN can not be executed, because there is no where to return.",
+  "number": 38
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "INVALID_ARGUMENT_FOR_FUNCTION_ADDRESS",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_INVALID_ARGUMENT_FOR_FUNCTION_ADDRESS",
-  "message": "en/The argument for the function address is invalid."
+  "message": "en/The argument for the function address is invalid.",
+  "number": 39
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "SETFILE_INVALID_ATTRIBUTE",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_SETFILE_INVALID_ATTRIBUTE",
-  "message": "en/The attribute value or symbol is invalid in the set file command."
+  "message": "en/The attribute value or symbol is invalid in the set file command.",
+  "number": 40
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "CHOWN_INVALID_USER",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_CHOWN_INVALID_USER",
-  "message": "en/The user does not exist."
+  "message": "en/The user does not exist.",
+  "number": 41
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "CHOWN_NOT_SUPPORTED",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_CHOWN_NOT_SUPPORTED",
-  "message": "en/The chown command is not supported on Win95 and Win98"
+  "message": "en/The chown command is not supported on Win95 and Win98",
+  "number": 42
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "CHOWN_SET_OWNER",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_CHOWN_SET_OWNER",
-  "message": "en/Can not change owner."
+  "message": "en/Can not change owner.",
+  "number": 43
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "INVALID_FILE_NAME",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_INVALID_FILE_NAME",
-  "message": "en/The file name is invalid."
+  "message": "en/The file name is invalid.",
+  "number": 44
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "CREATIME_FAIL",
+  "basic_alias": "SetCreateTime",
+  "define": "COMMAND_ERROR_CREATIME_FAIL",
+  "message": "en/Setting the create time of the file has failed.",
+  "number": 45
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "MODTIME_FAIL",
+  "basic_alias": "SetModifyTime",
+  "define": "COMMAND_ERROR_MODTIME_FAIL",
+  "message": "en/Setting the modify time of the file has failed.",
+  "number": 46
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "ACCTIM_FAIL",
+  "basic_alias": "SetAccessTime",
+  "define": "COMMAND_ERROR_ACCTIM_FAIL",
+  "message": "en/Setting the access time of the file has failed",
+  "number": 47
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "INVALID_TIME_FORMAT",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_INVALID_TIME_FORMAT",
-  "message": "en/The specified time format is invalid"
+  "message": "en/The specified time format is invalid",
+  "number": 48
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "INVALID_TIME",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_INVALID_TIME",
-  "message": "en/The time is not valid, cannot be earlier than January 1, 1970. 00:00"
+  "message": "en/The time is not valid, cannot be earlier than January 1, 1970. 00:00",
+  "number": 49
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "EXTENSION_SPECIFIC",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_EXTENSION_SPECIFIC",
-  "message": "en/Extension specific error: %s"
+  "message": "en/Extension specific error: %s",
+  "number": 50
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "SOCKET_FILE",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_SOCKET_FILE",
-  "message": "en/The operation can be done on files only and not on sockets."
+  "message": "en/The operation can be done on files only and not on sockets.",
+  "number": 51
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "INVALID_CODE",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_INVALID_CODE",
-  "message": "en/The embedding application tried to start the code at an invalid location"
+  "message": "en/The embedding application tried to start the code at an invalid location",
+  "number": 52
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "MANDARG",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_MANDARG",
-  "message": "en/Mandatory argument is missing"
+  "message": "en/Mandatory argument is missing",
+  "number": 53
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "TIMEOUT",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_TIMEOUT",
-  "message": "en/Subprocess did not finish within time limits"
+  "message": "en/Subprocess did not finish within time limits",
+  "number": 54
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "STAYS_IN_MEMORY",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_STAYS_IN_MEMORY",
-  "message": "en/The module can not be unloaded"
+  "message": "en/The module can not be unloaded",
+  "number": 55
  },
  {
   "module": "COMMAND",
   "kind": "",
   "id": "PREPROCESSOR_ABORT",
+  "basic_alias": null,
   "define": "COMMAND_ERROR_PREPROCESSOR_ABORT",
-  "message": "en/The preprocessor said to abort program compilation or execution."
+  "message": "en/The preprocessor said to abort program compilation or execution.",
+  "number": 56
  },
  {
   "module": "BU",
   "kind": "",
   "id": "FILE_CORRUPT",
+  "basic_alias": null,
   "define": "BU_ERROR_FILE_CORRUPT",
-  "message": "en/The file is either corrupt or was written with a different version of sb."
+  "message": "en/The file is either corrupt or was written with a different version of sb.",
+  "number": 57
  },
  {
   "module": "BU",
   "kind": "",
   "id": "NO_CODE",
+  "basic_alias": null,
   "define": "BU_ERROR_NO_CODE",
-  "message": "en/The compiled program contains no executable code."
+  "message": "en/The compiled program contains no executable code.",
+  "number": 58
  },
  {
   "module": "BU",
   "kind": "",
   "id": "FAIL",
+  "basic_alias": null,
   "define": "BU_ERROR_FAIL",
-  "message": "en/Code file can not be saved."
+  "message": "en/Code file can not be saved.",
+  "number": 59
  },
  {
   "module": "BU",
   "kind": "",
   "id": "ECODE_INPUT",
+  "basic_alias": null,
   "define": "BU_ERROR_ECODE_INPUT",
-  "message": "en/The interpreter file can not be read"
+  "message": "en/The interpreter file can not be read",
+  "number": 60
  },
  {
   "module": "READER",
   "kind": "",
   "id": "INCLUDE_SYNTAX",
+  "basic_alias": null,
   "define": "READER_ERROR_INCLUDE_SYNTAX",
-  "message": "en/Bad syntax in include statement."
+  "message": "en/Bad syntax in include statement.",
+  "number": 61
  },
  {
   "module": "READER",
   "kind": "",
   "id": "INCLUDE_FILE",
+  "basic_alias": null,
   "define": "READER_ERROR_INCLUDE_FILE",
-  "message": "en/Include file is not found"
+  "message": "en/Include file is not found",
+  "number": 62
  },
  {
   "module": "READER",
   "kind": "",
   "id": "TOOMANY_INCLUDE",
+  "basic_alias": null,
   "define": "READER_ERROR_TOOMANY_INCLUDE",
-  "message": "en/Too many includes, probably recursive include"
+  "message": "en/Too many includes, probably recursive include",
+  "number": 63
  },
  {
   "module": "READER",
   "kind": "",
   "id": "PREPROC_UNDEF",
+  "basic_alias": null,
   "define": "READER_ERROR_PREPROC_UNDEF",
-  "message": "en/Preprocessor \\\"%s\\\" is not defined."
+  "message": "en/Preprocessor \\\"%s\\\" is not defined.",
+  "number": 64
  },
  {
   "module": "READER",
   "kind": "",
   "id": "PREPROC_LONG",
+  "basic_alias": null,
   "define": "READER_ERROR_PREPROC_LONG",
-  "message": "en/Preprocessor name is too long."
+  "message": "en/Preprocessor name is too long.",
+  "number": 65
  },
  {
   "module": "READER",
   "kind": "",
   "id": "PREPROC_NOTAVA",
+  "basic_alias": null,
   "define": "READER_ERROR_PREPROC_NOTAVA",
-  "message": "en/Preprocessor \\\"%s\\\" is not available."
+  "message": "en/Preprocessor \\\"%s\\\" is not available.",
+  "number": 66
  },
  {
   "module": "READER",
   "kind": "",
   "id": "PREPROC_NOTVAL",
+  "basic_alias": null,
   "define": "READER_ERROR_PREPROC_NOTVAL",
-  "message": "en/Preprocessor \\\"%s\\\" is invalid."
+  "message": "en/Preprocessor \\\"%s\\\" is invalid.",
+  "number": 67
  },
  {
   "module": "READER",
   "kind": "",
   "id": "FILE_OPEN",
+  "basic_alias": null,
   "define": "READER_ERROR_FILE_OPEN",
-  "message": "en/The file can not be read."
+  "message": "en/The file can not be read.",
+  "number": 68
  },
  {
   "module": "READER",
   "kind": "",
   "id": "EMPTY_INPUT",
+  "basic_alias": null,
   "define": "READER_ERROR_EMPTY_INPUT",
-  "message": "en/The file is empty or is not readable."
+  "message": "en/The file is empty or is not readable.",
+  "number": 69
  },
  {
   "module": "PREPROC",
   "kind": "",
   "id": "FAIL",
+  "basic_alias": null,
   "define": "PREPROC_ERROR_FAIL",
-  "message": "en/The external preprocessor failed."
+  "message": "en/The external preprocessor failed.",
+  "number": 70
  },
  {
   "module": "PREPROC",
   "kind": "",
   "id": "CONFIG_EXE",
+  "basic_alias": null,
   "define": "PREPROC_ERROR_CONFIG_EXE",
-  "message": "en/The preprocessor executable is not configured."
+  "message": "en/The preprocessor executable is not configured.",
+  "number": 71
  },
  {
   "module": "PREPROC",
   "kind": "",
   "id": "CONFIG_DIR",
+  "basic_alias": null,
   "define": "PREPROC_ERROR_CONFIG_DIR",
-  "message": "en/The preprocessor temporary directory is not configured."
+  "message": "en/The preprocessor temporary directory is not configured.",
+  "number": 72
  },
  {
   "module": "LEX",
   "kind": "",
   "id": "TOO_LONG_SYMBOL",
+  "basic_alias": null,
   "define": "LEX_ERROR_TOO_LONG_SYMBOL",
-  "message": "en/Symbol is too long"
+  "message": "en/Symbol is too long",
+  "number": 73
  },
  {
   "module": "LEX",
   "kind": "",
   "id": "STRING_NOT_TERMINATED",
+  "basic_alias": null,
   "define": "LEX_ERROR_STRING_NOT_TERMINATED",
-  "message": "en/string is not terminated anywhere before end of file"
+  "message": "en/string is not terminated anywhere before end of file",
+  "number": 74
  },
  {
   "module": "LEX",
   "kind": "",
   "id": "STRING_NEW_LINE",
+  "basic_alias": null,
   "define": "LEX_ERROR_STRING_NEW_LINE",
-  "message": "en/string is not terminated anywhere before end of line"
+  "message": "en/string is not terminated anywhere before end of line",
+  "number": 75
  },
  {
   "module": "LEX",
   "kind": "",
   "id": "BAD_RADIX",
+  "basic_alias": null,
   "define": "LEX_ERROR_BAD_RADIX",
-  "message": "en/the number contains invalid radix. BASE#NNN numbers areavailable for 2<=BASE<=36 only."
+  "message": "en/the number contains invalid radix. BASE#NNN numbers areavailable for 2<=BASE<=36 only.",
+  "number": 76
  },
  {
   "module": "LEX",
   "kind": "",
   "id": "INVALID_NUMBER",
+  "basic_alias": null,
   "define": "LEX_ERROR_INVALID_NUMBER",
-  "message": "en/the BASE#NNN formatted number digit is out of range"
+  "message": "en/the BASE#NNN formatted number digit is out of range",
+  "number": 77
  },
  {
   "module": "EXE",
   "kind": "",
   "id": "INVALID_PC",
+  "basic_alias": null,
   "define": "EXE_ERROR_INVALID_PC",
-  "message": "en/Program counter points out of the code. The executed code is corrupt."
+  "message": "en/Program counter points out of the code. The executed code is corrupt.",
+  "number": 78
  },
  {
   "module": "EXE",
   "kind": "",
   "id": "INVALID_PC1",
+  "basic_alias": null,
   "define": "EXE_ERROR_INVALID_PC1",
-  "message": "en/Internal error or the cached code is corrupt."
+  "message": "en/Internal error or the cached code is corrupt.",
+  "number": 79
  },
  {
   "module": "EXE",
   "kind": "",
   "id": "INVALID_NODE",
+  "basic_alias": null,
   "define": "EXE_ERROR_INVALID_NODE",
-  "message": "en/Internal error or the cached code is corrupt."
+  "message": "en/Internal error or the cached code is corrupt.",
+  "number": 80
  },
  {
   "module": "EXE",
   "kind": "",
   "id": "INVALID_OPCODE",
+  "basic_alias": null,
   "define": "EXE_ERROR_INVALID_OPCODE",
-  "message": "en/invalid op code is in the code table"
+  "message": "en/invalid op code is in the code table",
+  "number": 81
  },
  {
   "module": "EXE",
   "kind": "",
   "id": "NOT_IMPLEMENTED",
+  "basic_alias": null,
   "define": "EXE_ERROR_NOT_IMPLEMENTED",
-  "message": "en/The code exists, but it is not implemented."
+  "message": "en/The code exists, but it is not implemented.",
+  "number": 82
  },
  {
   "module": "EXE",
   "kind": "",
   "id": "INVALID_EXPRESSION_NODE",
+  "basic_alias": null,
   "define": "EXE_ERROR_INVALID_EXPRESSION_NODE",
-  "message": "en/Internal error or the cached code is corrupt."
+  "message": "en/Internal error or the cached code is corrupt.",
+  "number": 83
  },
  {
   "module": "EXE",
   "kind": "",
   "id": "INVALID_EXPRESSION_NODE1",
+  "basic_alias": null,
   "define": "EXE_ERROR_INVALID_EXPRESSION_NODE1",
-  "message": "en/Internal error or the cached code is corrupt."
+  "message": "en/Internal error or the cached code is corrupt.",
+  "number": 84
  },
  {
   "module": "EXE",
   "kind": "",
   "id": "INTERNAL_DEFAULTTYPE",
+  "basic_alias": null,
   "define": "EXE_ERROR_INTERNAL_DEFAULTTYPE",
-  "message": "en/Internal error when releasing a variable it has no correct type"
+  "message": "en/Internal error when releasing a variable it has no correct type",
+  "number": 85
  },
  {
   "module": "EXE",
   "kind": "",
   "id": "INTERNAL_UNDEF",
+  "basic_alias": null,
   "define": "EXE_ERROR_INTERNAL_UNDEF",
-  "message": "en/Internal error when releasing undefined variable, nonsense"
+  "message": "en/Internal error when releasing undefined variable, nonsense",
+  "number": 86
  },
  {
   "module": "EXE",
   "kind": "",
   "id": "INTERNAL_MEMREF",
+  "basic_alias": null,
   "define": "EXE_ERROR_INTERNAL_MEMREF",
-  "message": "en/Internal error when releasing variable reference found"
+  "message": "en/Internal error when releasing variable reference found",
+  "number": 87
  },
  {
   "module": "EXE",
   "kind": "",
   "id": "INTERNAL",
+  "basic_alias": null,
   "define": "EXE_ERROR_INTERNAL",
-  "message": "en/any non classified internal error"
+  "message": "en/any non classified internal error",
+  "number": 88
  },
  {
   "module": "EXE",
   "kind": "",
   "id": "NO_LOCAL",
+  "basic_alias": null,
   "define": "EXE_ERROR_NO_LOCAL",
-  "message": "en/local variable referenced in global context or in a local context having no local variables"
+  "message": "en/local variable referenced in global context or in a local context having no local variables",
+  "number": 89
  },
  {
   "module": "EXE",
   "kind": "",
   "id": "INVALID_LVALNODE0",
+  "basic_alias": null,
   "define": "EXE_ERROR_INVALID_LVALNODE0",
-  "message": "en/Internal error or the cached code is corrupt."
+  "message": "en/Internal error or the cached code is corrupt.",
+  "number": 90
  },
  {
   "module": "EXE",
   "kind": "",
   "id": "INVALID_LVALNODE1",
+  "basic_alias": null,
   "define": "EXE_ERROR_INVALID_LVALNODE1",
-  "message": "en/Internal error or the cached code is corrupt."
+  "message": "en/Internal error or the cached code is corrupt.",
+  "number": 91
  },
  {
   "module": "EXE",
   "kind": "",
   "id": "INVALID_LVALNODE2",
+  "basic_alias": null,
   "define": "EXE_ERROR_INVALID_LVALNODE2",
-  "message": "en/Internal error or the cached code is corrupt."
+  "message": "en/Internal error or the cached code is corrupt.",
+  "number": 92
  },
  {
   "module": "EXE",
   "kind": "",
   "id": "INVALID_LVALNODE3",
+  "basic_alias": null,
   "define": "EXE_ERROR_INVALID_LVALNODE3",
-  "message": "en/Internal error or the cached code is corrupt."
+  "message": "en/Internal error or the cached code is corrupt.",
+  "number": 93
  },
  {
   "module": "EXE",
   "kind": "",
   "id": "INVALID_LVALNODE4",
+  "basic_alias": null,
   "define": "EXE_ERROR_INVALID_LVALNODE4",
-  "message": "en/Internal error or the cached code is corrupt."
+  "message": "en/Internal error or the cached code is corrupt.",
+  "number": 94
  },
  {
   "module": "EXE",
   "kind": "",
   "id": "INVALID_LVALNODE5",
+  "basic_alias": null,
   "define": "EXE_ERROR_INVALID_LVALNODE5",
-  "message": "en/Internal error or the cached code is corrupt."
+  "message": "en/Internal error or the cached code is corrupt.",
+  "number": 95
  },
  {
   "module": "EXE",
   "kind": "",
   "id": "INVALID_LVALNODE6",
+  "basic_alias": null,
   "define": "EXE_ERROR_INVALID_LVALNODE6",
-  "message": "en/Internal error or the cached code is corrupt."
+  "message": "en/Internal error or the cached code is corrupt.",
+  "number": 96
  },
  {
   "module": "EXE",
   "kind": "",
   "id": "USERFUN_UNDEFINED",
+  "basic_alias": null,
   "define": "EXE_ERROR_USERFUN_UNDEFINED",
-  "message": "en/the user function is undefined"
+  "message": "en/the user function is undefined",
+  "number": 97
  },
  {
   "module": "EXE",
   "kind": "",
   "id": "TOO_DEEP_CALL",
+  "basic_alias": null,
   "define": "EXE_ERROR_TOO_DEEP_CALL",
-  "message": "en/Recursive function calls exceeded configuration limit."
+  "message": "en/Recursive function calls exceeded configuration limit.",
+  "number": 98
  },
  {
   "module": "EXE",
   "kind": "",
   "id": "TOO_LONG_RUN",
+  "basic_alias": null,
   "define": "EXE_ERROR_TOO_LONG_RUN",
-  "message": "en/Program is running too long, probably infinite loop."
+  "message": "en/Program is running too long, probably infinite loop.",
+  "number": 99
  },
  {
   "module": "EX",
   "kind": "",
   "id": "INTERNAL",
+  "basic_alias": null,
   "define": "EX_ERROR_INTERNAL",
-  "message": "en/Internal error in the syntax analyzer"
+  "message": "en/Internal error in the syntax analyzer",
+  "number": 100
  },
  {
   "module": "EX",
   "kind": "",
   "id": "LABEL_DOUBLE_DEFINED",
+  "basic_alias": null,
   "define": "EX_ERROR_LABEL_DOUBLE_DEFINED",
-  "message": "en/A line label was defined more than once."
+  "message": "en/A line label was defined more than once.",
+  "number": 101
  },
  {
   "module": "EX",
   "kind": "",
   "id": "LABEL_NOT_DEFINED",
+  "basic_alias": null,
   "define": "EX_ERROR_LABEL_NOT_DEFINED",
-  "message": "en/A label \\\"%s\\\" was not defined during syntax analysis."
+  "message": "en/A label \\\"%s\\\" was not defined during syntax analysis.",
+  "number": 102
  },
  {
   "module": "EX",
   "kind": "",
   "id": "FUNCTION_DOUBLE_DEFINED",
+  "basic_alias": null,
   "define": "EX_ERROR_FUNCTION_DOUBLE_DEFINED",
-  "message": "en/The user function was already defined."
+  "message": "en/The user function was already defined.",
+  "number": 103
  },
  {
   "module": "EX",
   "kind": "",
   "id": "FUNCTION_NOT_DEFINED",
+  "basic_alias": null,
   "define": "EX_ERROR_FUNCTION_NOT_DEFINED",
-  "message": "en/The user function \\\"%s\\\" is used but is not defined."
+  "message": "en/The user function \\\"%s\\\" is used but is not defined.",
+  "number": 104
  },
  {
   "module": "EX",
   "kind": "",
   "id": "NO_OLD_NAMESPACE",
+  "basic_alias": null,
   "define": "EX_ERROR_NO_OLD_NAMESPACE",
-  "message": "en/There was no module started when an end module statement was found."
+  "message": "en/There was no module started when an end module statement was found.",
+  "number": 105
  },
  {
   "module": "EX",
   "kind": "",
   "id": "UNFINISHED_MODULE",
+  "basic_alias": null,
   "define": "EX_ERROR_UNFINISHED_MODULE",
-  "message": "en/A module was not closed at end of file."
+  "message": "en/A module was not closed at end of file.",
+  "number": 106
  },
  {
   "module": "EX",
   "kind": "",
   "id": "TOO_LONG_NAME_SPACE",
+  "basic_alias": null,
   "define": "EX_ERROR_TOO_LONG_NAME_SPACE",
-  "message": "en/the name space grew too long"
+  "message": "en/the name space grew too long",
+  "number": 107
  },
  {
   "module": "EX",
   "kind": "",
   "id": "TOO_LONG_VARIABLE",
+  "basic_alias": null,
   "define": "EX_ERROR_TOO_LONG_VARIABLE",
-  "message": "en/variable and namespace does not fit into the buffer"
+  "message": "en/variable and namespace does not fit into the buffer",
+  "number": 108
  },
  {
   "module": "EX",
   "kind": "",
   "id": "MISSING_PAREN",
+  "basic_alias": null,
   "define": "EX_ERROR_MISSING_PAREN",
-  "message": "en/ closing ) is missing in expression"
+  "message": "en/ closing ) is missing in expression",
+  "number": 109
  },
  {
   "module": "EX",
   "kind": "",
   "id": "MISSING_OPAREN",
+  "basic_alias": null,
   "define": "EX_ERROR_MISSING_OPAREN",
-  "message": "en/ opening ( is missing in sub call"
+  "message": "en/ opening ( is missing in sub call",
+  "number": 110
  },
  {
   "module": "EX",
   "kind": "",
   "id": "MISSING_APAREN",
+  "basic_alias": null,
   "define": "EX_ERROR_MISSING_APAREN",
-  "message": "en/ closing ] is missing following array indeces"
+  "message": "en/ closing ] is missing following array indeces",
+  "number": 111
  },
  {
   "module": "EX",
   "kind": "",
   "id": "MISSING_SAPAREN",
+  "basic_alias": null,
   "define": "EX_ERROR_MISSING_SAPAREN",
-  "message": "en/ closing } is missing following associative array indices"
+  "message": "en/ closing } is missing following associative array indices",
+  "number": 112
  },
  {
   "module": "EX",
   "kind": "",
   "id": "FUNCTION_NEEDS_ARGUMENTS",
+  "basic_alias": null,
   "define": "EX_ERROR_FUNCTION_NEEDS_ARGUMENTS",
-  "message": "en/ built in function needs arguments"
+  "message": "en/ built in function needs arguments",
+  "number": 113
  },
  {
   "module": "EX",
   "kind": "",
   "id": "TOO_FEW_ARGUMENTS",
+  "basic_alias": null,
   "define": "EX_ERROR_TOO_FEW_ARGUMENTS",
-  "message": "en/ Built in function has too few arguments"
+  "message": "en/ Built in function has too few arguments",
+  "number": 114
  },
  {
   "module": "EX",
   "kind": "",
   "id": "TOO_MANY_ARGUMENTS",
+  "basic_alias": null,
   "define": "EX_ERROR_TOO_MANY_ARGUMENTS",
-  "message": "en/ Built in function has too many arguments"
+  "message": "en/ Built in function has too many arguments",
+  "number": 115
  },
  {
   "module": "EX",
   "kind": "",
   "id": "BAD_NESTING",
+  "basic_alias": null,
   "define": "EX_ERROR_BAD_NESTING",
-  "message": "en/erroneous nesting of constructs like IF/ELSIF/ELSE/ENDIF/REPEAT/LOOP/WHILE and so on"
+  "message": "en/erroneous nesting of constructs like IF/ELSIF/ELSE/ENDIF/REPEAT/LOOP/WHILE and so on",
+  "number": 116
  },
  {
   "module": "EX",
   "kind": "",
   "id": "UNFINISHED_NESTING",
+  "basic_alias": null,
   "define": "EX_ERROR_UNFINISHED_NESTING",
-  "message": "en/nested construct remained unclosed when local_end"
+  "message": "en/nested construct remained unclosed when local_end",
+  "number": 117
  },
  {
   "module": "EX",
   "kind": "",
   "id": "SYNTAX",
+  "basic_alias": null,
   "define": "EX_ERROR_SYNTAX",
-  "message": "en/syntax error, no syntax defintion matches the line or syntax defintion does not match the line"
+  "message": "en/syntax error, no syntax defintion matches the line or syntax defintion does not match the line",
+  "number": 118
  },
  {
   "module": "EX",
   "kind": "",
   "id": "SYNTAX_FATAL",
+  "basic_alias": null,
   "define": "EX_ERROR_SYNTAX_FATAL",
-  "message": "en/syntax error during checking the line and also noting that the syntax error so serious that none of the other syntax defintions can match the current line"
+  "message": "en/syntax error during checking the line and also noting that the syntax error so serious that none of the other syntax defintions can match the current line",
+  "number": 119
  },
  {
   "module": "EX",
   "kind": "",
   "id": "TOO_MANY_WAITING_LABEL",
+  "basic_alias": null,
   "define": "EX_ERROR_TOO_MANY_WAITING_LABEL",
-  "message": "en/there are more then MAX_SAME_LABEL labels referencing the same line"
+  "message": "en/there are more then MAX_SAME_LABEL labels referencing the same line",
+  "number": 120
  },
  {
   "module": "EX",
   "kind": "",
   "id": "UNDEF_GLOBAL",
+  "basic_alias": null,
   "define": "EX_ERROR_UNDEF_GLOBAL",
-  "message": "en/Global variable was not declared."
+  "message": "en/Global variable was not declared.",
+  "number": 121
  },
  {
   "module": "EX",
   "kind": "",
   "id": "UNDEF_PRAGMA",
+  "basic_alias": null,
   "define": "EX_ERROR_UNDEF_PRAGMA",
-  "message": "en/Compiler option \\\"%s\\\" is not implemented"
+  "message": "en/Compiler option \\\"%s\\\" is not implemented",
+  "number": 122
  },
  {
   "module": "EX",
   "kind": "",
   "id": "GREDEF",
+  "basic_alias": null,
   "define": "EX_ERROR_GREDEF",
-  "message": "en/Global variable \\\"%s\\\" is redefined."
+  "message": "en/Global variable \\\"%s\\\" is redefined.",
+  "number": 123
  },
  {
   "module": "EX",
   "kind": "",
   "id": "GLODEF",
+  "basic_alias": null,
   "define": "EX_ERROR_GLODEF",
-  "message": "en/Variable \\\"%s\\\" can not be used as global and local in a sub."
+  "message": "en/Variable \\\"%s\\\" can not be used as global and local in a sub.",
+  "number": 124
  },
  {
   "module": "EX",
   "kind": "",
   "id": "CONST_LVAL",
+  "basic_alias": null,
   "define": "EX_ERROR_CONST_LVAL",
-  "message": "en/The variable is declared as constant. Needs 'var' declaration."
+  "message": "en/The variable is declared as constant. Needs 'var' declaration.",
+  "number": 125
  },
  {
   "module": "MEM",
   "kind": "",
   "id": "INTERNAL001",
+  "basic_alias": null,
   "define": "MEM_ERROR_INTERNAL001",
-  "message": "en/DupVar can not duplicate array. This is an internal error."
+  "message": "en/DupVar can not duplicate array. This is an internal error.",
+  "number": 126
  },
  {
   "module": "MATCH",
   "kind": "",
   "id": "INDEX_OUT_OF_RANGE",
+  "basic_alias": null,
   "define": "MATCH_ERROR_INDEX_OUT_OF_RANGE",
-  "message": "en/The format string contains $n where n is out of range."
+  "message": "en/The format string contains $n where n is out of range.",
+  "number": 127
  },
  {
   "module": "MATCH",
   "kind": "",
   "id": "BUFFER_SHORT",
+  "basic_alias": null,
   "define": "MATCH_ERROR_BUFFER_SHORT",
-  "message": "en/The provided buffer is too short."
+  "message": "en/The provided buffer is too short.",
+  "number": 128
  },
  {
   "module": "MATCH",
   "kind": "",
   "id": "SYNTAX_ERROR",
+  "basic_alias": null,
   "define": "MATCH_ERROR_SYNTAX_ERROR",
-  "message": "en/Invalid pattern contains no character after the ~ sign."
+  "message": "en/Invalid pattern contains no character after the ~ sign.",
+  "number": 129
  },
  {
   "module": "MATCH",
   "kind": "",
   "id": "ARRAY_SHORT",
+  "basic_alias": null,
   "define": "MATCH_ERROR_ARRAY_SHORT",
-  "message": "en/The provided string array is too short."
+  "message": "en/The provided string array is too short.",
+  "number": 130
  },
  {
   "module": "SCRIBA",
   "kind": "",
   "id": "FAIL",
+  "basic_alias": null,
   "define": "SCRIBA_ERROR_FAIL",
-  "message": "en/Operation failed"
+  "message": "en/Operation failed",
+  "number": 131
  },
  {
   "module": "SCRIBA",
   "kind": "",
   "id": "BUFFER_SHORT",
+  "basic_alias": null,
   "define": "SCRIBA_ERROR_BUFFER_SHORT",
-  "message": "en/The provided buffer is too short."
+  "message": "en/The provided buffer is too short.",
+  "number": 132
+ },
+ {
+  "module": "COMMAND",
+  "kind": "SYN",
+  "id": "SUCCESS",
+  "basic_alias": null,
+  "define": "COMMAND_ERROR_SUCCESS",
+  "number": 0,
+  "message": "(no error — success)",
+  "synthetic": true
+ },
+ {
+  "module": "COMMAND",
+  "kind": "SYN",
+  "id": "MEMORY_LOW",
+  "basic_alias": null,
+  "define": "COMMAND_ERROR_MEMORY_LOW",
+  "number": 1,
+  "message": "Memory allocation failed (out of memory).",
+  "synthetic": true
+ },
+ {
+  "module": "BU",
+  "kind": "SYN",
+  "id": "SUCCESS",
+  "basic_alias": null,
+  "define": "BU_ERROR_SUCCESS",
+  "number": 0,
+  "message": "(no error — success)",
+  "synthetic": true
+ },
+ {
+  "module": "BU",
+  "kind": "SYN",
+  "id": "MEMORY_LOW",
+  "basic_alias": null,
+  "define": "BU_ERROR_MEMORY_LOW",
+  "number": 1,
+  "message": "Memory allocation failed (out of memory).",
+  "synthetic": true
+ },
+ {
+  "module": "READER",
+  "kind": "SYN",
+  "id": "SUCCESS",
+  "basic_alias": null,
+  "define": "READER_ERROR_SUCCESS",
+  "number": 0,
+  "message": "(no error — success)",
+  "synthetic": true
+ },
+ {
+  "module": "READER",
+  "kind": "SYN",
+  "id": "MEMORY_LOW",
+  "basic_alias": null,
+  "define": "READER_ERROR_MEMORY_LOW",
+  "number": 1,
+  "message": "Memory allocation failed (out of memory).",
+  "synthetic": true
+ },
+ {
+  "module": "PREPROC",
+  "kind": "SYN",
+  "id": "SUCCESS",
+  "basic_alias": null,
+  "define": "PREPROC_ERROR_SUCCESS",
+  "number": 0,
+  "message": "(no error — success)",
+  "synthetic": true
+ },
+ {
+  "module": "PREPROC",
+  "kind": "SYN",
+  "id": "MEMORY_LOW",
+  "basic_alias": null,
+  "define": "PREPROC_ERROR_MEMORY_LOW",
+  "number": 1,
+  "message": "Memory allocation failed (out of memory).",
+  "synthetic": true
+ },
+ {
+  "module": "LEX",
+  "kind": "SYN",
+  "id": "SUCCESS",
+  "basic_alias": null,
+  "define": "LEX_ERROR_SUCCESS",
+  "number": 0,
+  "message": "(no error — success)",
+  "synthetic": true
+ },
+ {
+  "module": "LEX",
+  "kind": "SYN",
+  "id": "MEMORY_LOW",
+  "basic_alias": null,
+  "define": "LEX_ERROR_MEMORY_LOW",
+  "number": 1,
+  "message": "Memory allocation failed (out of memory).",
+  "synthetic": true
+ },
+ {
+  "module": "EXE",
+  "kind": "SYN",
+  "id": "SUCCESS",
+  "basic_alias": null,
+  "define": "EXE_ERROR_SUCCESS",
+  "number": 0,
+  "message": "(no error — success)",
+  "synthetic": true
+ },
+ {
+  "module": "EXE",
+  "kind": "SYN",
+  "id": "MEMORY_LOW",
+  "basic_alias": null,
+  "define": "EXE_ERROR_MEMORY_LOW",
+  "number": 1,
+  "message": "Memory allocation failed (out of memory).",
+  "synthetic": true
+ },
+ {
+  "module": "EX",
+  "kind": "SYN",
+  "id": "SUCCESS",
+  "basic_alias": null,
+  "define": "EX_ERROR_SUCCESS",
+  "number": 0,
+  "message": "(no error — success)",
+  "synthetic": true
+ },
+ {
+  "module": "EX",
+  "kind": "SYN",
+  "id": "MEMORY_LOW",
+  "basic_alias": null,
+  "define": "EX_ERROR_MEMORY_LOW",
+  "number": 1,
+  "message": "Memory allocation failed (out of memory).",
+  "synthetic": true
+ },
+ {
+  "module": "MEM",
+  "kind": "SYN",
+  "id": "SUCCESS",
+  "basic_alias": null,
+  "define": "MEM_ERROR_SUCCESS",
+  "number": 0,
+  "message": "(no error — success)",
+  "synthetic": true
+ },
+ {
+  "module": "MEM",
+  "kind": "SYN",
+  "id": "MEMORY_LOW",
+  "basic_alias": null,
+  "define": "MEM_ERROR_MEMORY_LOW",
+  "number": 1,
+  "message": "Memory allocation failed (out of memory).",
+  "synthetic": true
+ },
+ {
+  "module": "MATCH",
+  "kind": "SYN",
+  "id": "SUCCESS",
+  "basic_alias": null,
+  "define": "MATCH_ERROR_SUCCESS",
+  "number": 0,
+  "message": "(no error — success)",
+  "synthetic": true
+ },
+ {
+  "module": "MATCH",
+  "kind": "SYN",
+  "id": "MEMORY_LOW",
+  "basic_alias": null,
+  "define": "MATCH_ERROR_MEMORY_LOW",
+  "number": 1,
+  "message": "Memory allocation failed (out of memory).",
+  "synthetic": true
+ },
+ {
+  "module": "SCRIBA",
+  "kind": "SYN",
+  "id": "SUCCESS",
+  "basic_alias": null,
+  "define": "SCRIBA_ERROR_SUCCESS",
+  "number": 0,
+  "message": "(no error — success)",
+  "synthetic": true
+ },
+ {
+  "module": "SCRIBA",
+  "kind": "SYN",
+  "id": "MEMORY_LOW",
+  "basic_alias": null,
+  "define": "SCRIBA_ERROR_MEMORY_LOW",
+  "number": 1,
+  "message": "Memory allocation failed (out of memory).",
+  "synthetic": true
+ },
+ {
+  "module": "COMMAND",
+  "kind": "RT",
+  "id": "CREATIME_FAIL",
+  "basic_alias": "SetCreateTime",
+  "define": "COMMAND_ERROR_CREATIME_FAIL",
+  "number": 45,
+  "message": "Setting the create time of the file has failed.",
+  "implicit": true,
+  "source": "old/filesys.c"
+ },
+ {
+  "module": "COMMAND",
+  "kind": "RT",
+  "id": "MODTIME_FAIL",
+  "basic_alias": "SetModifyTime",
+  "define": "COMMAND_ERROR_MODTIME_FAIL",
+  "number": 46,
+  "message": "Setting the modify time of the file has failed.",
+  "implicit": true,
+  "source": "old/hookers.c"
+ },
+ {
+  "module": "COMMAND",
+  "kind": "RT",
+  "id": "ACCTIM_FAIL",
+  "basic_alias": "SetAccessTime",
+  "define": "COMMAND_ERROR_ACCTIM_FAIL",
+  "number": 47,
+  "message": "Setting the access time of the file has failed",
+  "implicit": true,
+  "source": "old/hookers.c"
+ },
+ {
+  "module": "COMMAND",
+  "kind": "RT",
+  "id": "CHDIR",
+  "basic_alias": "ChDir",
+  "define": "COMMAND_ERROR_CHDIR",
+  "number": 37,
+  "message": "The current directory can not be changed.",
+  "implicit": true,
+  "source": "old/commands/file.c"
+ },
+ {
+  "module": "COMMAND",
+  "kind": "RT",
+  "id": "CURDIR",
+  "basic_alias": "CurDir",
+  "define": "COMMAND_ERROR_CURDIR",
+  "number": 35,
+  "message": "The current directory can not be retrieved for some reason.",
+  "implicit": true,
+  "source": "old/commands/file.c"
+ },
+ {
+  "module": "COMMAND",
+  "kind": "RT",
+  "id": "DIR_NO_OPEN",
+  "basic_alias": "DirNoOpen",
+  "define": "COMMAND_ERROR_DIR_NO_OPEN",
+  "number": 33,
+  "message": "The directory can not be opened.",
+  "implicit": true,
+  "source": "old/commands/file.c"
+ },
+ {
+  "module": "COMMAND",
+  "kind": "RT",
+  "id": "INV_DNAME",
+  "basic_alias": "InvalidDirectoryName",
+  "define": "COMMAND_ERROR_INV_DNAME",
+  "number": 31,
+  "message": "The directory name is invalid.",
+  "implicit": true,
+  "source": "old/commands/file.c"
+ },
+ {
+  "module": "COMMAND",
+  "kind": "RT",
+  "id": "INV_DO_OPTION",
+  "basic_alias": "InvalidDirOption",
+  "define": "COMMAND_ERROR_INV_DO_OPTION",
+  "number": 32,
+  "message": "The directory option argument is undefined.",
+  "implicit": true,
+  "source": "old/commands/file.c"
+ },
+ {
+  "module": "COMMAND",
+  "kind": "RT",
+  "id": "UNDEF_DIR",
+  "basic_alias": "UndefDir",
+  "define": "COMMAND_ERROR_UNDEF_DIR",
+  "number": 36,
+  "message": "The directory argument is undefined.",
+  "implicit": true,
+  "source": "old/commands/file.c"
+ },
+ {
+  "module": "(sentinelle)",
+  "kind": "—",
+  "id": "MAX_ERROR_CODE",
+  "basic_alias": null,
+  "define": "MAX_ERROR_CODE",
+  "number": 133,
+  "message": "Sentinelle : nombre total de codes (tableau de messages).",
+  "synthetic": true
+ },
+ {
+  "module": "(sentinelle)",
+  "kind": "—",
+  "id": "LAST_COMMAND",
+  "basic_alias": null,
+  "define": "LAST_COMMAND",
+  "number": 56,
+  "message": "Borne haute implicite du module COMMAND.",
+  "synthetic": true
+ },
+ {
+  "module": "(sentinelle)",
+  "kind": "—",
+  "id": "LAST_BU",
+  "basic_alias": null,
+  "define": "LAST_BU",
+  "number": 60,
+  "message": "Borne haute implicite du module BU.",
+  "synthetic": true
+ },
+ {
+  "module": "(sentinelle)",
+  "kind": "—",
+  "id": "LAST_READER",
+  "basic_alias": null,
+  "define": "LAST_READER",
+  "number": 69,
+  "message": "Borne haute implicite du module READER.",
+  "synthetic": true
+ },
+ {
+  "module": "(sentinelle)",
+  "kind": "—",
+  "id": "LAST_PREPROC",
+  "basic_alias": null,
+  "define": "LAST_PREPROC",
+  "number": 72,
+  "message": "Borne haute implicite du module PREPROC.",
+  "synthetic": true
+ },
+ {
+  "module": "(sentinelle)",
+  "kind": "—",
+  "id": "LAST_LEX",
+  "basic_alias": null,
+  "define": "LAST_LEX",
+  "number": 77,
+  "message": "Borne haute implicite du module LEX.",
+  "synthetic": true
+ },
+ {
+  "module": "(sentinelle)",
+  "kind": "—",
+  "id": "LAST_EXE",
+  "basic_alias": null,
+  "define": "LAST_EXE",
+  "number": 99,
+  "message": "Borne haute implicite du module EXE.",
+  "synthetic": true
+ },
+ {
+  "module": "(sentinelle)",
+  "kind": "—",
+  "id": "LAST_EX",
+  "basic_alias": null,
+  "define": "LAST_EX",
+  "number": 125,
+  "message": "Borne haute implicite du module EX.",
+  "synthetic": true
+ },
+ {
+  "module": "(sentinelle)",
+  "kind": "—",
+  "id": "LAST_MEM",
+  "basic_alias": null,
+  "define": "LAST_MEM",
+  "number": 126,
+  "message": "Borne haute implicite du module MEM.",
+  "synthetic": true
+ },
+ {
+  "module": "(sentinelle)",
+  "kind": "—",
+  "id": "LAST_MATCH",
+  "basic_alias": null,
+  "define": "LAST_MATCH",
+  "number": 130,
+  "message": "Borne haute implicite du module MATCH.",
+  "synthetic": true
+ },
+ {
+  "module": "(sentinelle)",
+  "kind": "—",
+  "id": "LAST_SCRIBA",
+  "basic_alias": null,
+  "define": "LAST_SCRIBA",
+  "number": 132,
+  "message": "Borne haute implicite du module SCRIBA.",
+  "synthetic": true
  }
 ]

@@ -1,0 +1,14 @@
+[OPTIONS]
+Compatibility=1.1 or later
+Compiled file=mod_t.chm
+Contents file=mod_t.hhc
+Default topic=mod_t_title.htm
+Display compile progress=No
+Full-text search=Yes
+Index file=mod_t.hhk
+Language=0x409 English (United States)
+Title=
+
+[FILES]
+mod_t_title.htm
+[INFOTYPES]

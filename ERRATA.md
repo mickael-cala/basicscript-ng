@@ -44,6 +44,34 @@ _(À remplir au fil de l'audit du code `old/`. Pistes initiales issues de la lec
 - **Contournement :** lire `old/LICENSE.txt` en entier avant toute redistribution.
 - **Statut portage :** audit licence obligatoire avant Phase 6 (release).
 
+### E-004 — Codes d'erreur implicites absents du catalogue `errors.def`
+
+- **Constat :** le générateur historique Jamal injecte automatiquement des constantes
+  qui n'existent pas dans `old/errors.def`, et 9 codes sont utilisés par le code C sans
+  entrée de message dans le catalogue. Résultat : le `.def` (source « officielle ») est
+  incomplet par rapport au binaire réel (`old/errcodes.h`).
+- **Détail :**
+  - *Paires injectées* : pour chacun des 10 modules (`COMMAND, BU, READER, PREPROC, LEX,
+    EXE, EX, MEM, MATCH, SCRIBA`), Jamal génère `<MOD>_ERROR_SUCCESS = 0` (garanti zéro,
+    tous les autres codes ≠ 0) et `<MOD>_ERROR_MEMORY_LOW = 1` (valeur identique dans
+    tous les modules). Garantie documentée en commentaires de `old/errors.def` (l. 33-35).
+  - *Sentinelles* : `MAX_ERROR_CODE = 133` (taille du tableau de messages) et bornes
+    hautes `LAST_<MODULE>` (ex. `LAST_COMMAND = 56`).
+  - *9 codes implicites COMMAND* (utilisés via `ERROR()`/`return` mais sans message
+    catalogue) : `INV_DNAME`(31), `INV_DO_OPTION`(32), `DIR_NO_OPEN`(33), `CURDIR`(35),
+    `UNDEF_DIR`(36), `CHDIR`(37), `CREATIME_FAIL`(45), `MODTIME_FAIL`(46),
+    `ACCTIM_FAIL`(47). Sources d'usage : `old/commands/file.c` (dossier),
+    `old/hookers.c` + `old/filesys.c` (horodatage fichiers). Leurs messages dans
+    `doc/spec/errors.md` sont **reconstitués depuis l'usage**, pas extraits du `.def`.
+- **Impact portage :** la table d'erreurs v2 doit être régénérée depuis une spec unique
+  incluant ces artefacts (sinon numéros incompatibles avec `ERR()` / include BASIC legacy).
+- **Traitement :** `tools/gen/extract_errors.py` injecte désormais les paires
+  SUCCESS/MEMORY_LOW, les sentinelles et les 9 codes ; `doc/spec/errors.md` (171 lignes)
+  porte les colonnes N°/Alias/Type avec marquage *(implicite)* et type `SYN`.
+- **Statut portage :** à valider en Phase 1 (gel de la numérotation) puis figer dans la
+  spec v2 (`doc/spec/`) ; vérifier aussi les trous de numérotation (34, 38-44 non définis
+  dans COMMAND → espaces réservés à confirmer contre `include/basicscript/error.imp`).
+
 <!-- Les entrées suivantes seront ajoutées après audit systématique :
      gestion mémoire (myalloc), fuites connues du thread model, limites de
      longueur de lignes/identifiants, différences de comportement PRINT sous

@@ -1,0 +1,9 @@
+Status: 200 OK
+Content-Type: text/html
+
+<HTML><HEAD>
+<title>Error page, syntax error</title>
+</HEAD><BODY>
+<H1>Error has happened in the code</H1><pre>
+test/scripts/testsuite/testmt.bas(5): error &H3e:Include file is not found
+test/scripts/testsuite/testmt.bas(6): error &H3e:Include file is not found

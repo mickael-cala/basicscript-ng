@@ -1,2 +1,2 @@
-2013.08.06 23:06:37 perl jamal.pl -m make_gcc.jim makefile.jam bin/make/Makefile
-2013.08.06 23:06:37 perl syntaxer.pl
+2026.10.14 15:35:22 perl jamal.pl -m make_gcc.jim makefile.jam bin/make/Makefile
+2026.10.14 15:35:22 perl syntaxer.pl

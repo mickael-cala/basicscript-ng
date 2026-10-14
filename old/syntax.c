@@ -28,1063 +28,1063 @@ TO_HEADER:
 #include "builder.h"
 #include "execute.h"
 
-#define CMD_EXTOPJP 350
-void COMMAND_EXTOPJP(pExecuteObject);
-#define CMD_JOIN 351
-void COMMAND_JOIN(pExecuteObject);
-#define CMD_HEX 352
-void COMMAND_HEX(pExecuteObject);
-#define CMD_EXTOPIL 353
-void COMMAND_EXTOPIL(pExecuteObject);
-#define CMD_TXTMI 354
-void COMMAND_TXTMI(pExecuteObject);
-#define CMD_EXTOPPC 355
-void COMMAND_EXTOPPC(pExecuteObject);
-#define CMD_EXTOPPL 356
-void COMMAND_EXTOPPL(pExecuteObject);
-#define CMD_EXTOPHF 357
-void COMMAND_EXTOPHF(pExecuteObject);
-#define CMD_ISLONG 358
-void COMMAND_ISLONG(pExecuteObject);
-#define CMD_SQR 359
-void COMMAND_SQR(pExecuteObject);
-#define CMD_DOUNTIL 360
-void COMMAND_DOUNTIL(pExecuteObject);
-#define CMD_ONERRORRESUMELABEL 361
-void COMMAND_ONERRORRESUMELABEL(pExecuteObject);
-#define CMD_EXTOPAE 362
-void COMMAND_EXTOPAE(pExecuteObject);
-#define CMD_OPEN 363
-void COMMAND_OPEN(pExecuteObject);
-#define CMD_MONTH 364
-void COMMAND_MONTH(pExecuteObject);
-#define CMD_VAL 365
-void COMMAND_VAL(pExecuteObject);
-#define CMD_EXTOPHP 366
-void COMMAND_EXTOPHP(pExecuteObject);
-#define CMD_ISDOUBLE 367
-void COMMAND_ISDOUBLE(pExecuteObject);
-#define CMD_COSECANT 368
-void COMMAND_COSECANT(pExecuteObject);
-#define CMD_CREATEPROCESS 369
-void COMMAND_CREATEPROCESS(pExecuteObject);
-#define CMD_EXTOPNO 370
-void COMMAND_EXTOPNO(pExecuteObject);
-#define CMD_EXTOPFI 371
-void COMMAND_EXTOPFI(pExecuteObject);
-#define CMD_MINUTE 372
-void COMMAND_MINUTE(pExecuteObject);
-#define CMD_FORMATDATE 373
-void COMMAND_FORMATDATE(pExecuteObject);
-#define CMD_MID 374
-void COMMAND_MID(pExecuteObject);
-#define CMD_FTMODIFY 375
-void COMMAND_FTMODIFY(pExecuteObject);
-#define CMD_EXTOPDP 376
-void COMMAND_EXTOPDP(pExecuteObject);
-#define CMD_DELETE 377
-void COMMAND_DELETE(pExecuteObject);
-#define CMD_SPLIT 378
-void COMMAND_SPLIT(pExecuteObject);
-#define CMD_CONST 873
-#define CMD_CLOSE 379
-void COMMAND_CLOSE(pExecuteObject);
-#define CMD_ENDMODULE 874
-#define CMD_EXTOPIO 380
-void COMMAND_EXTOPIO(pExecuteObject);
-#define CMD_EXTOPHI 381
-void COMMAND_EXTOPHI(pExecuteObject);
-#define CMD_EXTOPOI 382
-void COMMAND_EXTOPOI(pExecuteObject);
-#define CMD_EXTOPDI 383
-void COMMAND_EXTOPDI(pExecuteObject);
-#define CMD_HCOSECANT 384
-void COMMAND_HCOSECANT(pExecuteObject);
-#define CMD_EXTOPKH 385
-void COMMAND_EXTOPKH(pExecuteObject);
-#define CMD_LETC 386
-void COMMAND_LETC(pExecuteObject);
-#define CMD_EXTOPCN 387
-void COMMAND_EXTOPCN(pExecuteObject);
-#define CMD_ERROR 388
-void COMMAND_ERROR(pExecuteObject);
-#define CMD_MININT 389
-void COMMAND_MININT(pExecuteObject);
-#define CMD_EXTOPNH 390
-void COMMAND_EXTOPNH(pExecuteObject);
-#define CMD_EXTOPJO 391
-void COMMAND_EXTOPJO(pExecuteObject);
-#define CMD_CERROR 392
-void COMMAND_CERROR(pExecuteObject);
-#define CMD_EXTOPMO 393
-void COMMAND_EXTOPMO(pExecuteObject);
-#define CMD_EXTOPLM 394
-void COMMAND_EXTOPLM(pExecuteObject);
-#define CMD_HCOS 395
-void COMMAND_HCOS(pExecuteObject);
-#define CMD_ISARRAY 396
-void COMMAND_ISARRAY(pExecuteObject);
-#define CMD_EXTOPFO 397
-void COMMAND_EXTOPFO(pExecuteObject);
-#define CMD_ABS 398
-void COMMAND_ABS(pExecuteObject);
-#define CMD_RETURNC 399
-void COMMAND_RETURNC(pExecuteObject);
-#define CMD_EXTOPBO 400
-void COMMAND_EXTOPBO(pExecuteObject);
-#define CMD_SPACE 401
-void COMMAND_SPACE(pExecuteObject);
-#define CMD_MAX 402
-void COMMAND_MAX(pExecuteObject);
-#define CMD_CONCATENATE 403
-void COMMAND_CONCATENATE(pExecuteObject);
-#define CMD_SETFILE 404
-void COMMAND_SETFILE(pExecuteObject);
-#define CMD_EXTOPEM 405
-void COMMAND_EXTOPEM(pExecuteObject);
-#define CMD_TAN2 406
-void COMMAND_TAN2(pExecuteObject);
-#define CMD_SPLITA 407
-void COMMAND_SPLITA(pExecuteObject);
-#define CMD_BINMF 408
-void COMMAND_BINMF(pExecuteObject);
-#define CMD_EXTOPFG 409
-void COMMAND_EXTOPFG(pExecuteObject);
-#define CMD_EXTOPKP 410
-void COMMAND_EXTOPKP(pExecuteObject);
-#define CMD_EXTOPMG 411
-void COMMAND_EXTOPMG(pExecuteObject);
-#define CMD_EXTOPJI 412
-void COMMAND_EXTOPJI(pExecuteObject);
-#define CMD_LOOPUNTIL 413
-void COMMAND_LOOPUNTIL(pExecuteObject);
-#define CMD_ELSIF 414
-void COMMAND_ELSIF(pExecuteObject);
-#define CMD_MOD 415
-void COMMAND_MOD(pExecuteObject);
-#define CMD_EXTOPHQ 416
-void COMMAND_EXTOPHQ(pExecuteObject);
-#define CMD_RLOCK 417
-void COMMAND_RLOCK(pExecuteObject);
-#define CMD_WAITPID 418
-void COMMAND_WAITPID(pExecuteObject);
-#define CMD_UCASE 419
-void COMMAND_UCASE(pExecuteObject);
-#define CMD_EXTOPLE 420
-void COMMAND_EXTOPLE(pExecuteObject);
-#define CMD_IMIN 421
-void COMMAND_IMIN(pExecuteObject);
-#define CMD_DO 422
-void COMMAND_DO(pExecuteObject);
-#define CMD_MKL 423
-void COMMAND_MKL(pExecuteObject);
-#define CMD_GCD 424
-void COMMAND_GCD(pExecuteObject);
-#define CMD_EXTOPPJ 425
-void COMMAND_EXTOPPJ(pExecuteObject);
-#define CMD_ISDIR 426
-void COMMAND_ISDIR(pExecuteObject);
-#define CMD_LINPUT 427
-void COMMAND_LINPUT(pExecuteObject);
-#define CMD_EXTOPCC 428
-void COMMAND_EXTOPCC(pExecuteObject);
-#define CMD_FORMAT 429
-void COMMAND_FORMAT(pExecuteObject);
-#define CMD_EXTOPDN 430
-void COMMAND_EXTOPDN(pExecuteObject);
-#define CMD_OPTION 431
-void COMMAND_OPTION(pExecuteObject);
-#define CMD_EXTOPPM 432
-void COMMAND_EXTOPPM(pExecuteObject);
-#define CMD_ELSE 433
-void COMMAND_ELSE(pExecuteObject);
-#define CMD_EXTOPCD 434
-void COMMAND_EXTOPCD(pExecuteObject);
-#define CMD_EXTOPHH 435
-void COMMAND_EXTOPHH(pExecuteObject);
-#define CMD_EXTOPEJ 436
-void COMMAND_EXTOPEJ(pExecuteObject);
-#define CMD_EXTOPCP 437
-void COMMAND_EXTOPCP(pExecuteObject);
-#define CMD_LEFT 438
-void COMMAND_LEFT(pExecuteObject);
-#define CMD_FOR 439
-void COMMAND_FOR(pExecuteObject);
-#define CMD_EXTOPJC 440
-void COMMAND_EXTOPJC(pExecuteObject);
-#define CMD_EXTOPHG 441
-void COMMAND_EXTOPHG(pExecuteObject);
-#define CMD_EXTOPFH 442
-void COMMAND_EXTOPFH(pExecuteObject);
-#define CMD_STRING 443
-void COMMAND_STRING(pExecuteObject);
-#define CMD_EXTOPAJ 444
-void COMMAND_EXTOPAJ(pExecuteObject);
-#define CMD_EQ 445
-void COMMAND_EQ(pExecuteObject);
-#define CMD_ICALL 446
-void COMMAND_ICALL(pExecuteObject);
-#define CMD_KILL 447
-void COMMAND_KILL(pExecuteObject);
-#define CMD_BINMO 448
-void COMMAND_BINMO(pExecuteObject);
-#define CMD_EXTOPQL 449
-void COMMAND_EXTOPQL(pExecuteObject);
-#define CMD_EXTOPLP 450
-void COMMAND_EXTOPLP(pExecuteObject);
-#define CMD_FTCREATED 451
-void COMMAND_FTCREATED(pExecuteObject);
-#define CMD_EXTOPMD 452
-void COMMAND_EXTOPMD(pExecuteObject);
-#define CMD_EXTOPGN 453
-void COMMAND_EXTOPGN(pExecuteObject);
-#define CMD_EXITFUNC 454
-void COMMAND_EXITFUNC(pExecuteObject);
-#define CMD_ERRORDOLLAR 455
-void COMMAND_ERRORDOLLAR(pExecuteObject);
-#define CMD_XOR 456
-void COMMAND_XOR(pExecuteObject);
-#define CMD_EXTOPLN 457
-void COMMAND_EXTOPLN(pExecuteObject);
-#define CMD_SEEK 458
-void COMMAND_SEEK(pExecuteObject);
-#define CMD_EXTOPQM 459
-void COMMAND_EXTOPQM(pExecuteObject);
-#define CMD_EXTOPJN 460
-void COMMAND_EXTOPJN(pExecuteObject);
-#define CMD_EXTOPNN 461
-void COMMAND_EXTOPNN(pExecuteObject);
-#define CMD_TIMEVALUE 462
-void COMMAND_TIMEVALUE(pExecuteObject);
-#define CMD_EXTOPHN 463
-void COMMAND_EXTOPHN(pExecuteObject);
-#define CMD_DIV 464
-void COMMAND_DIV(pExecuteObject);
-#define CMD_EOFFUN 465
-void COMMAND_EOFFUN(pExecuteObject);
-#define CMD_EXTOPBM 466
-void COMMAND_EXTOPBM(pExecuteObject);
-#define CMD_ISUNDEF 467
-void COMMAND_ISUNDEF(pExecuteObject);
-#define CMD_HCTAN 468
-void COMMAND_HCTAN(pExecuteObject);
-#define CMD_EXTOPAM 469
-void COMMAND_EXTOPAM(pExecuteObject);
-#define CMD_EXTOPLF 470
-void COMMAND_EXTOPLF(pExecuteObject);
-#define CMD_SLIF 471
-void COMMAND_SLIF(pExecuteObject);
-#define CMD_SETNOJO 472
-void COMMAND_SETNOJO(pExecuteObject);
-#define CMD_LET 473
-void COMMAND_LET(pExecuteObject);
-#define CMD_ICALLFUN 474
-void COMMAND_ICALLFUN(pExecuteObject);
-#define CMD_EXTOPFF 475
-void COMMAND_EXTOPFF(pExecuteObject);
-#define CMD_EXTOPBG 476
-void COMMAND_EXTOPBG(pExecuteObject);
-#define CMD_EXTOPBN 477
-void COMMAND_EXTOPBN(pExecuteObject);
-#define CMD_CONF 478
-void COMMAND_CONF(pExecuteObject);
-#define CMD_GT 479
-void COMMAND_GT(pExecuteObject);
-#define CMD_ISREG 480
-void COMMAND_ISREG(pExecuteObject);
-#define CMD_EXTOPCM 481
-void COMMAND_EXTOPCM(pExecuteObject);
-#define CMD_MODULE 875
-#define CMD_EXTOPGJ 482
-void COMMAND_EXTOPGJ(pExecuteObject);
-#define CMD_RTRIM 483
-void COMMAND_RTRIM(pExecuteObject);
-#define CMD_EXTOPCH 484
-void COMMAND_EXTOPCH(pExecuteObject);
-#define CMD_PI 485
-void COMMAND_PI(pExecuteObject);
-#define CMD_LBOUND 486
-void COMMAND_LBOUND(pExecuteObject);
-#define CMD_DELETEF 487
-void COMMAND_DELETEF(pExecuteObject);
-#define CMD_LETM 488
-void COMMAND_LETM(pExecuteObject);
-#define CMD_EXTOPGD 489
-void COMMAND_EXTOPGD(pExecuteObject);
-#define CMD_INSTR 490
-void COMMAND_INSTR(pExecuteObject);
-#define CMD_PRAGMA 876
-#define CMD_EXTOPII 491
-void COMMAND_EXTOPII(pExecuteObject);
-#define CMD_EXP 492
-void COMMAND_EXP(pExecuteObject);
-#define CMD_FORK 493
-void COMMAND_FORK(pExecuteObject);
-#define CMD_OCT 494
-void COMMAND_OCT(pExecuteObject);
-#define CMD_EXTOPON 495
-void COMMAND_EXTOPON(pExecuteObject);
-#define CMD_EXTOPMI 496
-void COMMAND_EXTOPMI(pExecuteObject);
-#define CMD_FILEXISTS 497
-void COMMAND_FILEXISTS(pExecuteObject);
-#define CMD_JOKER 498
-void COMMAND_JOKER(pExecuteObject);
-#define CMD_TRUE 499
-void COMMAND_TRUE(pExecuteObject);
-#define CMD_SEC 500
-void COMMAND_SEC(pExecuteObject);
-#define CMD_EXTOPIM 501
-void COMMAND_EXTOPIM(pExecuteObject);
-#define CMD_LEN 502
-void COMMAND_LEN(pExecuteObject);
-#define CMD_EXTOPOG 503
-void COMMAND_EXTOPOG(pExecuteObject);
-#define CMD_ONERRORGOTO 504
+#define CMD_ONERRORGOTO 350
 void COMMAND_ONERRORGOTO(pExecuteObject);
-#define CMD_LIKEOP 505
-void COMMAND_LIKEOP(pExecuteObject);
-#define CMD_LETP 506
-void COMMAND_LETP(pExecuteObject);
-#define CMD_GOSUB 507
-void COMMAND_GOSUB(pExecuteObject);
-#define CMD_EXTOPCG 508
-void COMMAND_EXTOPCG(pExecuteObject);
-#define CMD_ADDRESSF 509
-void COMMAND_ADDRESSF(pExecuteObject);
-#define CMD_EXTOPNP 510
-void COMMAND_EXTOPNP(pExecuteObject);
-#define CMD_EXTOPDF 511
-void COMMAND_EXTOPDF(pExecuteObject);
-#define CMD_EXTOPOO 512
-void COMMAND_EXTOPOO(pExecuteObject);
-#define CMD_EXTOPPN 513
-void COMMAND_EXTOPPN(pExecuteObject);
-#define CMD_EXTOPNM 514
-void COMMAND_EXTOPNM(pExecuteObject);
-#define CMD_EXTOPGL 515
-void COMMAND_EXTOPGL(pExecuteObject);
-#define CMD_EXTOPNG 516
-void COMMAND_EXTOPNG(pExecuteObject);
-#define CMD_NE 517
-void COMMAND_NE(pExecuteObject);
-#define CMD_EXTOPMH 518
-void COMMAND_EXTOPMH(pExecuteObject);
-#define CMD_LOOP 519
-void COMMAND_LOOP(pExecuteObject);
-#define CMD_ADDDAY 520
-void COMMAND_ADDDAY(pExecuteObject);
-#define CMD_EXTOPGQ 521
-void COMMAND_EXTOPGQ(pExecuteObject);
-#define CMD_EXTOPKD 522
-void COMMAND_EXTOPKD(pExecuteObject);
-#define CMD_END 523
-void COMMAND_END(pExecuteObject);
-#define CMD_EXTOPCO 524
-void COMMAND_EXTOPCO(pExecuteObject);
-#define CMD_NLABEL 877
-#define CMD_FILELEN 525
-void COMMAND_FILELEN(pExecuteObject);
-#define CMD_EXTOPAC 526
-void COMMAND_EXTOPAC(pExecuteObject);
-#define CMD_OR 527
-void COMMAND_OR(pExecuteObject);
-#define CMD_YEAR 528
-void COMMAND_YEAR(pExecuteObject);
-#define CMD_EXTOPAN 529
-void COMMAND_EXTOPAN(pExecuteObject);
-#define CMD_EXTOPDO 530
-void COMMAND_EXTOPDO(pExecuteObject);
-#define CMD_EXTOPBH 531
-void COMMAND_EXTOPBH(pExecuteObject);
-#define CMD_EODFUN 532
-void COMMAND_EODFUN(pExecuteObject);
-#define CMD_EXTOPLC 533
-void COMMAND_EXTOPLC(pExecuteObject);
-#define CMD_EXTOPMQ 534
-void COMMAND_EXTOPMQ(pExecuteObject);
-#define CMD_GCONST 878
-#define CMD_EXTOPFP 535
-void COMMAND_EXTOPFP(pExecuteObject);
-#define CMD_EXTOPQD 536
-void COMMAND_EXTOPQD(pExecuteObject);
-#define CMD_EXTOPHD 537
-void COMMAND_EXTOPHD(pExecuteObject);
-#define CMD_EXTOPKJ 538
-void COMMAND_EXTOPKJ(pExecuteObject);
-#define CMD_EXTOPLK 539
-void COMMAND_EXTOPLK(pExecuteObject);
-#define CMD_EXTOPBP 540
-void COMMAND_EXTOPBP(pExecuteObject);
-#define CMD_TXTMO 541
-void COMMAND_TXTMO(pExecuteObject);
-#define CMD_EXTOPGC 542
-void COMMAND_EXTOPGC(pExecuteObject);
-#define CMD_EXTOPLD 543
-void COMMAND_EXTOPLD(pExecuteObject);
-#define CMD_EXTOPJL 544
-void COMMAND_EXTOPJL(pExecuteObject);
-#define CMD_EXTOPFJ 545
-void COMMAND_EXTOPFJ(pExecuteObject);
-#define CMD_EXTOPQE 546
-void COMMAND_EXTOPQE(pExecuteObject);
-#define CMD_EXTOPAO 547
-void COMMAND_EXTOPAO(pExecuteObject);
-#define CMD_RIGHT 548
-void COMMAND_RIGHT(pExecuteObject);
-#define CMD_MAXINT 549
-void COMMAND_MAXINT(pExecuteObject);
-#define CMD_COMMANDF 550
-void COMMAND_COMMANDF(pExecuteObject);
-#define CMD_EXTOPNQ 551
-void COMMAND_EXTOPNQ(pExecuteObject);
-#define CMD_EXTOPPO 552
-void COMMAND_EXTOPPO(pExecuteObject);
-#define CMD_BIN 553
-void COMMAND_BIN(pExecuteObject);
-#define CMD_EXTOPOH 554
-void COMMAND_EXTOPOH(pExecuteObject);
-#define CMD_EXTOPHE 555
-void COMMAND_EXTOPHE(pExecuteObject);
-#define CMD_EXTOPNF 556
-void COMMAND_EXTOPNF(pExecuteObject);
-#define CMD_EXTOPQC 557
-void COMMAND_EXTOPQC(pExecuteObject);
-#define CMD_EXTOPID 558
+#define CMD_SETNOJO 351
+void COMMAND_SETNOJO(pExecuteObject);
+#define CMD_STOP 352
+void COMMAND_STOP(pExecuteObject);
+#define CMD_EXTOPID 353
 void COMMAND_EXTOPID(pExecuteObject);
-#define CMD_EXTOPPE 559
-void COMMAND_EXTOPPE(pExecuteObject);
-#define CMD_EXTOPHJ 560
-void COMMAND_EXTOPHJ(pExecuteObject);
-#define CMD_ADDMONTH 561
-void COMMAND_ADDMONTH(pExecuteObject);
-#define CMD_NAME 562
-void COMMAND_NAME(pExecuteObject);
-#define CMD_EXTOPEC 563
-void COMMAND_EXTOPEC(pExecuteObject);
-#define CMD_ACOS 564
-void COMMAND_ACOS(pExecuteObject);
-#define CMD_SIN 565
-void COMMAND_SIN(pExecuteObject);
-#define CMD_EXTOPKO 566
-void COMMAND_EXTOPKO(pExecuteObject);
-#define CMD_NOT 567
-void COMMAND_NOT(pExecuteObject);
-#define CMD_EXTOPAL 568
-void COMMAND_EXTOPAL(pExecuteObject);
-#define CMD_EXTOPNE 569
-void COMMAND_EXTOPNE(pExecuteObject);
-#define CMD_EXTOPGM 570
-void COMMAND_EXTOPGM(pExecuteObject);
-#define CMD_IF 571
-void COMMAND_IF(pExecuteObject);
-#define CMD_EXTOPDL 572
-void COMMAND_EXTOPDL(pExecuteObject);
-#define CMD_EXTOPKC 573
-void COMMAND_EXTOPKC(pExecuteObject);
-#define CMD_UNPACK 574
-void COMMAND_UNPACK(pExecuteObject);
-#define CMD_EXTOPNL 575
-void COMMAND_EXTOPNL(pExecuteObject);
-#define CMD_LETI 576
-void COMMAND_LETI(pExecuteObject);
-#define CMD_OPENDIR 577
-void COMMAND_OPENDIR(pExecuteObject);
-#define CMD_EXITSUB 578
-void COMMAND_EXITSUB(pExecuteObject);
-#define CMD_IMAX 579
-void COMMAND_IMAX(pExecuteObject);
-#define CMD_LLET 580
-void COMMAND_LLET(pExecuteObject);
-#define CMD_EXTOPEH 581
-void COMMAND_EXTOPEH(pExecuteObject);
-#define CMD_FRAC 582
-void COMMAND_FRAC(pExecuteObject);
-#define CMD_ISNUMERIC 583
-void COMMAND_ISNUMERIC(pExecuteObject);
-#define CMD_EXTOPLL 584
-void COMMAND_EXTOPLL(pExecuteObject);
-#define CMD_EXTOPDQ 585
-void COMMAND_EXTOPDQ(pExecuteObject);
-#define CMD_EXTOPQJ 586
-void COMMAND_EXTOPQJ(pExecuteObject);
-#define CMD_POWER 587
-void COMMAND_POWER(pExecuteObject);
-#define CMD_ATAN 588
-void COMMAND_ATAN(pExecuteObject);
-#define CMD_EXTOPIE 589
-void COMMAND_EXTOPIE(pExecuteObject);
-#define CMD_ADDSECOND 590
-void COMMAND_ADDSECOND(pExecuteObject);
-#define CMD_EXTOPK 591
-void COMMAND_EXTOPK(pExecuteObject);
-#define CMD_CVD 592
-void COMMAND_CVD(pExecuteObject);
-#define CMD_MKI 593
-void COMMAND_MKI(pExecuteObject);
-#define CMD_ADDYEAR 594
-void COMMAND_ADDYEAR(pExecuteObject);
-#define CMD_EXTOPMN 595
-void COMMAND_EXTOPMN(pExecuteObject);
-#define CMD_EXTOPL 596
+#define CMD_EXTOPL 354
 void COMMAND_EXTOPL(pExecuteObject);
-#define CMD_RESUMELABEL 597
-void COMMAND_RESUMELABEL(pExecuteObject);
-#define CMD_INT 598
-void COMMAND_INT(pExecuteObject);
-#define CMD_EXTOPKI 599
-void COMMAND_EXTOPKI(pExecuteObject);
-#define CMD_EXTOPMF 600
-void COMMAND_EXTOPMF(pExecuteObject);
-#define CMD_EXTOPEK 601
-void COMMAND_EXTOPEK(pExecuteObject);
-#define CMD_EXTOPFC 602
-void COMMAND_EXTOPFC(pExecuteObject);
-#define CMD_MIN 603
-void COMMAND_MIN(pExecuteObject);
-#define CMD_EXTOPAI 604
-void COMMAND_EXTOPAI(pExecuteObject);
-#define CMD_REPEAT 605
-void COMMAND_REPEAT(pExecuteObject);
-#define CMD_REPLACE 606
-void COMMAND_REPLACE(pExecuteObject);
-#define CMD_EXTOPJJ 607
-void COMMAND_EXTOPJJ(pExecuteObject);
-#define CMD_ADDMINUTE 608
-void COMMAND_ADDMINUTE(pExecuteObject);
-#define CMD_GOTO 609
-void COMMAND_GOTO(pExecuteObject);
-#define CMD_EXTOPMK 610
-void COMMAND_EXTOPMK(pExecuteObject);
-#define CMD_EXTOPFQ 611
-void COMMAND_EXTOPFQ(pExecuteObject);
-#define CMD_EXTOPHL 612
-void COMMAND_EXTOPHL(pExecuteObject);
-#define CMD_HTAN 613
-void COMMAND_HTAN(pExecuteObject);
-#define CMD_LOOPWHILE 614
-void COMMAND_LOOPWHILE(pExecuteObject);
-#define CMD_EXTOPHC 615
-void COMMAND_EXTOPHC(pExecuteObject);
-#define CMD_EXTOPOE 616
-void COMMAND_EXTOPOE(pExecuteObject);
-#define CMD_EXTOPOP 617
-void COMMAND_EXTOPOP(pExecuteObject);
-#define CMD_EXTOPFK 618
-void COMMAND_EXTOPFK(pExecuteObject);
-#define CMD_EXTOPEQ 619
-void COMMAND_EXTOPEQ(pExecuteObject);
-#define CMD_EXTOPKL 620
-void COMMAND_EXTOPKL(pExecuteObject);
-#define CMD_EXTOPBJ 621
-void COMMAND_EXTOPBJ(pExecuteObject);
-#define CMD_EXTOPKG 622
-void COMMAND_EXTOPKG(pExecuteObject);
-#define CMD_CVI 623
-void COMMAND_CVI(pExecuteObject);
-#define CMD_CUNDEF 624
-void COMMAND_CUNDEF(pExecuteObject);
-#define CMD_EXTOPIF 625
-void COMMAND_EXTOPIF(pExecuteObject);
-#define CMD_PRINTNL 626
-void COMMAND_PRINTNL(pExecuteObject);
-#define CMD_MINUS 627
-void COMMAND_MINUS(pExecuteObject);
-#define CMD_DOWHILE 628
-void COMMAND_DOWHILE(pExecuteObject);
-#define CMD_FORSTEP 629
-void COMMAND_FORSTEP(pExecuteObject);
-#define CMD_UBOUND 630
-void COMMAND_UBOUND(pExecuteObject);
-#define CMD_EXTOPGF 631
-void COMMAND_EXTOPGF(pExecuteObject);
-#define CMD_EXTOPIK 632
-void COMMAND_EXTOPIK(pExecuteObject);
-#define CMD_DAY 633
-void COMMAND_DAY(pExecuteObject);
-#define CMD_REF 634
-void COMMAND_REF(pExecuteObject);
-#define CMD_SLEEP 635
-void COMMAND_SLEEP(pExecuteObject);
-#define CMD_HOSTNAME 636
-void COMMAND_HOSTNAME(pExecuteObject);
-#define CMD_ROUND 637
-void COMMAND_ROUND(pExecuteObject);
-#define CMD_EXTOPKK 638
-void COMMAND_EXTOPKK(pExecuteObject);
-#define CMD_LE 639
-void COMMAND_LE(pExecuteObject);
-#define CMD_EXTOPPI 640
-void COMMAND_EXTOPPI(pExecuteObject);
-#define CMD_EXTOPDJ 641
-void COMMAND_EXTOPDJ(pExecuteObject);
-#define CMD_EXTOPMP 642
-void COMMAND_EXTOPMP(pExecuteObject);
-#define CMD_PLUS 643
-void COMMAND_PLUS(pExecuteObject);
-#define CMD_CHR 644
-void COMMAND_CHR(pExecuteObject);
-#define CMD_FOWNER 645
-void COMMAND_FOWNER(pExecuteObject);
-#define CMD_FALSE 646
-void COMMAND_FALSE(pExecuteObject);
-#define CMD_ENVIRON 647
-void COMMAND_ENVIRON(pExecuteObject);
-#define CMD_EXTOPDM 648
-void COMMAND_EXTOPDM(pExecuteObject);
-#define CMD_LCASE 649
-void COMMAND_LCASE(pExecuteObject);
-#define CMD_ODD 650
-void COMMAND_ODD(pExecuteObject);
-#define CMD_RESETDIR 651
-void COMMAND_RESETDIR(pExecuteObject);
-#define CMD_EXTOPIH 652
-void COMMAND_EXTOPIH(pExecuteObject);
-#define CMD_POP 653
-void COMMAND_POP(pExecuteObject);
-#define CMD_EXTOPBC 654
-void COMMAND_EXTOPBC(pExecuteObject);
-#define CMD_EXTOPKF 655
-void COMMAND_EXTOPKF(pExecuteObject);
-#define CMD_SETWILD 656
-void COMMAND_SETWILD(pExecuteObject);
-#define CMD_ENDSUB 657
-void COMMAND_ENDSUB(pExecuteObject);
-#define CMD_REWIND 658
-void COMMAND_REWIND(pExecuteObject);
-#define CMD_LABEL 879
-#define CMD_EXTOPAF 659
+#define CMD_ISLONG 355
+void COMMAND_ISLONG(pExecuteObject);
+#define CMD_DELETE 356
+void COMMAND_DELETE(pExecuteObject);
+#define CMD_STRING 357
+void COMMAND_STRING(pExecuteObject);
+#define CMD_EXTOPEL 358
+void COMMAND_EXTOPEL(pExecuteObject);
+#define CMD_EXTOPAF 359
 void COMMAND_EXTOPAF(pExecuteObject);
-#define CMD_EXTOPPQ 660
-void COMMAND_EXTOPPQ(pExecuteObject);
-#define CMD_EXTOPJM 661
-void COMMAND_EXTOPJM(pExecuteObject);
-#define CMD_EXTOPLI 662
-void COMMAND_EXTOPLI(pExecuteObject);
-#define CMD_BINMI 663
-void COMMAND_BINMI(pExecuteObject);
-#define CMD_EXTOPEE 664
-void COMMAND_EXTOPEE(pExecuteObject);
-#define CMD_EXTOPJD 665
-void COMMAND_EXTOPJD(pExecuteObject);
-#define CMD_EXTOPAQ 666
-void COMMAND_EXTOPAQ(pExecuteObject);
-#define CMD_EXTOPJG 667
+#define CMD_RND 360
+void COMMAND_RND(pExecuteObject);
+#define CMD_EXTOPJI 361
+void COMMAND_EXTOPJI(pExecuteObject);
+#define CMD_EXTOPGP 362
+void COMMAND_EXTOPGP(pExecuteObject);
+#define CMD_EXTOPJG 363
 void COMMAND_EXTOPJG(pExecuteObject);
-#define CMD_SWAP 668
+#define CMD_GT 364
+void COMMAND_GT(pExecuteObject);
+#define CMD_EXTOPHP 365
+void COMMAND_EXTOPHP(pExecuteObject);
+#define CMD_MAX 366
+void COMMAND_MAX(pExecuteObject);
+#define CMD_SPLITA 367
+void COMMAND_SPLITA(pExecuteObject);
+#define CMD_EXTOPAH 368
+void COMMAND_EXTOPAH(pExecuteObject);
+#define CMD_MODULE 873
+#define CMD_SGN 369
+void COMMAND_SGN(pExecuteObject);
+#define CMD_XOR 370
+void COMMAND_XOR(pExecuteObject);
+#define CMD_EXTOPEK 371
+void COMMAND_EXTOPEK(pExecuteObject);
+#define CMD_EXTOPFP 372
+void COMMAND_EXTOPFP(pExecuteObject);
+#define CMD_EXTOPNI 373
+void COMMAND_EXTOPNI(pExecuteObject);
+#define CMD_EXTOPLE 374
+void COMMAND_EXTOPLE(pExecuteObject);
+#define CMD_EXTOPKQ 375
+void COMMAND_EXTOPKQ(pExecuteObject);
+#define CMD_EXTOPNG 376
+void COMMAND_EXTOPNG(pExecuteObject);
+#define CMD_CONST 874
+#define CMD_FOWNER 377
+void COMMAND_FOWNER(pExecuteObject);
+#define CMD_BINMF 378
+void COMMAND_BINMF(pExecuteObject);
+#define CMD_EXTOPOE 379
+void COMMAND_EXTOPOE(pExecuteObject);
+#define CMD_NOW 380
+void COMMAND_NOW(pExecuteObject);
+#define CMD_EXTOPAL 381
+void COMMAND_EXTOPAL(pExecuteObject);
+#define CMD_ADDMINUTE 382
+void COMMAND_ADDMINUTE(pExecuteObject);
+#define CMD_CVI 383
+void COMMAND_CVI(pExecuteObject);
+#define CMD_EXTOPBC 384
+void COMMAND_EXTOPBC(pExecuteObject);
+#define CMD_EXTOPEF 385
+void COMMAND_EXTOPEF(pExecuteObject);
+#define CMD_EXTOPQC 386
+void COMMAND_EXTOPQC(pExecuteObject);
+#define CMD_EXTOPMM 387
+void COMMAND_EXTOPMM(pExecuteObject);
+#define CMD_POWER 388
+void COMMAND_POWER(pExecuteObject);
+#define CMD_EXTOPND 389
+void COMMAND_EXTOPND(pExecuteObject);
+#define CMD_EXTOPII 390
+void COMMAND_EXTOPII(pExecuteObject);
+#define CMD_RESUMELABEL 391
+void COMMAND_RESUMELABEL(pExecuteObject);
+#define CMD_EXTOPDC 392
+void COMMAND_EXTOPDC(pExecuteObject);
+#define CMD_EXTOPIG 393
+void COMMAND_EXTOPIG(pExecuteObject);
+#define CMD_EXTOPEH 394
+void COMMAND_EXTOPEH(pExecuteObject);
+#define CMD_MKD 395
+void COMMAND_MKD(pExecuteObject);
+#define CMD_ICALLFUN 396
+void COMMAND_ICALLFUN(pExecuteObject);
+#define CMD_EXTOPPQ 397
+void COMMAND_EXTOPPQ(pExecuteObject);
+#define CMD_EXTOPJD 398
+void COMMAND_EXTOPJD(pExecuteObject);
+#define CMD_EXTOPCQ 399
+void COMMAND_EXTOPCQ(pExecuteObject);
+#define CMD_EXTOPAK 400
+void COMMAND_EXTOPAK(pExecuteObject);
+#define CMD_EXTOPO 401
+void COMMAND_EXTOPO(pExecuteObject);
+#define CMD_GOTO 402
+void COMMAND_GOTO(pExecuteObject);
+#define CMD_EXTOPCH 403
+void COMMAND_EXTOPCH(pExecuteObject);
+#define CMD_EXTOPNP 404
+void COMMAND_EXTOPNP(pExecuteObject);
+#define CMD_EXTOPFI 405
+void COMMAND_EXTOPFI(pExecuteObject);
+#define CMD_EXTOPFG 406
+void COMMAND_EXTOPFG(pExecuteObject);
+#define CMD_EXTOPLN 407
+void COMMAND_EXTOPLN(pExecuteObject);
+#define CMD_EXTOPEQ 408
+void COMMAND_EXTOPEQ(pExecuteObject);
+#define CMD_EXTOPLO 409
+void COMMAND_EXTOPLO(pExecuteObject);
+#define CMD_ADDMONTH 410
+void COMMAND_ADDMONTH(pExecuteObject);
+#define CMD_EXTOPPH 411
+void COMMAND_EXTOPPH(pExecuteObject);
+#define CMD_EXTOPKK 412
+void COMMAND_EXTOPKK(pExecuteObject);
+#define CMD_MAXINT 413
+void COMMAND_MAXINT(pExecuteObject);
+#define CMD_FORMAT 414
+void COMMAND_FORMAT(pExecuteObject);
+#define CMD_EXTOPGG 415
+void COMMAND_EXTOPGG(pExecuteObject);
+#define CMD_EXTOPJP 416
+void COMMAND_EXTOPJP(pExecuteObject);
+#define CMD_EXTOPKL 417
+void COMMAND_EXTOPKL(pExecuteObject);
+#define CMD_EXTOPGI 418
+void COMMAND_EXTOPGI(pExecuteObject);
+#define CMD_TXTMO 419
+void COMMAND_TXTMO(pExecuteObject);
+#define CMD_EXTOPHG 420
+void COMMAND_EXTOPHG(pExecuteObject);
+#define CMD_FLET 421
+void COMMAND_FLET(pExecuteObject);
+#define CMD_ISSTRING 422
+void COMMAND_ISSTRING(pExecuteObject);
+#define CMD_EXTOPCF 423
+void COMMAND_EXTOPCF(pExecuteObject);
+#define CMD_EXTOPHI 424
+void COMMAND_EXTOPHI(pExecuteObject);
+#define CMD_ISDIR 425
+void COMMAND_ISDIR(pExecuteObject);
+#define CMD_LIKEOP 426
+void COMMAND_LIKEOP(pExecuteObject);
+#define CMD_EXTOPPF 427
+void COMMAND_EXTOPPF(pExecuteObject);
+#define CMD_LT 428
+void COMMAND_LT(pExecuteObject);
+#define CMD_INT 429
+void COMMAND_INT(pExecuteObject);
+#define CMD_LOG 430
+void COMMAND_LOG(pExecuteObject);
+#define CMD_EXTOPLJ 431
+void COMMAND_EXTOPLJ(pExecuteObject);
+#define CMD_EXTOPOJ 432
+void COMMAND_EXTOPOJ(pExecuteObject);
+#define CMD_EXTOPBM 433
+void COMMAND_EXTOPBM(pExecuteObject);
+#define CMD_FPRINTNL 434
+void COMMAND_FPRINTNL(pExecuteObject);
+#define CMD_ADDRESSF 435
+void COMMAND_ADDRESSF(pExecuteObject);
+#define CMD_EXTOPGD 436
+void COMMAND_EXTOPGD(pExecuteObject);
+#define CMD_EXTOPHD 437
+void COMMAND_EXTOPHD(pExecuteObject);
+#define CMD_EXTOPKH 438
+void COMMAND_EXTOPKH(pExecuteObject);
+#define CMD_EXTOPPK 439
+void COMMAND_EXTOPPK(pExecuteObject);
+#define CMD_EXTOPIP 440
+void COMMAND_EXTOPIP(pExecuteObject);
+#define CMD_EXTOPCK 441
+void COMMAND_EXTOPCK(pExecuteObject);
+#define CMD_EXTOPAQ 442
+void COMMAND_EXTOPAQ(pExecuteObject);
+#define CMD_OPTION 443
+void COMMAND_OPTION(pExecuteObject);
+#define CMD_LETM 444
+void COMMAND_LETM(pExecuteObject);
+#define CMD_OR 445
+void COMMAND_OR(pExecuteObject);
+#define CMD_WDAY 446
+void COMMAND_WDAY(pExecuteObject);
+#define CMD_EXTOPMC 447
+void COMMAND_EXTOPMC(pExecuteObject);
+#define CMD_EXTOPQM 448
+void COMMAND_EXTOPQM(pExecuteObject);
+#define CMD_EXTOPOO 449
+void COMMAND_EXTOPOO(pExecuteObject);
+#define CMD_TRUNCATEF 450
+void COMMAND_TRUNCATEF(pExecuteObject);
+#define CMD_STRREVERSE 451
+void COMMAND_STRREVERSE(pExecuteObject);
+#define CMD_SWAP 452
 void COMMAND_SWAP(pExecuteObject);
-#define CMD_EXTOPQK 669
+#define CMD_EXTOPKF 453
+void COMMAND_EXTOPKF(pExecuteObject);
+#define CMD_EXTOPFD 454
+void COMMAND_EXTOPFD(pExecuteObject);
+#define CMD_CERROR 455
+void COMMAND_CERROR(pExecuteObject);
+#define CMD_EXTOPCL 456
+void COMMAND_EXTOPCL(pExecuteObject);
+#define CMD_SEEK 457
+void COMMAND_SEEK(pExecuteObject);
+#define CMD_EXTOPDM 458
+void COMMAND_EXTOPDM(pExecuteObject);
+#define CMD_PAUSE 459
+void COMMAND_PAUSE(pExecuteObject);
+#define CMD_LOCAL 875
+#define CMD_TAN2 460
+void COMMAND_TAN2(pExecuteObject);
+#define CMD_EXTOPON 461
+void COMMAND_EXTOPON(pExecuteObject);
+#define CMD_EXTOPPL 462
+void COMMAND_EXTOPPL(pExecuteObject);
+#define CMD_FTCREATED 463
+void COMMAND_FTCREATED(pExecuteObject);
+#define CMD_ASECANT 464
+void COMMAND_ASECANT(pExecuteObject);
+#define CMD_EXTOPLD 465
+void COMMAND_EXTOPLD(pExecuteObject);
+#define CMD_EXTOPEM 466
+void COMMAND_EXTOPEM(pExecuteObject);
+#define CMD_HTAN 467
+void COMMAND_HTAN(pExecuteObject);
+#define CMD_EXTOPMF 468
+void COMMAND_EXTOPMF(pExecuteObject);
+#define CMD_EXTOPOG 469
+void COMMAND_EXTOPOG(pExecuteObject);
+#define CMD_EXTOPOI 470
+void COMMAND_EXTOPOI(pExecuteObject);
+#define CMD_CBYVAL 471
+void COMMAND_CBYVAL(pExecuteObject);
+#define CMD_GMTIME 472
+void COMMAND_GMTIME(pExecuteObject);
+#define CMD_HOUR 473
+void COMMAND_HOUR(pExecuteObject);
+#define CMD_LE 474
+void COMMAND_LE(pExecuteObject);
+#define CMD_EXTOPKC 475
+void COMMAND_EXTOPKC(pExecuteObject);
+#define CMD_SETJOKER 476
+void COMMAND_SETJOKER(pExecuteObject);
+#define CMD_WEND 477
+void COMMAND_WEND(pExecuteObject);
+#define CMD_ABS 478
+void COMMAND_ABS(pExecuteObject);
+#define CMD_LETS 479
+void COMMAND_LETS(pExecuteObject);
+#define CMD_EXTOPIE 480
+void COMMAND_EXTOPIE(pExecuteObject);
+#define CMD_EXTOPMH 481
+void COMMAND_EXTOPMH(pExecuteObject);
+#define CMD_CREATEPROCESS 482
+void COMMAND_CREATEPROCESS(pExecuteObject);
+#define CMD_FILELEN 483
+void COMMAND_FILELEN(pExecuteObject);
+#define CMD_EXTOPHN 484
+void COMMAND_EXTOPHN(pExecuteObject);
+#define CMD_BINMO 485
+void COMMAND_BINMO(pExecuteObject);
+#define CMD_EXTOPQQ 486
+void COMMAND_EXTOPQQ(pExecuteObject);
+#define CMD_RESUMENEXT 487
+void COMMAND_RESUMENEXT(pExecuteObject);
+#define CMD_SUBARG 488
+void COMMAND_SUBARG(pExecuteObject);
+#define CMD_EXTOPGN 489
+void COMMAND_EXTOPGN(pExecuteObject);
+#define CMD_EXTOPJE 490
+void COMMAND_EXTOPJE(pExecuteObject);
+#define CMD_EXTOPAM 491
+void COMMAND_EXTOPAM(pExecuteObject);
+#define CMD_FALSE 492
+void COMMAND_FALSE(pExecuteObject);
+#define CMD_ENVIRON 493
+void COMMAND_ENVIRON(pExecuteObject);
+#define CMD_CONCATENATE 494
+void COMMAND_CONCATENATE(pExecuteObject);
+#define CMD_ISARRAY 495
+void COMMAND_ISARRAY(pExecuteObject);
+#define CMD_GCONST 876
+#define CMD_EXTOPML 496
+void COMMAND_EXTOPML(pExecuteObject);
+#define CMD_EXTOPHO 497
+void COMMAND_EXTOPHO(pExecuteObject);
+#define CMD_MID 498
+void COMMAND_MID(pExecuteObject);
+#define CMD_REWIND 499
+void COMMAND_REWIND(pExecuteObject);
+#define CMD_EXTOPFJ 500
+void COMMAND_EXTOPFJ(pExecuteObject);
+#define CMD_EXTOPGO 501
+void COMMAND_EXTOPGO(pExecuteObject);
+#define CMD_DAY 502
+void COMMAND_DAY(pExecuteObject);
+#define CMD_COTAN 503
+void COMMAND_COTAN(pExecuteObject);
+#define CMD_LETP 504
+void COMMAND_LETP(pExecuteObject);
+#define CMD_LBOUND 505
+void COMMAND_LBOUND(pExecuteObject);
+#define CMD_EXTOPBQ 506
+void COMMAND_EXTOPBQ(pExecuteObject);
+#define CMD_ASIN 507
+void COMMAND_ASIN(pExecuteObject);
+#define CMD_EXTOPLI 508
+void COMMAND_EXTOPLI(pExecuteObject);
+#define CMD_EXTOPCC 509
+void COMMAND_EXTOPCC(pExecuteObject);
+#define CMD_EXTOPNE 510
+void COMMAND_EXTOPNE(pExecuteObject);
+#define CMD_FIX 511
+void COMMAND_FIX(pExecuteObject);
+#define CMD_LETI 512
+void COMMAND_LETI(pExecuteObject);
+#define CMD_EXTOPLG 513
+void COMMAND_EXTOPLG(pExecuteObject);
+#define CMD_EXTOPFN 514
+void COMMAND_EXTOPFN(pExecuteObject);
+#define CMD_EXTOPMK 515
+void COMMAND_EXTOPMK(pExecuteObject);
+#define CMD_MOD 516
+void COMMAND_MOD(pExecuteObject);
+#define CMD_MININT 517
+void COMMAND_MININT(pExecuteObject);
+#define CMD_LEN 518
+void COMMAND_LEN(pExecuteObject);
+#define CMD_WHILE 519
+void COMMAND_WHILE(pExecuteObject);
+#define CMD_FORSTEP 520
+void COMMAND_FORSTEP(pExecuteObject);
+#define CMD_EXTOPHJ 521
+void COMMAND_EXTOPHJ(pExecuteObject);
+#define CMD_FORK 522
+void COMMAND_FORK(pExecuteObject);
+#define CMD_SIN 523
+void COMMAND_SIN(pExecuteObject);
+#define CMD_EXTOPDQ 524
+void COMMAND_EXTOPDQ(pExecuteObject);
+#define CMD_EXTOPFO 525
+void COMMAND_EXTOPFO(pExecuteObject);
+#define CMD_ACOSECANT 526
+void COMMAND_ACOSECANT(pExecuteObject);
+#define CMD_PRINT 527
+void COMMAND_PRINT(pExecuteObject);
+#define CMD_EXTOPGJ 528
+void COMMAND_EXTOPGJ(pExecuteObject);
+#define CMD_IDIV 529
+void COMMAND_IDIV(pExecuteObject);
+#define CMD_EXTOPPC 530
+void COMMAND_EXTOPPC(pExecuteObject);
+#define CMD_ELSE 531
+void COMMAND_ELSE(pExecuteObject);
+#define CMD_EXTOPOD 532
+void COMMAND_EXTOPOD(pExecuteObject);
+#define CMD_MONTH 533
+void COMMAND_MONTH(pExecuteObject);
+#define CMD_EXTOPBF 534
+void COMMAND_EXTOPBF(pExecuteObject);
+#define CMD_EXTOPEC 535
+void COMMAND_EXTOPEC(pExecuteObject);
+#define CMD_EXTOPDH 536
+void COMMAND_EXTOPDH(pExecuteObject);
+#define CMD_GE 537
+void COMMAND_GE(pExecuteObject);
+#define CMD_GM2LOCAL 538
+void COMMAND_GM2LOCAL(pExecuteObject);
+#define CMD_EXTOPIN 539
+void COMMAND_EXTOPIN(pExecuteObject);
+#define CMD_ACOS 540
+void COMMAND_ACOS(pExecuteObject);
+#define CMD_VAR 877
+#define CMD_EXTOPIO 541
+void COMMAND_EXTOPIO(pExecuteObject);
+#define CMD_TIMEVALUE 542
+void COMMAND_TIMEVALUE(pExecuteObject);
+#define CMD_EXTOPQF 543
+void COMMAND_EXTOPQF(pExecuteObject);
+#define CMD_GCD 544
+void COMMAND_GCD(pExecuteObject);
+#define CMD_OPEN 545
+void COMMAND_OPEN(pExecuteObject);
+#define CMD_LLET 546
+void COMMAND_LLET(pExecuteObject);
+#define CMD_EXTOPKM 547
+void COMMAND_EXTOPKM(pExecuteObject);
+#define CMD_ONERRORRESUMENEXT 548
+void COMMAND_ONERRORRESUMENEXT(pExecuteObject);
+#define CMD_TXTMF 549
+void COMMAND_TXTMF(pExecuteObject);
+#define CMD_HCTAN 550
+void COMMAND_HCTAN(pExecuteObject);
+#define CMD_INPUTFUN 551
+void COMMAND_INPUTFUN(pExecuteObject);
+#define CMD_LEFT 552
+void COMMAND_LEFT(pExecuteObject);
+#define CMD_EXTOPDF 553
+void COMMAND_EXTOPDF(pExecuteObject);
+#define CMD_EXTOPOP 554
+void COMMAND_EXTOPOP(pExecuteObject);
+#define CMD_EXTOPBH 555
+void COMMAND_EXTOPBH(pExecuteObject);
+#define CMD_EOFFUN 556
+void COMMAND_EOFFUN(pExecuteObject);
+#define CMD_EXTOPQH 557
+void COMMAND_EXTOPQH(pExecuteObject);
+#define CMD_LOOP 558
+void COMMAND_LOOP(pExecuteObject);
+#define CMD_YDAY 559
+void COMMAND_YDAY(pExecuteObject);
+#define CMD_EQ 560
+void COMMAND_EQ(pExecuteObject);
+#define CMD_ENDMODULE 878
+#define CMD_TRIM 561
+void COMMAND_TRIM(pExecuteObject);
+#define CMD_EXTOPIJ 562
+void COMMAND_EXTOPIJ(pExecuteObject);
+#define CMD_SQR 563
+void COMMAND_SQR(pExecuteObject);
+#define CMD_EXTOPBL 564
+void COMMAND_EXTOPBL(pExecuteObject);
+#define CMD_GLOBAL 879
+#define CMD_EXTOPNO 565
+void COMMAND_EXTOPNO(pExecuteObject);
+#define CMD_EXTOPAC 566
+void COMMAND_EXTOPAC(pExecuteObject);
+#define CMD_CHR 567
+void COMMAND_CHR(pExecuteObject);
+#define CMD_EXTOPMQ 568
+void COMMAND_EXTOPMQ(pExecuteObject);
+#define CMD_EXTOPJJ 569
+void COMMAND_EXTOPJJ(pExecuteObject);
+#define CMD_EXTOPLP 570
+void COMMAND_EXTOPLP(pExecuteObject);
+#define CMD_CVD 571
+void COMMAND_CVD(pExecuteObject);
+#define CMD_OPENDIR 572
+void COMMAND_OPENDIR(pExecuteObject);
+#define CMD_EXTOPFE 573
+void COMMAND_EXTOPFE(pExecuteObject);
+#define CMD_MIN 574
+void COMMAND_MIN(pExecuteObject);
+#define CMD_EXTOPDK 575
+void COMMAND_EXTOPDK(pExecuteObject);
+#define CMD_EXTOPNN 576
+void COMMAND_EXTOPNN(pExecuteObject);
+#define CMD_EXTOPQL 577
+void COMMAND_EXTOPQL(pExecuteObject);
+#define CMD_LCASE 578
+void COMMAND_LCASE(pExecuteObject);
+#define CMD_COTAN2 579
+void COMMAND_COTAN2(pExecuteObject);
+#define CMD_FUNCTIONARG 580
+void COMMAND_FUNCTIONARG(pExecuteObject);
+#define CMD_EXTOPQK 581
 void COMMAND_EXTOPQK(pExecuteObject);
+#define CMD_EXTOPNJ 582
+void COMMAND_EXTOPNJ(pExecuteObject);
+#define CMD_EXTOPCM 583
+void COMMAND_EXTOPCM(pExecuteObject);
+#define CMD_EXTOPDL 584
+void COMMAND_EXTOPDL(pExecuteObject);
+#define CMD_EXTOPJO 585
+void COMMAND_EXTOPJO(pExecuteObject);
+#define CMD_ISNUMERIC 586
+void COMMAND_ISNUMERIC(pExecuteObject);
+#define CMD_EXTOPF 587
+void COMMAND_EXTOPF(pExecuteObject);
+#define CMD_LOF 588
+void COMMAND_LOF(pExecuteObject);
+#define CMD_BIN 589
+void COMMAND_BIN(pExecuteObject);
+#define CMD_ISEMPTY 590
+void COMMAND_ISEMPTY(pExecuteObject);
+#define CMD_EXTOPPM 591
+void COMMAND_EXTOPPM(pExecuteObject);
+#define CMD_MKI 592
+void COMMAND_MKI(pExecuteObject);
+#define CMD_EXTOPHE 593
+void COMMAND_EXTOPHE(pExecuteObject);
+#define CMD_LINPUTF 594
+void COMMAND_LINPUTF(pExecuteObject);
+#define CMD_EXTOPGE 595
+void COMMAND_EXTOPGE(pExecuteObject);
+#define CMD_EXTOPBK 596
+void COMMAND_EXTOPBK(pExecuteObject);
+#define CMD_EXTOPJN 597
+void COMMAND_EXTOPJN(pExecuteObject);
+#define CMD_REPEAT 598
+void COMMAND_REPEAT(pExecuteObject);
+#define CMD_EXITSUB 599
+void COMMAND_EXITSUB(pExecuteObject);
+#define CMD_LOC 600
+void COMMAND_LOC(pExecuteObject);
+#define CMD_EXTOPQE 601
+void COMMAND_EXTOPQE(pExecuteObject);
+#define CMD_UCASE 602
+void COMMAND_UCASE(pExecuteObject);
+#define CMD_EXTOPCD 603
+void COMMAND_EXTOPCD(pExecuteObject);
+#define CMD_EXTOPMJ 604
+void COMMAND_EXTOPMJ(pExecuteObject);
+#define CMD_EXTOPJQ 605
+void COMMAND_EXTOPJQ(pExecuteObject);
+#define CMD_FTMODIFY 606
+void COMMAND_FTMODIFY(pExecuteObject);
+#define CMD_EXTOPFL 607
+void COMMAND_EXTOPFL(pExecuteObject);
+#define CMD_RANDOMIZE 608
+void COMMAND_RANDOMIZE(pExecuteObject);
+#define CMD_EXTOPOC 609
+void COMMAND_EXTOPOC(pExecuteObject);
+#define CMD_EXTOPPD 610
+void COMMAND_EXTOPPD(pExecuteObject);
+#define CMD_EXTOPHK 611
+void COMMAND_EXTOPHK(pExecuteObject);
+#define CMD_EXTOPGK 612
+void COMMAND_EXTOPGK(pExecuteObject);
+#define CMD_EXTOPBE 613
+void COMMAND_EXTOPBE(pExecuteObject);
+#define CMD_EXTOPNQ 614
+void COMMAND_EXTOPNQ(pExecuteObject);
+#define CMD_EXTOPKG 615
+void COMMAND_EXTOPKG(pExecuteObject);
+#define CMD_SEC 616
+void COMMAND_SEC(pExecuteObject);
+#define CMD_EXTOPGL 617
+void COMMAND_EXTOPGL(pExecuteObject);
+#define CMD_RLOCK 618
+void COMMAND_RLOCK(pExecuteObject);
+#define CMD_DO 619
+void COMMAND_DO(pExecuteObject);
+#define CMD_EXTOPKI 620
+void COMMAND_EXTOPKI(pExecuteObject);
+#define CMD_FLOCK 621
+void COMMAND_FLOCK(pExecuteObject);
+#define CMD_EXTOPHL 622
+void COMMAND_EXTOPHL(pExecuteObject);
+#define CMD_EXTOPMO 623
+void COMMAND_EXTOPMO(pExecuteObject);
+#define CMD_CHDIR 624
+void COMMAND_CHDIR(pExecuteObject);
+#define CMD_LOOPWHILE 625
+void COMMAND_LOOPWHILE(pExecuteObject);
+#define CMD_ONERRORRESUMELABEL 626
+void COMMAND_ONERRORRESUMELABEL(pExecuteObject);
+#define CMD_EXTOPFK 627
+void COMMAND_EXTOPFK(pExecuteObject);
+#define CMD_EXTOPMN 628
+void COMMAND_EXTOPMN(pExecuteObject);
+#define CMD_EXTOPQ 629
+void COMMAND_EXTOPQ(pExecuteObject);
+#define CMD_EXTOPEP 630
+void COMMAND_EXTOPEP(pExecuteObject);
+#define CMD_GOSUB 631
+void COMMAND_GOSUB(pExecuteObject);
+#define CMD_VAL 632
+void COMMAND_VAL(pExecuteObject);
+#define CMD_YEAR 633
+void COMMAND_YEAR(pExecuteObject);
+#define CMD_EXTOPKD 634
+void COMMAND_EXTOPKD(pExecuteObject);
+#define CMD_EXTOPHH 635
+void COMMAND_EXTOPHH(pExecuteObject);
+#define CMD_ONERRORGOTONULL 636
+void COMMAND_ONERRORGOTONULL(pExecuteObject);
+#define CMD_EXTOPFF 637
+void COMMAND_EXTOPFF(pExecuteObject);
+#define CMD_PI 638
+void COMMAND_PI(pExecuteObject);
+#define CMD_MKS 639
+void COMMAND_MKS(pExecuteObject);
+#define CMD_EXTOPGH 640
+void COMMAND_EXTOPGH(pExecuteObject);
+#define CMD_NOT 641
+void COMMAND_NOT(pExecuteObject);
+#define CMD_LINPUT 642
+void COMMAND_LINPUT(pExecuteObject);
+#define CMD_ATN 643
+void COMMAND_ATN(pExecuteObject);
+#define CMD_EXITFUNC 644
+void COMMAND_EXITFUNC(pExecuteObject);
+#define CMD_FILEXISTS 645
+void COMMAND_FILEXISTS(pExecuteObject);
+#define CMD_EXTOPFH 646
+void COMMAND_EXTOPFH(pExecuteObject);
+#define CMD_DIV 647
+void COMMAND_DIV(pExecuteObject);
+#define CMD_LOOPUNTIL 648
+void COMMAND_LOOPUNTIL(pExecuteObject);
+#define CMD_LETD 649
+void COMMAND_LETD(pExecuteObject);
+#define CMD_EXTOPGF 650
+void COMMAND_EXTOPGF(pExecuteObject);
+#define CMD_EXTOPLC 651
+void COMMAND_EXTOPLC(pExecuteObject);
+#define CMD_EXTOPCI 652
+void COMMAND_EXTOPCI(pExecuteObject);
+#define CMD_EXTOPHF 653
+void COMMAND_EXTOPHF(pExecuteObject);
+#define CMD_RESET 654
+void COMMAND_RESET(pExecuteObject);
+#define CMD_EXTOPCG 655
+void COMMAND_EXTOPCG(pExecuteObject);
+#define CMD_EXTOPPG 656
+void COMMAND_EXTOPPG(pExecuteObject);
+#define CMD_SETWILD 657
+void COMMAND_SETWILD(pExecuteObject);
+#define CMD_SETFILE 658
+void COMMAND_SETFILE(pExecuteObject);
+#define CMD_EXTOPPI 659
+void COMMAND_EXTOPPI(pExecuteObject);
+#define CMD_EXTOPIQ 660
+void COMMAND_EXTOPIQ(pExecuteObject);
+#define CMD_ADDHOUR 661
+void COMMAND_ADDHOUR(pExecuteObject);
+#define CMD_BINMI 662
+void COMMAND_BINMI(pExecuteObject);
+#define CMD_EXTOPAP 663
+void COMMAND_EXTOPAP(pExecuteObject);
+#define CMD_JOKER 664
+void COMMAND_JOKER(pExecuteObject);
+#define CMD_SECANT 665
+void COMMAND_SECANT(pExecuteObject);
+#define CMD_EXTOPQJ 666
+void COMMAND_EXTOPQJ(pExecuteObject);
+#define CMD_UBOUND 667
+void COMMAND_UBOUND(pExecuteObject);
+#define CMD_EXP 668
+void COMMAND_EXP(pExecuteObject);
+#define CMD_EXTOPDN 669
+void COMMAND_EXTOPDN(pExecuteObject);
 #define CMD_EXTOPNK 670
 void COMMAND_EXTOPNK(pExecuteObject);
-#define CMD_TYPE 671
-void COMMAND_TYPE(pExecuteObject);
-#define CMD_LOCAL2GM 672
+#define CMD_HOSTNAME 671
+void COMMAND_HOSTNAME(pExecuteObject);
+#define CMD_CUNDEF 672
+void COMMAND_CUNDEF(pExecuteObject);
+#define CMD_LOCAL2GM 673
 void COMMAND_LOCAL2GM(pExecuteObject);
-#define CMD_EXTOPMC 673
-void COMMAND_EXTOPMC(pExecuteObject);
-#define CMD_RESET 674
-void COMMAND_RESET(pExecuteObject);
-#define CMD_FTACCESS 675
-void COMMAND_FTACCESS(pExecuteObject);
-#define CMD_EXTOPCI 676
-void COMMAND_EXTOPCI(pExecuteObject);
-#define CMD_EXTOPHM 677
-void COMMAND_EXTOPHM(pExecuteObject);
-#define CMD_LINPUTF 678
-void COMMAND_LINPUTF(pExecuteObject);
-#define CMD_ISSTRING 679
-void COMMAND_ISSTRING(pExecuteObject);
-#define CMD_EXTOPFE 680
-void COMMAND_EXTOPFE(pExecuteObject);
-#define CMD_RND 681
-void COMMAND_RND(pExecuteObject);
-#define CMD_FUNCTIONARG 682
-void COMMAND_FUNCTIONARG(pExecuteObject);
-#define CMD_EXTOPOQ 683
-void COMMAND_EXTOPOQ(pExecuteObject);
-#define CMD_STOP 684
-void COMMAND_STOP(pExecuteObject);
-#define CMD_EXTOPJF 685
-void COMMAND_EXTOPJF(pExecuteObject);
-#define CMD_CREATEPROCESSEX 686
-void COMMAND_CREATEPROCESSEX(pExecuteObject);
-#define CMD_PACK 687
-void COMMAND_PACK(pExecuteObject);
-#define CMD_EXTOPBI 688
-void COMMAND_EXTOPBI(pExecuteObject);
-#define CMD_EXTOPLJ 689
-void COMMAND_EXTOPLJ(pExecuteObject);
-#define CMD_BYVAL 690
-void COMMAND_BYVAL(pExecuteObject);
-#define CMD_EXTOPIG 691
-void COMMAND_EXTOPIG(pExecuteObject);
-#define CMD_EXTOPQH 692
-void COMMAND_EXTOPQH(pExecuteObject);
-#define CMD_MKDIR 693
-void COMMAND_MKDIR(pExecuteObject);
-#define CMD_ACOSECANT 694
-void COMMAND_ACOSECANT(pExecuteObject);
-#define CMD_EXTOPGP 695
-void COMMAND_EXTOPGP(pExecuteObject);
-#define CMD_CHDIR 696
-void COMMAND_CHDIR(pExecuteObject);
-#define CMD_EXTOPDC 697
-void COMMAND_EXTOPDC(pExecuteObject);
-#define CMD_EXTOPQG 698
-void COMMAND_EXTOPQG(pExecuteObject);
-#define CMD_ASIN 699
-void COMMAND_ASIN(pExecuteObject);
-#define CMD_FUNCTION 700
-void COMMAND_FUNCTION(pExecuteObject);
-#define CMD_EXTOPJK 701
-void COMMAND_EXTOPJK(pExecuteObject);
-#define CMD_EXTOPOF 702
-void COMMAND_EXTOPOF(pExecuteObject);
-#define CMD_RANDOMIZE 703
-void COMMAND_RANDOMIZE(pExecuteObject);
-#define CMD_ONERRORRESUMENEXT 704
-void COMMAND_ONERRORRESUMENEXT(pExecuteObject);
-#define CMD_EXTOPIP 705
-void COMMAND_EXTOPIP(pExecuteObject);
-#define CMD_EXTOPOM 706
-void COMMAND_EXTOPOM(pExecuteObject);
-#define CMD_OPTIONF 707
-void COMMAND_OPTIONF(pExecuteObject);
-#define CMD_FLET 708
-void COMMAND_FLET(pExecuteObject);
-#define CMD_EXTOPFL 709
-void COMMAND_EXTOPFL(pExecuteObject);
-#define CMD_RESUME 710
-void COMMAND_RESUME(pExecuteObject);
-#define CMD_EXTOPGE 711
-void COMMAND_EXTOPGE(pExecuteObject);
-#define CMD_EXTOPND 712
-void COMMAND_EXTOPND(pExecuteObject);
-#define CMD_EXTOPGK 713
-void COMMAND_EXTOPGK(pExecuteObject);
-#define CMD_EXTOPHK 714
-void COMMAND_EXTOPHK(pExecuteObject);
-#define CMD_EXTOPKE 715
-void COMMAND_EXTOPKE(pExecuteObject);
-#define CMD_FORTO 716
-void COMMAND_FORTO(pExecuteObject);
-#define CMD_LOG10 717
-void COMMAND_LOG10(pExecuteObject);
-#define CMD_MKS 718
-void COMMAND_MKS(pExecuteObject);
-#define CMD_RANDOMIZA 719
-void COMMAND_RANDOMIZA(pExecuteObject);
-#define CMD_EXTOPAG 720
-void COMMAND_EXTOPAG(pExecuteObject);
-#define CMD_EXTOPPD 721
-void COMMAND_EXTOPPD(pExecuteObject);
-#define CMD_EXTOPNJ 722
-void COMMAND_EXTOPNJ(pExecuteObject);
-#define CMD_LCM 723
-void COMMAND_LCM(pExecuteObject);
-#define CMD_VAR 880
-#define CMD_EXTOPBE 724
-void COMMAND_EXTOPBE(pExecuteObject);
-#define CMD_RESUMENEXT 725
-void COMMAND_RESUMENEXT(pExecuteObject);
-#define CMD_NEXTFILE 726
-void COMMAND_NEXTFILE(pExecuteObject);
-#define CMD_GLOBAL 881
-#define CMD_EXTERNAL 727
-void COMMAND_EXTERNAL(pExecuteObject);
-#define CMD_TRUNCATEF 728
-void COMMAND_TRUNCATEF(pExecuteObject);
-#define CMD_EXTOPEN 729
-void COMMAND_EXTOPEN(pExecuteObject);
-#define CMD_ENDIF 730
-void COMMAND_ENDIF(pExecuteObject);
-#define CMD_EXTOPBQ 731
-void COMMAND_EXTOPBQ(pExecuteObject);
-#define CMD_CURDIR 732
-void COMMAND_CURDIR(pExecuteObject);
-#define CMD_EXTOPEI 733
+#define CMD_COMMANDF 674
+void COMMAND_COMMANDF(pExecuteObject);
+#define CMD_CLOSE 675
+void COMMAND_CLOSE(pExecuteObject);
+#define CMD_EXTOPIH 676
+void COMMAND_EXTOPIH(pExecuteObject);
+#define CMD_EXTOPEI 677
 void COMMAND_EXTOPEI(pExecuteObject);
-#define CMD_ONERRORGOTONULL 734
-void COMMAND_ONERRORGOTONULL(pExecuteObject);
-#define CMD_LT 735
-void COMMAND_LT(pExecuteObject);
-#define CMD_FLOCK 736
-void COMMAND_FLOCK(pExecuteObject);
-#define CMD_MULT 737
-void COMMAND_MULT(pExecuteObject);
-#define CMD_COS 738
-void COMMAND_COS(pExecuteObject);
-#define CMD_COTAN 739
-void COMMAND_COTAN(pExecuteObject);
-#define CMD_EXTOPDD 740
-void COMMAND_EXTOPDD(pExecuteObject);
-#define CMD_UNDEF 741
-void COMMAND_UNDEF(pExecuteObject);
-#define CMD_TAN 742
-void COMMAND_TAN(pExecuteObject);
-#define CMD_EXTOPDK 743
-void COMMAND_EXTOPDK(pExecuteObject);
-#define CMD_EXTOPKQ 744
-void COMMAND_EXTOPKQ(pExecuteObject);
-#define CMD_EXTOPAD 745
-void COMMAND_EXTOPAD(pExecuteObject);
-#define CMD_EXTOPFM 746
-void COMMAND_EXTOPFM(pExecuteObject);
-#define CMD_POW 747
-void COMMAND_POW(pExecuteObject);
-#define CMD_EXTOPEP 748
-void COMMAND_EXTOPEP(pExecuteObject);
-#define CMD_EXTOPQI 749
-void COMMAND_EXTOPQI(pExecuteObject);
-#define CMD_EXTOPQ 750
-void COMMAND_EXTOPQ(pExecuteObject);
-#define CMD_SPLITAQ 751
-void COMMAND_SPLITAQ(pExecuteObject);
-#define CMD_NOW 752
-void COMMAND_NOW(pExecuteObject);
-#define CMD_EXTOPOK 753
-void COMMAND_EXTOPOK(pExecuteObject);
-#define CMD_EXTOPQN 754
-void COMMAND_EXTOPQN(pExecuteObject);
-#define CMD_EXTOPGI 755
-void COMMAND_EXTOPGI(pExecuteObject);
-#define CMD_SUB 756
-void COMMAND_SUB(pExecuteObject);
-#define CMD_EXTOPML 757
-void COMMAND_EXTOPML(pExecuteObject);
-#define CMD_NEXTI 758
-void COMMAND_NEXTI(pExecuteObject);
-#define CMD_EXTOPME 759
+#define CMD_SPLIT 678
+void COMMAND_SPLIT(pExecuteObject);
+#define CMD_EXTOPME 679
 void COMMAND_EXTOPME(pExecuteObject);
-#define CMD_EXTOPFD 760
-void COMMAND_EXTOPFD(pExecuteObject);
-#define CMD_EXTERNAM 761
-void COMMAND_EXTERNAM(pExecuteObject);
-#define CMD_SECANT 762
-void COMMAND_SECANT(pExecuteObject);
-#define CMD_FPRINT 763
-void COMMAND_FPRINT(pExecuteObject);
-#define CMD_EXTOPPK 764
-void COMMAND_EXTOPPK(pExecuteObject);
-#define CMD_EXTOPIC 765
-void COMMAND_EXTOPIC(pExecuteObject);
-#define CMD_HSIN 766
-void COMMAND_HSIN(pExecuteObject);
-#define CMD_FREEFILE 767
+#define CMD_EXTOPDO 680
+void COMMAND_EXTOPDO(pExecuteObject);
+#define CMD_KILL 681
+void COMMAND_KILL(pExecuteObject);
+#define CMD_EXTOPFQ 682
+void COMMAND_EXTOPFQ(pExecuteObject);
+#define CMD_ERROR 683
+void COMMAND_ERROR(pExecuteObject);
+#define CMD_END 684
+void COMMAND_END(pExecuteObject);
+#define CMD_EXTOPKP 685
+void COMMAND_EXTOPKP(pExecuteObject);
+#define CMD_EXTOPJL 686
+void COMMAND_EXTOPJL(pExecuteObject);
+#define CMD_ADDDAY 687
+void COMMAND_ADDDAY(pExecuteObject);
+#define CMD_TAN 688
+void COMMAND_TAN(pExecuteObject);
+#define CMD_CHOMP 689
+void COMMAND_CHOMP(pExecuteObject);
+#define CMD_TYPE 690
+void COMMAND_TYPE(pExecuteObject);
+#define CMD_LCM 691
+void COMMAND_LCM(pExecuteObject);
+#define CMD_EXTOPBJ 692
+void COMMAND_EXTOPBJ(pExecuteObject);
+#define CMD_ENDIF 693
+void COMMAND_ENDIF(pExecuteObject);
+#define CMD_NAME 694
+void COMMAND_NAME(pExecuteObject);
+#define CMD_EXTOPOM 695
+void COMMAND_EXTOPOM(pExecuteObject);
+#define CMD_WAITPID 696
+void COMMAND_WAITPID(pExecuteObject);
+#define CMD_ISDOUBLE 697
+void COMMAND_ISDOUBLE(pExecuteObject);
+#define CMD_EXTOPIF 698
+void COMMAND_EXTOPIF(pExecuteObject);
+#define CMD_RETURNC 699
+void COMMAND_RETURNC(pExecuteObject);
+#define CMD_EXTOPQO 700
+void COMMAND_EXTOPQO(pExecuteObject);
+#define CMD_COSECANT 701
+void COMMAND_COSECANT(pExecuteObject);
+#define CMD_FCRYPT 702
+void COMMAND_FCRYPT(pExecuteObject);
+#define CMD_ISUNDEF 703
+void COMMAND_ISUNDEF(pExecuteObject);
+#define CMD_LET 704
+void COMMAND_LET(pExecuteObject);
+#define CMD_EXTOPBN 705
+void COMMAND_EXTOPBN(pExecuteObject);
+#define CMD_EXTOPJK 706
+void COMMAND_EXTOPJK(pExecuteObject);
+#define CMD_IMAX 707
+void COMMAND_IMAX(pExecuteObject);
+#define CMD_RTRIM 708
+void COMMAND_RTRIM(pExecuteObject);
+#define CMD_EXTOPAD 709
+void COMMAND_EXTOPAD(pExecuteObject);
+#define CMD_EXTOPQN 710
+void COMMAND_EXTOPQN(pExecuteObject);
+#define CMD_EXTOPDJ 711
+void COMMAND_EXTOPDJ(pExecuteObject);
+#define CMD_LETC 712
+void COMMAND_LETC(pExecuteObject);
+#define CMD_EXTOPHQ 713
+void COMMAND_EXTOPHQ(pExecuteObject);
+#define CMD_IF 714
+void COMMAND_IF(pExecuteObject);
+#define CMD_HEX 715
+void COMMAND_HEX(pExecuteObject);
+#define CMD_EXTOPBO 716
+void COMMAND_EXTOPBO(pExecuteObject);
+#define CMD_EXTOPGQ 717
+void COMMAND_EXTOPGQ(pExecuteObject);
+#define CMD_HSECANT 718
+void COMMAND_HSECANT(pExecuteObject);
+#define CMD_EXTOPNL 719
+void COMMAND_EXTOPNL(pExecuteObject);
+#define CMD_DOUNTIL 720
+void COMMAND_DOUNTIL(pExecuteObject);
+#define CMD_MKL 721
+void COMMAND_MKL(pExecuteObject);
+#define CMD_BYVAL 722
+void COMMAND_BYVAL(pExecuteObject);
+#define CMD_PRINTNL 723
+void COMMAND_PRINTNL(pExecuteObject);
+#define CMD_EXTOPPP 724
+void COMMAND_EXTOPPP(pExecuteObject);
+#define CMD_FUNCTION 725
+void COMMAND_FUNCTION(pExecuteObject);
+#define CMD_EXTOPAG 726
+void COMMAND_EXTOPAG(pExecuteObject);
+#define CMD_EXTOPAI 727
+void COMMAND_EXTOPAI(pExecuteObject);
+#define CMD_INSTR 728
+void COMMAND_INSTR(pExecuteObject);
+#define CMD_EXTOPJF 729
+void COMMAND_EXTOPJF(pExecuteObject);
+#define CMD_EXTOPNH 730
+void COMMAND_EXTOPNH(pExecuteObject);
+#define CMD_FREEFILE 731
 void COMMAND_FREEFILE(pExecuteObject);
-#define CMD_CBYVAL 768
-void COMMAND_CBYVAL(pExecuteObject);
-#define CMD_EXTOPJE 769
-void COMMAND_EXTOPJE(pExecuteObject);
-#define CMD_EXTOPAK 770
-void COMMAND_EXTOPAK(pExecuteObject);
-#define CMD_EXTOPBD 771
-void COMMAND_EXTOPBD(pExecuteObject);
-#define CMD_CVS 772
-void COMMAND_CVS(pExecuteObject);
-#define CMD_EXTOPED 773
+#define CMD_EXTOPIK 732
+void COMMAND_EXTOPIK(pExecuteObject);
+#define CMD_SLEEP 733
+void COMMAND_SLEEP(pExecuteObject);
+#define CMD_EXTOPCP 734
+void COMMAND_EXTOPCP(pExecuteObject);
+#define CMD_MULT 735
+void COMMAND_MULT(pExecuteObject);
+#define CMD_EXTOPLM 736
+void COMMAND_EXTOPLM(pExecuteObject);
+#define CMD_NEXT 737
+void COMMAND_NEXT(pExecuteObject);
+#define CMD_REF 738
+void COMMAND_REF(pExecuteObject);
+#define CMD_EXTOPIL 739
+void COMMAND_EXTOPIL(pExecuteObject);
+#define CMD_EXTOPED 740
 void COMMAND_EXTOPED(pExecuteObject);
-#define CMD_ENDFUNC 774
-void COMMAND_ENDFUNC(pExecuteObject);
-#define CMD_EXTOPLQ 775
-void COMMAND_EXTOPLQ(pExecuteObject);
-#define CMD_WEND 776
-void COMMAND_WEND(pExecuteObject);
-#define CMD_SGN 777
-void COMMAND_SGN(pExecuteObject);
-#define CMD_EXTOPQP 778
-void COMMAND_EXTOPQP(pExecuteObject);
-#define CMD_ISEMPTY 779
-void COMMAND_ISEMPTY(pExecuteObject);
-#define CMD_LTRIM 780
-void COMMAND_LTRIM(pExecuteObject);
-#define CMD_EXTOPGO 781
-void COMMAND_EXTOPGO(pExecuteObject);
-#define CMD_EXTOPOJ 782
-void COMMAND_EXTOPOJ(pExecuteObject);
-#define CMD_PAUSE 783
-void COMMAND_PAUSE(pExecuteObject);
-#define CMD_EXTOPLO 784
-void COMMAND_EXTOPLO(pExecuteObject);
-#define CMD_EXTOPMM 785
-void COMMAND_EXTOPMM(pExecuteObject);
-#define CMD_CVL 786
-void COMMAND_CVL(pExecuteObject);
-#define CMD_CALL 787
+#define CMD_ADDWEEK 741
+void COMMAND_ADDWEEK(pExecuteObject);
+#define CMD_MKDIR 742
+void COMMAND_MKDIR(pExecuteObject);
+#define CMD_EXTOPNF 743
+void COMMAND_EXTOPNF(pExecuteObject);
+#define CMD_SPACE 744
+void COMMAND_SPACE(pExecuteObject);
+#define CMD_EXTOPJH 745
+void COMMAND_EXTOPJH(pExecuteObject);
+#define CMD_PRAGMA 880
+#define CMD_EXTOPOQ 746
+void COMMAND_EXTOPOQ(pExecuteObject);
+#define CMD_ERRORDOLLAR 747
+void COMMAND_ERRORDOLLAR(pExecuteObject);
+#define CMD_EXTOPFM 748
+void COMMAND_EXTOPFM(pExecuteObject);
+#define CMD_CALL 749
 void COMMAND_CALL(pExecuteObject);
-#define CMD_EXTOPIJ 788
-void COMMAND_EXTOPIJ(pExecuteObject);
-#define CMD_FCOPY 789
+#define CMD_OCT 750
+void COMMAND_OCT(pExecuteObject);
+#define CMD_EXTOPDD 751
+void COMMAND_EXTOPDD(pExecuteObject);
+#define CMD_EXTOPAJ 752
+void COMMAND_EXTOPAJ(pExecuteObject);
+#define CMD_LOG10 753
+void COMMAND_LOG10(pExecuteObject);
+#define CMD_ISDEF 754
+void COMMAND_ISDEF(pExecuteObject);
+#define CMD_MINUTE 755
+void COMMAND_MINUTE(pExecuteObject);
+#define CMD_EXTOPJC 756
+void COMMAND_EXTOPJC(pExecuteObject);
+#define CMD_MINUS 757
+void COMMAND_MINUS(pExecuteObject);
+#define CMD_HSIN 758
+void COMMAND_HSIN(pExecuteObject);
+#define CMD_DOWHILE 759
+void COMMAND_DOWHILE(pExecuteObject);
+#define CMD_UNPACK 760
+void COMMAND_UNPACK(pExecuteObject);
+#define CMD_FORTO 761
+void COMMAND_FORTO(pExecuteObject);
+#define CMD_NEXTI 762
+void COMMAND_NEXTI(pExecuteObject);
+#define CMD_EXTOPAN 763
+void COMMAND_EXTOPAN(pExecuteObject);
+#define CMD_EXTOPGM 764
+void COMMAND_EXTOPGM(pExecuteObject);
+#define CMD_EXTOPBD 765
+void COMMAND_EXTOPBD(pExecuteObject);
+#define CMD_STR 766
+void COMMAND_STR(pExecuteObject);
+#define CMD_RESUME 767
+void COMMAND_RESUME(pExecuteObject);
+#define CMD_EXTOPHM 768
+void COMMAND_EXTOPHM(pExecuteObject);
+#define CMD_EXTOPPE 769
+void COMMAND_EXTOPPE(pExecuteObject);
+#define CMD_EXTOPAO 770
+void COMMAND_EXTOPAO(pExecuteObject);
+#define CMD_EXTOPCE 771
+void COMMAND_EXTOPCE(pExecuteObject);
+#define CMD_EXTOPNC 772
+void COMMAND_EXTOPNC(pExecuteObject);
+#define CMD_HCOSECANT 773
+void COMMAND_HCOSECANT(pExecuteObject);
+#define CMD_ROUND 774
+void COMMAND_ROUND(pExecuteObject);
+#define CMD_FCOPY 775
 void COMMAND_FCOPY(pExecuteObject);
-#define CMD_EXTOPEO 790
-void COMMAND_EXTOPEO(pExecuteObject);
+#define CMD_COS 776
+void COMMAND_COS(pExecuteObject);
+#define CMD_ENDFUNC 777
+void COMMAND_ENDFUNC(pExecuteObject);
+#define CMD_EXTOPQD 778
+void COMMAND_EXTOPQD(pExecuteObject);
+#define CMD_CURDIR 779
+void COMMAND_CURDIR(pExecuteObject);
+#define CMD_EXTOPK 780
+void COMMAND_EXTOPK(pExecuteObject);
+#define CMD_EXTOPBG 781
+void COMMAND_EXTOPBG(pExecuteObject);
+#define CMD_PACK 782
+void COMMAND_PACK(pExecuteObject);
+#define CMD_EXTOPBI 783
+void COMMAND_EXTOPBI(pExecuteObject);
+#define CMD_IMIN 784
+void COMMAND_IMIN(pExecuteObject);
+#define CMD_NEXTFILE 785
+void COMMAND_NEXTFILE(pExecuteObject);
+#define CMD_FPRINT 786
+void COMMAND_FPRINT(pExecuteObject);
+#define CMD_ATAN 787
+void COMMAND_ATAN(pExecuteObject);
+#define CMD_EXTOPEJ 788
+void COMMAND_EXTOPEJ(pExecuteObject);
+#define CMD_FORMATDATE 789
+void COMMAND_FORMATDATE(pExecuteObject);
+#define CMD_LABEL 881
+#define CMD_ICALL 790
+void COMMAND_ICALL(pExecuteObject);
 #define CMD_INSTRREV 791
 void COMMAND_INSTRREV(pExecuteObject);
-#define CMD_EXTOPOC 792
-void COMMAND_EXTOPOC(pExecuteObject);
-#define CMD_EXTOPIN 793
-void COMMAND_EXTOPIN(pExecuteObject);
-#define CMD_AND 794
-void COMMAND_AND(pExecuteObject);
-#define CMD_HOUR 795
-void COMMAND_HOUR(pExecuteObject);
-#define CMD_EXTOPIQ 796
-void COMMAND_EXTOPIQ(pExecuteObject);
-#define CMD_EXTOPBL 797
-void COMMAND_EXTOPBL(pExecuteObject);
-#define CMD_GE 798
-void COMMAND_GE(pExecuteObject);
-#define CMD_EXTOPCE 799
-void COMMAND_EXTOPCE(pExecuteObject);
-#define CMD_EMPTY 882
-#define CMD_INPUTFUN 800
-void COMMAND_INPUTFUN(pExecuteObject);
-#define CMD_EXTOPCQ 801
-void COMMAND_EXTOPCQ(pExecuteObject);
-#define CMD_EXTOPLG 802
-void COMMAND_EXTOPLG(pExecuteObject);
-#define CMD_LOC 803
-void COMMAND_LOC(pExecuteObject);
-#define CMD_CLOSEDIR 804
-void COMMAND_CLOSEDIR(pExecuteObject);
-#define CMD_EXTOPO 805
-void COMMAND_EXTOPO(pExecuteObject);
-#define CMD_IDIV 806
-void COMMAND_IDIV(pExecuteObject);
-#define CMD_LOF 807
-void COMMAND_LOF(pExecuteObject);
-#define CMD_TXTMF 808
-void COMMAND_TXTMF(pExecuteObject);
-#define CMD_EXTOPKN 809
-void COMMAND_EXTOPKN(pExecuteObject);
-#define CMD_EXTOPGG 810
-void COMMAND_EXTOPGG(pExecuteObject);
-#define CMD_STRREVERSE 811
-void COMMAND_STRREVERSE(pExecuteObject);
-#define CMD_GMTIME 812
-void COMMAND_GMTIME(pExecuteObject);
-#define CMD_EXTOPNC 813
-void COMMAND_EXTOPNC(pExecuteObject);
-#define CMD_SUBARG 814
-void COMMAND_SUBARG(pExecuteObject);
-#define CMD_EXTOPHO 815
-void COMMAND_EXTOPHO(pExecuteObject);
-#define CMD_EXTOPPG 816
-void COMMAND_EXTOPPG(pExecuteObject);
-#define CMD_EXTOPCL 817
-void COMMAND_EXTOPCL(pExecuteObject);
-#define CMD_EXTOPCK 818
-void COMMAND_EXTOPCK(pExecuteObject);
-#define CMD_EXTOPBF 819
-void COMMAND_EXTOPBF(pExecuteObject);
-#define CMD_HSECANT 820
-void COMMAND_HSECANT(pExecuteObject);
-#define CMD_ADDWEEK 821
-void COMMAND_ADDWEEK(pExecuteObject);
-#define CMD_ISDEF 822
-void COMMAND_ISDEF(pExecuteObject);
-#define CMD_COTAN2 823
-void COMMAND_COTAN2(pExecuteObject);
-#define CMD_EXTOPDH 824
-void COMMAND_EXTOPDH(pExecuteObject);
-#define CMD_MKD 825
-void COMMAND_MKD(pExecuteObject);
-#define CMD_EXTOPCF 826
-void COMMAND_EXTOPCF(pExecuteObject);
-#define CMD_EXTOPQQ 827
-void COMMAND_EXTOPQQ(pExecuteObject);
-#define CMD_CHOMP 828
-void COMMAND_CHOMP(pExecuteObject);
-#define CMD_EXTOPBK 829
-void COMMAND_EXTOPBK(pExecuteObject);
-#define CMD_YDAY 830
-void COMMAND_YDAY(pExecuteObject);
-#define CMD_NEXT 831
-void COMMAND_NEXT(pExecuteObject);
-#define CMD_LETD 832
-void COMMAND_LETD(pExecuteObject);
-#define CMD_EXTOPF 833
-void COMMAND_EXTOPF(pExecuteObject);
-#define CMD_STR 834
-void COMMAND_STR(pExecuteObject);
-#define CMD_GM2LOCAL 835
-void COMMAND_GM2LOCAL(pExecuteObject);
-#define CMD_EXTOPJQ 836
-void COMMAND_EXTOPJQ(pExecuteObject);
-#define CMD_FCRYPT 837
-void COMMAND_FCRYPT(pExecuteObject);
-#define CMD_EXTOPEL 838
-void COMMAND_EXTOPEL(pExecuteObject);
-#define CMD_EVEN 839
-void COMMAND_EVEN(pExecuteObject);
-#define CMD_ATN 840
-void COMMAND_ATN(pExecuteObject);
-#define CMD_EXTOPEF 841
-void COMMAND_EXTOPEF(pExecuteObject);
-#define CMD_PRINT 842
-void COMMAND_PRINT(pExecuteObject);
-#define CMD_FIX 843
-void COMMAND_FIX(pExecuteObject);
-#define CMD_FPRINTNL 844
-void COMMAND_FPRINTNL(pExecuteObject);
-#define CMD_ADDHOUR 845
-void COMMAND_ADDHOUR(pExecuteObject);
-#define CMD_TRIM 846
-void COMMAND_TRIM(pExecuteObject);
-#define CMD_EXTOPFN 847
-void COMMAND_EXTOPFN(pExecuteObject);
-#define CMD_EXTOPQF 848
-void COMMAND_EXTOPQF(pExecuteObject);
-#define CMD_EXTOPOL 849
-void COMMAND_EXTOPOL(pExecuteObject);
-#define CMD_SETJOKER 850
-void COMMAND_SETJOKER(pExecuteObject);
-#define CMD_LETS 851
-void COMMAND_LETS(pExecuteObject);
-#define CMD_ASECANT 852
-void COMMAND_ASECANT(pExecuteObject);
-#define CMD_EXTOPPP 853
-void COMMAND_EXTOPPP(pExecuteObject);
-#define CMD_UNTIL 854
-void COMMAND_UNTIL(pExecuteObject);
-#define CMD_EXTOPJH 855
-void COMMAND_EXTOPJH(pExecuteObject);
-#define CMD_EXTOPPF 856
-void COMMAND_EXTOPPF(pExecuteObject);
-#define CMD_EXTOPKM 857
-void COMMAND_EXTOPKM(pExecuteObject);
-#define CMD_EXTOPLH 858
+#define CMD_EXTOPQG 792
+void COMMAND_EXTOPQG(pExecuteObject);
+#define CMD_ODD 793
+void COMMAND_ODD(pExecuteObject);
+#define CMD_SPLITAQ 794
+void COMMAND_SPLITAQ(pExecuteObject);
+#define CMD_ADDYEAR 795
+void COMMAND_ADDYEAR(pExecuteObject);
+#define CMD_ISREG 796
+void COMMAND_ISREG(pExecuteObject);
+#define CMD_EXTOPQI 797
+void COMMAND_EXTOPQI(pExecuteObject);
+#define CMD_RANDOMIZA 798
+void COMMAND_RANDOMIZA(pExecuteObject);
+#define CMD_EXTERNAL 799
+void COMMAND_EXTERNAL(pExecuteObject);
+#define CMD_FRAC 800
+void COMMAND_FRAC(pExecuteObject);
+#define CMD_EXTOPEN 801
+void COMMAND_EXTOPEN(pExecuteObject);
+#define CMD_EXTOPMP 802
+void COMMAND_EXTOPMP(pExecuteObject);
+#define CMD_NLABEL 882
+#define CMD_EXTOPIC 803
+void COMMAND_EXTOPIC(pExecuteObject);
+#define CMD_EXTOPDI 804
+void COMMAND_EXTOPDI(pExecuteObject);
+#define CMD_RESETDIR 805
+void COMMAND_RESETDIR(pExecuteObject);
+#define CMD_EXTOPEO 806
+void COMMAND_EXTOPEO(pExecuteObject);
+#define CMD_OPTIONF 807
+void COMMAND_OPTIONF(pExecuteObject);
+#define CMD_EMPTY 883
+#define CMD_EXTOPLQ 808
+void COMMAND_EXTOPLQ(pExecuteObject);
+#define CMD_CVL 809
+void COMMAND_CVL(pExecuteObject);
+#define CMD_EXTOPKE 810
+void COMMAND_EXTOPKE(pExecuteObject);
+#define CMD_EXTOPFC 811
+void COMMAND_EXTOPFC(pExecuteObject);
+#define CMD_ENDSUB 812
+void COMMAND_ENDSUB(pExecuteObject);
+#define CMD_EXTOPCN 813
+void COMMAND_EXTOPCN(pExecuteObject);
+#define CMD_EXTOPPO 814
+void COMMAND_EXTOPPO(pExecuteObject);
+#define CMD_EXTOPLH 815
 void COMMAND_EXTOPLH(pExecuteObject);
-#define CMD_EXTOPMJ 859
-void COMMAND_EXTOPMJ(pExecuteObject);
-#define CMD_WDAY 860
-void COMMAND_WDAY(pExecuteObject);
-#define CMD_ASC 861
+#define CMD_ASC 816
 void COMMAND_ASC(pExecuteObject);
-#define CMD_EXTOPOD 862
-void COMMAND_EXTOPOD(pExecuteObject);
-#define CMD_LOG 863
-void COMMAND_LOG(pExecuteObject);
-#define CMD_EXTOPGH 864
-void COMMAND_EXTOPGH(pExecuteObject);
-#define CMD_WHILE 865
-void COMMAND_WHILE(pExecuteObject);
-#define CMD_LOCAL 883
-#define CMD_EXTOPQO 866
-void COMMAND_EXTOPQO(pExecuteObject);
-#define CMD_EXTOPAH 867
-void COMMAND_EXTOPAH(pExecuteObject);
-#define CMD_EXTOPNI 868
-void COMMAND_EXTOPNI(pExecuteObject);
-#define CMD_ACTAN 869
-void COMMAND_ACTAN(pExecuteObject);
-#define CMD_EXTOPAP 870
-void COMMAND_EXTOPAP(pExecuteObject);
-#define CMD_EXTOPCJ 871
+#define CMD_CLOSEDIR 817
+void COMMAND_CLOSEDIR(pExecuteObject);
+#define CMD_EXTOPJM 818
+void COMMAND_EXTOPJM(pExecuteObject);
+#define CMD_FOR 819
+void COMMAND_FOR(pExecuteObject);
+#define CMD_ELSIF 820
+void COMMAND_ELSIF(pExecuteObject);
+#define CMD_EXTOPAE 821
+void COMMAND_EXTOPAE(pExecuteObject);
+#define CMD_EXTOPCO 822
+void COMMAND_EXTOPCO(pExecuteObject);
+#define CMD_UNTIL 823
+void COMMAND_UNTIL(pExecuteObject);
+#define CMD_TXTMI 824
+void COMMAND_TXTMI(pExecuteObject);
+#define CMD_EXTOPOL 825
+void COMMAND_EXTOPOL(pExecuteObject);
+#define CMD_EXTOPPN 826
+void COMMAND_EXTOPPN(pExecuteObject);
+#define CMD_EXTOPLF 827
+void COMMAND_EXTOPLF(pExecuteObject);
+#define CMD_DELETEF 828
+void COMMAND_DELETEF(pExecuteObject);
+#define CMD_JOIN 829
+void COMMAND_JOIN(pExecuteObject);
+#define CMD_CREATEPROCESSEX 830
+void COMMAND_CREATEPROCESSEX(pExecuteObject);
+#define CMD_EXTOPHC 831
+void COMMAND_EXTOPHC(pExecuteObject);
+#define CMD_SLIF 832
+void COMMAND_SLIF(pExecuteObject);
+#define CMD_RIGHT 833
+void COMMAND_RIGHT(pExecuteObject);
+#define CMD_EXTOPOK 834
+void COMMAND_EXTOPOK(pExecuteObject);
+#define CMD_AND 835
+void COMMAND_AND(pExecuteObject);
+#define CMD_LTRIM 836
+void COMMAND_LTRIM(pExecuteObject);
+#define CMD_EXTOPPJ 837
+void COMMAND_EXTOPPJ(pExecuteObject);
+#define CMD_EXTOPGC 838
+void COMMAND_EXTOPGC(pExecuteObject);
+#define CMD_CONF 839
+void COMMAND_CONF(pExecuteObject);
+#define CMD_EXTOPMD 840
+void COMMAND_EXTOPMD(pExecuteObject);
+#define CMD_EXTOPCJ 841
 void COMMAND_EXTOPCJ(pExecuteObject);
-#define CMD_EXTOPPH 872
-void COMMAND_EXTOPPH(pExecuteObject);
+#define CMD_EODFUN 842
+void COMMAND_EODFUN(pExecuteObject);
+#define CMD_EXTOPNM 843
+void COMMAND_EXTOPNM(pExecuteObject);
+#define CMD_PLUS 844
+void COMMAND_PLUS(pExecuteObject);
+#define CMD_ADDSECOND 845
+void COMMAND_ADDSECOND(pExecuteObject);
+#define CMD_REPLACE 846
+void COMMAND_REPLACE(pExecuteObject);
+#define CMD_EXTOPKN 847
+void COMMAND_EXTOPKN(pExecuteObject);
+#define CMD_NE 848
+void COMMAND_NE(pExecuteObject);
+#define CMD_HCOS 849
+void COMMAND_HCOS(pExecuteObject);
+#define CMD_EVEN 850
+void COMMAND_EVEN(pExecuteObject);
+#define CMD_EXTOPMG 851
+void COMMAND_EXTOPMG(pExecuteObject);
+#define CMD_EXTOPMI 852
+void COMMAND_EXTOPMI(pExecuteObject);
+#define CMD_EXTOPEE 853
+void COMMAND_EXTOPEE(pExecuteObject);
+#define CMD_EXTOPKO 854
+void COMMAND_EXTOPKO(pExecuteObject);
+#define CMD_EXTOPLK 855
+void COMMAND_EXTOPLK(pExecuteObject);
+#define CMD_EXTERNAM 856
+void COMMAND_EXTERNAM(pExecuteObject);
+#define CMD_EXTOPOF 857
+void COMMAND_EXTOPOF(pExecuteObject);
+#define CMD_EXTOPDP 858
+void COMMAND_EXTOPDP(pExecuteObject);
+#define CMD_EXTOPIM 859
+void COMMAND_EXTOPIM(pExecuteObject);
+#define CMD_EXTOPLL 860
+void COMMAND_EXTOPLL(pExecuteObject);
+#define CMD_POW 861
+void COMMAND_POW(pExecuteObject);
+#define CMD_ACTAN 862
+void COMMAND_ACTAN(pExecuteObject);
+#define CMD_TRUE 863
+void COMMAND_TRUE(pExecuteObject);
+#define CMD_EXTOPQP 864
+void COMMAND_EXTOPQP(pExecuteObject);
+#define CMD_POP 865
+void COMMAND_POP(pExecuteObject);
+#define CMD_SUB 866
+void COMMAND_SUB(pExecuteObject);
+#define CMD_CVS 867
+void COMMAND_CVS(pExecuteObject);
+#define CMD_UNDEF 868
+void COMMAND_UNDEF(pExecuteObject);
+#define CMD_EXTOPBP 869
+void COMMAND_EXTOPBP(pExecuteObject);
+#define CMD_EXTOPOH 870
+void COMMAND_EXTOPOH(pExecuteObject);
+#define CMD_FTACCESS 871
+void COMMAND_FTACCESS(pExecuteObject);
+#define CMD_EXTOPKJ 872
+void COMMAND_EXTOPKJ(pExecuteObject);
 */
 unsigned long BINARIES[] = {
   CMD_EXTOPF , 1 ,
@@ -3371,14 +3371,14 @@ TO_HEADER:
 { "addsecond" , CMD_ADDSECOND } ,
 /*
 TO_HEADER:
-#define KEYWORDCODE_RANDOMIZE 341
-*/
-{ "randomize" , 341 } ,
-/*
-TO_HEADER:
 #define KEYWORDCODE_DIRECTORY 310
 */
 { "directory" , 310 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_RANDOMIZE 341
+*/
+{ "randomize" , 341 } ,
 /*
 TO_HEADER:
 #define KEYWORDCODE_ISSTRING CMD_ISSTRING
@@ -3421,14 +3421,9 @@ TO_HEADER:
 { "hostname" , CMD_HOSTNAME } ,
 /*
 TO_HEADER:
-#define KEYWORDCODE_TEXTMODE 334
+#define KEYWORDCODE_FILECOPY 327
 */
-{ "textmode" , 334 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_FUNCTION 268
-*/
-{ "function" , 268 } ,
+{ "filecopy" , 327 } ,
 /*
 TO_HEADER:
 #define KEYWORDCODE_TRUNCATE 320
@@ -3436,9 +3431,14 @@ TO_HEADER:
 { "truncate" , 320 } ,
 /*
 TO_HEADER:
-#define KEYWORDCODE_FILECOPY 327
+#define KEYWORDCODE_FUNCTION 268
 */
-{ "filecopy" , 327 } ,
+{ "function" , 268 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_TEXTMODE 334
+*/
+{ "textmode" , 334 } ,
 /*
 TO_HEADER:
 #define KEYWORDCODE_ISARRAY CMD_ISARRAY
@@ -3531,6 +3531,16 @@ TO_HEADER:
 { "waitpid" , CMD_WAITPID } ,
 /*
 TO_HEADER:
+#define KEYWORDCODE_DECLARE 260
+*/
+{ "declare" , 260 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_PRINTNL 266
+*/
+{ "printnl" , 266 } ,
+/*
+TO_HEADER:
 #define KEYWORDCODE_BINMODE 332
 */
 { "binmode" , 332 } ,
@@ -3541,24 +3551,14 @@ TO_HEADER:
 { "deltree" , 325 } ,
 /*
 TO_HEADER:
-#define KEYWORDCODE_SPLITAQ 335
-*/
-{ "splitaq" , 335 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_PRINTNL 266
-*/
-{ "printnl" , 266 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_DECLARE 260
-*/
-{ "declare" , 260 } ,
-/*
-TO_HEADER:
 #define KEYWORDCODE_PATTERN 311
 */
 { "pattern" , 311 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_SPLITAQ 335
+*/
+{ "splitaq" , 335 } ,
 /*
 TO_HEADER:
 #define KEYWORDCODE_MAXINT CMD_MAXINT
@@ -3686,29 +3686,9 @@ TO_HEADER:
 { "system" , CMD_CREATEPROCESS } ,
 /*
 TO_HEADER:
-#define KEYWORDCODE_REGION 322
+#define KEYWORDCODE_SPLITA 338
 */
-{ "region" , 322 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_OUTPUT 333
-*/
-{ "output" , 333 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_DELETE 326
-*/
-{ "delete" , 326 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_REPEAT 299
-*/
-{ "repeat" , 299 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_UNPACK 340
-*/
-{ "unpack" , 340 } ,
+{ "splita" , 338 } ,
 /*
 TO_HEADER:
 #define KEYWORDCODE_MODULE 256
@@ -3716,9 +3696,9 @@ TO_HEADER:
 { "module" , 256 } ,
 /*
 TO_HEADER:
-#define KEYWORDCODE_SPLITA 338
+#define KEYWORDCODE_DELETE 326
 */
-{ "splita" , 338 } ,
+{ "delete" , 326 } ,
 /*
 TO_HEADER:
 #define KEYWORDCODE_ELSEIF 304
@@ -3726,9 +3706,19 @@ TO_HEADER:
 { "elseif" , 304 } ,
 /*
 TO_HEADER:
-#define KEYWORDCODE_RESUME 292
+#define KEYWORDCODE_REWIND 317
 */
-{ "resume" , 292 } ,
+{ "rewind" , 317 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_REGION 322
+*/
+{ "region" , 322 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_REPEAT 299
+*/
+{ "repeat" , 299 } ,
 /*
 TO_HEADER:
 #define KEYWORDCODE_GLOBAL 263
@@ -3736,14 +3726,24 @@ TO_HEADER:
 { "global" , 263 } ,
 /*
 TO_HEADER:
+#define KEYWORDCODE_RESUME 292
+*/
+{ "resume" , 292 } ,
+/*
+TO_HEADER:
 #define KEYWORDCODE_RETURN 285
 */
 { "return" , 285 } ,
 /*
 TO_HEADER:
-#define KEYWORDCODE_REWIND 317
+#define KEYWORDCODE_UNPACK 340
 */
-{ "rewind" , 317 } ,
+{ "unpack" , 340 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_OUTPUT 333
+*/
+{ "output" , 333 } ,
 /*
 TO_HEADER:
 #define KEYWORDCODE_BYVAL CMD_BYVAL
@@ -3876,6 +3876,36 @@ TO_HEADER:
 { "crypt" , CMD_FCRYPT } ,
 /*
 TO_HEADER:
+#define KEYWORDCODE_MKDIR 324
+*/
+{ "mkdir" , 324 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_GOSUB 284
+*/
+{ "gosub" , 284 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_ALIAS 347
+*/
+{ "alias" , 347 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_WHILE 294
+*/
+{ "while" , 294 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_RESET 313
+*/
+{ "reset" , 313 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_ENDIF 308
+*/
+{ "endif" , 308 } ,
+/*
+TO_HEADER:
 #define KEYWORDCODE_PRINT 267
 */
 { "print" , 267 } ,
@@ -3891,49 +3921,9 @@ TO_HEADER:
 { "local" , 258 } ,
 /*
 TO_HEADER:
-#define KEYWORDCODE_ELSIF 307
-*/
-{ "elsif" , 307 } ,
-/*
-TO_HEADER:
 #define KEYWORDCODE_CHDIR 329
 */
 { "chdir" , 329 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_MKDIR 324
-*/
-{ "mkdir" , 324 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_GOSUB 284
-*/
-{ "gosub" , 284 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_PAUSE 346
-*/
-{ "pause" , 346 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_QUOTE 337
-*/
-{ "quote" , 337 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_ENDIF 308
-*/
-{ "endif" , 308 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_SPLIT 339
-*/
-{ "split" , 339 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_ALIAS 347
-*/
-{ "alias" , 347 } ,
 /*
 TO_HEADER:
 #define KEYWORDCODE_CLOSE 314
@@ -3941,24 +3931,34 @@ TO_HEADER:
 { "close" , 314 } ,
 /*
 TO_HEADER:
-#define KEYWORDCODE_RESET 313
+#define KEYWORDCODE_QUOTE 337
 */
-{ "reset" , 313 } ,
+{ "quote" , 337 } ,
 /*
 TO_HEADER:
-#define KEYWORDCODE_WHILE 294
+#define KEYWORDCODE_SPLIT 339
 */
-{ "while" , 294 } ,
+{ "split" , 339 } ,
 /*
 TO_HEADER:
-#define KEYWORDCODE_UNTIL 297
+#define KEYWORDCODE_ELSIF 307
 */
-{ "until" , 297 } ,
+{ "elsif" , 307 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_PAUSE 346
+*/
+{ "pause" , 346 } ,
 /*
 TO_HEADER:
 #define KEYWORDCODE_SLEEP 345
 */
 { "sleep" , 345 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_UNTIL 297
+*/
+{ "until" , 297 } ,
 /*
 TO_HEADER:
 #define KEYWORDCODE_LIKE CMD_LIKEOP
@@ -4131,29 +4131,9 @@ TO_HEADER:
 { "fork" , CMD_FORK } ,
 /*
 TO_HEADER:
-#define KEYWORDCODE_WEND 295
+#define KEYWORDCODE_ELSE 305
 */
-{ "wend" , 295 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_FILE 331
-*/
-{ "file" , 331 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_LOOP 298
-*/
-{ "loop" , 298 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_SWAP 265
-*/
-{ "swap" , 265 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_LINE 318
-*/
-{ "line" , 318 } ,
+{ "else" , 305 } ,
 /*
 TO_HEADER:
 #define KEYWORDCODE_NAME 328
@@ -4161,39 +4141,9 @@ TO_HEADER:
 { "name" , 328 } ,
 /*
 TO_HEADER:
-#define KEYWORDCODE_OPEN 309
+#define KEYWORDCODE_ELIF 306
 */
-{ "open" , 309 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_FROM 323
-*/
-{ "from" , 323 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_WILD 343
-*/
-{ "wild" , 343 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_THEN 303
-*/
-{ "then" , 303 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_NEXT 293
-*/
-{ "next" , 293 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_LOCK 321
-*/
-{ "lock" , 321 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_EXIT 269
-*/
-{ "exit" , 269 } ,
+{ "elif" , 306 } ,
 /*
 TO_HEADER:
 #define KEYWORDCODE_STEP 301
@@ -4201,9 +4151,44 @@ TO_HEADER:
 { "step" , 301 } ,
 /*
 TO_HEADER:
-#define KEYWORDCODE_ELSE 305
+#define KEYWORDCODE_LINE 318
 */
-{ "else" , 305 } ,
+{ "line" , 318 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_WILD 343
+*/
+{ "wild" , 343 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_LOCK 321
+*/
+{ "lock" , 321 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_SEEK 316
+*/
+{ "seek" , 316 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_THEN 303
+*/
+{ "then" , 303 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_FILE 331
+*/
+{ "file" , 331 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_NEXT 293
+*/
+{ "next" , 293 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_WEND 295
+*/
+{ "wend" , 295 } ,
 /*
 TO_HEADER:
 #define KEYWORDCODE_NULL 291
@@ -4211,19 +4196,9 @@ TO_HEADER:
 { "null" , 291 } ,
 /*
 TO_HEADER:
-#define KEYWORDCODE_GOTO 281
+#define KEYWORDCODE_EXIT 269
 */
-{ "goto" , 281 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_CALL 271
-*/
-{ "call" , 271 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_ELIF 306
-*/
-{ "elif" , 306 } ,
+{ "exit" , 269 } ,
 /*
 TO_HEADER:
 #define KEYWORDCODE_STOP 259
@@ -4231,9 +4206,34 @@ TO_HEADER:
 { "stop" , 259 } ,
 /*
 TO_HEADER:
-#define KEYWORDCODE_SEEK 316
+#define KEYWORDCODE_GOTO 281
 */
-{ "seek" , 316 } ,
+{ "goto" , 281 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_SWAP 265
+*/
+{ "swap" , 265 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_LOOP 298
+*/
+{ "loop" , 298 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_FROM 323
+*/
+{ "from" , 323 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_CALL 271
+*/
+{ "call" , 271 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_OPEN 309
+*/
+{ "open" , 309 } ,
 /*
 TO_HEADER:
 #define KEYWORDCODE_AND CMD_AND
@@ -4461,9 +4461,19 @@ TO_HEADER:
 { "sec" , CMD_SEC } ,
 /*
 TO_HEADER:
-#define KEYWORDCODE_REF 280
+#define KEYWORDCODE_LET 273
 */
-{ "ref" , 280 } ,
+{ "let" , 273 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_FOR 300
+*/
+{ "for" , 300 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_SUB 270
+*/
+{ "sub" , 270 } ,
 /*
 TO_HEADER:
 #define KEYWORDCODE_VAR 264
@@ -4476,19 +4486,14 @@ TO_HEADER:
 { "set" , 330 } ,
 /*
 TO_HEADER:
-#define KEYWORDCODE_POP 286
+#define KEYWORDCODE_LIB 348
 */
-{ "pop" , 286 } ,
+{ "lib" , 348 } ,
 /*
 TO_HEADER:
-#define KEYWORDCODE_LET 273
+#define KEYWORDCODE_REF 280
 */
-{ "let" , 273 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_FOR 300
-*/
-{ "for" , 300 } ,
+{ "ref" , 280 } ,
 /*
 TO_HEADER:
 #define KEYWORDCODE_END 257
@@ -4496,14 +4501,9 @@ TO_HEADER:
 { "end" , 257 } ,
 /*
 TO_HEADER:
-#define KEYWORDCODE_LIB 348
+#define KEYWORDCODE_POP 286
 */
-{ "lib" , 348 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_SUB 270
-*/
-{ "sub" , 270 } ,
+{ "pop" , 286 } ,
 /*
 TO_HEADER:
 #define KEYWORDCODE_OR CMD_OR
@@ -4516,29 +4516,9 @@ TO_HEADER:
 { "pi" , CMD_PI } ,
 /*
 TO_HEADER:
-#define KEYWORDCODE_IF 302
-*/
-{ "if" , 302 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_ON 289
-*/
-{ "on" , 289 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_DO 296
-*/
-{ "do" , 296 } ,
-/*
-TO_HEADER:
 #define KEYWORDCODE_TO 283
 */
 { "to" , 283 } ,
-/*
-TO_HEADER:
-#define KEYWORDCODE_NO 344
-*/
-{ "no" , 344 } ,
 /*
 TO_HEADER:
 #define KEYWORDCODE_BY 336
@@ -4546,14 +4526,34 @@ TO_HEADER:
 { "by" , 336 } ,
 /*
 TO_HEADER:
-#define KEYWORDCODE_GO 282
+#define KEYWORDCODE_DO 296
 */
-{ "go" , 282 } ,
+{ "do" , 296 } ,
 /*
 TO_HEADER:
 #define KEYWORDCODE_AS 312
 */
 { "as" , 312 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_GO 282
+*/
+{ "go" , 282 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_ON 289
+*/
+{ "on" , 289 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_NO 344
+*/
+{ "no" , 344 } ,
+/*
+TO_HEADER:
+#define KEYWORDCODE_IF 302
+*/
+{ "if" , 302 } ,
 /*
 TO_HEADER:
 #define KEYWORDCODE_GMTIMETOLOCALTIME CMD_GM2LOCAL
@@ -4612,540 +4612,540 @@ TO_HEADER:
 { NULL, 0 }
   };
 LexNASymbol CSYMBOLS[] = {
-{ "EXTOPJP" , CMD_EXTOPJP } , /* 350 */
-{ "JOIN" , CMD_JOIN } , /* 351 */
-{ "HEX" , CMD_HEX } , /* 352 */
-{ "EXTOPIL" , CMD_EXTOPIL } , /* 353 */
-{ "TXTMI" , CMD_TXTMI } , /* 354 */
-{ "EXTOPPC" , CMD_EXTOPPC } , /* 355 */
-{ "EXTOPPL" , CMD_EXTOPPL } , /* 356 */
-{ "EXTOPHF" , CMD_EXTOPHF } , /* 357 */
-{ "ISLONG" , CMD_ISLONG } , /* 358 */
-{ "SQR" , CMD_SQR } , /* 359 */
-{ "DOUNTIL" , CMD_DOUNTIL } , /* 360 */
-{ "ONERRORRESUMELABEL" , CMD_ONERRORRESUMELABEL } , /* 361 */
-{ "EXTOPAE" , CMD_EXTOPAE } , /* 362 */
-{ "OPEN" , CMD_OPEN } , /* 363 */
-{ "MONTH" , CMD_MONTH } , /* 364 */
-{ "VAL" , CMD_VAL } , /* 365 */
-{ "EXTOPHP" , CMD_EXTOPHP } , /* 366 */
-{ "ISDOUBLE" , CMD_ISDOUBLE } , /* 367 */
-{ "COSECANT" , CMD_COSECANT } , /* 368 */
-{ "CREATEPROCESS" , CMD_CREATEPROCESS } , /* 369 */
-{ "EXTOPNO" , CMD_EXTOPNO } , /* 370 */
-{ "EXTOPFI" , CMD_EXTOPFI } , /* 371 */
-{ "MINUTE" , CMD_MINUTE } , /* 372 */
-{ "FORMATDATE" , CMD_FORMATDATE } , /* 373 */
-{ "MID" , CMD_MID } , /* 374 */
-{ "FTMODIFY" , CMD_FTMODIFY } , /* 375 */
-{ "EXTOPDP" , CMD_EXTOPDP } , /* 376 */
-{ "DELETE" , CMD_DELETE } , /* 377 */
-{ "SPLIT" , CMD_SPLIT } , /* 378 */
-{ "CONST" , CMD_CONST } , /* 873 */
-{ "CLOSE" , CMD_CLOSE } , /* 379 */
-{ "ENDMODULE" , CMD_ENDMODULE } , /* 874 */
-{ "EXTOPIO" , CMD_EXTOPIO } , /* 380 */
-{ "EXTOPHI" , CMD_EXTOPHI } , /* 381 */
-{ "EXTOPOI" , CMD_EXTOPOI } , /* 382 */
-{ "EXTOPDI" , CMD_EXTOPDI } , /* 383 */
-{ "HCOSECANT" , CMD_HCOSECANT } , /* 384 */
-{ "EXTOPKH" , CMD_EXTOPKH } , /* 385 */
-{ "LETC" , CMD_LETC } , /* 386 */
-{ "EXTOPCN" , CMD_EXTOPCN } , /* 387 */
-{ "ERROR" , CMD_ERROR } , /* 388 */
-{ "MININT" , CMD_MININT } , /* 389 */
-{ "EXTOPNH" , CMD_EXTOPNH } , /* 390 */
-{ "EXTOPJO" , CMD_EXTOPJO } , /* 391 */
-{ "CERROR" , CMD_CERROR } , /* 392 */
-{ "EXTOPMO" , CMD_EXTOPMO } , /* 393 */
-{ "EXTOPLM" , CMD_EXTOPLM } , /* 394 */
-{ "HCOS" , CMD_HCOS } , /* 395 */
-{ "ISARRAY" , CMD_ISARRAY } , /* 396 */
-{ "EXTOPFO" , CMD_EXTOPFO } , /* 397 */
-{ "ABS" , CMD_ABS } , /* 398 */
-{ "RETURNC" , CMD_RETURNC } , /* 399 */
-{ "EXTOPBO" , CMD_EXTOPBO } , /* 400 */
-{ "SPACE" , CMD_SPACE } , /* 401 */
-{ "MAX" , CMD_MAX } , /* 402 */
-{ "CONCATENATE" , CMD_CONCATENATE } , /* 403 */
-{ "SETFILE" , CMD_SETFILE } , /* 404 */
-{ "EXTOPEM" , CMD_EXTOPEM } , /* 405 */
-{ "TAN2" , CMD_TAN2 } , /* 406 */
-{ "SPLITA" , CMD_SPLITA } , /* 407 */
-{ "BINMF" , CMD_BINMF } , /* 408 */
-{ "EXTOPFG" , CMD_EXTOPFG } , /* 409 */
-{ "EXTOPKP" , CMD_EXTOPKP } , /* 410 */
-{ "EXTOPMG" , CMD_EXTOPMG } , /* 411 */
-{ "EXTOPJI" , CMD_EXTOPJI } , /* 412 */
-{ "LOOPUNTIL" , CMD_LOOPUNTIL } , /* 413 */
-{ "ELSIF" , CMD_ELSIF } , /* 414 */
-{ "MOD" , CMD_MOD } , /* 415 */
-{ "EXTOPHQ" , CMD_EXTOPHQ } , /* 416 */
-{ "RLOCK" , CMD_RLOCK } , /* 417 */
-{ "WAITPID" , CMD_WAITPID } , /* 418 */
-{ "UCASE" , CMD_UCASE } , /* 419 */
-{ "EXTOPLE" , CMD_EXTOPLE } , /* 420 */
-{ "IMIN" , CMD_IMIN } , /* 421 */
-{ "DO" , CMD_DO } , /* 422 */
-{ "MKL" , CMD_MKL } , /* 423 */
-{ "GCD" , CMD_GCD } , /* 424 */
-{ "EXTOPPJ" , CMD_EXTOPPJ } , /* 425 */
-{ "ISDIR" , CMD_ISDIR } , /* 426 */
-{ "LINPUT" , CMD_LINPUT } , /* 427 */
-{ "EXTOPCC" , CMD_EXTOPCC } , /* 428 */
-{ "FORMAT" , CMD_FORMAT } , /* 429 */
-{ "EXTOPDN" , CMD_EXTOPDN } , /* 430 */
-{ "OPTION" , CMD_OPTION } , /* 431 */
-{ "EXTOPPM" , CMD_EXTOPPM } , /* 432 */
-{ "ELSE" , CMD_ELSE } , /* 433 */
-{ "EXTOPCD" , CMD_EXTOPCD } , /* 434 */
-{ "EXTOPHH" , CMD_EXTOPHH } , /* 435 */
-{ "EXTOPEJ" , CMD_EXTOPEJ } , /* 436 */
-{ "EXTOPCP" , CMD_EXTOPCP } , /* 437 */
-{ "LEFT" , CMD_LEFT } , /* 438 */
-{ "FOR" , CMD_FOR } , /* 439 */
-{ "EXTOPJC" , CMD_EXTOPJC } , /* 440 */
-{ "EXTOPHG" , CMD_EXTOPHG } , /* 441 */
-{ "EXTOPFH" , CMD_EXTOPFH } , /* 442 */
-{ "STRING" , CMD_STRING } , /* 443 */
-{ "EXTOPAJ" , CMD_EXTOPAJ } , /* 444 */
-{ "EQ" , CMD_EQ } , /* 445 */
-{ "ICALL" , CMD_ICALL } , /* 446 */
-{ "KILL" , CMD_KILL } , /* 447 */
-{ "BINMO" , CMD_BINMO } , /* 448 */
-{ "EXTOPQL" , CMD_EXTOPQL } , /* 449 */
-{ "EXTOPLP" , CMD_EXTOPLP } , /* 450 */
-{ "FTCREATED" , CMD_FTCREATED } , /* 451 */
-{ "EXTOPMD" , CMD_EXTOPMD } , /* 452 */
-{ "EXTOPGN" , CMD_EXTOPGN } , /* 453 */
-{ "EXITFUNC" , CMD_EXITFUNC } , /* 454 */
-{ "ERRORDOLLAR" , CMD_ERRORDOLLAR } , /* 455 */
-{ "XOR" , CMD_XOR } , /* 456 */
-{ "EXTOPLN" , CMD_EXTOPLN } , /* 457 */
-{ "SEEK" , CMD_SEEK } , /* 458 */
-{ "EXTOPQM" , CMD_EXTOPQM } , /* 459 */
-{ "EXTOPJN" , CMD_EXTOPJN } , /* 460 */
-{ "EXTOPNN" , CMD_EXTOPNN } , /* 461 */
-{ "TIMEVALUE" , CMD_TIMEVALUE } , /* 462 */
-{ "EXTOPHN" , CMD_EXTOPHN } , /* 463 */
-{ "DIV" , CMD_DIV } , /* 464 */
-{ "EOFFUN" , CMD_EOFFUN } , /* 465 */
-{ "EXTOPBM" , CMD_EXTOPBM } , /* 466 */
-{ "ISUNDEF" , CMD_ISUNDEF } , /* 467 */
-{ "HCTAN" , CMD_HCTAN } , /* 468 */
-{ "EXTOPAM" , CMD_EXTOPAM } , /* 469 */
-{ "EXTOPLF" , CMD_EXTOPLF } , /* 470 */
-{ "SLIF" , CMD_SLIF } , /* 471 */
-{ "SETNOJO" , CMD_SETNOJO } , /* 472 */
-{ "LET" , CMD_LET } , /* 473 */
-{ "ICALLFUN" , CMD_ICALLFUN } , /* 474 */
-{ "EXTOPFF" , CMD_EXTOPFF } , /* 475 */
-{ "EXTOPBG" , CMD_EXTOPBG } , /* 476 */
-{ "EXTOPBN" , CMD_EXTOPBN } , /* 477 */
-{ "CONF" , CMD_CONF } , /* 478 */
-{ "GT" , CMD_GT } , /* 479 */
-{ "ISREG" , CMD_ISREG } , /* 480 */
-{ "EXTOPCM" , CMD_EXTOPCM } , /* 481 */
-{ "MODULE" , CMD_MODULE } , /* 875 */
-{ "EXTOPGJ" , CMD_EXTOPGJ } , /* 482 */
-{ "RTRIM" , CMD_RTRIM } , /* 483 */
-{ "EXTOPCH" , CMD_EXTOPCH } , /* 484 */
-{ "PI" , CMD_PI } , /* 485 */
-{ "LBOUND" , CMD_LBOUND } , /* 486 */
-{ "DELETEF" , CMD_DELETEF } , /* 487 */
-{ "LETM" , CMD_LETM } , /* 488 */
-{ "EXTOPGD" , CMD_EXTOPGD } , /* 489 */
-{ "INSTR" , CMD_INSTR } , /* 490 */
-{ "PRAGMA" , CMD_PRAGMA } , /* 876 */
-{ "EXTOPII" , CMD_EXTOPII } , /* 491 */
-{ "EXP" , CMD_EXP } , /* 492 */
-{ "FORK" , CMD_FORK } , /* 493 */
-{ "OCT" , CMD_OCT } , /* 494 */
-{ "EXTOPON" , CMD_EXTOPON } , /* 495 */
-{ "EXTOPMI" , CMD_EXTOPMI } , /* 496 */
-{ "FILEXISTS" , CMD_FILEXISTS } , /* 497 */
-{ "JOKER" , CMD_JOKER } , /* 498 */
-{ "TRUE" , CMD_TRUE } , /* 499 */
-{ "SEC" , CMD_SEC } , /* 500 */
-{ "EXTOPIM" , CMD_EXTOPIM } , /* 501 */
-{ "LEN" , CMD_LEN } , /* 502 */
-{ "EXTOPOG" , CMD_EXTOPOG } , /* 503 */
-{ "ONERRORGOTO" , CMD_ONERRORGOTO } , /* 504 */
-{ "LIKEOP" , CMD_LIKEOP } , /* 505 */
-{ "LETP" , CMD_LETP } , /* 506 */
-{ "GOSUB" , CMD_GOSUB } , /* 507 */
-{ "EXTOPCG" , CMD_EXTOPCG } , /* 508 */
-{ "ADDRESSF" , CMD_ADDRESSF } , /* 509 */
-{ "EXTOPNP" , CMD_EXTOPNP } , /* 510 */
-{ "EXTOPDF" , CMD_EXTOPDF } , /* 511 */
-{ "EXTOPOO" , CMD_EXTOPOO } , /* 512 */
-{ "EXTOPPN" , CMD_EXTOPPN } , /* 513 */
-{ "EXTOPNM" , CMD_EXTOPNM } , /* 514 */
-{ "EXTOPGL" , CMD_EXTOPGL } , /* 515 */
-{ "EXTOPNG" , CMD_EXTOPNG } , /* 516 */
-{ "NE" , CMD_NE } , /* 517 */
-{ "EXTOPMH" , CMD_EXTOPMH } , /* 518 */
-{ "LOOP" , CMD_LOOP } , /* 519 */
-{ "ADDDAY" , CMD_ADDDAY } , /* 520 */
-{ "EXTOPGQ" , CMD_EXTOPGQ } , /* 521 */
-{ "EXTOPKD" , CMD_EXTOPKD } , /* 522 */
-{ "END" , CMD_END } , /* 523 */
-{ "EXTOPCO" , CMD_EXTOPCO } , /* 524 */
-{ "NLABEL" , CMD_NLABEL } , /* 877 */
-{ "FILELEN" , CMD_FILELEN } , /* 525 */
-{ "EXTOPAC" , CMD_EXTOPAC } , /* 526 */
-{ "OR" , CMD_OR } , /* 527 */
-{ "YEAR" , CMD_YEAR } , /* 528 */
-{ "EXTOPAN" , CMD_EXTOPAN } , /* 529 */
-{ "EXTOPDO" , CMD_EXTOPDO } , /* 530 */
-{ "EXTOPBH" , CMD_EXTOPBH } , /* 531 */
-{ "EODFUN" , CMD_EODFUN } , /* 532 */
-{ "EXTOPLC" , CMD_EXTOPLC } , /* 533 */
-{ "EXTOPMQ" , CMD_EXTOPMQ } , /* 534 */
-{ "GCONST" , CMD_GCONST } , /* 878 */
-{ "EXTOPFP" , CMD_EXTOPFP } , /* 535 */
-{ "EXTOPQD" , CMD_EXTOPQD } , /* 536 */
-{ "EXTOPHD" , CMD_EXTOPHD } , /* 537 */
-{ "EXTOPKJ" , CMD_EXTOPKJ } , /* 538 */
-{ "EXTOPLK" , CMD_EXTOPLK } , /* 539 */
-{ "EXTOPBP" , CMD_EXTOPBP } , /* 540 */
-{ "TXTMO" , CMD_TXTMO } , /* 541 */
-{ "EXTOPGC" , CMD_EXTOPGC } , /* 542 */
-{ "EXTOPLD" , CMD_EXTOPLD } , /* 543 */
-{ "EXTOPJL" , CMD_EXTOPJL } , /* 544 */
-{ "EXTOPFJ" , CMD_EXTOPFJ } , /* 545 */
-{ "EXTOPQE" , CMD_EXTOPQE } , /* 546 */
-{ "EXTOPAO" , CMD_EXTOPAO } , /* 547 */
-{ "RIGHT" , CMD_RIGHT } , /* 548 */
-{ "MAXINT" , CMD_MAXINT } , /* 549 */
-{ "COMMANDF" , CMD_COMMANDF } , /* 550 */
-{ "EXTOPNQ" , CMD_EXTOPNQ } , /* 551 */
-{ "EXTOPPO" , CMD_EXTOPPO } , /* 552 */
-{ "BIN" , CMD_BIN } , /* 553 */
-{ "EXTOPOH" , CMD_EXTOPOH } , /* 554 */
-{ "EXTOPHE" , CMD_EXTOPHE } , /* 555 */
-{ "EXTOPNF" , CMD_EXTOPNF } , /* 556 */
-{ "EXTOPQC" , CMD_EXTOPQC } , /* 557 */
-{ "EXTOPID" , CMD_EXTOPID } , /* 558 */
-{ "EXTOPPE" , CMD_EXTOPPE } , /* 559 */
-{ "EXTOPHJ" , CMD_EXTOPHJ } , /* 560 */
-{ "ADDMONTH" , CMD_ADDMONTH } , /* 561 */
-{ "NAME" , CMD_NAME } , /* 562 */
-{ "EXTOPEC" , CMD_EXTOPEC } , /* 563 */
-{ "ACOS" , CMD_ACOS } , /* 564 */
-{ "SIN" , CMD_SIN } , /* 565 */
-{ "EXTOPKO" , CMD_EXTOPKO } , /* 566 */
-{ "NOT" , CMD_NOT } , /* 567 */
-{ "EXTOPAL" , CMD_EXTOPAL } , /* 568 */
-{ "EXTOPNE" , CMD_EXTOPNE } , /* 569 */
-{ "EXTOPGM" , CMD_EXTOPGM } , /* 570 */
-{ "IF" , CMD_IF } , /* 571 */
-{ "EXTOPDL" , CMD_EXTOPDL } , /* 572 */
-{ "EXTOPKC" , CMD_EXTOPKC } , /* 573 */
-{ "UNPACK" , CMD_UNPACK } , /* 574 */
-{ "EXTOPNL" , CMD_EXTOPNL } , /* 575 */
-{ "LETI" , CMD_LETI } , /* 576 */
-{ "OPENDIR" , CMD_OPENDIR } , /* 577 */
-{ "EXITSUB" , CMD_EXITSUB } , /* 578 */
-{ "IMAX" , CMD_IMAX } , /* 579 */
-{ "LLET" , CMD_LLET } , /* 580 */
-{ "EXTOPEH" , CMD_EXTOPEH } , /* 581 */
-{ "FRAC" , CMD_FRAC } , /* 582 */
-{ "ISNUMERIC" , CMD_ISNUMERIC } , /* 583 */
-{ "EXTOPLL" , CMD_EXTOPLL } , /* 584 */
-{ "EXTOPDQ" , CMD_EXTOPDQ } , /* 585 */
-{ "EXTOPQJ" , CMD_EXTOPQJ } , /* 586 */
-{ "POWER" , CMD_POWER } , /* 587 */
-{ "ATAN" , CMD_ATAN } , /* 588 */
-{ "EXTOPIE" , CMD_EXTOPIE } , /* 589 */
-{ "ADDSECOND" , CMD_ADDSECOND } , /* 590 */
-{ "EXTOPK" , CMD_EXTOPK } , /* 591 */
-{ "CVD" , CMD_CVD } , /* 592 */
-{ "MKI" , CMD_MKI } , /* 593 */
-{ "ADDYEAR" , CMD_ADDYEAR } , /* 594 */
-{ "EXTOPMN" , CMD_EXTOPMN } , /* 595 */
-{ "EXTOPL" , CMD_EXTOPL } , /* 596 */
-{ "RESUMELABEL" , CMD_RESUMELABEL } , /* 597 */
-{ "INT" , CMD_INT } , /* 598 */
-{ "EXTOPKI" , CMD_EXTOPKI } , /* 599 */
-{ "EXTOPMF" , CMD_EXTOPMF } , /* 600 */
-{ "EXTOPEK" , CMD_EXTOPEK } , /* 601 */
-{ "EXTOPFC" , CMD_EXTOPFC } , /* 602 */
-{ "MIN" , CMD_MIN } , /* 603 */
-{ "EXTOPAI" , CMD_EXTOPAI } , /* 604 */
-{ "REPEAT" , CMD_REPEAT } , /* 605 */
-{ "REPLACE" , CMD_REPLACE } , /* 606 */
-{ "EXTOPJJ" , CMD_EXTOPJJ } , /* 607 */
-{ "ADDMINUTE" , CMD_ADDMINUTE } , /* 608 */
-{ "GOTO" , CMD_GOTO } , /* 609 */
-{ "EXTOPMK" , CMD_EXTOPMK } , /* 610 */
-{ "EXTOPFQ" , CMD_EXTOPFQ } , /* 611 */
-{ "EXTOPHL" , CMD_EXTOPHL } , /* 612 */
-{ "HTAN" , CMD_HTAN } , /* 613 */
-{ "LOOPWHILE" , CMD_LOOPWHILE } , /* 614 */
-{ "EXTOPHC" , CMD_EXTOPHC } , /* 615 */
-{ "EXTOPOE" , CMD_EXTOPOE } , /* 616 */
-{ "EXTOPOP" , CMD_EXTOPOP } , /* 617 */
-{ "EXTOPFK" , CMD_EXTOPFK } , /* 618 */
-{ "EXTOPEQ" , CMD_EXTOPEQ } , /* 619 */
-{ "EXTOPKL" , CMD_EXTOPKL } , /* 620 */
-{ "EXTOPBJ" , CMD_EXTOPBJ } , /* 621 */
-{ "EXTOPKG" , CMD_EXTOPKG } , /* 622 */
-{ "CVI" , CMD_CVI } , /* 623 */
-{ "CUNDEF" , CMD_CUNDEF } , /* 624 */
-{ "EXTOPIF" , CMD_EXTOPIF } , /* 625 */
-{ "PRINTNL" , CMD_PRINTNL } , /* 626 */
-{ "MINUS" , CMD_MINUS } , /* 627 */
-{ "DOWHILE" , CMD_DOWHILE } , /* 628 */
-{ "FORSTEP" , CMD_FORSTEP } , /* 629 */
-{ "UBOUND" , CMD_UBOUND } , /* 630 */
-{ "EXTOPGF" , CMD_EXTOPGF } , /* 631 */
-{ "EXTOPIK" , CMD_EXTOPIK } , /* 632 */
-{ "DAY" , CMD_DAY } , /* 633 */
-{ "REF" , CMD_REF } , /* 634 */
-{ "SLEEP" , CMD_SLEEP } , /* 635 */
-{ "HOSTNAME" , CMD_HOSTNAME } , /* 636 */
-{ "ROUND" , CMD_ROUND } , /* 637 */
-{ "EXTOPKK" , CMD_EXTOPKK } , /* 638 */
-{ "LE" , CMD_LE } , /* 639 */
-{ "EXTOPPI" , CMD_EXTOPPI } , /* 640 */
-{ "EXTOPDJ" , CMD_EXTOPDJ } , /* 641 */
-{ "EXTOPMP" , CMD_EXTOPMP } , /* 642 */
-{ "PLUS" , CMD_PLUS } , /* 643 */
-{ "CHR" , CMD_CHR } , /* 644 */
-{ "FOWNER" , CMD_FOWNER } , /* 645 */
-{ "FALSE" , CMD_FALSE } , /* 646 */
-{ "ENVIRON" , CMD_ENVIRON } , /* 647 */
-{ "EXTOPDM" , CMD_EXTOPDM } , /* 648 */
-{ "LCASE" , CMD_LCASE } , /* 649 */
-{ "ODD" , CMD_ODD } , /* 650 */
-{ "RESETDIR" , CMD_RESETDIR } , /* 651 */
-{ "EXTOPIH" , CMD_EXTOPIH } , /* 652 */
-{ "POP" , CMD_POP } , /* 653 */
-{ "EXTOPBC" , CMD_EXTOPBC } , /* 654 */
-{ "EXTOPKF" , CMD_EXTOPKF } , /* 655 */
-{ "SETWILD" , CMD_SETWILD } , /* 656 */
-{ "ENDSUB" , CMD_ENDSUB } , /* 657 */
-{ "REWIND" , CMD_REWIND } , /* 658 */
-{ "LABEL" , CMD_LABEL } , /* 879 */
-{ "EXTOPAF" , CMD_EXTOPAF } , /* 659 */
-{ "EXTOPPQ" , CMD_EXTOPPQ } , /* 660 */
-{ "EXTOPJM" , CMD_EXTOPJM } , /* 661 */
-{ "EXTOPLI" , CMD_EXTOPLI } , /* 662 */
-{ "BINMI" , CMD_BINMI } , /* 663 */
-{ "EXTOPEE" , CMD_EXTOPEE } , /* 664 */
-{ "EXTOPJD" , CMD_EXTOPJD } , /* 665 */
-{ "EXTOPAQ" , CMD_EXTOPAQ } , /* 666 */
-{ "EXTOPJG" , CMD_EXTOPJG } , /* 667 */
-{ "SWAP" , CMD_SWAP } , /* 668 */
-{ "EXTOPQK" , CMD_EXTOPQK } , /* 669 */
+{ "ONERRORGOTO" , CMD_ONERRORGOTO } , /* 350 */
+{ "SETNOJO" , CMD_SETNOJO } , /* 351 */
+{ "STOP" , CMD_STOP } , /* 352 */
+{ "EXTOPID" , CMD_EXTOPID } , /* 353 */
+{ "EXTOPL" , CMD_EXTOPL } , /* 354 */
+{ "ISLONG" , CMD_ISLONG } , /* 355 */
+{ "DELETE" , CMD_DELETE } , /* 356 */
+{ "STRING" , CMD_STRING } , /* 357 */
+{ "EXTOPEL" , CMD_EXTOPEL } , /* 358 */
+{ "EXTOPAF" , CMD_EXTOPAF } , /* 359 */
+{ "RND" , CMD_RND } , /* 360 */
+{ "EXTOPJI" , CMD_EXTOPJI } , /* 361 */
+{ "EXTOPGP" , CMD_EXTOPGP } , /* 362 */
+{ "EXTOPJG" , CMD_EXTOPJG } , /* 363 */
+{ "GT" , CMD_GT } , /* 364 */
+{ "EXTOPHP" , CMD_EXTOPHP } , /* 365 */
+{ "MAX" , CMD_MAX } , /* 366 */
+{ "SPLITA" , CMD_SPLITA } , /* 367 */
+{ "EXTOPAH" , CMD_EXTOPAH } , /* 368 */
+{ "MODULE" , CMD_MODULE } , /* 873 */
+{ "SGN" , CMD_SGN } , /* 369 */
+{ "XOR" , CMD_XOR } , /* 370 */
+{ "EXTOPEK" , CMD_EXTOPEK } , /* 371 */
+{ "EXTOPFP" , CMD_EXTOPFP } , /* 372 */
+{ "EXTOPNI" , CMD_EXTOPNI } , /* 373 */
+{ "EXTOPLE" , CMD_EXTOPLE } , /* 374 */
+{ "EXTOPKQ" , CMD_EXTOPKQ } , /* 375 */
+{ "EXTOPNG" , CMD_EXTOPNG } , /* 376 */
+{ "CONST" , CMD_CONST } , /* 874 */
+{ "FOWNER" , CMD_FOWNER } , /* 377 */
+{ "BINMF" , CMD_BINMF } , /* 378 */
+{ "EXTOPOE" , CMD_EXTOPOE } , /* 379 */
+{ "NOW" , CMD_NOW } , /* 380 */
+{ "EXTOPAL" , CMD_EXTOPAL } , /* 381 */
+{ "ADDMINUTE" , CMD_ADDMINUTE } , /* 382 */
+{ "CVI" , CMD_CVI } , /* 383 */
+{ "EXTOPBC" , CMD_EXTOPBC } , /* 384 */
+{ "EXTOPEF" , CMD_EXTOPEF } , /* 385 */
+{ "EXTOPQC" , CMD_EXTOPQC } , /* 386 */
+{ "EXTOPMM" , CMD_EXTOPMM } , /* 387 */
+{ "POWER" , CMD_POWER } , /* 388 */
+{ "EXTOPND" , CMD_EXTOPND } , /* 389 */
+{ "EXTOPII" , CMD_EXTOPII } , /* 390 */
+{ "RESUMELABEL" , CMD_RESUMELABEL } , /* 391 */
+{ "EXTOPDC" , CMD_EXTOPDC } , /* 392 */
+{ "EXTOPIG" , CMD_EXTOPIG } , /* 393 */
+{ "EXTOPEH" , CMD_EXTOPEH } , /* 394 */
+{ "MKD" , CMD_MKD } , /* 395 */
+{ "ICALLFUN" , CMD_ICALLFUN } , /* 396 */
+{ "EXTOPPQ" , CMD_EXTOPPQ } , /* 397 */
+{ "EXTOPJD" , CMD_EXTOPJD } , /* 398 */
+{ "EXTOPCQ" , CMD_EXTOPCQ } , /* 399 */
+{ "EXTOPAK" , CMD_EXTOPAK } , /* 400 */
+{ "EXTOPO" , CMD_EXTOPO } , /* 401 */
+{ "GOTO" , CMD_GOTO } , /* 402 */
+{ "EXTOPCH" , CMD_EXTOPCH } , /* 403 */
+{ "EXTOPNP" , CMD_EXTOPNP } , /* 404 */
+{ "EXTOPFI" , CMD_EXTOPFI } , /* 405 */
+{ "EXTOPFG" , CMD_EXTOPFG } , /* 406 */
+{ "EXTOPLN" , CMD_EXTOPLN } , /* 407 */
+{ "EXTOPEQ" , CMD_EXTOPEQ } , /* 408 */
+{ "EXTOPLO" , CMD_EXTOPLO } , /* 409 */
+{ "ADDMONTH" , CMD_ADDMONTH } , /* 410 */
+{ "EXTOPPH" , CMD_EXTOPPH } , /* 411 */
+{ "EXTOPKK" , CMD_EXTOPKK } , /* 412 */
+{ "MAXINT" , CMD_MAXINT } , /* 413 */
+{ "FORMAT" , CMD_FORMAT } , /* 414 */
+{ "EXTOPGG" , CMD_EXTOPGG } , /* 415 */
+{ "EXTOPJP" , CMD_EXTOPJP } , /* 416 */
+{ "EXTOPKL" , CMD_EXTOPKL } , /* 417 */
+{ "EXTOPGI" , CMD_EXTOPGI } , /* 418 */
+{ "TXTMO" , CMD_TXTMO } , /* 419 */
+{ "EXTOPHG" , CMD_EXTOPHG } , /* 420 */
+{ "FLET" , CMD_FLET } , /* 421 */
+{ "ISSTRING" , CMD_ISSTRING } , /* 422 */
+{ "EXTOPCF" , CMD_EXTOPCF } , /* 423 */
+{ "EXTOPHI" , CMD_EXTOPHI } , /* 424 */
+{ "ISDIR" , CMD_ISDIR } , /* 425 */
+{ "LIKEOP" , CMD_LIKEOP } , /* 426 */
+{ "EXTOPPF" , CMD_EXTOPPF } , /* 427 */
+{ "LT" , CMD_LT } , /* 428 */
+{ "INT" , CMD_INT } , /* 429 */
+{ "LOG" , CMD_LOG } , /* 430 */
+{ "EXTOPLJ" , CMD_EXTOPLJ } , /* 431 */
+{ "EXTOPOJ" , CMD_EXTOPOJ } , /* 432 */
+{ "EXTOPBM" , CMD_EXTOPBM } , /* 433 */
+{ "FPRINTNL" , CMD_FPRINTNL } , /* 434 */
+{ "ADDRESSF" , CMD_ADDRESSF } , /* 435 */
+{ "EXTOPGD" , CMD_EXTOPGD } , /* 436 */
+{ "EXTOPHD" , CMD_EXTOPHD } , /* 437 */
+{ "EXTOPKH" , CMD_EXTOPKH } , /* 438 */
+{ "EXTOPPK" , CMD_EXTOPPK } , /* 439 */
+{ "EXTOPIP" , CMD_EXTOPIP } , /* 440 */
+{ "EXTOPCK" , CMD_EXTOPCK } , /* 441 */
+{ "EXTOPAQ" , CMD_EXTOPAQ } , /* 442 */
+{ "OPTION" , CMD_OPTION } , /* 443 */
+{ "LETM" , CMD_LETM } , /* 444 */
+{ "OR" , CMD_OR } , /* 445 */
+{ "WDAY" , CMD_WDAY } , /* 446 */
+{ "EXTOPMC" , CMD_EXTOPMC } , /* 447 */
+{ "EXTOPQM" , CMD_EXTOPQM } , /* 448 */
+{ "EXTOPOO" , CMD_EXTOPOO } , /* 449 */
+{ "TRUNCATEF" , CMD_TRUNCATEF } , /* 450 */
+{ "STRREVERSE" , CMD_STRREVERSE } , /* 451 */
+{ "SWAP" , CMD_SWAP } , /* 452 */
+{ "EXTOPKF" , CMD_EXTOPKF } , /* 453 */
+{ "EXTOPFD" , CMD_EXTOPFD } , /* 454 */
+{ "CERROR" , CMD_CERROR } , /* 455 */
+{ "EXTOPCL" , CMD_EXTOPCL } , /* 456 */
+{ "SEEK" , CMD_SEEK } , /* 457 */
+{ "EXTOPDM" , CMD_EXTOPDM } , /* 458 */
+{ "PAUSE" , CMD_PAUSE } , /* 459 */
+{ "LOCAL" , CMD_LOCAL } , /* 875 */
+{ "TAN2" , CMD_TAN2 } , /* 460 */
+{ "EXTOPON" , CMD_EXTOPON } , /* 461 */
+{ "EXTOPPL" , CMD_EXTOPPL } , /* 462 */
+{ "FTCREATED" , CMD_FTCREATED } , /* 463 */
+{ "ASECANT" , CMD_ASECANT } , /* 464 */
+{ "EXTOPLD" , CMD_EXTOPLD } , /* 465 */
+{ "EXTOPEM" , CMD_EXTOPEM } , /* 466 */
+{ "HTAN" , CMD_HTAN } , /* 467 */
+{ "EXTOPMF" , CMD_EXTOPMF } , /* 468 */
+{ "EXTOPOG" , CMD_EXTOPOG } , /* 469 */
+{ "EXTOPOI" , CMD_EXTOPOI } , /* 470 */
+{ "CBYVAL" , CMD_CBYVAL } , /* 471 */
+{ "GMTIME" , CMD_GMTIME } , /* 472 */
+{ "HOUR" , CMD_HOUR } , /* 473 */
+{ "LE" , CMD_LE } , /* 474 */
+{ "EXTOPKC" , CMD_EXTOPKC } , /* 475 */
+{ "SETJOKER" , CMD_SETJOKER } , /* 476 */
+{ "WEND" , CMD_WEND } , /* 477 */
+{ "ABS" , CMD_ABS } , /* 478 */
+{ "LETS" , CMD_LETS } , /* 479 */
+{ "EXTOPIE" , CMD_EXTOPIE } , /* 480 */
+{ "EXTOPMH" , CMD_EXTOPMH } , /* 481 */
+{ "CREATEPROCESS" , CMD_CREATEPROCESS } , /* 482 */
+{ "FILELEN" , CMD_FILELEN } , /* 483 */
+{ "EXTOPHN" , CMD_EXTOPHN } , /* 484 */
+{ "BINMO" , CMD_BINMO } , /* 485 */
+{ "EXTOPQQ" , CMD_EXTOPQQ } , /* 486 */
+{ "RESUMENEXT" , CMD_RESUMENEXT } , /* 487 */
+{ "SUBARG" , CMD_SUBARG } , /* 488 */
+{ "EXTOPGN" , CMD_EXTOPGN } , /* 489 */
+{ "EXTOPJE" , CMD_EXTOPJE } , /* 490 */
+{ "EXTOPAM" , CMD_EXTOPAM } , /* 491 */
+{ "FALSE" , CMD_FALSE } , /* 492 */
+{ "ENVIRON" , CMD_ENVIRON } , /* 493 */
+{ "CONCATENATE" , CMD_CONCATENATE } , /* 494 */
+{ "ISARRAY" , CMD_ISARRAY } , /* 495 */
+{ "GCONST" , CMD_GCONST } , /* 876 */
+{ "EXTOPML" , CMD_EXTOPML } , /* 496 */
+{ "EXTOPHO" , CMD_EXTOPHO } , /* 497 */
+{ "MID" , CMD_MID } , /* 498 */
+{ "REWIND" , CMD_REWIND } , /* 499 */
+{ "EXTOPFJ" , CMD_EXTOPFJ } , /* 500 */
+{ "EXTOPGO" , CMD_EXTOPGO } , /* 501 */
+{ "DAY" , CMD_DAY } , /* 502 */
+{ "COTAN" , CMD_COTAN } , /* 503 */
+{ "LETP" , CMD_LETP } , /* 504 */
+{ "LBOUND" , CMD_LBOUND } , /* 505 */
+{ "EXTOPBQ" , CMD_EXTOPBQ } , /* 506 */
+{ "ASIN" , CMD_ASIN } , /* 507 */
+{ "EXTOPLI" , CMD_EXTOPLI } , /* 508 */
+{ "EXTOPCC" , CMD_EXTOPCC } , /* 509 */
+{ "EXTOPNE" , CMD_EXTOPNE } , /* 510 */
+{ "FIX" , CMD_FIX } , /* 511 */
+{ "LETI" , CMD_LETI } , /* 512 */
+{ "EXTOPLG" , CMD_EXTOPLG } , /* 513 */
+{ "EXTOPFN" , CMD_EXTOPFN } , /* 514 */
+{ "EXTOPMK" , CMD_EXTOPMK } , /* 515 */
+{ "MOD" , CMD_MOD } , /* 516 */
+{ "MININT" , CMD_MININT } , /* 517 */
+{ "LEN" , CMD_LEN } , /* 518 */
+{ "WHILE" , CMD_WHILE } , /* 519 */
+{ "FORSTEP" , CMD_FORSTEP } , /* 520 */
+{ "EXTOPHJ" , CMD_EXTOPHJ } , /* 521 */
+{ "FORK" , CMD_FORK } , /* 522 */
+{ "SIN" , CMD_SIN } , /* 523 */
+{ "EXTOPDQ" , CMD_EXTOPDQ } , /* 524 */
+{ "EXTOPFO" , CMD_EXTOPFO } , /* 525 */
+{ "ACOSECANT" , CMD_ACOSECANT } , /* 526 */
+{ "PRINT" , CMD_PRINT } , /* 527 */
+{ "EXTOPGJ" , CMD_EXTOPGJ } , /* 528 */
+{ "IDIV" , CMD_IDIV } , /* 529 */
+{ "EXTOPPC" , CMD_EXTOPPC } , /* 530 */
+{ "ELSE" , CMD_ELSE } , /* 531 */
+{ "EXTOPOD" , CMD_EXTOPOD } , /* 532 */
+{ "MONTH" , CMD_MONTH } , /* 533 */
+{ "EXTOPBF" , CMD_EXTOPBF } , /* 534 */
+{ "EXTOPEC" , CMD_EXTOPEC } , /* 535 */
+{ "EXTOPDH" , CMD_EXTOPDH } , /* 536 */
+{ "GE" , CMD_GE } , /* 537 */
+{ "GM2LOCAL" , CMD_GM2LOCAL } , /* 538 */
+{ "EXTOPIN" , CMD_EXTOPIN } , /* 539 */
+{ "ACOS" , CMD_ACOS } , /* 540 */
+{ "VAR" , CMD_VAR } , /* 877 */
+{ "EXTOPIO" , CMD_EXTOPIO } , /* 541 */
+{ "TIMEVALUE" , CMD_TIMEVALUE } , /* 542 */
+{ "EXTOPQF" , CMD_EXTOPQF } , /* 543 */
+{ "GCD" , CMD_GCD } , /* 544 */
+{ "OPEN" , CMD_OPEN } , /* 545 */
+{ "LLET" , CMD_LLET } , /* 546 */
+{ "EXTOPKM" , CMD_EXTOPKM } , /* 547 */
+{ "ONERRORRESUMENEXT" , CMD_ONERRORRESUMENEXT } , /* 548 */
+{ "TXTMF" , CMD_TXTMF } , /* 549 */
+{ "HCTAN" , CMD_HCTAN } , /* 550 */
+{ "INPUTFUN" , CMD_INPUTFUN } , /* 551 */
+{ "LEFT" , CMD_LEFT } , /* 552 */
+{ "EXTOPDF" , CMD_EXTOPDF } , /* 553 */
+{ "EXTOPOP" , CMD_EXTOPOP } , /* 554 */
+{ "EXTOPBH" , CMD_EXTOPBH } , /* 555 */
+{ "EOFFUN" , CMD_EOFFUN } , /* 556 */
+{ "EXTOPQH" , CMD_EXTOPQH } , /* 557 */
+{ "LOOP" , CMD_LOOP } , /* 558 */
+{ "YDAY" , CMD_YDAY } , /* 559 */
+{ "EQ" , CMD_EQ } , /* 560 */
+{ "ENDMODULE" , CMD_ENDMODULE } , /* 878 */
+{ "TRIM" , CMD_TRIM } , /* 561 */
+{ "EXTOPIJ" , CMD_EXTOPIJ } , /* 562 */
+{ "SQR" , CMD_SQR } , /* 563 */
+{ "EXTOPBL" , CMD_EXTOPBL } , /* 564 */
+{ "GLOBAL" , CMD_GLOBAL } , /* 879 */
+{ "EXTOPNO" , CMD_EXTOPNO } , /* 565 */
+{ "EXTOPAC" , CMD_EXTOPAC } , /* 566 */
+{ "CHR" , CMD_CHR } , /* 567 */
+{ "EXTOPMQ" , CMD_EXTOPMQ } , /* 568 */
+{ "EXTOPJJ" , CMD_EXTOPJJ } , /* 569 */
+{ "EXTOPLP" , CMD_EXTOPLP } , /* 570 */
+{ "CVD" , CMD_CVD } , /* 571 */
+{ "OPENDIR" , CMD_OPENDIR } , /* 572 */
+{ "EXTOPFE" , CMD_EXTOPFE } , /* 573 */
+{ "MIN" , CMD_MIN } , /* 574 */
+{ "EXTOPDK" , CMD_EXTOPDK } , /* 575 */
+{ "EXTOPNN" , CMD_EXTOPNN } , /* 576 */
+{ "EXTOPQL" , CMD_EXTOPQL } , /* 577 */
+{ "LCASE" , CMD_LCASE } , /* 578 */
+{ "COTAN2" , CMD_COTAN2 } , /* 579 */
+{ "FUNCTIONARG" , CMD_FUNCTIONARG } , /* 580 */
+{ "EXTOPQK" , CMD_EXTOPQK } , /* 581 */
+{ "EXTOPNJ" , CMD_EXTOPNJ } , /* 582 */
+{ "EXTOPCM" , CMD_EXTOPCM } , /* 583 */
+{ "EXTOPDL" , CMD_EXTOPDL } , /* 584 */
+{ "EXTOPJO" , CMD_EXTOPJO } , /* 585 */
+{ "ISNUMERIC" , CMD_ISNUMERIC } , /* 586 */
+{ "EXTOPF" , CMD_EXTOPF } , /* 587 */
+{ "LOF" , CMD_LOF } , /* 588 */
+{ "BIN" , CMD_BIN } , /* 589 */
+{ "ISEMPTY" , CMD_ISEMPTY } , /* 590 */
+{ "EXTOPPM" , CMD_EXTOPPM } , /* 591 */
+{ "MKI" , CMD_MKI } , /* 592 */
+{ "EXTOPHE" , CMD_EXTOPHE } , /* 593 */
+{ "LINPUTF" , CMD_LINPUTF } , /* 594 */
+{ "EXTOPGE" , CMD_EXTOPGE } , /* 595 */
+{ "EXTOPBK" , CMD_EXTOPBK } , /* 596 */
+{ "EXTOPJN" , CMD_EXTOPJN } , /* 597 */
+{ "REPEAT" , CMD_REPEAT } , /* 598 */
+{ "EXITSUB" , CMD_EXITSUB } , /* 599 */
+{ "LOC" , CMD_LOC } , /* 600 */
+{ "EXTOPQE" , CMD_EXTOPQE } , /* 601 */
+{ "UCASE" , CMD_UCASE } , /* 602 */
+{ "EXTOPCD" , CMD_EXTOPCD } , /* 603 */
+{ "EXTOPMJ" , CMD_EXTOPMJ } , /* 604 */
+{ "EXTOPJQ" , CMD_EXTOPJQ } , /* 605 */
+{ "FTMODIFY" , CMD_FTMODIFY } , /* 606 */
+{ "EXTOPFL" , CMD_EXTOPFL } , /* 607 */
+{ "RANDOMIZE" , CMD_RANDOMIZE } , /* 608 */
+{ "EXTOPOC" , CMD_EXTOPOC } , /* 609 */
+{ "EXTOPPD" , CMD_EXTOPPD } , /* 610 */
+{ "EXTOPHK" , CMD_EXTOPHK } , /* 611 */
+{ "EXTOPGK" , CMD_EXTOPGK } , /* 612 */
+{ "EXTOPBE" , CMD_EXTOPBE } , /* 613 */
+{ "EXTOPNQ" , CMD_EXTOPNQ } , /* 614 */
+{ "EXTOPKG" , CMD_EXTOPKG } , /* 615 */
+{ "SEC" , CMD_SEC } , /* 616 */
+{ "EXTOPGL" , CMD_EXTOPGL } , /* 617 */
+{ "RLOCK" , CMD_RLOCK } , /* 618 */
+{ "DO" , CMD_DO } , /* 619 */
+{ "EXTOPKI" , CMD_EXTOPKI } , /* 620 */
+{ "FLOCK" , CMD_FLOCK } , /* 621 */
+{ "EXTOPHL" , CMD_EXTOPHL } , /* 622 */
+{ "EXTOPMO" , CMD_EXTOPMO } , /* 623 */
+{ "CHDIR" , CMD_CHDIR } , /* 624 */
+{ "LOOPWHILE" , CMD_LOOPWHILE } , /* 625 */
+{ "ONERRORRESUMELABEL" , CMD_ONERRORRESUMELABEL } , /* 626 */
+{ "EXTOPFK" , CMD_EXTOPFK } , /* 627 */
+{ "EXTOPMN" , CMD_EXTOPMN } , /* 628 */
+{ "EXTOPQ" , CMD_EXTOPQ } , /* 629 */
+{ "EXTOPEP" , CMD_EXTOPEP } , /* 630 */
+{ "GOSUB" , CMD_GOSUB } , /* 631 */
+{ "VAL" , CMD_VAL } , /* 632 */
+{ "YEAR" , CMD_YEAR } , /* 633 */
+{ "EXTOPKD" , CMD_EXTOPKD } , /* 634 */
+{ "EXTOPHH" , CMD_EXTOPHH } , /* 635 */
+{ "ONERRORGOTONULL" , CMD_ONERRORGOTONULL } , /* 636 */
+{ "EXTOPFF" , CMD_EXTOPFF } , /* 637 */
+{ "PI" , CMD_PI } , /* 638 */
+{ "MKS" , CMD_MKS } , /* 639 */
+{ "EXTOPGH" , CMD_EXTOPGH } , /* 640 */
+{ "NOT" , CMD_NOT } , /* 641 */
+{ "LINPUT" , CMD_LINPUT } , /* 642 */
+{ "ATN" , CMD_ATN } , /* 643 */
+{ "EXITFUNC" , CMD_EXITFUNC } , /* 644 */
+{ "FILEXISTS" , CMD_FILEXISTS } , /* 645 */
+{ "EXTOPFH" , CMD_EXTOPFH } , /* 646 */
+{ "DIV" , CMD_DIV } , /* 647 */
+{ "LOOPUNTIL" , CMD_LOOPUNTIL } , /* 648 */
+{ "LETD" , CMD_LETD } , /* 649 */
+{ "EXTOPGF" , CMD_EXTOPGF } , /* 650 */
+{ "EXTOPLC" , CMD_EXTOPLC } , /* 651 */
+{ "EXTOPCI" , CMD_EXTOPCI } , /* 652 */
+{ "EXTOPHF" , CMD_EXTOPHF } , /* 653 */
+{ "RESET" , CMD_RESET } , /* 654 */
+{ "EXTOPCG" , CMD_EXTOPCG } , /* 655 */
+{ "EXTOPPG" , CMD_EXTOPPG } , /* 656 */
+{ "SETWILD" , CMD_SETWILD } , /* 657 */
+{ "SETFILE" , CMD_SETFILE } , /* 658 */
+{ "EXTOPPI" , CMD_EXTOPPI } , /* 659 */
+{ "EXTOPIQ" , CMD_EXTOPIQ } , /* 660 */
+{ "ADDHOUR" , CMD_ADDHOUR } , /* 661 */
+{ "BINMI" , CMD_BINMI } , /* 662 */
+{ "EXTOPAP" , CMD_EXTOPAP } , /* 663 */
+{ "JOKER" , CMD_JOKER } , /* 664 */
+{ "SECANT" , CMD_SECANT } , /* 665 */
+{ "EXTOPQJ" , CMD_EXTOPQJ } , /* 666 */
+{ "UBOUND" , CMD_UBOUND } , /* 667 */
+{ "EXP" , CMD_EXP } , /* 668 */
+{ "EXTOPDN" , CMD_EXTOPDN } , /* 669 */
 { "EXTOPNK" , CMD_EXTOPNK } , /* 670 */
-{ "TYPE" , CMD_TYPE } , /* 671 */
-{ "LOCAL2GM" , CMD_LOCAL2GM } , /* 672 */
-{ "EXTOPMC" , CMD_EXTOPMC } , /* 673 */
-{ "RESET" , CMD_RESET } , /* 674 */
-{ "FTACCESS" , CMD_FTACCESS } , /* 675 */
-{ "EXTOPCI" , CMD_EXTOPCI } , /* 676 */
-{ "EXTOPHM" , CMD_EXTOPHM } , /* 677 */
-{ "LINPUTF" , CMD_LINPUTF } , /* 678 */
-{ "ISSTRING" , CMD_ISSTRING } , /* 679 */
-{ "EXTOPFE" , CMD_EXTOPFE } , /* 680 */
-{ "RND" , CMD_RND } , /* 681 */
-{ "FUNCTIONARG" , CMD_FUNCTIONARG } , /* 682 */
-{ "EXTOPOQ" , CMD_EXTOPOQ } , /* 683 */
-{ "STOP" , CMD_STOP } , /* 684 */
-{ "EXTOPJF" , CMD_EXTOPJF } , /* 685 */
-{ "CREATEPROCESSEX" , CMD_CREATEPROCESSEX } , /* 686 */
-{ "PACK" , CMD_PACK } , /* 687 */
-{ "EXTOPBI" , CMD_EXTOPBI } , /* 688 */
-{ "EXTOPLJ" , CMD_EXTOPLJ } , /* 689 */
-{ "BYVAL" , CMD_BYVAL } , /* 690 */
-{ "EXTOPIG" , CMD_EXTOPIG } , /* 691 */
-{ "EXTOPQH" , CMD_EXTOPQH } , /* 692 */
-{ "MKDIR" , CMD_MKDIR } , /* 693 */
-{ "ACOSECANT" , CMD_ACOSECANT } , /* 694 */
-{ "EXTOPGP" , CMD_EXTOPGP } , /* 695 */
-{ "CHDIR" , CMD_CHDIR } , /* 696 */
-{ "EXTOPDC" , CMD_EXTOPDC } , /* 697 */
-{ "EXTOPQG" , CMD_EXTOPQG } , /* 698 */
-{ "ASIN" , CMD_ASIN } , /* 699 */
-{ "FUNCTION" , CMD_FUNCTION } , /* 700 */
-{ "EXTOPJK" , CMD_EXTOPJK } , /* 701 */
-{ "EXTOPOF" , CMD_EXTOPOF } , /* 702 */
-{ "RANDOMIZE" , CMD_RANDOMIZE } , /* 703 */
-{ "ONERRORRESUMENEXT" , CMD_ONERRORRESUMENEXT } , /* 704 */
-{ "EXTOPIP" , CMD_EXTOPIP } , /* 705 */
-{ "EXTOPOM" , CMD_EXTOPOM } , /* 706 */
-{ "OPTIONF" , CMD_OPTIONF } , /* 707 */
-{ "FLET" , CMD_FLET } , /* 708 */
-{ "EXTOPFL" , CMD_EXTOPFL } , /* 709 */
-{ "RESUME" , CMD_RESUME } , /* 710 */
-{ "EXTOPGE" , CMD_EXTOPGE } , /* 711 */
-{ "EXTOPND" , CMD_EXTOPND } , /* 712 */
-{ "EXTOPGK" , CMD_EXTOPGK } , /* 713 */
-{ "EXTOPHK" , CMD_EXTOPHK } , /* 714 */
-{ "EXTOPKE" , CMD_EXTOPKE } , /* 715 */
-{ "FORTO" , CMD_FORTO } , /* 716 */
-{ "LOG10" , CMD_LOG10 } , /* 717 */
-{ "MKS" , CMD_MKS } , /* 718 */
-{ "RANDOMIZA" , CMD_RANDOMIZA } , /* 719 */
-{ "EXTOPAG" , CMD_EXTOPAG } , /* 720 */
-{ "EXTOPPD" , CMD_EXTOPPD } , /* 721 */
-{ "EXTOPNJ" , CMD_EXTOPNJ } , /* 722 */
-{ "LCM" , CMD_LCM } , /* 723 */
-{ "VAR" , CMD_VAR } , /* 880 */
-{ "EXTOPBE" , CMD_EXTOPBE } , /* 724 */
-{ "RESUMENEXT" , CMD_RESUMENEXT } , /* 725 */
-{ "NEXTFILE" , CMD_NEXTFILE } , /* 726 */
-{ "GLOBAL" , CMD_GLOBAL } , /* 881 */
-{ "EXTERNAL" , CMD_EXTERNAL } , /* 727 */
-{ "TRUNCATEF" , CMD_TRUNCATEF } , /* 728 */
-{ "EXTOPEN" , CMD_EXTOPEN } , /* 729 */
-{ "ENDIF" , CMD_ENDIF } , /* 730 */
-{ "EXTOPBQ" , CMD_EXTOPBQ } , /* 731 */
-{ "CURDIR" , CMD_CURDIR } , /* 732 */
-{ "EXTOPEI" , CMD_EXTOPEI } , /* 733 */
-{ "ONERRORGOTONULL" , CMD_ONERRORGOTONULL } , /* 734 */
-{ "LT" , CMD_LT } , /* 735 */
-{ "FLOCK" , CMD_FLOCK } , /* 736 */
-{ "MULT" , CMD_MULT } , /* 737 */
-{ "COS" , CMD_COS } , /* 738 */
-{ "COTAN" , CMD_COTAN } , /* 739 */
-{ "EXTOPDD" , CMD_EXTOPDD } , /* 740 */
-{ "UNDEF" , CMD_UNDEF } , /* 741 */
-{ "TAN" , CMD_TAN } , /* 742 */
-{ "EXTOPDK" , CMD_EXTOPDK } , /* 743 */
-{ "EXTOPKQ" , CMD_EXTOPKQ } , /* 744 */
-{ "EXTOPAD" , CMD_EXTOPAD } , /* 745 */
-{ "EXTOPFM" , CMD_EXTOPFM } , /* 746 */
-{ "POW" , CMD_POW } , /* 747 */
-{ "EXTOPEP" , CMD_EXTOPEP } , /* 748 */
-{ "EXTOPQI" , CMD_EXTOPQI } , /* 749 */
-{ "EXTOPQ" , CMD_EXTOPQ } , /* 750 */
-{ "SPLITAQ" , CMD_SPLITAQ } , /* 751 */
-{ "NOW" , CMD_NOW } , /* 752 */
-{ "EXTOPOK" , CMD_EXTOPOK } , /* 753 */
-{ "EXTOPQN" , CMD_EXTOPQN } , /* 754 */
-{ "EXTOPGI" , CMD_EXTOPGI } , /* 755 */
-{ "SUB" , CMD_SUB } , /* 756 */
-{ "EXTOPML" , CMD_EXTOPML } , /* 757 */
-{ "NEXTI" , CMD_NEXTI } , /* 758 */
-{ "EXTOPME" , CMD_EXTOPME } , /* 759 */
-{ "EXTOPFD" , CMD_EXTOPFD } , /* 760 */
-{ "EXTERNAM" , CMD_EXTERNAM } , /* 761 */
-{ "SECANT" , CMD_SECANT } , /* 762 */
-{ "FPRINT" , CMD_FPRINT } , /* 763 */
-{ "EXTOPPK" , CMD_EXTOPPK } , /* 764 */
-{ "EXTOPIC" , CMD_EXTOPIC } , /* 765 */
-{ "HSIN" , CMD_HSIN } , /* 766 */
-{ "FREEFILE" , CMD_FREEFILE } , /* 767 */
-{ "CBYVAL" , CMD_CBYVAL } , /* 768 */
-{ "EXTOPJE" , CMD_EXTOPJE } , /* 769 */
-{ "EXTOPAK" , CMD_EXTOPAK } , /* 770 */
-{ "EXTOPBD" , CMD_EXTOPBD } , /* 771 */
-{ "CVS" , CMD_CVS } , /* 772 */
-{ "EXTOPED" , CMD_EXTOPED } , /* 773 */
-{ "ENDFUNC" , CMD_ENDFUNC } , /* 774 */
-{ "EXTOPLQ" , CMD_EXTOPLQ } , /* 775 */
-{ "WEND" , CMD_WEND } , /* 776 */
-{ "SGN" , CMD_SGN } , /* 777 */
-{ "EXTOPQP" , CMD_EXTOPQP } , /* 778 */
-{ "ISEMPTY" , CMD_ISEMPTY } , /* 779 */
-{ "LTRIM" , CMD_LTRIM } , /* 780 */
-{ "EXTOPGO" , CMD_EXTOPGO } , /* 781 */
-{ "EXTOPOJ" , CMD_EXTOPOJ } , /* 782 */
-{ "PAUSE" , CMD_PAUSE } , /* 783 */
-{ "EXTOPLO" , CMD_EXTOPLO } , /* 784 */
-{ "EXTOPMM" , CMD_EXTOPMM } , /* 785 */
-{ "CVL" , CMD_CVL } , /* 786 */
-{ "CALL" , CMD_CALL } , /* 787 */
-{ "EXTOPIJ" , CMD_EXTOPIJ } , /* 788 */
-{ "FCOPY" , CMD_FCOPY } , /* 789 */
-{ "EXTOPEO" , CMD_EXTOPEO } , /* 790 */
+{ "HOSTNAME" , CMD_HOSTNAME } , /* 671 */
+{ "CUNDEF" , CMD_CUNDEF } , /* 672 */
+{ "LOCAL2GM" , CMD_LOCAL2GM } , /* 673 */
+{ "COMMANDF" , CMD_COMMANDF } , /* 674 */
+{ "CLOSE" , CMD_CLOSE } , /* 675 */
+{ "EXTOPIH" , CMD_EXTOPIH } , /* 676 */
+{ "EXTOPEI" , CMD_EXTOPEI } , /* 677 */
+{ "SPLIT" , CMD_SPLIT } , /* 678 */
+{ "EXTOPME" , CMD_EXTOPME } , /* 679 */
+{ "EXTOPDO" , CMD_EXTOPDO } , /* 680 */
+{ "KILL" , CMD_KILL } , /* 681 */
+{ "EXTOPFQ" , CMD_EXTOPFQ } , /* 682 */
+{ "ERROR" , CMD_ERROR } , /* 683 */
+{ "END" , CMD_END } , /* 684 */
+{ "EXTOPKP" , CMD_EXTOPKP } , /* 685 */
+{ "EXTOPJL" , CMD_EXTOPJL } , /* 686 */
+{ "ADDDAY" , CMD_ADDDAY } , /* 687 */
+{ "TAN" , CMD_TAN } , /* 688 */
+{ "CHOMP" , CMD_CHOMP } , /* 689 */
+{ "TYPE" , CMD_TYPE } , /* 690 */
+{ "LCM" , CMD_LCM } , /* 691 */
+{ "EXTOPBJ" , CMD_EXTOPBJ } , /* 692 */
+{ "ENDIF" , CMD_ENDIF } , /* 693 */
+{ "NAME" , CMD_NAME } , /* 694 */
+{ "EXTOPOM" , CMD_EXTOPOM } , /* 695 */
+{ "WAITPID" , CMD_WAITPID } , /* 696 */
+{ "ISDOUBLE" , CMD_ISDOUBLE } , /* 697 */
+{ "EXTOPIF" , CMD_EXTOPIF } , /* 698 */
+{ "RETURNC" , CMD_RETURNC } , /* 699 */
+{ "EXTOPQO" , CMD_EXTOPQO } , /* 700 */
+{ "COSECANT" , CMD_COSECANT } , /* 701 */
+{ "FCRYPT" , CMD_FCRYPT } , /* 702 */
+{ "ISUNDEF" , CMD_ISUNDEF } , /* 703 */
+{ "LET" , CMD_LET } , /* 704 */
+{ "EXTOPBN" , CMD_EXTOPBN } , /* 705 */
+{ "EXTOPJK" , CMD_EXTOPJK } , /* 706 */
+{ "IMAX" , CMD_IMAX } , /* 707 */
+{ "RTRIM" , CMD_RTRIM } , /* 708 */
+{ "EXTOPAD" , CMD_EXTOPAD } , /* 709 */
+{ "EXTOPQN" , CMD_EXTOPQN } , /* 710 */
+{ "EXTOPDJ" , CMD_EXTOPDJ } , /* 711 */
+{ "LETC" , CMD_LETC } , /* 712 */
+{ "EXTOPHQ" , CMD_EXTOPHQ } , /* 713 */
+{ "IF" , CMD_IF } , /* 714 */
+{ "HEX" , CMD_HEX } , /* 715 */
+{ "EXTOPBO" , CMD_EXTOPBO } , /* 716 */
+{ "EXTOPGQ" , CMD_EXTOPGQ } , /* 717 */
+{ "HSECANT" , CMD_HSECANT } , /* 718 */
+{ "EXTOPNL" , CMD_EXTOPNL } , /* 719 */
+{ "DOUNTIL" , CMD_DOUNTIL } , /* 720 */
+{ "MKL" , CMD_MKL } , /* 721 */
+{ "BYVAL" , CMD_BYVAL } , /* 722 */
+{ "PRINTNL" , CMD_PRINTNL } , /* 723 */
+{ "EXTOPPP" , CMD_EXTOPPP } , /* 724 */
+{ "FUNCTION" , CMD_FUNCTION } , /* 725 */
+{ "EXTOPAG" , CMD_EXTOPAG } , /* 726 */
+{ "EXTOPAI" , CMD_EXTOPAI } , /* 727 */
+{ "INSTR" , CMD_INSTR } , /* 728 */
+{ "EXTOPJF" , CMD_EXTOPJF } , /* 729 */
+{ "EXTOPNH" , CMD_EXTOPNH } , /* 730 */
+{ "FREEFILE" , CMD_FREEFILE } , /* 731 */
+{ "EXTOPIK" , CMD_EXTOPIK } , /* 732 */
+{ "SLEEP" , CMD_SLEEP } , /* 733 */
+{ "EXTOPCP" , CMD_EXTOPCP } , /* 734 */
+{ "MULT" , CMD_MULT } , /* 735 */
+{ "EXTOPLM" , CMD_EXTOPLM } , /* 736 */
+{ "NEXT" , CMD_NEXT } , /* 737 */
+{ "REF" , CMD_REF } , /* 738 */
+{ "EXTOPIL" , CMD_EXTOPIL } , /* 739 */
+{ "EXTOPED" , CMD_EXTOPED } , /* 740 */
+{ "ADDWEEK" , CMD_ADDWEEK } , /* 741 */
+{ "MKDIR" , CMD_MKDIR } , /* 742 */
+{ "EXTOPNF" , CMD_EXTOPNF } , /* 743 */
+{ "SPACE" , CMD_SPACE } , /* 744 */
+{ "EXTOPJH" , CMD_EXTOPJH } , /* 745 */
+{ "PRAGMA" , CMD_PRAGMA } , /* 880 */
+{ "EXTOPOQ" , CMD_EXTOPOQ } , /* 746 */
+{ "ERRORDOLLAR" , CMD_ERRORDOLLAR } , /* 747 */
+{ "EXTOPFM" , CMD_EXTOPFM } , /* 748 */
+{ "CALL" , CMD_CALL } , /* 749 */
+{ "OCT" , CMD_OCT } , /* 750 */
+{ "EXTOPDD" , CMD_EXTOPDD } , /* 751 */
+{ "EXTOPAJ" , CMD_EXTOPAJ } , /* 752 */
+{ "LOG10" , CMD_LOG10 } , /* 753 */
+{ "ISDEF" , CMD_ISDEF } , /* 754 */
+{ "MINUTE" , CMD_MINUTE } , /* 755 */
+{ "EXTOPJC" , CMD_EXTOPJC } , /* 756 */
+{ "MINUS" , CMD_MINUS } , /* 757 */
+{ "HSIN" , CMD_HSIN } , /* 758 */
+{ "DOWHILE" , CMD_DOWHILE } , /* 759 */
+{ "UNPACK" , CMD_UNPACK } , /* 760 */
+{ "FORTO" , CMD_FORTO } , /* 761 */
+{ "NEXTI" , CMD_NEXTI } , /* 762 */
+{ "EXTOPAN" , CMD_EXTOPAN } , /* 763 */
+{ "EXTOPGM" , CMD_EXTOPGM } , /* 764 */
+{ "EXTOPBD" , CMD_EXTOPBD } , /* 765 */
+{ "STR" , CMD_STR } , /* 766 */
+{ "RESUME" , CMD_RESUME } , /* 767 */
+{ "EXTOPHM" , CMD_EXTOPHM } , /* 768 */
+{ "EXTOPPE" , CMD_EXTOPPE } , /* 769 */
+{ "EXTOPAO" , CMD_EXTOPAO } , /* 770 */
+{ "EXTOPCE" , CMD_EXTOPCE } , /* 771 */
+{ "EXTOPNC" , CMD_EXTOPNC } , /* 772 */
+{ "HCOSECANT" , CMD_HCOSECANT } , /* 773 */
+{ "ROUND" , CMD_ROUND } , /* 774 */
+{ "FCOPY" , CMD_FCOPY } , /* 775 */
+{ "COS" , CMD_COS } , /* 776 */
+{ "ENDFUNC" , CMD_ENDFUNC } , /* 777 */
+{ "EXTOPQD" , CMD_EXTOPQD } , /* 778 */
+{ "CURDIR" , CMD_CURDIR } , /* 779 */
+{ "EXTOPK" , CMD_EXTOPK } , /* 780 */
+{ "EXTOPBG" , CMD_EXTOPBG } , /* 781 */
+{ "PACK" , CMD_PACK } , /* 782 */
+{ "EXTOPBI" , CMD_EXTOPBI } , /* 783 */
+{ "IMIN" , CMD_IMIN } , /* 784 */
+{ "NEXTFILE" , CMD_NEXTFILE } , /* 785 */
+{ "FPRINT" , CMD_FPRINT } , /* 786 */
+{ "ATAN" , CMD_ATAN } , /* 787 */
+{ "EXTOPEJ" , CMD_EXTOPEJ } , /* 788 */
+{ "FORMATDATE" , CMD_FORMATDATE } , /* 789 */
+{ "LABEL" , CMD_LABEL } , /* 881 */
+{ "ICALL" , CMD_ICALL } , /* 790 */
 { "INSTRREV" , CMD_INSTRREV } , /* 791 */
-{ "EXTOPOC" , CMD_EXTOPOC } , /* 792 */
-{ "EXTOPIN" , CMD_EXTOPIN } , /* 793 */
-{ "AND" , CMD_AND } , /* 794 */
-{ "HOUR" , CMD_HOUR } , /* 795 */
-{ "EXTOPIQ" , CMD_EXTOPIQ } , /* 796 */
-{ "EXTOPBL" , CMD_EXTOPBL } , /* 797 */
-{ "GE" , CMD_GE } , /* 798 */
-{ "EXTOPCE" , CMD_EXTOPCE } , /* 799 */
-{ "EMPTY" , CMD_EMPTY } , /* 882 */
-{ "INPUTFUN" , CMD_INPUTFUN } , /* 800 */
-{ "EXTOPCQ" , CMD_EXTOPCQ } , /* 801 */
-{ "EXTOPLG" , CMD_EXTOPLG } , /* 802 */
-{ "LOC" , CMD_LOC } , /* 803 */
-{ "CLOSEDIR" , CMD_CLOSEDIR } , /* 804 */
-{ "EXTOPO" , CMD_EXTOPO } , /* 805 */
-{ "IDIV" , CMD_IDIV } , /* 806 */
-{ "LOF" , CMD_LOF } , /* 807 */
-{ "TXTMF" , CMD_TXTMF } , /* 808 */
-{ "EXTOPKN" , CMD_EXTOPKN } , /* 809 */
-{ "EXTOPGG" , CMD_EXTOPGG } , /* 810 */
-{ "STRREVERSE" , CMD_STRREVERSE } , /* 811 */
-{ "GMTIME" , CMD_GMTIME } , /* 812 */
-{ "EXTOPNC" , CMD_EXTOPNC } , /* 813 */
-{ "SUBARG" , CMD_SUBARG } , /* 814 */
-{ "EXTOPHO" , CMD_EXTOPHO } , /* 815 */
-{ "EXTOPPG" , CMD_EXTOPPG } , /* 816 */
-{ "EXTOPCL" , CMD_EXTOPCL } , /* 817 */
-{ "EXTOPCK" , CMD_EXTOPCK } , /* 818 */
-{ "EXTOPBF" , CMD_EXTOPBF } , /* 819 */
-{ "HSECANT" , CMD_HSECANT } , /* 820 */
-{ "ADDWEEK" , CMD_ADDWEEK } , /* 821 */
-{ "ISDEF" , CMD_ISDEF } , /* 822 */
-{ "COTAN2" , CMD_COTAN2 } , /* 823 */
-{ "EXTOPDH" , CMD_EXTOPDH } , /* 824 */
-{ "MKD" , CMD_MKD } , /* 825 */
-{ "EXTOPCF" , CMD_EXTOPCF } , /* 826 */
-{ "EXTOPQQ" , CMD_EXTOPQQ } , /* 827 */
-{ "CHOMP" , CMD_CHOMP } , /* 828 */
-{ "EXTOPBK" , CMD_EXTOPBK } , /* 829 */
-{ "YDAY" , CMD_YDAY } , /* 830 */
-{ "NEXT" , CMD_NEXT } , /* 831 */
-{ "LETD" , CMD_LETD } , /* 832 */
-{ "EXTOPF" , CMD_EXTOPF } , /* 833 */
-{ "STR" , CMD_STR } , /* 834 */
-{ "GM2LOCAL" , CMD_GM2LOCAL } , /* 835 */
-{ "EXTOPJQ" , CMD_EXTOPJQ } , /* 836 */
-{ "FCRYPT" , CMD_FCRYPT } , /* 837 */
-{ "EXTOPEL" , CMD_EXTOPEL } , /* 838 */
-{ "EVEN" , CMD_EVEN } , /* 839 */
-{ "ATN" , CMD_ATN } , /* 840 */
-{ "EXTOPEF" , CMD_EXTOPEF } , /* 841 */
-{ "PRINT" , CMD_PRINT } , /* 842 */
-{ "FIX" , CMD_FIX } , /* 843 */
-{ "FPRINTNL" , CMD_FPRINTNL } , /* 844 */
-{ "ADDHOUR" , CMD_ADDHOUR } , /* 845 */
-{ "TRIM" , CMD_TRIM } , /* 846 */
-{ "EXTOPFN" , CMD_EXTOPFN } , /* 847 */
-{ "EXTOPQF" , CMD_EXTOPQF } , /* 848 */
-{ "EXTOPOL" , CMD_EXTOPOL } , /* 849 */
-{ "SETJOKER" , CMD_SETJOKER } , /* 850 */
-{ "LETS" , CMD_LETS } , /* 851 */
-{ "ASECANT" , CMD_ASECANT } , /* 852 */
-{ "EXTOPPP" , CMD_EXTOPPP } , /* 853 */
-{ "UNTIL" , CMD_UNTIL } , /* 854 */
-{ "EXTOPJH" , CMD_EXTOPJH } , /* 855 */
-{ "EXTOPPF" , CMD_EXTOPPF } , /* 856 */
-{ "EXTOPKM" , CMD_EXTOPKM } , /* 857 */
-{ "EXTOPLH" , CMD_EXTOPLH } , /* 858 */
-{ "EXTOPMJ" , CMD_EXTOPMJ } , /* 859 */
-{ "WDAY" , CMD_WDAY } , /* 860 */
-{ "ASC" , CMD_ASC } , /* 861 */
-{ "EXTOPOD" , CMD_EXTOPOD } , /* 862 */
-{ "LOG" , CMD_LOG } , /* 863 */
-{ "EXTOPGH" , CMD_EXTOPGH } , /* 864 */
-{ "WHILE" , CMD_WHILE } , /* 865 */
-{ "LOCAL" , CMD_LOCAL } , /* 883 */
-{ "EXTOPQO" , CMD_EXTOPQO } , /* 866 */
-{ "EXTOPAH" , CMD_EXTOPAH } , /* 867 */
-{ "EXTOPNI" , CMD_EXTOPNI } , /* 868 */
-{ "ACTAN" , CMD_ACTAN } , /* 869 */
-{ "EXTOPAP" , CMD_EXTOPAP } , /* 870 */
-{ "EXTOPCJ" , CMD_EXTOPCJ } , /* 871 */
-{ "EXTOPPH" , CMD_EXTOPPH } , /* 872 */
+{ "EXTOPQG" , CMD_EXTOPQG } , /* 792 */
+{ "ODD" , CMD_ODD } , /* 793 */
+{ "SPLITAQ" , CMD_SPLITAQ } , /* 794 */
+{ "ADDYEAR" , CMD_ADDYEAR } , /* 795 */
+{ "ISREG" , CMD_ISREG } , /* 796 */
+{ "EXTOPQI" , CMD_EXTOPQI } , /* 797 */
+{ "RANDOMIZA" , CMD_RANDOMIZA } , /* 798 */
+{ "EXTERNAL" , CMD_EXTERNAL } , /* 799 */
+{ "FRAC" , CMD_FRAC } , /* 800 */
+{ "EXTOPEN" , CMD_EXTOPEN } , /* 801 */
+{ "EXTOPMP" , CMD_EXTOPMP } , /* 802 */
+{ "NLABEL" , CMD_NLABEL } , /* 882 */
+{ "EXTOPIC" , CMD_EXTOPIC } , /* 803 */
+{ "EXTOPDI" , CMD_EXTOPDI } , /* 804 */
+{ "RESETDIR" , CMD_RESETDIR } , /* 805 */
+{ "EXTOPEO" , CMD_EXTOPEO } , /* 806 */
+{ "OPTIONF" , CMD_OPTIONF } , /* 807 */
+{ "EMPTY" , CMD_EMPTY } , /* 883 */
+{ "EXTOPLQ" , CMD_EXTOPLQ } , /* 808 */
+{ "CVL" , CMD_CVL } , /* 809 */
+{ "EXTOPKE" , CMD_EXTOPKE } , /* 810 */
+{ "EXTOPFC" , CMD_EXTOPFC } , /* 811 */
+{ "ENDSUB" , CMD_ENDSUB } , /* 812 */
+{ "EXTOPCN" , CMD_EXTOPCN } , /* 813 */
+{ "EXTOPPO" , CMD_EXTOPPO } , /* 814 */
+{ "EXTOPLH" , CMD_EXTOPLH } , /* 815 */
+{ "ASC" , CMD_ASC } , /* 816 */
+{ "CLOSEDIR" , CMD_CLOSEDIR } , /* 817 */
+{ "EXTOPJM" , CMD_EXTOPJM } , /* 818 */
+{ "FOR" , CMD_FOR } , /* 819 */
+{ "ELSIF" , CMD_ELSIF } , /* 820 */
+{ "EXTOPAE" , CMD_EXTOPAE } , /* 821 */
+{ "EXTOPCO" , CMD_EXTOPCO } , /* 822 */
+{ "UNTIL" , CMD_UNTIL } , /* 823 */
+{ "TXTMI" , CMD_TXTMI } , /* 824 */
+{ "EXTOPOL" , CMD_EXTOPOL } , /* 825 */
+{ "EXTOPPN" , CMD_EXTOPPN } , /* 826 */
+{ "EXTOPLF" , CMD_EXTOPLF } , /* 827 */
+{ "DELETEF" , CMD_DELETEF } , /* 828 */
+{ "JOIN" , CMD_JOIN } , /* 829 */
+{ "CREATEPROCESSEX" , CMD_CREATEPROCESSEX } , /* 830 */
+{ "EXTOPHC" , CMD_EXTOPHC } , /* 831 */
+{ "SLIF" , CMD_SLIF } , /* 832 */
+{ "RIGHT" , CMD_RIGHT } , /* 833 */
+{ "EXTOPOK" , CMD_EXTOPOK } , /* 834 */
+{ "AND" , CMD_AND } , /* 835 */
+{ "LTRIM" , CMD_LTRIM } , /* 836 */
+{ "EXTOPPJ" , CMD_EXTOPPJ } , /* 837 */
+{ "EXTOPGC" , CMD_EXTOPGC } , /* 838 */
+{ "CONF" , CMD_CONF } , /* 839 */
+{ "EXTOPMD" , CMD_EXTOPMD } , /* 840 */
+{ "EXTOPCJ" , CMD_EXTOPCJ } , /* 841 */
+{ "EODFUN" , CMD_EODFUN } , /* 842 */
+{ "EXTOPNM" , CMD_EXTOPNM } , /* 843 */
+{ "PLUS" , CMD_PLUS } , /* 844 */
+{ "ADDSECOND" , CMD_ADDSECOND } , /* 845 */
+{ "REPLACE" , CMD_REPLACE } , /* 846 */
+{ "EXTOPKN" , CMD_EXTOPKN } , /* 847 */
+{ "NE" , CMD_NE } , /* 848 */
+{ "HCOS" , CMD_HCOS } , /* 849 */
+{ "EVEN" , CMD_EVEN } , /* 850 */
+{ "EXTOPMG" , CMD_EXTOPMG } , /* 851 */
+{ "EXTOPMI" , CMD_EXTOPMI } , /* 852 */
+{ "EXTOPEE" , CMD_EXTOPEE } , /* 853 */
+{ "EXTOPKO" , CMD_EXTOPKO } , /* 854 */
+{ "EXTOPLK" , CMD_EXTOPLK } , /* 855 */
+{ "EXTERNAM" , CMD_EXTERNAM } , /* 856 */
+{ "EXTOPOF" , CMD_EXTOPOF } , /* 857 */
+{ "EXTOPDP" , CMD_EXTOPDP } , /* 858 */
+{ "EXTOPIM" , CMD_EXTOPIM } , /* 859 */
+{ "EXTOPLL" , CMD_EXTOPLL } , /* 860 */
+{ "POW" , CMD_POW } , /* 861 */
+{ "ACTAN" , CMD_ACTAN } , /* 862 */
+{ "TRUE" , CMD_TRUE } , /* 863 */
+{ "EXTOPQP" , CMD_EXTOPQP } , /* 864 */
+{ "POP" , CMD_POP } , /* 865 */
+{ "SUB" , CMD_SUB } , /* 866 */
+{ "CVS" , CMD_CVS } , /* 867 */
+{ "UNDEF" , CMD_UNDEF } , /* 868 */
+{ "EXTOPBP" , CMD_EXTOPBP } , /* 869 */
+{ "EXTOPOH" , CMD_EXTOPOH } , /* 870 */
+{ "FTACCESS" , CMD_FTACCESS } , /* 871 */
+{ "EXTOPKJ" , CMD_EXTOPKJ } , /* 872 */
 { NULL, 0 }
   };
 /*
@@ -5162,529 +5162,529 @@ extern char *COMMANDSYMBOLS[];
 extern CommandFunctionType CommandFunction[];
 */
 CommandFunctionType CommandFunction[]={
-  COMMAND_EXTOPJP, /* 350 */
-  COMMAND_JOIN, /* 351 */
-  COMMAND_HEX, /* 352 */
-  COMMAND_EXTOPIL, /* 353 */
-  COMMAND_TXTMI, /* 354 */
-  COMMAND_EXTOPPC, /* 355 */
-  COMMAND_EXTOPPL, /* 356 */
-  COMMAND_EXTOPHF, /* 357 */
-  COMMAND_ISLONG, /* 358 */
-  COMMAND_SQR, /* 359 */
-  COMMAND_DOUNTIL, /* 360 */
-  COMMAND_ONERRORRESUMELABEL, /* 361 */
-  COMMAND_EXTOPAE, /* 362 */
-  COMMAND_OPEN, /* 363 */
-  COMMAND_MONTH, /* 364 */
-  COMMAND_VAL, /* 365 */
-  COMMAND_EXTOPHP, /* 366 */
-  COMMAND_ISDOUBLE, /* 367 */
-  COMMAND_COSECANT, /* 368 */
-  COMMAND_CREATEPROCESS, /* 369 */
-  COMMAND_EXTOPNO, /* 370 */
-  COMMAND_EXTOPFI, /* 371 */
-  COMMAND_MINUTE, /* 372 */
-  COMMAND_FORMATDATE, /* 373 */
-  COMMAND_MID, /* 374 */
-  COMMAND_FTMODIFY, /* 375 */
-  COMMAND_EXTOPDP, /* 376 */
-  COMMAND_DELETE, /* 377 */
-  COMMAND_SPLIT, /* 378 */
-  COMMAND_CLOSE, /* 379 */
-  COMMAND_EXTOPIO, /* 380 */
-  COMMAND_EXTOPHI, /* 381 */
-  COMMAND_EXTOPOI, /* 382 */
-  COMMAND_EXTOPDI, /* 383 */
-  COMMAND_HCOSECANT, /* 384 */
-  COMMAND_EXTOPKH, /* 385 */
-  COMMAND_LETC, /* 386 */
-  COMMAND_EXTOPCN, /* 387 */
-  COMMAND_ERROR, /* 388 */
-  COMMAND_MININT, /* 389 */
-  COMMAND_EXTOPNH, /* 390 */
-  COMMAND_EXTOPJO, /* 391 */
-  COMMAND_CERROR, /* 392 */
-  COMMAND_EXTOPMO, /* 393 */
-  COMMAND_EXTOPLM, /* 394 */
-  COMMAND_HCOS, /* 395 */
-  COMMAND_ISARRAY, /* 396 */
-  COMMAND_EXTOPFO, /* 397 */
-  COMMAND_ABS, /* 398 */
-  COMMAND_RETURNC, /* 399 */
-  COMMAND_EXTOPBO, /* 400 */
-  COMMAND_SPACE, /* 401 */
-  COMMAND_MAX, /* 402 */
-  COMMAND_CONCATENATE, /* 403 */
-  COMMAND_SETFILE, /* 404 */
-  COMMAND_EXTOPEM, /* 405 */
-  COMMAND_TAN2, /* 406 */
-  COMMAND_SPLITA, /* 407 */
-  COMMAND_BINMF, /* 408 */
-  COMMAND_EXTOPFG, /* 409 */
-  COMMAND_EXTOPKP, /* 410 */
-  COMMAND_EXTOPMG, /* 411 */
-  COMMAND_EXTOPJI, /* 412 */
-  COMMAND_LOOPUNTIL, /* 413 */
-  COMMAND_ELSIF, /* 414 */
-  COMMAND_MOD, /* 415 */
-  COMMAND_EXTOPHQ, /* 416 */
-  COMMAND_RLOCK, /* 417 */
-  COMMAND_WAITPID, /* 418 */
-  COMMAND_UCASE, /* 419 */
-  COMMAND_EXTOPLE, /* 420 */
-  COMMAND_IMIN, /* 421 */
-  COMMAND_DO, /* 422 */
-  COMMAND_MKL, /* 423 */
-  COMMAND_GCD, /* 424 */
-  COMMAND_EXTOPPJ, /* 425 */
-  COMMAND_ISDIR, /* 426 */
-  COMMAND_LINPUT, /* 427 */
-  COMMAND_EXTOPCC, /* 428 */
-  COMMAND_FORMAT, /* 429 */
-  COMMAND_EXTOPDN, /* 430 */
-  COMMAND_OPTION, /* 431 */
-  COMMAND_EXTOPPM, /* 432 */
-  COMMAND_ELSE, /* 433 */
-  COMMAND_EXTOPCD, /* 434 */
-  COMMAND_EXTOPHH, /* 435 */
-  COMMAND_EXTOPEJ, /* 436 */
-  COMMAND_EXTOPCP, /* 437 */
-  COMMAND_LEFT, /* 438 */
-  COMMAND_FOR, /* 439 */
-  COMMAND_EXTOPJC, /* 440 */
-  COMMAND_EXTOPHG, /* 441 */
-  COMMAND_EXTOPFH, /* 442 */
-  COMMAND_STRING, /* 443 */
-  COMMAND_EXTOPAJ, /* 444 */
-  COMMAND_EQ, /* 445 */
-  COMMAND_ICALL, /* 446 */
-  COMMAND_KILL, /* 447 */
-  COMMAND_BINMO, /* 448 */
-  COMMAND_EXTOPQL, /* 449 */
-  COMMAND_EXTOPLP, /* 450 */
-  COMMAND_FTCREATED, /* 451 */
-  COMMAND_EXTOPMD, /* 452 */
-  COMMAND_EXTOPGN, /* 453 */
-  COMMAND_EXITFUNC, /* 454 */
-  COMMAND_ERRORDOLLAR, /* 455 */
-  COMMAND_XOR, /* 456 */
-  COMMAND_EXTOPLN, /* 457 */
-  COMMAND_SEEK, /* 458 */
-  COMMAND_EXTOPQM, /* 459 */
-  COMMAND_EXTOPJN, /* 460 */
-  COMMAND_EXTOPNN, /* 461 */
-  COMMAND_TIMEVALUE, /* 462 */
-  COMMAND_EXTOPHN, /* 463 */
-  COMMAND_DIV, /* 464 */
-  COMMAND_EOFFUN, /* 465 */
-  COMMAND_EXTOPBM, /* 466 */
-  COMMAND_ISUNDEF, /* 467 */
-  COMMAND_HCTAN, /* 468 */
-  COMMAND_EXTOPAM, /* 469 */
-  COMMAND_EXTOPLF, /* 470 */
-  COMMAND_SLIF, /* 471 */
-  COMMAND_SETNOJO, /* 472 */
-  COMMAND_LET, /* 473 */
-  COMMAND_ICALLFUN, /* 474 */
-  COMMAND_EXTOPFF, /* 475 */
-  COMMAND_EXTOPBG, /* 476 */
-  COMMAND_EXTOPBN, /* 477 */
-  COMMAND_CONF, /* 478 */
-  COMMAND_GT, /* 479 */
-  COMMAND_ISREG, /* 480 */
-  COMMAND_EXTOPCM, /* 481 */
-  COMMAND_EXTOPGJ, /* 482 */
-  COMMAND_RTRIM, /* 483 */
-  COMMAND_EXTOPCH, /* 484 */
-  COMMAND_PI, /* 485 */
-  COMMAND_LBOUND, /* 486 */
-  COMMAND_DELETEF, /* 487 */
-  COMMAND_LETM, /* 488 */
-  COMMAND_EXTOPGD, /* 489 */
-  COMMAND_INSTR, /* 490 */
-  COMMAND_EXTOPII, /* 491 */
-  COMMAND_EXP, /* 492 */
-  COMMAND_FORK, /* 493 */
-  COMMAND_OCT, /* 494 */
-  COMMAND_EXTOPON, /* 495 */
-  COMMAND_EXTOPMI, /* 496 */
-  COMMAND_FILEXISTS, /* 497 */
-  COMMAND_JOKER, /* 498 */
-  COMMAND_TRUE, /* 499 */
-  COMMAND_SEC, /* 500 */
-  COMMAND_EXTOPIM, /* 501 */
-  COMMAND_LEN, /* 502 */
-  COMMAND_EXTOPOG, /* 503 */
-  COMMAND_ONERRORGOTO, /* 504 */
-  COMMAND_LIKEOP, /* 505 */
-  COMMAND_LETP, /* 506 */
-  COMMAND_GOSUB, /* 507 */
-  COMMAND_EXTOPCG, /* 508 */
-  COMMAND_ADDRESSF, /* 509 */
-  COMMAND_EXTOPNP, /* 510 */
-  COMMAND_EXTOPDF, /* 511 */
-  COMMAND_EXTOPOO, /* 512 */
-  COMMAND_EXTOPPN, /* 513 */
-  COMMAND_EXTOPNM, /* 514 */
-  COMMAND_EXTOPGL, /* 515 */
-  COMMAND_EXTOPNG, /* 516 */
-  COMMAND_NE, /* 517 */
-  COMMAND_EXTOPMH, /* 518 */
-  COMMAND_LOOP, /* 519 */
-  COMMAND_ADDDAY, /* 520 */
-  COMMAND_EXTOPGQ, /* 521 */
-  COMMAND_EXTOPKD, /* 522 */
-  COMMAND_END, /* 523 */
-  COMMAND_EXTOPCO, /* 524 */
-  COMMAND_FILELEN, /* 525 */
-  COMMAND_EXTOPAC, /* 526 */
-  COMMAND_OR, /* 527 */
-  COMMAND_YEAR, /* 528 */
-  COMMAND_EXTOPAN, /* 529 */
-  COMMAND_EXTOPDO, /* 530 */
-  COMMAND_EXTOPBH, /* 531 */
-  COMMAND_EODFUN, /* 532 */
-  COMMAND_EXTOPLC, /* 533 */
-  COMMAND_EXTOPMQ, /* 534 */
-  COMMAND_EXTOPFP, /* 535 */
-  COMMAND_EXTOPQD, /* 536 */
-  COMMAND_EXTOPHD, /* 537 */
-  COMMAND_EXTOPKJ, /* 538 */
-  COMMAND_EXTOPLK, /* 539 */
-  COMMAND_EXTOPBP, /* 540 */
-  COMMAND_TXTMO, /* 541 */
-  COMMAND_EXTOPGC, /* 542 */
-  COMMAND_EXTOPLD, /* 543 */
-  COMMAND_EXTOPJL, /* 544 */
-  COMMAND_EXTOPFJ, /* 545 */
-  COMMAND_EXTOPQE, /* 546 */
-  COMMAND_EXTOPAO, /* 547 */
-  COMMAND_RIGHT, /* 548 */
-  COMMAND_MAXINT, /* 549 */
-  COMMAND_COMMANDF, /* 550 */
-  COMMAND_EXTOPNQ, /* 551 */
-  COMMAND_EXTOPPO, /* 552 */
-  COMMAND_BIN, /* 553 */
-  COMMAND_EXTOPOH, /* 554 */
-  COMMAND_EXTOPHE, /* 555 */
-  COMMAND_EXTOPNF, /* 556 */
-  COMMAND_EXTOPQC, /* 557 */
-  COMMAND_EXTOPID, /* 558 */
-  COMMAND_EXTOPPE, /* 559 */
-  COMMAND_EXTOPHJ, /* 560 */
-  COMMAND_ADDMONTH, /* 561 */
-  COMMAND_NAME, /* 562 */
-  COMMAND_EXTOPEC, /* 563 */
-  COMMAND_ACOS, /* 564 */
-  COMMAND_SIN, /* 565 */
-  COMMAND_EXTOPKO, /* 566 */
-  COMMAND_NOT, /* 567 */
-  COMMAND_EXTOPAL, /* 568 */
-  COMMAND_EXTOPNE, /* 569 */
-  COMMAND_EXTOPGM, /* 570 */
-  COMMAND_IF, /* 571 */
-  COMMAND_EXTOPDL, /* 572 */
-  COMMAND_EXTOPKC, /* 573 */
-  COMMAND_UNPACK, /* 574 */
-  COMMAND_EXTOPNL, /* 575 */
-  COMMAND_LETI, /* 576 */
-  COMMAND_OPENDIR, /* 577 */
-  COMMAND_EXITSUB, /* 578 */
-  COMMAND_IMAX, /* 579 */
-  COMMAND_LLET, /* 580 */
-  COMMAND_EXTOPEH, /* 581 */
-  COMMAND_FRAC, /* 582 */
-  COMMAND_ISNUMERIC, /* 583 */
-  COMMAND_EXTOPLL, /* 584 */
-  COMMAND_EXTOPDQ, /* 585 */
-  COMMAND_EXTOPQJ, /* 586 */
-  COMMAND_POWER, /* 587 */
-  COMMAND_ATAN, /* 588 */
-  COMMAND_EXTOPIE, /* 589 */
-  COMMAND_ADDSECOND, /* 590 */
-  COMMAND_EXTOPK, /* 591 */
-  COMMAND_CVD, /* 592 */
-  COMMAND_MKI, /* 593 */
-  COMMAND_ADDYEAR, /* 594 */
-  COMMAND_EXTOPMN, /* 595 */
-  COMMAND_EXTOPL, /* 596 */
-  COMMAND_RESUMELABEL, /* 597 */
-  COMMAND_INT, /* 598 */
-  COMMAND_EXTOPKI, /* 599 */
-  COMMAND_EXTOPMF, /* 600 */
-  COMMAND_EXTOPEK, /* 601 */
-  COMMAND_EXTOPFC, /* 602 */
-  COMMAND_MIN, /* 603 */
-  COMMAND_EXTOPAI, /* 604 */
-  COMMAND_REPEAT, /* 605 */
-  COMMAND_REPLACE, /* 606 */
-  COMMAND_EXTOPJJ, /* 607 */
-  COMMAND_ADDMINUTE, /* 608 */
-  COMMAND_GOTO, /* 609 */
-  COMMAND_EXTOPMK, /* 610 */
-  COMMAND_EXTOPFQ, /* 611 */
-  COMMAND_EXTOPHL, /* 612 */
-  COMMAND_HTAN, /* 613 */
-  COMMAND_LOOPWHILE, /* 614 */
-  COMMAND_EXTOPHC, /* 615 */
-  COMMAND_EXTOPOE, /* 616 */
-  COMMAND_EXTOPOP, /* 617 */
-  COMMAND_EXTOPFK, /* 618 */
-  COMMAND_EXTOPEQ, /* 619 */
-  COMMAND_EXTOPKL, /* 620 */
-  COMMAND_EXTOPBJ, /* 621 */
-  COMMAND_EXTOPKG, /* 622 */
-  COMMAND_CVI, /* 623 */
-  COMMAND_CUNDEF, /* 624 */
-  COMMAND_EXTOPIF, /* 625 */
-  COMMAND_PRINTNL, /* 626 */
-  COMMAND_MINUS, /* 627 */
-  COMMAND_DOWHILE, /* 628 */
-  COMMAND_FORSTEP, /* 629 */
-  COMMAND_UBOUND, /* 630 */
-  COMMAND_EXTOPGF, /* 631 */
-  COMMAND_EXTOPIK, /* 632 */
-  COMMAND_DAY, /* 633 */
-  COMMAND_REF, /* 634 */
-  COMMAND_SLEEP, /* 635 */
-  COMMAND_HOSTNAME, /* 636 */
-  COMMAND_ROUND, /* 637 */
-  COMMAND_EXTOPKK, /* 638 */
-  COMMAND_LE, /* 639 */
-  COMMAND_EXTOPPI, /* 640 */
-  COMMAND_EXTOPDJ, /* 641 */
-  COMMAND_EXTOPMP, /* 642 */
-  COMMAND_PLUS, /* 643 */
-  COMMAND_CHR, /* 644 */
-  COMMAND_FOWNER, /* 645 */
-  COMMAND_FALSE, /* 646 */
-  COMMAND_ENVIRON, /* 647 */
-  COMMAND_EXTOPDM, /* 648 */
-  COMMAND_LCASE, /* 649 */
-  COMMAND_ODD, /* 650 */
-  COMMAND_RESETDIR, /* 651 */
-  COMMAND_EXTOPIH, /* 652 */
-  COMMAND_POP, /* 653 */
-  COMMAND_EXTOPBC, /* 654 */
-  COMMAND_EXTOPKF, /* 655 */
-  COMMAND_SETWILD, /* 656 */
-  COMMAND_ENDSUB, /* 657 */
-  COMMAND_REWIND, /* 658 */
-  COMMAND_EXTOPAF, /* 659 */
-  COMMAND_EXTOPPQ, /* 660 */
-  COMMAND_EXTOPJM, /* 661 */
-  COMMAND_EXTOPLI, /* 662 */
-  COMMAND_BINMI, /* 663 */
-  COMMAND_EXTOPEE, /* 664 */
-  COMMAND_EXTOPJD, /* 665 */
-  COMMAND_EXTOPAQ, /* 666 */
-  COMMAND_EXTOPJG, /* 667 */
-  COMMAND_SWAP, /* 668 */
-  COMMAND_EXTOPQK, /* 669 */
+  COMMAND_ONERRORGOTO, /* 350 */
+  COMMAND_SETNOJO, /* 351 */
+  COMMAND_STOP, /* 352 */
+  COMMAND_EXTOPID, /* 353 */
+  COMMAND_EXTOPL, /* 354 */
+  COMMAND_ISLONG, /* 355 */
+  COMMAND_DELETE, /* 356 */
+  COMMAND_STRING, /* 357 */
+  COMMAND_EXTOPEL, /* 358 */
+  COMMAND_EXTOPAF, /* 359 */
+  COMMAND_RND, /* 360 */
+  COMMAND_EXTOPJI, /* 361 */
+  COMMAND_EXTOPGP, /* 362 */
+  COMMAND_EXTOPJG, /* 363 */
+  COMMAND_GT, /* 364 */
+  COMMAND_EXTOPHP, /* 365 */
+  COMMAND_MAX, /* 366 */
+  COMMAND_SPLITA, /* 367 */
+  COMMAND_EXTOPAH, /* 368 */
+  COMMAND_SGN, /* 369 */
+  COMMAND_XOR, /* 370 */
+  COMMAND_EXTOPEK, /* 371 */
+  COMMAND_EXTOPFP, /* 372 */
+  COMMAND_EXTOPNI, /* 373 */
+  COMMAND_EXTOPLE, /* 374 */
+  COMMAND_EXTOPKQ, /* 375 */
+  COMMAND_EXTOPNG, /* 376 */
+  COMMAND_FOWNER, /* 377 */
+  COMMAND_BINMF, /* 378 */
+  COMMAND_EXTOPOE, /* 379 */
+  COMMAND_NOW, /* 380 */
+  COMMAND_EXTOPAL, /* 381 */
+  COMMAND_ADDMINUTE, /* 382 */
+  COMMAND_CVI, /* 383 */
+  COMMAND_EXTOPBC, /* 384 */
+  COMMAND_EXTOPEF, /* 385 */
+  COMMAND_EXTOPQC, /* 386 */
+  COMMAND_EXTOPMM, /* 387 */
+  COMMAND_POWER, /* 388 */
+  COMMAND_EXTOPND, /* 389 */
+  COMMAND_EXTOPII, /* 390 */
+  COMMAND_RESUMELABEL, /* 391 */
+  COMMAND_EXTOPDC, /* 392 */
+  COMMAND_EXTOPIG, /* 393 */
+  COMMAND_EXTOPEH, /* 394 */
+  COMMAND_MKD, /* 395 */
+  COMMAND_ICALLFUN, /* 396 */
+  COMMAND_EXTOPPQ, /* 397 */
+  COMMAND_EXTOPJD, /* 398 */
+  COMMAND_EXTOPCQ, /* 399 */
+  COMMAND_EXTOPAK, /* 400 */
+  COMMAND_EXTOPO, /* 401 */
+  COMMAND_GOTO, /* 402 */
+  COMMAND_EXTOPCH, /* 403 */
+  COMMAND_EXTOPNP, /* 404 */
+  COMMAND_EXTOPFI, /* 405 */
+  COMMAND_EXTOPFG, /* 406 */
+  COMMAND_EXTOPLN, /* 407 */
+  COMMAND_EXTOPEQ, /* 408 */
+  COMMAND_EXTOPLO, /* 409 */
+  COMMAND_ADDMONTH, /* 410 */
+  COMMAND_EXTOPPH, /* 411 */
+  COMMAND_EXTOPKK, /* 412 */
+  COMMAND_MAXINT, /* 413 */
+  COMMAND_FORMAT, /* 414 */
+  COMMAND_EXTOPGG, /* 415 */
+  COMMAND_EXTOPJP, /* 416 */
+  COMMAND_EXTOPKL, /* 417 */
+  COMMAND_EXTOPGI, /* 418 */
+  COMMAND_TXTMO, /* 419 */
+  COMMAND_EXTOPHG, /* 420 */
+  COMMAND_FLET, /* 421 */
+  COMMAND_ISSTRING, /* 422 */
+  COMMAND_EXTOPCF, /* 423 */
+  COMMAND_EXTOPHI, /* 424 */
+  COMMAND_ISDIR, /* 425 */
+  COMMAND_LIKEOP, /* 426 */
+  COMMAND_EXTOPPF, /* 427 */
+  COMMAND_LT, /* 428 */
+  COMMAND_INT, /* 429 */
+  COMMAND_LOG, /* 430 */
+  COMMAND_EXTOPLJ, /* 431 */
+  COMMAND_EXTOPOJ, /* 432 */
+  COMMAND_EXTOPBM, /* 433 */
+  COMMAND_FPRINTNL, /* 434 */
+  COMMAND_ADDRESSF, /* 435 */
+  COMMAND_EXTOPGD, /* 436 */
+  COMMAND_EXTOPHD, /* 437 */
+  COMMAND_EXTOPKH, /* 438 */
+  COMMAND_EXTOPPK, /* 439 */
+  COMMAND_EXTOPIP, /* 440 */
+  COMMAND_EXTOPCK, /* 441 */
+  COMMAND_EXTOPAQ, /* 442 */
+  COMMAND_OPTION, /* 443 */
+  COMMAND_LETM, /* 444 */
+  COMMAND_OR, /* 445 */
+  COMMAND_WDAY, /* 446 */
+  COMMAND_EXTOPMC, /* 447 */
+  COMMAND_EXTOPQM, /* 448 */
+  COMMAND_EXTOPOO, /* 449 */
+  COMMAND_TRUNCATEF, /* 450 */
+  COMMAND_STRREVERSE, /* 451 */
+  COMMAND_SWAP, /* 452 */
+  COMMAND_EXTOPKF, /* 453 */
+  COMMAND_EXTOPFD, /* 454 */
+  COMMAND_CERROR, /* 455 */
+  COMMAND_EXTOPCL, /* 456 */
+  COMMAND_SEEK, /* 457 */
+  COMMAND_EXTOPDM, /* 458 */
+  COMMAND_PAUSE, /* 459 */
+  COMMAND_TAN2, /* 460 */
+  COMMAND_EXTOPON, /* 461 */
+  COMMAND_EXTOPPL, /* 462 */
+  COMMAND_FTCREATED, /* 463 */
+  COMMAND_ASECANT, /* 464 */
+  COMMAND_EXTOPLD, /* 465 */
+  COMMAND_EXTOPEM, /* 466 */
+  COMMAND_HTAN, /* 467 */
+  COMMAND_EXTOPMF, /* 468 */
+  COMMAND_EXTOPOG, /* 469 */
+  COMMAND_EXTOPOI, /* 470 */
+  COMMAND_CBYVAL, /* 471 */
+  COMMAND_GMTIME, /* 472 */
+  COMMAND_HOUR, /* 473 */
+  COMMAND_LE, /* 474 */
+  COMMAND_EXTOPKC, /* 475 */
+  COMMAND_SETJOKER, /* 476 */
+  COMMAND_WEND, /* 477 */
+  COMMAND_ABS, /* 478 */
+  COMMAND_LETS, /* 479 */
+  COMMAND_EXTOPIE, /* 480 */
+  COMMAND_EXTOPMH, /* 481 */
+  COMMAND_CREATEPROCESS, /* 482 */
+  COMMAND_FILELEN, /* 483 */
+  COMMAND_EXTOPHN, /* 484 */
+  COMMAND_BINMO, /* 485 */
+  COMMAND_EXTOPQQ, /* 486 */
+  COMMAND_RESUMENEXT, /* 487 */
+  COMMAND_SUBARG, /* 488 */
+  COMMAND_EXTOPGN, /* 489 */
+  COMMAND_EXTOPJE, /* 490 */
+  COMMAND_EXTOPAM, /* 491 */
+  COMMAND_FALSE, /* 492 */
+  COMMAND_ENVIRON, /* 493 */
+  COMMAND_CONCATENATE, /* 494 */
+  COMMAND_ISARRAY, /* 495 */
+  COMMAND_EXTOPML, /* 496 */
+  COMMAND_EXTOPHO, /* 497 */
+  COMMAND_MID, /* 498 */
+  COMMAND_REWIND, /* 499 */
+  COMMAND_EXTOPFJ, /* 500 */
+  COMMAND_EXTOPGO, /* 501 */
+  COMMAND_DAY, /* 502 */
+  COMMAND_COTAN, /* 503 */
+  COMMAND_LETP, /* 504 */
+  COMMAND_LBOUND, /* 505 */
+  COMMAND_EXTOPBQ, /* 506 */
+  COMMAND_ASIN, /* 507 */
+  COMMAND_EXTOPLI, /* 508 */
+  COMMAND_EXTOPCC, /* 509 */
+  COMMAND_EXTOPNE, /* 510 */
+  COMMAND_FIX, /* 511 */
+  COMMAND_LETI, /* 512 */
+  COMMAND_EXTOPLG, /* 513 */
+  COMMAND_EXTOPFN, /* 514 */
+  COMMAND_EXTOPMK, /* 515 */
+  COMMAND_MOD, /* 516 */
+  COMMAND_MININT, /* 517 */
+  COMMAND_LEN, /* 518 */
+  COMMAND_WHILE, /* 519 */
+  COMMAND_FORSTEP, /* 520 */
+  COMMAND_EXTOPHJ, /* 521 */
+  COMMAND_FORK, /* 522 */
+  COMMAND_SIN, /* 523 */
+  COMMAND_EXTOPDQ, /* 524 */
+  COMMAND_EXTOPFO, /* 525 */
+  COMMAND_ACOSECANT, /* 526 */
+  COMMAND_PRINT, /* 527 */
+  COMMAND_EXTOPGJ, /* 528 */
+  COMMAND_IDIV, /* 529 */
+  COMMAND_EXTOPPC, /* 530 */
+  COMMAND_ELSE, /* 531 */
+  COMMAND_EXTOPOD, /* 532 */
+  COMMAND_MONTH, /* 533 */
+  COMMAND_EXTOPBF, /* 534 */
+  COMMAND_EXTOPEC, /* 535 */
+  COMMAND_EXTOPDH, /* 536 */
+  COMMAND_GE, /* 537 */
+  COMMAND_GM2LOCAL, /* 538 */
+  COMMAND_EXTOPIN, /* 539 */
+  COMMAND_ACOS, /* 540 */
+  COMMAND_EXTOPIO, /* 541 */
+  COMMAND_TIMEVALUE, /* 542 */
+  COMMAND_EXTOPQF, /* 543 */
+  COMMAND_GCD, /* 544 */
+  COMMAND_OPEN, /* 545 */
+  COMMAND_LLET, /* 546 */
+  COMMAND_EXTOPKM, /* 547 */
+  COMMAND_ONERRORRESUMENEXT, /* 548 */
+  COMMAND_TXTMF, /* 549 */
+  COMMAND_HCTAN, /* 550 */
+  COMMAND_INPUTFUN, /* 551 */
+  COMMAND_LEFT, /* 552 */
+  COMMAND_EXTOPDF, /* 553 */
+  COMMAND_EXTOPOP, /* 554 */
+  COMMAND_EXTOPBH, /* 555 */
+  COMMAND_EOFFUN, /* 556 */
+  COMMAND_EXTOPQH, /* 557 */
+  COMMAND_LOOP, /* 558 */
+  COMMAND_YDAY, /* 559 */
+  COMMAND_EQ, /* 560 */
+  COMMAND_TRIM, /* 561 */
+  COMMAND_EXTOPIJ, /* 562 */
+  COMMAND_SQR, /* 563 */
+  COMMAND_EXTOPBL, /* 564 */
+  COMMAND_EXTOPNO, /* 565 */
+  COMMAND_EXTOPAC, /* 566 */
+  COMMAND_CHR, /* 567 */
+  COMMAND_EXTOPMQ, /* 568 */
+  COMMAND_EXTOPJJ, /* 569 */
+  COMMAND_EXTOPLP, /* 570 */
+  COMMAND_CVD, /* 571 */
+  COMMAND_OPENDIR, /* 572 */
+  COMMAND_EXTOPFE, /* 573 */
+  COMMAND_MIN, /* 574 */
+  COMMAND_EXTOPDK, /* 575 */
+  COMMAND_EXTOPNN, /* 576 */
+  COMMAND_EXTOPQL, /* 577 */
+  COMMAND_LCASE, /* 578 */
+  COMMAND_COTAN2, /* 579 */
+  COMMAND_FUNCTIONARG, /* 580 */
+  COMMAND_EXTOPQK, /* 581 */
+  COMMAND_EXTOPNJ, /* 582 */
+  COMMAND_EXTOPCM, /* 583 */
+  COMMAND_EXTOPDL, /* 584 */
+  COMMAND_EXTOPJO, /* 585 */
+  COMMAND_ISNUMERIC, /* 586 */
+  COMMAND_EXTOPF, /* 587 */
+  COMMAND_LOF, /* 588 */
+  COMMAND_BIN, /* 589 */
+  COMMAND_ISEMPTY, /* 590 */
+  COMMAND_EXTOPPM, /* 591 */
+  COMMAND_MKI, /* 592 */
+  COMMAND_EXTOPHE, /* 593 */
+  COMMAND_LINPUTF, /* 594 */
+  COMMAND_EXTOPGE, /* 595 */
+  COMMAND_EXTOPBK, /* 596 */
+  COMMAND_EXTOPJN, /* 597 */
+  COMMAND_REPEAT, /* 598 */
+  COMMAND_EXITSUB, /* 599 */
+  COMMAND_LOC, /* 600 */
+  COMMAND_EXTOPQE, /* 601 */
+  COMMAND_UCASE, /* 602 */
+  COMMAND_EXTOPCD, /* 603 */
+  COMMAND_EXTOPMJ, /* 604 */
+  COMMAND_EXTOPJQ, /* 605 */
+  COMMAND_FTMODIFY, /* 606 */
+  COMMAND_EXTOPFL, /* 607 */
+  COMMAND_RANDOMIZE, /* 608 */
+  COMMAND_EXTOPOC, /* 609 */
+  COMMAND_EXTOPPD, /* 610 */
+  COMMAND_EXTOPHK, /* 611 */
+  COMMAND_EXTOPGK, /* 612 */
+  COMMAND_EXTOPBE, /* 613 */
+  COMMAND_EXTOPNQ, /* 614 */
+  COMMAND_EXTOPKG, /* 615 */
+  COMMAND_SEC, /* 616 */
+  COMMAND_EXTOPGL, /* 617 */
+  COMMAND_RLOCK, /* 618 */
+  COMMAND_DO, /* 619 */
+  COMMAND_EXTOPKI, /* 620 */
+  COMMAND_FLOCK, /* 621 */
+  COMMAND_EXTOPHL, /* 622 */
+  COMMAND_EXTOPMO, /* 623 */
+  COMMAND_CHDIR, /* 624 */
+  COMMAND_LOOPWHILE, /* 625 */
+  COMMAND_ONERRORRESUMELABEL, /* 626 */
+  COMMAND_EXTOPFK, /* 627 */
+  COMMAND_EXTOPMN, /* 628 */
+  COMMAND_EXTOPQ, /* 629 */
+  COMMAND_EXTOPEP, /* 630 */
+  COMMAND_GOSUB, /* 631 */
+  COMMAND_VAL, /* 632 */
+  COMMAND_YEAR, /* 633 */
+  COMMAND_EXTOPKD, /* 634 */
+  COMMAND_EXTOPHH, /* 635 */
+  COMMAND_ONERRORGOTONULL, /* 636 */
+  COMMAND_EXTOPFF, /* 637 */
+  COMMAND_PI, /* 638 */
+  COMMAND_MKS, /* 639 */
+  COMMAND_EXTOPGH, /* 640 */
+  COMMAND_NOT, /* 641 */
+  COMMAND_LINPUT, /* 642 */
+  COMMAND_ATN, /* 643 */
+  COMMAND_EXITFUNC, /* 644 */
+  COMMAND_FILEXISTS, /* 645 */
+  COMMAND_EXTOPFH, /* 646 */
+  COMMAND_DIV, /* 647 */
+  COMMAND_LOOPUNTIL, /* 648 */
+  COMMAND_LETD, /* 649 */
+  COMMAND_EXTOPGF, /* 650 */
+  COMMAND_EXTOPLC, /* 651 */
+  COMMAND_EXTOPCI, /* 652 */
+  COMMAND_EXTOPHF, /* 653 */
+  COMMAND_RESET, /* 654 */
+  COMMAND_EXTOPCG, /* 655 */
+  COMMAND_EXTOPPG, /* 656 */
+  COMMAND_SETWILD, /* 657 */
+  COMMAND_SETFILE, /* 658 */
+  COMMAND_EXTOPPI, /* 659 */
+  COMMAND_EXTOPIQ, /* 660 */
+  COMMAND_ADDHOUR, /* 661 */
+  COMMAND_BINMI, /* 662 */
+  COMMAND_EXTOPAP, /* 663 */
+  COMMAND_JOKER, /* 664 */
+  COMMAND_SECANT, /* 665 */
+  COMMAND_EXTOPQJ, /* 666 */
+  COMMAND_UBOUND, /* 667 */
+  COMMAND_EXP, /* 668 */
+  COMMAND_EXTOPDN, /* 669 */
   COMMAND_EXTOPNK, /* 670 */
-  COMMAND_TYPE, /* 671 */
-  COMMAND_LOCAL2GM, /* 672 */
-  COMMAND_EXTOPMC, /* 673 */
-  COMMAND_RESET, /* 674 */
-  COMMAND_FTACCESS, /* 675 */
-  COMMAND_EXTOPCI, /* 676 */
-  COMMAND_EXTOPHM, /* 677 */
-  COMMAND_LINPUTF, /* 678 */
-  COMMAND_ISSTRING, /* 679 */
-  COMMAND_EXTOPFE, /* 680 */
-  COMMAND_RND, /* 681 */
-  COMMAND_FUNCTIONARG, /* 682 */
-  COMMAND_EXTOPOQ, /* 683 */
-  COMMAND_STOP, /* 684 */
-  COMMAND_EXTOPJF, /* 685 */
-  COMMAND_CREATEPROCESSEX, /* 686 */
-  COMMAND_PACK, /* 687 */
-  COMMAND_EXTOPBI, /* 688 */
-  COMMAND_EXTOPLJ, /* 689 */
-  COMMAND_BYVAL, /* 690 */
-  COMMAND_EXTOPIG, /* 691 */
-  COMMAND_EXTOPQH, /* 692 */
-  COMMAND_MKDIR, /* 693 */
-  COMMAND_ACOSECANT, /* 694 */
-  COMMAND_EXTOPGP, /* 695 */
-  COMMAND_CHDIR, /* 696 */
-  COMMAND_EXTOPDC, /* 697 */
-  COMMAND_EXTOPQG, /* 698 */
-  COMMAND_ASIN, /* 699 */
-  COMMAND_FUNCTION, /* 700 */
-  COMMAND_EXTOPJK, /* 701 */
-  COMMAND_EXTOPOF, /* 702 */
-  COMMAND_RANDOMIZE, /* 703 */
-  COMMAND_ONERRORRESUMENEXT, /* 704 */
-  COMMAND_EXTOPIP, /* 705 */
-  COMMAND_EXTOPOM, /* 706 */
-  COMMAND_OPTIONF, /* 707 */
-  COMMAND_FLET, /* 708 */
-  COMMAND_EXTOPFL, /* 709 */
-  COMMAND_RESUME, /* 710 */
-  COMMAND_EXTOPGE, /* 711 */
-  COMMAND_EXTOPND, /* 712 */
-  COMMAND_EXTOPGK, /* 713 */
-  COMMAND_EXTOPHK, /* 714 */
-  COMMAND_EXTOPKE, /* 715 */
-  COMMAND_FORTO, /* 716 */
-  COMMAND_LOG10, /* 717 */
-  COMMAND_MKS, /* 718 */
-  COMMAND_RANDOMIZA, /* 719 */
-  COMMAND_EXTOPAG, /* 720 */
-  COMMAND_EXTOPPD, /* 721 */
-  COMMAND_EXTOPNJ, /* 722 */
-  COMMAND_LCM, /* 723 */
-  COMMAND_EXTOPBE, /* 724 */
-  COMMAND_RESUMENEXT, /* 725 */
-  COMMAND_NEXTFILE, /* 726 */
-  COMMAND_EXTERNAL, /* 727 */
-  COMMAND_TRUNCATEF, /* 728 */
-  COMMAND_EXTOPEN, /* 729 */
-  COMMAND_ENDIF, /* 730 */
-  COMMAND_EXTOPBQ, /* 731 */
-  COMMAND_CURDIR, /* 732 */
-  COMMAND_EXTOPEI, /* 733 */
-  COMMAND_ONERRORGOTONULL, /* 734 */
-  COMMAND_LT, /* 735 */
-  COMMAND_FLOCK, /* 736 */
-  COMMAND_MULT, /* 737 */
-  COMMAND_COS, /* 738 */
-  COMMAND_COTAN, /* 739 */
-  COMMAND_EXTOPDD, /* 740 */
-  COMMAND_UNDEF, /* 741 */
-  COMMAND_TAN, /* 742 */
-  COMMAND_EXTOPDK, /* 743 */
-  COMMAND_EXTOPKQ, /* 744 */
-  COMMAND_EXTOPAD, /* 745 */
-  COMMAND_EXTOPFM, /* 746 */
-  COMMAND_POW, /* 747 */
-  COMMAND_EXTOPEP, /* 748 */
-  COMMAND_EXTOPQI, /* 749 */
-  COMMAND_EXTOPQ, /* 750 */
-  COMMAND_SPLITAQ, /* 751 */
-  COMMAND_NOW, /* 752 */
-  COMMAND_EXTOPOK, /* 753 */
-  COMMAND_EXTOPQN, /* 754 */
-  COMMAND_EXTOPGI, /* 755 */
-  COMMAND_SUB, /* 756 */
-  COMMAND_EXTOPML, /* 757 */
-  COMMAND_NEXTI, /* 758 */
-  COMMAND_EXTOPME, /* 759 */
-  COMMAND_EXTOPFD, /* 760 */
-  COMMAND_EXTERNAM, /* 761 */
-  COMMAND_SECANT, /* 762 */
-  COMMAND_FPRINT, /* 763 */
-  COMMAND_EXTOPPK, /* 764 */
-  COMMAND_EXTOPIC, /* 765 */
-  COMMAND_HSIN, /* 766 */
-  COMMAND_FREEFILE, /* 767 */
-  COMMAND_CBYVAL, /* 768 */
-  COMMAND_EXTOPJE, /* 769 */
-  COMMAND_EXTOPAK, /* 770 */
-  COMMAND_EXTOPBD, /* 771 */
-  COMMAND_CVS, /* 772 */
-  COMMAND_EXTOPED, /* 773 */
-  COMMAND_ENDFUNC, /* 774 */
-  COMMAND_EXTOPLQ, /* 775 */
-  COMMAND_WEND, /* 776 */
-  COMMAND_SGN, /* 777 */
-  COMMAND_EXTOPQP, /* 778 */
-  COMMAND_ISEMPTY, /* 779 */
-  COMMAND_LTRIM, /* 780 */
-  COMMAND_EXTOPGO, /* 781 */
-  COMMAND_EXTOPOJ, /* 782 */
-  COMMAND_PAUSE, /* 783 */
-  COMMAND_EXTOPLO, /* 784 */
-  COMMAND_EXTOPMM, /* 785 */
-  COMMAND_CVL, /* 786 */
-  COMMAND_CALL, /* 787 */
-  COMMAND_EXTOPIJ, /* 788 */
-  COMMAND_FCOPY, /* 789 */
-  COMMAND_EXTOPEO, /* 790 */
+  COMMAND_HOSTNAME, /* 671 */
+  COMMAND_CUNDEF, /* 672 */
+  COMMAND_LOCAL2GM, /* 673 */
+  COMMAND_COMMANDF, /* 674 */
+  COMMAND_CLOSE, /* 675 */
+  COMMAND_EXTOPIH, /* 676 */
+  COMMAND_EXTOPEI, /* 677 */
+  COMMAND_SPLIT, /* 678 */
+  COMMAND_EXTOPME, /* 679 */
+  COMMAND_EXTOPDO, /* 680 */
+  COMMAND_KILL, /* 681 */
+  COMMAND_EXTOPFQ, /* 682 */
+  COMMAND_ERROR, /* 683 */
+  COMMAND_END, /* 684 */
+  COMMAND_EXTOPKP, /* 685 */
+  COMMAND_EXTOPJL, /* 686 */
+  COMMAND_ADDDAY, /* 687 */
+  COMMAND_TAN, /* 688 */
+  COMMAND_CHOMP, /* 689 */
+  COMMAND_TYPE, /* 690 */
+  COMMAND_LCM, /* 691 */
+  COMMAND_EXTOPBJ, /* 692 */
+  COMMAND_ENDIF, /* 693 */
+  COMMAND_NAME, /* 694 */
+  COMMAND_EXTOPOM, /* 695 */
+  COMMAND_WAITPID, /* 696 */
+  COMMAND_ISDOUBLE, /* 697 */
+  COMMAND_EXTOPIF, /* 698 */
+  COMMAND_RETURNC, /* 699 */
+  COMMAND_EXTOPQO, /* 700 */
+  COMMAND_COSECANT, /* 701 */
+  COMMAND_FCRYPT, /* 702 */
+  COMMAND_ISUNDEF, /* 703 */
+  COMMAND_LET, /* 704 */
+  COMMAND_EXTOPBN, /* 705 */
+  COMMAND_EXTOPJK, /* 706 */
+  COMMAND_IMAX, /* 707 */
+  COMMAND_RTRIM, /* 708 */
+  COMMAND_EXTOPAD, /* 709 */
+  COMMAND_EXTOPQN, /* 710 */
+  COMMAND_EXTOPDJ, /* 711 */
+  COMMAND_LETC, /* 712 */
+  COMMAND_EXTOPHQ, /* 713 */
+  COMMAND_IF, /* 714 */
+  COMMAND_HEX, /* 715 */
+  COMMAND_EXTOPBO, /* 716 */
+  COMMAND_EXTOPGQ, /* 717 */
+  COMMAND_HSECANT, /* 718 */
+  COMMAND_EXTOPNL, /* 719 */
+  COMMAND_DOUNTIL, /* 720 */
+  COMMAND_MKL, /* 721 */
+  COMMAND_BYVAL, /* 722 */
+  COMMAND_PRINTNL, /* 723 */
+  COMMAND_EXTOPPP, /* 724 */
+  COMMAND_FUNCTION, /* 725 */
+  COMMAND_EXTOPAG, /* 726 */
+  COMMAND_EXTOPAI, /* 727 */
+  COMMAND_INSTR, /* 728 */
+  COMMAND_EXTOPJF, /* 729 */
+  COMMAND_EXTOPNH, /* 730 */
+  COMMAND_FREEFILE, /* 731 */
+  COMMAND_EXTOPIK, /* 732 */
+  COMMAND_SLEEP, /* 733 */
+  COMMAND_EXTOPCP, /* 734 */
+  COMMAND_MULT, /* 735 */
+  COMMAND_EXTOPLM, /* 736 */
+  COMMAND_NEXT, /* 737 */
+  COMMAND_REF, /* 738 */
+  COMMAND_EXTOPIL, /* 739 */
+  COMMAND_EXTOPED, /* 740 */
+  COMMAND_ADDWEEK, /* 741 */
+  COMMAND_MKDIR, /* 742 */
+  COMMAND_EXTOPNF, /* 743 */
+  COMMAND_SPACE, /* 744 */
+  COMMAND_EXTOPJH, /* 745 */
+  COMMAND_EXTOPOQ, /* 746 */
+  COMMAND_ERRORDOLLAR, /* 747 */
+  COMMAND_EXTOPFM, /* 748 */
+  COMMAND_CALL, /* 749 */
+  COMMAND_OCT, /* 750 */
+  COMMAND_EXTOPDD, /* 751 */
+  COMMAND_EXTOPAJ, /* 752 */
+  COMMAND_LOG10, /* 753 */
+  COMMAND_ISDEF, /* 754 */
+  COMMAND_MINUTE, /* 755 */
+  COMMAND_EXTOPJC, /* 756 */
+  COMMAND_MINUS, /* 757 */
+  COMMAND_HSIN, /* 758 */
+  COMMAND_DOWHILE, /* 759 */
+  COMMAND_UNPACK, /* 760 */
+  COMMAND_FORTO, /* 761 */
+  COMMAND_NEXTI, /* 762 */
+  COMMAND_EXTOPAN, /* 763 */
+  COMMAND_EXTOPGM, /* 764 */
+  COMMAND_EXTOPBD, /* 765 */
+  COMMAND_STR, /* 766 */
+  COMMAND_RESUME, /* 767 */
+  COMMAND_EXTOPHM, /* 768 */
+  COMMAND_EXTOPPE, /* 769 */
+  COMMAND_EXTOPAO, /* 770 */
+  COMMAND_EXTOPCE, /* 771 */
+  COMMAND_EXTOPNC, /* 772 */
+  COMMAND_HCOSECANT, /* 773 */
+  COMMAND_ROUND, /* 774 */
+  COMMAND_FCOPY, /* 775 */
+  COMMAND_COS, /* 776 */
+  COMMAND_ENDFUNC, /* 777 */
+  COMMAND_EXTOPQD, /* 778 */
+  COMMAND_CURDIR, /* 779 */
+  COMMAND_EXTOPK, /* 780 */
+  COMMAND_EXTOPBG, /* 781 */
+  COMMAND_PACK, /* 782 */
+  COMMAND_EXTOPBI, /* 783 */
+  COMMAND_IMIN, /* 784 */
+  COMMAND_NEXTFILE, /* 785 */
+  COMMAND_FPRINT, /* 786 */
+  COMMAND_ATAN, /* 787 */
+  COMMAND_EXTOPEJ, /* 788 */
+  COMMAND_FORMATDATE, /* 789 */
+  COMMAND_ICALL, /* 790 */
   COMMAND_INSTRREV, /* 791 */
-  COMMAND_EXTOPOC, /* 792 */
-  COMMAND_EXTOPIN, /* 793 */
-  COMMAND_AND, /* 794 */
-  COMMAND_HOUR, /* 795 */
-  COMMAND_EXTOPIQ, /* 796 */
-  COMMAND_EXTOPBL, /* 797 */
-  COMMAND_GE, /* 798 */
-  COMMAND_EXTOPCE, /* 799 */
-  COMMAND_INPUTFUN, /* 800 */
-  COMMAND_EXTOPCQ, /* 801 */
-  COMMAND_EXTOPLG, /* 802 */
-  COMMAND_LOC, /* 803 */
-  COMMAND_CLOSEDIR, /* 804 */
-  COMMAND_EXTOPO, /* 805 */
-  COMMAND_IDIV, /* 806 */
-  COMMAND_LOF, /* 807 */
-  COMMAND_TXTMF, /* 808 */
-  COMMAND_EXTOPKN, /* 809 */
-  COMMAND_EXTOPGG, /* 810 */
-  COMMAND_STRREVERSE, /* 811 */
-  COMMAND_GMTIME, /* 812 */
-  COMMAND_EXTOPNC, /* 813 */
-  COMMAND_SUBARG, /* 814 */
-  COMMAND_EXTOPHO, /* 815 */
-  COMMAND_EXTOPPG, /* 816 */
-  COMMAND_EXTOPCL, /* 817 */
-  COMMAND_EXTOPCK, /* 818 */
-  COMMAND_EXTOPBF, /* 819 */
-  COMMAND_HSECANT, /* 820 */
-  COMMAND_ADDWEEK, /* 821 */
-  COMMAND_ISDEF, /* 822 */
-  COMMAND_COTAN2, /* 823 */
-  COMMAND_EXTOPDH, /* 824 */
-  COMMAND_MKD, /* 825 */
-  COMMAND_EXTOPCF, /* 826 */
-  COMMAND_EXTOPQQ, /* 827 */
-  COMMAND_CHOMP, /* 828 */
-  COMMAND_EXTOPBK, /* 829 */
-  COMMAND_YDAY, /* 830 */
-  COMMAND_NEXT, /* 831 */
-  COMMAND_LETD, /* 832 */
-  COMMAND_EXTOPF, /* 833 */
-  COMMAND_STR, /* 834 */
-  COMMAND_GM2LOCAL, /* 835 */
-  COMMAND_EXTOPJQ, /* 836 */
-  COMMAND_FCRYPT, /* 837 */
-  COMMAND_EXTOPEL, /* 838 */
-  COMMAND_EVEN, /* 839 */
-  COMMAND_ATN, /* 840 */
-  COMMAND_EXTOPEF, /* 841 */
-  COMMAND_PRINT, /* 842 */
-  COMMAND_FIX, /* 843 */
-  COMMAND_FPRINTNL, /* 844 */
-  COMMAND_ADDHOUR, /* 845 */
-  COMMAND_TRIM, /* 846 */
-  COMMAND_EXTOPFN, /* 847 */
-  COMMAND_EXTOPQF, /* 848 */
-  COMMAND_EXTOPOL, /* 849 */
-  COMMAND_SETJOKER, /* 850 */
-  COMMAND_LETS, /* 851 */
-  COMMAND_ASECANT, /* 852 */
-  COMMAND_EXTOPPP, /* 853 */
-  COMMAND_UNTIL, /* 854 */
-  COMMAND_EXTOPJH, /* 855 */
-  COMMAND_EXTOPPF, /* 856 */
-  COMMAND_EXTOPKM, /* 857 */
-  COMMAND_EXTOPLH, /* 858 */
-  COMMAND_EXTOPMJ, /* 859 */
-  COMMAND_WDAY, /* 860 */
-  COMMAND_ASC, /* 861 */
-  COMMAND_EXTOPOD, /* 862 */
-  COMMAND_LOG, /* 863 */
-  COMMAND_EXTOPGH, /* 864 */
-  COMMAND_WHILE, /* 865 */
-  COMMAND_EXTOPQO, /* 866 */
-  COMMAND_EXTOPAH, /* 867 */
-  COMMAND_EXTOPNI, /* 868 */
-  COMMAND_ACTAN, /* 869 */
-  COMMAND_EXTOPAP, /* 870 */
-  COMMAND_EXTOPCJ, /* 871 */
-  COMMAND_EXTOPPH, /* 872 */
+  COMMAND_EXTOPQG, /* 792 */
+  COMMAND_ODD, /* 793 */
+  COMMAND_SPLITAQ, /* 794 */
+  COMMAND_ADDYEAR, /* 795 */
+  COMMAND_ISREG, /* 796 */
+  COMMAND_EXTOPQI, /* 797 */
+  COMMAND_RANDOMIZA, /* 798 */
+  COMMAND_EXTERNAL, /* 799 */
+  COMMAND_FRAC, /* 800 */
+  COMMAND_EXTOPEN, /* 801 */
+  COMMAND_EXTOPMP, /* 802 */
+  COMMAND_EXTOPIC, /* 803 */
+  COMMAND_EXTOPDI, /* 804 */
+  COMMAND_RESETDIR, /* 805 */
+  COMMAND_EXTOPEO, /* 806 */
+  COMMAND_OPTIONF, /* 807 */
+  COMMAND_EXTOPLQ, /* 808 */
+  COMMAND_CVL, /* 809 */
+  COMMAND_EXTOPKE, /* 810 */
+  COMMAND_EXTOPFC, /* 811 */
+  COMMAND_ENDSUB, /* 812 */
+  COMMAND_EXTOPCN, /* 813 */
+  COMMAND_EXTOPPO, /* 814 */
+  COMMAND_EXTOPLH, /* 815 */
+  COMMAND_ASC, /* 816 */
+  COMMAND_CLOSEDIR, /* 817 */
+  COMMAND_EXTOPJM, /* 818 */
+  COMMAND_FOR, /* 819 */
+  COMMAND_ELSIF, /* 820 */
+  COMMAND_EXTOPAE, /* 821 */
+  COMMAND_EXTOPCO, /* 822 */
+  COMMAND_UNTIL, /* 823 */
+  COMMAND_TXTMI, /* 824 */
+  COMMAND_EXTOPOL, /* 825 */
+  COMMAND_EXTOPPN, /* 826 */
+  COMMAND_EXTOPLF, /* 827 */
+  COMMAND_DELETEF, /* 828 */
+  COMMAND_JOIN, /* 829 */
+  COMMAND_CREATEPROCESSEX, /* 830 */
+  COMMAND_EXTOPHC, /* 831 */
+  COMMAND_SLIF, /* 832 */
+  COMMAND_RIGHT, /* 833 */
+  COMMAND_EXTOPOK, /* 834 */
+  COMMAND_AND, /* 835 */
+  COMMAND_LTRIM, /* 836 */
+  COMMAND_EXTOPPJ, /* 837 */
+  COMMAND_EXTOPGC, /* 838 */
+  COMMAND_CONF, /* 839 */
+  COMMAND_EXTOPMD, /* 840 */
+  COMMAND_EXTOPCJ, /* 841 */
+  COMMAND_EODFUN, /* 842 */
+  COMMAND_EXTOPNM, /* 843 */
+  COMMAND_PLUS, /* 844 */
+  COMMAND_ADDSECOND, /* 845 */
+  COMMAND_REPLACE, /* 846 */
+  COMMAND_EXTOPKN, /* 847 */
+  COMMAND_NE, /* 848 */
+  COMMAND_HCOS, /* 849 */
+  COMMAND_EVEN, /* 850 */
+  COMMAND_EXTOPMG, /* 851 */
+  COMMAND_EXTOPMI, /* 852 */
+  COMMAND_EXTOPEE, /* 853 */
+  COMMAND_EXTOPKO, /* 854 */
+  COMMAND_EXTOPLK, /* 855 */
+  COMMAND_EXTERNAM, /* 856 */
+  COMMAND_EXTOPOF, /* 857 */
+  COMMAND_EXTOPDP, /* 858 */
+  COMMAND_EXTOPIM, /* 859 */
+  COMMAND_EXTOPLL, /* 860 */
+  COMMAND_POW, /* 861 */
+  COMMAND_ACTAN, /* 862 */
+  COMMAND_TRUE, /* 863 */
+  COMMAND_EXTOPQP, /* 864 */
+  COMMAND_POP, /* 865 */
+  COMMAND_SUB, /* 866 */
+  COMMAND_CVS, /* 867 */
+  COMMAND_UNDEF, /* 868 */
+  COMMAND_EXTOPBP, /* 869 */
+  COMMAND_EXTOPOH, /* 870 */
+  COMMAND_FTACCESS, /* 871 */
+  COMMAND_EXTOPKJ, /* 872 */
   NULL
   };
 /*
@@ -5692,529 +5692,529 @@ TO_HEADER:
 #define END_EXEC 873
 */
 char *COMMANDSYMBOLS[]={
-         "EXTOPJP", /* 350 */
-         "JOIN", /* 351 */
-         "HEX", /* 352 */
-         "EXTOPIL", /* 353 */
-         "TXTMI", /* 354 */
-         "EXTOPPC", /* 355 */
-         "EXTOPPL", /* 356 */
-         "EXTOPHF", /* 357 */
-         "ISLONG", /* 358 */
-         "SQR", /* 359 */
-         "DOUNTIL", /* 360 */
-         "ONERRORRESUMELABEL", /* 361 */
-         "EXTOPAE", /* 362 */
-         "OPEN", /* 363 */
-         "MONTH", /* 364 */
-         "VAL", /* 365 */
-         "EXTOPHP", /* 366 */
-         "ISDOUBLE", /* 367 */
-         "COSECANT", /* 368 */
-         "CREATEPROCESS", /* 369 */
-         "EXTOPNO", /* 370 */
-         "EXTOPFI", /* 371 */
-         "MINUTE", /* 372 */
-         "FORMATDATE", /* 373 */
-         "MID", /* 374 */
-         "FTMODIFY", /* 375 */
-         "EXTOPDP", /* 376 */
-         "DELETE", /* 377 */
-         "SPLIT", /* 378 */
-         "CLOSE", /* 379 */
-         "EXTOPIO", /* 380 */
-         "EXTOPHI", /* 381 */
-         "EXTOPOI", /* 382 */
-         "EXTOPDI", /* 383 */
-         "HCOSECANT", /* 384 */
-         "EXTOPKH", /* 385 */
-         "LETC", /* 386 */
-         "EXTOPCN", /* 387 */
-         "ERROR", /* 388 */
-         "MININT", /* 389 */
-         "EXTOPNH", /* 390 */
-         "EXTOPJO", /* 391 */
-         "CERROR", /* 392 */
-         "EXTOPMO", /* 393 */
-         "EXTOPLM", /* 394 */
-         "HCOS", /* 395 */
-         "ISARRAY", /* 396 */
-         "EXTOPFO", /* 397 */
-         "ABS", /* 398 */
-         "RETURNC", /* 399 */
-         "EXTOPBO", /* 400 */
-         "SPACE", /* 401 */
-         "MAX", /* 402 */
-         "CONCATENATE", /* 403 */
-         "SETFILE", /* 404 */
-         "EXTOPEM", /* 405 */
-         "TAN2", /* 406 */
-         "SPLITA", /* 407 */
-         "BINMF", /* 408 */
-         "EXTOPFG", /* 409 */
-         "EXTOPKP", /* 410 */
-         "EXTOPMG", /* 411 */
-         "EXTOPJI", /* 412 */
-         "LOOPUNTIL", /* 413 */
-         "ELSIF", /* 414 */
-         "MOD", /* 415 */
-         "EXTOPHQ", /* 416 */
-         "RLOCK", /* 417 */
-         "WAITPID", /* 418 */
-         "UCASE", /* 419 */
-         "EXTOPLE", /* 420 */
-         "IMIN", /* 421 */
-         "DO", /* 422 */
-         "MKL", /* 423 */
-         "GCD", /* 424 */
-         "EXTOPPJ", /* 425 */
-         "ISDIR", /* 426 */
-         "LINPUT", /* 427 */
-         "EXTOPCC", /* 428 */
-         "FORMAT", /* 429 */
-         "EXTOPDN", /* 430 */
-         "OPTION", /* 431 */
-         "EXTOPPM", /* 432 */
-         "ELSE", /* 433 */
-         "EXTOPCD", /* 434 */
-         "EXTOPHH", /* 435 */
-         "EXTOPEJ", /* 436 */
-         "EXTOPCP", /* 437 */
-         "LEFT", /* 438 */
-         "FOR", /* 439 */
-         "EXTOPJC", /* 440 */
-         "EXTOPHG", /* 441 */
-         "EXTOPFH", /* 442 */
-         "STRING", /* 443 */
-         "EXTOPAJ", /* 444 */
-         "EQ", /* 445 */
-         "ICALL", /* 446 */
-         "KILL", /* 447 */
-         "BINMO", /* 448 */
-         "EXTOPQL", /* 449 */
-         "EXTOPLP", /* 450 */
-         "FTCREATED", /* 451 */
-         "EXTOPMD", /* 452 */
-         "EXTOPGN", /* 453 */
-         "EXITFUNC", /* 454 */
-         "ERRORDOLLAR", /* 455 */
-         "XOR", /* 456 */
-         "EXTOPLN", /* 457 */
-         "SEEK", /* 458 */
-         "EXTOPQM", /* 459 */
-         "EXTOPJN", /* 460 */
-         "EXTOPNN", /* 461 */
-         "TIMEVALUE", /* 462 */
-         "EXTOPHN", /* 463 */
-         "DIV", /* 464 */
-         "EOFFUN", /* 465 */
-         "EXTOPBM", /* 466 */
-         "ISUNDEF", /* 467 */
-         "HCTAN", /* 468 */
-         "EXTOPAM", /* 469 */
-         "EXTOPLF", /* 470 */
-         "SLIF", /* 471 */
-         "SETNOJO", /* 472 */
-         "LET", /* 473 */
-         "ICALLFUN", /* 474 */
-         "EXTOPFF", /* 475 */
-         "EXTOPBG", /* 476 */
-         "EXTOPBN", /* 477 */
-         "CONF", /* 478 */
-         "GT", /* 479 */
-         "ISREG", /* 480 */
-         "EXTOPCM", /* 481 */
-         "EXTOPGJ", /* 482 */
-         "RTRIM", /* 483 */
-         "EXTOPCH", /* 484 */
-         "PI", /* 485 */
-         "LBOUND", /* 486 */
-         "DELETEF", /* 487 */
-         "LETM", /* 488 */
-         "EXTOPGD", /* 489 */
-         "INSTR", /* 490 */
-         "EXTOPII", /* 491 */
-         "EXP", /* 492 */
-         "FORK", /* 493 */
-         "OCT", /* 494 */
-         "EXTOPON", /* 495 */
-         "EXTOPMI", /* 496 */
-         "FILEXISTS", /* 497 */
-         "JOKER", /* 498 */
-         "TRUE", /* 499 */
-         "SEC", /* 500 */
-         "EXTOPIM", /* 501 */
-         "LEN", /* 502 */
-         "EXTOPOG", /* 503 */
-         "ONERRORGOTO", /* 504 */
-         "LIKEOP", /* 505 */
-         "LETP", /* 506 */
-         "GOSUB", /* 507 */
-         "EXTOPCG", /* 508 */
-         "ADDRESSF", /* 509 */
-         "EXTOPNP", /* 510 */
-         "EXTOPDF", /* 511 */
-         "EXTOPOO", /* 512 */
-         "EXTOPPN", /* 513 */
-         "EXTOPNM", /* 514 */
-         "EXTOPGL", /* 515 */
-         "EXTOPNG", /* 516 */
-         "NE", /* 517 */
-         "EXTOPMH", /* 518 */
-         "LOOP", /* 519 */
-         "ADDDAY", /* 520 */
-         "EXTOPGQ", /* 521 */
-         "EXTOPKD", /* 522 */
-         "END", /* 523 */
-         "EXTOPCO", /* 524 */
-         "FILELEN", /* 525 */
-         "EXTOPAC", /* 526 */
-         "OR", /* 527 */
-         "YEAR", /* 528 */
-         "EXTOPAN", /* 529 */
-         "EXTOPDO", /* 530 */
-         "EXTOPBH", /* 531 */
-         "EODFUN", /* 532 */
-         "EXTOPLC", /* 533 */
-         "EXTOPMQ", /* 534 */
-         "EXTOPFP", /* 535 */
-         "EXTOPQD", /* 536 */
-         "EXTOPHD", /* 537 */
-         "EXTOPKJ", /* 538 */
-         "EXTOPLK", /* 539 */
-         "EXTOPBP", /* 540 */
-         "TXTMO", /* 541 */
-         "EXTOPGC", /* 542 */
-         "EXTOPLD", /* 543 */
-         "EXTOPJL", /* 544 */
-         "EXTOPFJ", /* 545 */
-         "EXTOPQE", /* 546 */
-         "EXTOPAO", /* 547 */
-         "RIGHT", /* 548 */
-         "MAXINT", /* 549 */
-         "COMMANDF", /* 550 */
-         "EXTOPNQ", /* 551 */
-         "EXTOPPO", /* 552 */
-         "BIN", /* 553 */
-         "EXTOPOH", /* 554 */
-         "EXTOPHE", /* 555 */
-         "EXTOPNF", /* 556 */
-         "EXTOPQC", /* 557 */
-         "EXTOPID", /* 558 */
-         "EXTOPPE", /* 559 */
-         "EXTOPHJ", /* 560 */
-         "ADDMONTH", /* 561 */
-         "NAME", /* 562 */
-         "EXTOPEC", /* 563 */
-         "ACOS", /* 564 */
-         "SIN", /* 565 */
-         "EXTOPKO", /* 566 */
-         "NOT", /* 567 */
-         "EXTOPAL", /* 568 */
-         "EXTOPNE", /* 569 */
-         "EXTOPGM", /* 570 */
-         "IF", /* 571 */
-         "EXTOPDL", /* 572 */
-         "EXTOPKC", /* 573 */
-         "UNPACK", /* 574 */
-         "EXTOPNL", /* 575 */
-         "LETI", /* 576 */
-         "OPENDIR", /* 577 */
-         "EXITSUB", /* 578 */
-         "IMAX", /* 579 */
-         "LLET", /* 580 */
-         "EXTOPEH", /* 581 */
-         "FRAC", /* 582 */
-         "ISNUMERIC", /* 583 */
-         "EXTOPLL", /* 584 */
-         "EXTOPDQ", /* 585 */
-         "EXTOPQJ", /* 586 */
-         "POWER", /* 587 */
-         "ATAN", /* 588 */
-         "EXTOPIE", /* 589 */
-         "ADDSECOND", /* 590 */
-         "EXTOPK", /* 591 */
-         "CVD", /* 592 */
-         "MKI", /* 593 */
-         "ADDYEAR", /* 594 */
-         "EXTOPMN", /* 595 */
-         "EXTOPL", /* 596 */
-         "RESUMELABEL", /* 597 */
-         "INT", /* 598 */
-         "EXTOPKI", /* 599 */
-         "EXTOPMF", /* 600 */
-         "EXTOPEK", /* 601 */
-         "EXTOPFC", /* 602 */
-         "MIN", /* 603 */
-         "EXTOPAI", /* 604 */
-         "REPEAT", /* 605 */
-         "REPLACE", /* 606 */
-         "EXTOPJJ", /* 607 */
-         "ADDMINUTE", /* 608 */
-         "GOTO", /* 609 */
-         "EXTOPMK", /* 610 */
-         "EXTOPFQ", /* 611 */
-         "EXTOPHL", /* 612 */
-         "HTAN", /* 613 */
-         "LOOPWHILE", /* 614 */
-         "EXTOPHC", /* 615 */
-         "EXTOPOE", /* 616 */
-         "EXTOPOP", /* 617 */
-         "EXTOPFK", /* 618 */
-         "EXTOPEQ", /* 619 */
-         "EXTOPKL", /* 620 */
-         "EXTOPBJ", /* 621 */
-         "EXTOPKG", /* 622 */
-         "CVI", /* 623 */
-         "CUNDEF", /* 624 */
-         "EXTOPIF", /* 625 */
-         "PRINTNL", /* 626 */
-         "MINUS", /* 627 */
-         "DOWHILE", /* 628 */
-         "FORSTEP", /* 629 */
-         "UBOUND", /* 630 */
-         "EXTOPGF", /* 631 */
-         "EXTOPIK", /* 632 */
-         "DAY", /* 633 */
-         "REF", /* 634 */
-         "SLEEP", /* 635 */
-         "HOSTNAME", /* 636 */
-         "ROUND", /* 637 */
-         "EXTOPKK", /* 638 */
-         "LE", /* 639 */
-         "EXTOPPI", /* 640 */
-         "EXTOPDJ", /* 641 */
-         "EXTOPMP", /* 642 */
-         "PLUS", /* 643 */
-         "CHR", /* 644 */
-         "FOWNER", /* 645 */
-         "FALSE", /* 646 */
-         "ENVIRON", /* 647 */
-         "EXTOPDM", /* 648 */
-         "LCASE", /* 649 */
-         "ODD", /* 650 */
-         "RESETDIR", /* 651 */
-         "EXTOPIH", /* 652 */
-         "POP", /* 653 */
-         "EXTOPBC", /* 654 */
-         "EXTOPKF", /* 655 */
-         "SETWILD", /* 656 */
-         "ENDSUB", /* 657 */
-         "REWIND", /* 658 */
-         "EXTOPAF", /* 659 */
-         "EXTOPPQ", /* 660 */
-         "EXTOPJM", /* 661 */
-         "EXTOPLI", /* 662 */
-         "BINMI", /* 663 */
-         "EXTOPEE", /* 664 */
-         "EXTOPJD", /* 665 */
-         "EXTOPAQ", /* 666 */
-         "EXTOPJG", /* 667 */
-         "SWAP", /* 668 */
-         "EXTOPQK", /* 669 */
+         "ONERRORGOTO", /* 350 */
+         "SETNOJO", /* 351 */
+         "STOP", /* 352 */
+         "EXTOPID", /* 353 */
+         "EXTOPL", /* 354 */
+         "ISLONG", /* 355 */
+         "DELETE", /* 356 */
+         "STRING", /* 357 */
+         "EXTOPEL", /* 358 */
+         "EXTOPAF", /* 359 */
+         "RND", /* 360 */
+         "EXTOPJI", /* 361 */
+         "EXTOPGP", /* 362 */
+         "EXTOPJG", /* 363 */
+         "GT", /* 364 */
+         "EXTOPHP", /* 365 */
+         "MAX", /* 366 */
+         "SPLITA", /* 367 */
+         "EXTOPAH", /* 368 */
+         "SGN", /* 369 */
+         "XOR", /* 370 */
+         "EXTOPEK", /* 371 */
+         "EXTOPFP", /* 372 */
+         "EXTOPNI", /* 373 */
+         "EXTOPLE", /* 374 */
+         "EXTOPKQ", /* 375 */
+         "EXTOPNG", /* 376 */
+         "FOWNER", /* 377 */
+         "BINMF", /* 378 */
+         "EXTOPOE", /* 379 */
+         "NOW", /* 380 */
+         "EXTOPAL", /* 381 */
+         "ADDMINUTE", /* 382 */
+         "CVI", /* 383 */
+         "EXTOPBC", /* 384 */
+         "EXTOPEF", /* 385 */
+         "EXTOPQC", /* 386 */
+         "EXTOPMM", /* 387 */
+         "POWER", /* 388 */
+         "EXTOPND", /* 389 */
+         "EXTOPII", /* 390 */
+         "RESUMELABEL", /* 391 */
+         "EXTOPDC", /* 392 */
+         "EXTOPIG", /* 393 */
+         "EXTOPEH", /* 394 */
+         "MKD", /* 395 */
+         "ICALLFUN", /* 396 */
+         "EXTOPPQ", /* 397 */
+         "EXTOPJD", /* 398 */
+         "EXTOPCQ", /* 399 */
+         "EXTOPAK", /* 400 */
+         "EXTOPO", /* 401 */
+         "GOTO", /* 402 */
+         "EXTOPCH", /* 403 */
+         "EXTOPNP", /* 404 */
+         "EXTOPFI", /* 405 */
+         "EXTOPFG", /* 406 */
+         "EXTOPLN", /* 407 */
+         "EXTOPEQ", /* 408 */
+         "EXTOPLO", /* 409 */
+         "ADDMONTH", /* 410 */
+         "EXTOPPH", /* 411 */
+         "EXTOPKK", /* 412 */
+         "MAXINT", /* 413 */
+         "FORMAT", /* 414 */
+         "EXTOPGG", /* 415 */
+         "EXTOPJP", /* 416 */
+         "EXTOPKL", /* 417 */
+         "EXTOPGI", /* 418 */
+         "TXTMO", /* 419 */
+         "EXTOPHG", /* 420 */
+         "FLET", /* 421 */
+         "ISSTRING", /* 422 */
+         "EXTOPCF", /* 423 */
+         "EXTOPHI", /* 424 */
+         "ISDIR", /* 425 */
+         "LIKEOP", /* 426 */
+         "EXTOPPF", /* 427 */
+         "LT", /* 428 */
+         "INT", /* 429 */
+         "LOG", /* 430 */
+         "EXTOPLJ", /* 431 */
+         "EXTOPOJ", /* 432 */
+         "EXTOPBM", /* 433 */
+         "FPRINTNL", /* 434 */
+         "ADDRESSF", /* 435 */
+         "EXTOPGD", /* 436 */
+         "EXTOPHD", /* 437 */
+         "EXTOPKH", /* 438 */
+         "EXTOPPK", /* 439 */
+         "EXTOPIP", /* 440 */
+         "EXTOPCK", /* 441 */
+         "EXTOPAQ", /* 442 */
+         "OPTION", /* 443 */
+         "LETM", /* 444 */
+         "OR", /* 445 */
+         "WDAY", /* 446 */
+         "EXTOPMC", /* 447 */
+         "EXTOPQM", /* 448 */
+         "EXTOPOO", /* 449 */
+         "TRUNCATEF", /* 450 */
+         "STRREVERSE", /* 451 */
+         "SWAP", /* 452 */
+         "EXTOPKF", /* 453 */
+         "EXTOPFD", /* 454 */
+         "CERROR", /* 455 */
+         "EXTOPCL", /* 456 */
+         "SEEK", /* 457 */
+         "EXTOPDM", /* 458 */
+         "PAUSE", /* 459 */
+         "TAN2", /* 460 */
+         "EXTOPON", /* 461 */
+         "EXTOPPL", /* 462 */
+         "FTCREATED", /* 463 */
+         "ASECANT", /* 464 */
+         "EXTOPLD", /* 465 */
+         "EXTOPEM", /* 466 */
+         "HTAN", /* 467 */
+         "EXTOPMF", /* 468 */
+         "EXTOPOG", /* 469 */
+         "EXTOPOI", /* 470 */
+         "CBYVAL", /* 471 */
+         "GMTIME", /* 472 */
+         "HOUR", /* 473 */
+         "LE", /* 474 */
+         "EXTOPKC", /* 475 */
+         "SETJOKER", /* 476 */
+         "WEND", /* 477 */
+         "ABS", /* 478 */
+         "LETS", /* 479 */
+         "EXTOPIE", /* 480 */
+         "EXTOPMH", /* 481 */
+         "CREATEPROCESS", /* 482 */
+         "FILELEN", /* 483 */
+         "EXTOPHN", /* 484 */
+         "BINMO", /* 485 */
+         "EXTOPQQ", /* 486 */
+         "RESUMENEXT", /* 487 */
+         "SUBARG", /* 488 */
+         "EXTOPGN", /* 489 */
+         "EXTOPJE", /* 490 */
+         "EXTOPAM", /* 491 */
+         "FALSE", /* 492 */
+         "ENVIRON", /* 493 */
+         "CONCATENATE", /* 494 */
+         "ISARRAY", /* 495 */
+         "EXTOPML", /* 496 */
+         "EXTOPHO", /* 497 */
+         "MID", /* 498 */
+         "REWIND", /* 499 */
+         "EXTOPFJ", /* 500 */
+         "EXTOPGO", /* 501 */
+         "DAY", /* 502 */
+         "COTAN", /* 503 */
+         "LETP", /* 504 */
+         "LBOUND", /* 505 */
+         "EXTOPBQ", /* 506 */
+         "ASIN", /* 507 */
+         "EXTOPLI", /* 508 */
+         "EXTOPCC", /* 509 */
+         "EXTOPNE", /* 510 */
+         "FIX", /* 511 */
+         "LETI", /* 512 */
+         "EXTOPLG", /* 513 */
+         "EXTOPFN", /* 514 */
+         "EXTOPMK", /* 515 */
+         "MOD", /* 516 */
+         "MININT", /* 517 */
+         "LEN", /* 518 */
+         "WHILE", /* 519 */
+         "FORSTEP", /* 520 */
+         "EXTOPHJ", /* 521 */
+         "FORK", /* 522 */
+         "SIN", /* 523 */
+         "EXTOPDQ", /* 524 */
+         "EXTOPFO", /* 525 */
+         "ACOSECANT", /* 526 */
+         "PRINT", /* 527 */
+         "EXTOPGJ", /* 528 */
+         "IDIV", /* 529 */
+         "EXTOPPC", /* 530 */
+         "ELSE", /* 531 */
+         "EXTOPOD", /* 532 */
+         "MONTH", /* 533 */
+         "EXTOPBF", /* 534 */
+         "EXTOPEC", /* 535 */
+         "EXTOPDH", /* 536 */
+         "GE", /* 537 */
+         "GM2LOCAL", /* 538 */
+         "EXTOPIN", /* 539 */
+         "ACOS", /* 540 */
+         "EXTOPIO", /* 541 */
+         "TIMEVALUE", /* 542 */
+         "EXTOPQF", /* 543 */
+         "GCD", /* 544 */
+         "OPEN", /* 545 */
+         "LLET", /* 546 */
+         "EXTOPKM", /* 547 */
+         "ONERRORRESUMENEXT", /* 548 */
+         "TXTMF", /* 549 */
+         "HCTAN", /* 550 */
+         "INPUTFUN", /* 551 */
+         "LEFT", /* 552 */
+         "EXTOPDF", /* 553 */
+         "EXTOPOP", /* 554 */
+         "EXTOPBH", /* 555 */
+         "EOFFUN", /* 556 */
+         "EXTOPQH", /* 557 */
+         "LOOP", /* 558 */
+         "YDAY", /* 559 */
+         "EQ", /* 560 */
+         "TRIM", /* 561 */
+         "EXTOPIJ", /* 562 */
+         "SQR", /* 563 */
+         "EXTOPBL", /* 564 */
+         "EXTOPNO", /* 565 */
+         "EXTOPAC", /* 566 */
+         "CHR", /* 567 */
+         "EXTOPMQ", /* 568 */
+         "EXTOPJJ", /* 569 */
+         "EXTOPLP", /* 570 */
+         "CVD", /* 571 */
+         "OPENDIR", /* 572 */
+         "EXTOPFE", /* 573 */
+         "MIN", /* 574 */
+         "EXTOPDK", /* 575 */
+         "EXTOPNN", /* 576 */
+         "EXTOPQL", /* 577 */
+         "LCASE", /* 578 */
+         "COTAN2", /* 579 */
+         "FUNCTIONARG", /* 580 */
+         "EXTOPQK", /* 581 */
+         "EXTOPNJ", /* 582 */
+         "EXTOPCM", /* 583 */
+         "EXTOPDL", /* 584 */
+         "EXTOPJO", /* 585 */
+         "ISNUMERIC", /* 586 */
+         "EXTOPF", /* 587 */
+         "LOF", /* 588 */
+         "BIN", /* 589 */
+         "ISEMPTY", /* 590 */
+         "EXTOPPM", /* 591 */
+         "MKI", /* 592 */
+         "EXTOPHE", /* 593 */
+         "LINPUTF", /* 594 */
+         "EXTOPGE", /* 595 */
+         "EXTOPBK", /* 596 */
+         "EXTOPJN", /* 597 */
+         "REPEAT", /* 598 */
+         "EXITSUB", /* 599 */
+         "LOC", /* 600 */
+         "EXTOPQE", /* 601 */
+         "UCASE", /* 602 */
+         "EXTOPCD", /* 603 */
+         "EXTOPMJ", /* 604 */
+         "EXTOPJQ", /* 605 */
+         "FTMODIFY", /* 606 */
+         "EXTOPFL", /* 607 */
+         "RANDOMIZE", /* 608 */
+         "EXTOPOC", /* 609 */
+         "EXTOPPD", /* 610 */
+         "EXTOPHK", /* 611 */
+         "EXTOPGK", /* 612 */
+         "EXTOPBE", /* 613 */
+         "EXTOPNQ", /* 614 */
+         "EXTOPKG", /* 615 */
+         "SEC", /* 616 */
+         "EXTOPGL", /* 617 */
+         "RLOCK", /* 618 */
+         "DO", /* 619 */
+         "EXTOPKI", /* 620 */
+         "FLOCK", /* 621 */
+         "EXTOPHL", /* 622 */
+         "EXTOPMO", /* 623 */
+         "CHDIR", /* 624 */
+         "LOOPWHILE", /* 625 */
+         "ONERRORRESUMELABEL", /* 626 */
+         "EXTOPFK", /* 627 */
+         "EXTOPMN", /* 628 */
+         "EXTOPQ", /* 629 */
+         "EXTOPEP", /* 630 */
+         "GOSUB", /* 631 */
+         "VAL", /* 632 */
+         "YEAR", /* 633 */
+         "EXTOPKD", /* 634 */
+         "EXTOPHH", /* 635 */
+         "ONERRORGOTONULL", /* 636 */
+         "EXTOPFF", /* 637 */
+         "PI", /* 638 */
+         "MKS", /* 639 */
+         "EXTOPGH", /* 640 */
+         "NOT", /* 641 */
+         "LINPUT", /* 642 */
+         "ATN", /* 643 */
+         "EXITFUNC", /* 644 */
+         "FILEXISTS", /* 645 */
+         "EXTOPFH", /* 646 */
+         "DIV", /* 647 */
+         "LOOPUNTIL", /* 648 */
+         "LETD", /* 649 */
+         "EXTOPGF", /* 650 */
+         "EXTOPLC", /* 651 */
+         "EXTOPCI", /* 652 */
+         "EXTOPHF", /* 653 */
+         "RESET", /* 654 */
+         "EXTOPCG", /* 655 */
+         "EXTOPPG", /* 656 */
+         "SETWILD", /* 657 */
+         "SETFILE", /* 658 */
+         "EXTOPPI", /* 659 */
+         "EXTOPIQ", /* 660 */
+         "ADDHOUR", /* 661 */
+         "BINMI", /* 662 */
+         "EXTOPAP", /* 663 */
+         "JOKER", /* 664 */
+         "SECANT", /* 665 */
+         "EXTOPQJ", /* 666 */
+         "UBOUND", /* 667 */
+         "EXP", /* 668 */
+         "EXTOPDN", /* 669 */
          "EXTOPNK", /* 670 */
-         "TYPE", /* 671 */
-         "LOCAL2GM", /* 672 */
-         "EXTOPMC", /* 673 */
-         "RESET", /* 674 */
-         "FTACCESS", /* 675 */
-         "EXTOPCI", /* 676 */
-         "EXTOPHM", /* 677 */
-         "LINPUTF", /* 678 */
-         "ISSTRING", /* 679 */
-         "EXTOPFE", /* 680 */
-         "RND", /* 681 */
-         "FUNCTIONARG", /* 682 */
-         "EXTOPOQ", /* 683 */
-         "STOP", /* 684 */
-         "EXTOPJF", /* 685 */
-         "CREATEPROCESSEX", /* 686 */
-         "PACK", /* 687 */
-         "EXTOPBI", /* 688 */
-         "EXTOPLJ", /* 689 */
-         "BYVAL", /* 690 */
-         "EXTOPIG", /* 691 */
-         "EXTOPQH", /* 692 */
-         "MKDIR", /* 693 */
-         "ACOSECANT", /* 694 */
-         "EXTOPGP", /* 695 */
-         "CHDIR", /* 696 */
-         "EXTOPDC", /* 697 */
-         "EXTOPQG", /* 698 */
-         "ASIN", /* 699 */
-         "FUNCTION", /* 700 */
-         "EXTOPJK", /* 701 */
-         "EXTOPOF", /* 702 */
-         "RANDOMIZE", /* 703 */
-         "ONERRORRESUMENEXT", /* 704 */
-         "EXTOPIP", /* 705 */
-         "EXTOPOM", /* 706 */
-         "OPTIONF", /* 707 */
-         "FLET", /* 708 */
-         "EXTOPFL", /* 709 */
-         "RESUME", /* 710 */
-         "EXTOPGE", /* 711 */
-         "EXTOPND", /* 712 */
-         "EXTOPGK", /* 713 */
-         "EXTOPHK", /* 714 */
-         "EXTOPKE", /* 715 */
-         "FORTO", /* 716 */
-         "LOG10", /* 717 */
-         "MKS", /* 718 */
-         "RANDOMIZA", /* 719 */
-         "EXTOPAG", /* 720 */
-         "EXTOPPD", /* 721 */
-         "EXTOPNJ", /* 722 */
-         "LCM", /* 723 */
-         "EXTOPBE", /* 724 */
-         "RESUMENEXT", /* 725 */
-         "NEXTFILE", /* 726 */
-         "EXTERNAL", /* 727 */
-         "TRUNCATEF", /* 728 */
-         "EXTOPEN", /* 729 */
-         "ENDIF", /* 730 */
-         "EXTOPBQ", /* 731 */
-         "CURDIR", /* 732 */
-         "EXTOPEI", /* 733 */
-         "ONERRORGOTONULL", /* 734 */
-         "LT", /* 735 */
-         "FLOCK", /* 736 */
-         "MULT", /* 737 */
-         "COS", /* 738 */
-         "COTAN", /* 739 */
-         "EXTOPDD", /* 740 */
-         "UNDEF", /* 741 */
-         "TAN", /* 742 */
-         "EXTOPDK", /* 743 */
-         "EXTOPKQ", /* 744 */
-         "EXTOPAD", /* 745 */
-         "EXTOPFM", /* 746 */
-         "POW", /* 747 */
-         "EXTOPEP", /* 748 */
-         "EXTOPQI", /* 749 */
-         "EXTOPQ", /* 750 */
-         "SPLITAQ", /* 751 */
-         "NOW", /* 752 */
-         "EXTOPOK", /* 753 */
-         "EXTOPQN", /* 754 */
-         "EXTOPGI", /* 755 */
-         "SUB", /* 756 */
-         "EXTOPML", /* 757 */
-         "NEXTI", /* 758 */
-         "EXTOPME", /* 759 */
-         "EXTOPFD", /* 760 */
-         "EXTERNAM", /* 761 */
-         "SECANT", /* 762 */
-         "FPRINT", /* 763 */
-         "EXTOPPK", /* 764 */
-         "EXTOPIC", /* 765 */
-         "HSIN", /* 766 */
-         "FREEFILE", /* 767 */
-         "CBYVAL", /* 768 */
-         "EXTOPJE", /* 769 */
-         "EXTOPAK", /* 770 */
-         "EXTOPBD", /* 771 */
-         "CVS", /* 772 */
-         "EXTOPED", /* 773 */
-         "ENDFUNC", /* 774 */
-         "EXTOPLQ", /* 775 */
-         "WEND", /* 776 */
-         "SGN", /* 777 */
-         "EXTOPQP", /* 778 */
-         "ISEMPTY", /* 779 */
-         "LTRIM", /* 780 */
-         "EXTOPGO", /* 781 */
-         "EXTOPOJ", /* 782 */
-         "PAUSE", /* 783 */
-         "EXTOPLO", /* 784 */
-         "EXTOPMM", /* 785 */
-         "CVL", /* 786 */
-         "CALL", /* 787 */
-         "EXTOPIJ", /* 788 */
-         "FCOPY", /* 789 */
-         "EXTOPEO", /* 790 */
+         "HOSTNAME", /* 671 */
+         "CUNDEF", /* 672 */
+         "LOCAL2GM", /* 673 */
+         "COMMANDF", /* 674 */
+         "CLOSE", /* 675 */
+         "EXTOPIH", /* 676 */
+         "EXTOPEI", /* 677 */
+         "SPLIT", /* 678 */
+         "EXTOPME", /* 679 */
+         "EXTOPDO", /* 680 */
+         "KILL", /* 681 */
+         "EXTOPFQ", /* 682 */
+         "ERROR", /* 683 */
+         "END", /* 684 */
+         "EXTOPKP", /* 685 */
+         "EXTOPJL", /* 686 */
+         "ADDDAY", /* 687 */
+         "TAN", /* 688 */
+         "CHOMP", /* 689 */
+         "TYPE", /* 690 */
+         "LCM", /* 691 */
+         "EXTOPBJ", /* 692 */
+         "ENDIF", /* 693 */
+         "NAME", /* 694 */
+         "EXTOPOM", /* 695 */
+         "WAITPID", /* 696 */
+         "ISDOUBLE", /* 697 */
+         "EXTOPIF", /* 698 */
+         "RETURNC", /* 699 */
+         "EXTOPQO", /* 700 */
+         "COSECANT", /* 701 */
+         "FCRYPT", /* 702 */
+         "ISUNDEF", /* 703 */
+         "LET", /* 704 */
+         "EXTOPBN", /* 705 */
+         "EXTOPJK", /* 706 */
+         "IMAX", /* 707 */
+         "RTRIM", /* 708 */
+         "EXTOPAD", /* 709 */
+         "EXTOPQN", /* 710 */
+         "EXTOPDJ", /* 711 */
+         "LETC", /* 712 */
+         "EXTOPHQ", /* 713 */
+         "IF", /* 714 */
+         "HEX", /* 715 */
+         "EXTOPBO", /* 716 */
+         "EXTOPGQ", /* 717 */
+         "HSECANT", /* 718 */
+         "EXTOPNL", /* 719 */
+         "DOUNTIL", /* 720 */
+         "MKL", /* 721 */
+         "BYVAL", /* 722 */
+         "PRINTNL", /* 723 */
+         "EXTOPPP", /* 724 */
+         "FUNCTION", /* 725 */
+         "EXTOPAG", /* 726 */
+         "EXTOPAI", /* 727 */
+         "INSTR", /* 728 */
+         "EXTOPJF", /* 729 */
+         "EXTOPNH", /* 730 */
+         "FREEFILE", /* 731 */
+         "EXTOPIK", /* 732 */
+         "SLEEP", /* 733 */
+         "EXTOPCP", /* 734 */
+         "MULT", /* 735 */
+         "EXTOPLM", /* 736 */
+         "NEXT", /* 737 */
+         "REF", /* 738 */
+         "EXTOPIL", /* 739 */
+         "EXTOPED", /* 740 */
+         "ADDWEEK", /* 741 */
+         "MKDIR", /* 742 */
+         "EXTOPNF", /* 743 */
+         "SPACE", /* 744 */
+         "EXTOPJH", /* 745 */
+         "EXTOPOQ", /* 746 */
+         "ERRORDOLLAR", /* 747 */
+         "EXTOPFM", /* 748 */
+         "CALL", /* 749 */
+         "OCT", /* 750 */
+         "EXTOPDD", /* 751 */
+         "EXTOPAJ", /* 752 */
+         "LOG10", /* 753 */
+         "ISDEF", /* 754 */
+         "MINUTE", /* 755 */
+         "EXTOPJC", /* 756 */
+         "MINUS", /* 757 */
+         "HSIN", /* 758 */
+         "DOWHILE", /* 759 */
+         "UNPACK", /* 760 */
+         "FORTO", /* 761 */
+         "NEXTI", /* 762 */
+         "EXTOPAN", /* 763 */
+         "EXTOPGM", /* 764 */
+         "EXTOPBD", /* 765 */
+         "STR", /* 766 */
+         "RESUME", /* 767 */
+         "EXTOPHM", /* 768 */
+         "EXTOPPE", /* 769 */
+         "EXTOPAO", /* 770 */
+         "EXTOPCE", /* 771 */
+         "EXTOPNC", /* 772 */
+         "HCOSECANT", /* 773 */
+         "ROUND", /* 774 */
+         "FCOPY", /* 775 */
+         "COS", /* 776 */
+         "ENDFUNC", /* 777 */
+         "EXTOPQD", /* 778 */
+         "CURDIR", /* 779 */
+         "EXTOPK", /* 780 */
+         "EXTOPBG", /* 781 */
+         "PACK", /* 782 */
+         "EXTOPBI", /* 783 */
+         "IMIN", /* 784 */
+         "NEXTFILE", /* 785 */
+         "FPRINT", /* 786 */
+         "ATAN", /* 787 */
+         "EXTOPEJ", /* 788 */
+         "FORMATDATE", /* 789 */
+         "ICALL", /* 790 */
          "INSTRREV", /* 791 */
-         "EXTOPOC", /* 792 */
-         "EXTOPIN", /* 793 */
-         "AND", /* 794 */
-         "HOUR", /* 795 */
-         "EXTOPIQ", /* 796 */
-         "EXTOPBL", /* 797 */
-         "GE", /* 798 */
-         "EXTOPCE", /* 799 */
-         "INPUTFUN", /* 800 */
-         "EXTOPCQ", /* 801 */
-         "EXTOPLG", /* 802 */
-         "LOC", /* 803 */
-         "CLOSEDIR", /* 804 */
-         "EXTOPO", /* 805 */
-         "IDIV", /* 806 */
-         "LOF", /* 807 */
-         "TXTMF", /* 808 */
-         "EXTOPKN", /* 809 */
-         "EXTOPGG", /* 810 */
-         "STRREVERSE", /* 811 */
-         "GMTIME", /* 812 */
-         "EXTOPNC", /* 813 */
-         "SUBARG", /* 814 */
-         "EXTOPHO", /* 815 */
-         "EXTOPPG", /* 816 */
-         "EXTOPCL", /* 817 */
-         "EXTOPCK", /* 818 */
-         "EXTOPBF", /* 819 */
-         "HSECANT", /* 820 */
-         "ADDWEEK", /* 821 */
-         "ISDEF", /* 822 */
-         "COTAN2", /* 823 */
-         "EXTOPDH", /* 824 */
-         "MKD", /* 825 */
-         "EXTOPCF", /* 826 */
-         "EXTOPQQ", /* 827 */
-         "CHOMP", /* 828 */
-         "EXTOPBK", /* 829 */
-         "YDAY", /* 830 */
-         "NEXT", /* 831 */
-         "LETD", /* 832 */
-         "EXTOPF", /* 833 */
-         "STR", /* 834 */
-         "GM2LOCAL", /* 835 */
-         "EXTOPJQ", /* 836 */
-         "FCRYPT", /* 837 */
-         "EXTOPEL", /* 838 */
-         "EVEN", /* 839 */
-         "ATN", /* 840 */
-         "EXTOPEF", /* 841 */
-         "PRINT", /* 842 */
-         "FIX", /* 843 */
-         "FPRINTNL", /* 844 */
-         "ADDHOUR", /* 845 */
-         "TRIM", /* 846 */
-         "EXTOPFN", /* 847 */
-         "EXTOPQF", /* 848 */
-         "EXTOPOL", /* 849 */
-         "SETJOKER", /* 850 */
-         "LETS", /* 851 */
-         "ASECANT", /* 852 */
-         "EXTOPPP", /* 853 */
-         "UNTIL", /* 854 */
-         "EXTOPJH", /* 855 */
-         "EXTOPPF", /* 856 */
-         "EXTOPKM", /* 857 */
-         "EXTOPLH", /* 858 */
-         "EXTOPMJ", /* 859 */
-         "WDAY", /* 860 */
-         "ASC", /* 861 */
-         "EXTOPOD", /* 862 */
-         "LOG", /* 863 */
-         "EXTOPGH", /* 864 */
-         "WHILE", /* 865 */
-         "EXTOPQO", /* 866 */
-         "EXTOPAH", /* 867 */
-         "EXTOPNI", /* 868 */
-         "ACTAN", /* 869 */
-         "EXTOPAP", /* 870 */
-         "EXTOPCJ", /* 871 */
-         "EXTOPPH", /* 872 */
+         "EXTOPQG", /* 792 */
+         "ODD", /* 793 */
+         "SPLITAQ", /* 794 */
+         "ADDYEAR", /* 795 */
+         "ISREG", /* 796 */
+         "EXTOPQI", /* 797 */
+         "RANDOMIZA", /* 798 */
+         "EXTERNAL", /* 799 */
+         "FRAC", /* 800 */
+         "EXTOPEN", /* 801 */
+         "EXTOPMP", /* 802 */
+         "EXTOPIC", /* 803 */
+         "EXTOPDI", /* 804 */
+         "RESETDIR", /* 805 */
+         "EXTOPEO", /* 806 */
+         "OPTIONF", /* 807 */
+         "EXTOPLQ", /* 808 */
+         "CVL", /* 809 */
+         "EXTOPKE", /* 810 */
+         "EXTOPFC", /* 811 */
+         "ENDSUB", /* 812 */
+         "EXTOPCN", /* 813 */
+         "EXTOPPO", /* 814 */
+         "EXTOPLH", /* 815 */
+         "ASC", /* 816 */
+         "CLOSEDIR", /* 817 */
+         "EXTOPJM", /* 818 */
+         "FOR", /* 819 */
+         "ELSIF", /* 820 */
+         "EXTOPAE", /* 821 */
+         "EXTOPCO", /* 822 */
+         "UNTIL", /* 823 */
+         "TXTMI", /* 824 */
+         "EXTOPOL", /* 825 */
+         "EXTOPPN", /* 826 */
+         "EXTOPLF", /* 827 */
+         "DELETEF", /* 828 */
+         "JOIN", /* 829 */
+         "CREATEPROCESSEX", /* 830 */
+         "EXTOPHC", /* 831 */
+         "SLIF", /* 832 */
+         "RIGHT", /* 833 */
+         "EXTOPOK", /* 834 */
+         "AND", /* 835 */
+         "LTRIM", /* 836 */
+         "EXTOPPJ", /* 837 */
+         "EXTOPGC", /* 838 */
+         "CONF", /* 839 */
+         "EXTOPMD", /* 840 */
+         "EXTOPCJ", /* 841 */
+         "EODFUN", /* 842 */
+         "EXTOPNM", /* 843 */
+         "PLUS", /* 844 */
+         "ADDSECOND", /* 845 */
+         "REPLACE", /* 846 */
+         "EXTOPKN", /* 847 */
+         "NE", /* 848 */
+         "HCOS", /* 849 */
+         "EVEN", /* 850 */
+         "EXTOPMG", /* 851 */
+         "EXTOPMI", /* 852 */
+         "EXTOPEE", /* 853 */
+         "EXTOPKO", /* 854 */
+         "EXTOPLK", /* 855 */
+         "EXTERNAM", /* 856 */
+         "EXTOPOF", /* 857 */
+         "EXTOPDP", /* 858 */
+         "EXTOPIM", /* 859 */
+         "EXTOPLL", /* 860 */
+         "POW", /* 861 */
+         "ACTAN", /* 862 */
+         "TRUE", /* 863 */
+         "EXTOPQP", /* 864 */
+         "POP", /* 865 */
+         "SUB", /* 866 */
+         "CVS", /* 867 */
+         "UNDEF", /* 868 */
+         "EXTOPBP", /* 869 */
+         "EXTOPOH", /* 870 */
+         "FTACCESS", /* 871 */
+         "EXTOPKJ", /* 872 */
   NULL
   };
 PredLConst PREDLCONSTS[]={

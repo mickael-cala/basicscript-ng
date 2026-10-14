@@ -1,3 +1,3 @@
-cd extensions/zlib
+cd extensions/re
 make
 cd ../..

@@ -1,0 +1,7 @@
+This program tests different string comparisions.
+The result should be a lot of 1
+printed. If there is any 0 printed there 
+is an error in the interpreter.
+
+1111111111111111111111111111
+test ended

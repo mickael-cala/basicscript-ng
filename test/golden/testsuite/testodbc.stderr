@@ -1,0 +1,8 @@
+Status: 200 OK
+Content-Type: text/html
+
+<HTML><HEAD>
+<title>Error page, syntax error</title>
+</HEAD><BODY>
+<H1>Error has happened in the code</H1><pre>
+test/scripts/testsuite/testodbc.bas(3): error &H3e:Include file is not found

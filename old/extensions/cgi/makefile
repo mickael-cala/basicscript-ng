@@ -1,28 +1,28 @@
 
 
 
-all : /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/lib/cgi.a /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/dll/cgi.so /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/texi/mod_cgi.texi
+all : /workspace/old/bin/mod/lib/cgi.a /workspace/old/bin/mod/dll/cgi.so /workspace/old/bin/texi/mod_cgi.texi
 
 
 
 
-/Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/lib/cgi.a : /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/obj/cgi/cgi.o /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/obj/cgi/s_interface.o 
-	ar -r /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/lib/cgi.a /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/obj/cgi/cgi.o /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/obj/cgi/s_interface.o  
+/workspace/old/bin/mod/lib/cgi.a : /workspace/old/bin/mod/obj/cgi/cgi.o /workspace/old/bin/mod/obj/cgi/s_interface.o 
+	ar -r /workspace/old/bin/mod/lib/cgi.a /workspace/old/bin/mod/obj/cgi/cgi.o /workspace/old/bin/mod/obj/cgi/s_interface.o  
 
-/Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/dll/cgi.so : /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/obj/cgi/cgi.o /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/obj/cgi/interface.o 
-	ld -shared -Bstatic -o /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/dll/cgi.so /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/obj/cgi/cgi.o /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/obj/cgi/interface.o  
+/workspace/old/bin/mod/dll/cgi.so : /workspace/old/bin/mod/obj/cgi/cgi.o /workspace/old/bin/mod/obj/cgi/interface.o 
+	ld -shared -Bstatic -o /workspace/old/bin/mod/dll/cgi.so /workspace/old/bin/mod/obj/cgi/cgi.o /workspace/old/bin/mod/obj/cgi/interface.o  
 
-/Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/obj/cgi/cgi.o : cgi.c cgi.h 
-	gcc -w -c -o /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/obj/cgi/cgi.o cgi.c
+/workspace/old/bin/mod/obj/cgi/cgi.o : cgi.c cgi.h 
+	gcc -w -c -o /workspace/old/bin/mod/obj/cgi/cgi.o cgi.c
 
-/Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/obj/cgi/interface.o : interface.c cgi.h 
-	gcc -w -c -o /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/obj/cgi/interface.o interface.c
+/workspace/old/bin/mod/obj/cgi/interface.o : interface.c cgi.h 
+	gcc -w -c -o /workspace/old/bin/mod/obj/cgi/interface.o interface.c
 
-/Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/obj/cgi/s_interface.o : interface.c cgi.h 
-	gcc -w -DSTATIC_LINK=1 -c -o /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/mod/obj/cgi/s_interface.o interface.c
+/workspace/old/bin/mod/obj/cgi/s_interface.o : interface.c cgi.h 
+	gcc -w -DSTATIC_LINK=1 -c -o /workspace/old/bin/mod/obj/cgi/s_interface.o interface.c
 
-/Users/verhasp/github/ScriptBasic/ScriptBasic/bin/texi/mod_cgi.texi : manual.texi.jam
-	perl /Users/verhasp/github/ScriptBasic/ScriptBasic/jamal.pl manual.texi.jam /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/texi/mod_cgi.texi
-	perl /Users/verhasp/github/ScriptBasic/ScriptBasic/t2h.pl /Users/verhasp/github/ScriptBasic/ScriptBasic/bin/texi/mod_cgi.texi
+/workspace/old/bin/texi/mod_cgi.texi : manual.texi.jam
+	perl /workspace/old/jamal.pl manual.texi.jam /workspace/old/bin/texi/mod_cgi.texi
+	perl /workspace/old/t2h.pl /workspace/old/bin/texi/mod_cgi.texi
 
 

@@ -1,0 +1,40 @@
+1.
+The local         time is: 2026.10.14 15:36:42
+The Greenich mean time is: 2026.10.14 3:36:42
+Local time is sec from Now():1791992202
+Local time in sec from TimeValue(...)1791992202
+The difference should be zero: 0
+GMT:1791992202=1791992202
+LCT:1791992202=1791992202
+2.
+The local         time is: 2026.10.14 15:36:43
+The Greenich mean time is: 2026.10.14 3:36:43
+Local time is sec from Now():1791992203
+Local time in sec from TimeValue(...)1791992203
+The difference should be zero: 0
+GMT:1791992203=1791992203
+LCT:1791992203=1791992203
+3.
+The local         time is: 2026.10.14 15:36:44
+The Greenich mean time is: 2026.10.14 3:36:44
+Local time is sec from Now():1791992204
+Local time in sec from TimeValue(...)1791992204
+The difference should be zero: 0
+GMT:1791992204=1791992204
+LCT:1791992204=1791992204
+4.
+The local         time is: 2026.10.14 15:36:45
+The Greenich mean time is: 2026.10.14 3:36:45
+Local time is sec from Now():1791992205
+Local time in sec from TimeValue(...)1791992205
+The difference should be zero: 0
+GMT:1791992205=1791992205
+LCT:1791992205=1791992205
+5.
+The local         time is: 2026.10.14 15:36:46
+The Greenich mean time is: 2026.10.14 3:36:46
+Local time is sec from Now():1791992206
+Local time in sec from TimeValue(...)1791992206
+The difference should be zero: 0
+GMT:1791992206=1791992206
+LCT:1791992206=1791992206
