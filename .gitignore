@@ -1,9 +1,9 @@
 # Artefacts de build (ancien et nouveau)
 *.o *.obj *.a *.lib *.so *.dll *.exe
 old/scriba old/scriba.exe
-_b/ build-out/ zig-cache/ .zig-cache/ zig-out/
+_b/ zig-cache/ .zig-cache/ zig-out/
 
-# Fichers générés (régénérables via les outils Perl du dépôt legacy)
+# Fichiers générés (régénérables via les outils Perl du dépôt legacy)
 old/errcodes.h
 old/versioninfo.rc
 

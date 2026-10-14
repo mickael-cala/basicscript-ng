@@ -1,0 +1,856 @@
+[
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "NOARRAY",
+  "define": "COMMAND_ERROR_NOARRAY",
+  "message": "en/Function can not return a whole array"
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "DIV",
+  "define": "COMMAND_ERROR_DIV",
+  "message": "en/Division by zero or other calculation error"
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "UNDEFOP",
+  "define": "COMMAND_ERROR_UNDEFOP",
+  "message": "en/Argument to operator is undefined"
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "BAD_CALL",
+  "define": "COMMAND_ERROR_BAD_CALL",
+  "message": "en/The command or sub was called the wrong way"
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "FEW_ARGS",
+  "define": "COMMAND_ERROR_FEW_ARGS",
+  "message": "en/There are not enough arguments of the module function."
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "ARGUMENT_TYPE",
+  "define": "COMMAND_ERROR_ARGUMENT_TYPE",
+  "message": "en/The argument passed to a module function is not the needed type."
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "ARGUMENT_RANGE",
+  "define": "COMMAND_ERROR_ARGUMENT_RANGE",
+  "message": "en/The argument passed to a module function is out of the accepted range."
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "FILE_READ",
+  "define": "COMMAND_ERROR_FILE_READ",
+  "message": "en/The module experiences difficulties reading the file"
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "FILE_WRITE",
+  "define": "COMMAND_ERROR_FILE_WRITE",
+  "message": "en/The module experiences difficulties writing the file."
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "FILE",
+  "define": "COMMAND_ERROR_FILE",
+  "message": "en/The module experiences handling the file."
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "CIRCULAR",
+  "define": "COMMAND_ERROR_CIRCULAR",
+  "message": "en/There is a circular reference in memory."
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "MODULE_NOT_LOADED",
+  "define": "COMMAND_ERROR_MODULE_NOT_LOADED",
+  "message": "en/The module can not be unloaded, because it was not loaded."
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "PARTIAL_UNLOAD",
+  "define": "COMMAND_ERROR_PARTIAL_UNLOAD",
+  "message": "en/Some modules were active and could not be unloaded."
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "MODULE_ACTIVE",
+  "define": "COMMAND_ERROR_MODULE_ACTIVE",
+  "message": "en/The module can not be unloaded, because it is currently active."
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "MODULE_LOAD",
+  "define": "COMMAND_ERROR_MODULE_LOAD",
+  "message": "en/The requested module can not be loaded."
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "MODULE_FUNCTION",
+  "define": "COMMAND_ERROR_MODULE_FUNCTION",
+  "message": "en/The requested function does not exist in the module."
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "MODULE_INITIALIZE",
+  "define": "COMMAND_ERROR_MODULE_INITIALIZE",
+  "message": "en/The module did not initialize correctly"
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "MODULE_VERSION",
+  "define": "COMMAND_ERROR_MODULE_VERSION",
+  "message": "en/The module was developed for a different version of ScriptBasic."
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "BAD_FILE_NUMBER",
+  "define": "COMMAND_ERROR_BAD_FILE_NUMBER",
+  "message": "en/File number is out of range, it should be between 1 and 512"
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "FILE_NUMBER_IS_USED",
+  "define": "COMMAND_ERROR_FILE_NUMBER_IS_USED",
+  "message": "en/The file number is already used."
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "FILE_CANNOT_BE_OPENED",
+  "define": "COMMAND_ERROR_FILE_CANNOT_BE_OPENED",
+  "message": "en/The file can not be opened."
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "FILE_IS_NOT_OPENED",
+  "define": "COMMAND_ERROR_FILE_IS_NOT_OPENED",
+  "message": "en/The file is not opened."
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "INVALID_LOCK",
+  "define": "COMMAND_ERROR_INVALID_LOCK",
+  "message": "en/The lock type is invalid."
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "PRINT_FAIL",
+  "define": "COMMAND_ERROR_PRINT_FAIL",
+  "message": "en/The print command failed. The file may be locked by another process."
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "MKDIR_FAIL",
+  "define": "COMMAND_ERROR_MKDIR_FAIL",
+  "message": "en/Directory can not be created."
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "DELETE_FAIL",
+  "define": "COMMAND_ERROR_DELETE_FAIL",
+  "message": "en/The directory or file could not be deleted."
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "NOTIMP",
+  "define": "COMMAND_ERROR_NOTIMP",
+  "message": "en/Command is not implemented and no currently loaded extension module defined behaviour for it"
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "INVALID_JOKER",
+  "define": "COMMAND_ERROR_INVALID_JOKER",
+  "message": "en/The character can not be a joker or wild card character."
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "NO_RESUME",
+  "define": "COMMAND_ERROR_NO_RESUME",
+  "message": "en/The code tried to execute a resume while not being in error correction code."
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "BAD_RECORD_LENGTH",
+  "define": "COMMAND_ERROR_BAD_RECORD_LENGTH",
+  "message": "en/The record length is invalid in the open statements (undefined, zero or negative)"
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "RETURN_WITHOUT_GOSUB",
+  "define": "COMMAND_ERROR_RETURN_WITHOUT_GOSUB",
+  "message": "en/The command RETURN can not be executed, because there is no where to return."
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "INVALID_ARGUMENT_FOR_FUNCTION_ADDRESS",
+  "define": "COMMAND_ERROR_INVALID_ARGUMENT_FOR_FUNCTION_ADDRESS",
+  "message": "en/The argument for the function address is invalid."
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "SETFILE_INVALID_ATTRIBUTE",
+  "define": "COMMAND_ERROR_SETFILE_INVALID_ATTRIBUTE",
+  "message": "en/The attribute value or symbol is invalid in the set file command."
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "CHOWN_INVALID_USER",
+  "define": "COMMAND_ERROR_CHOWN_INVALID_USER",
+  "message": "en/The user does not exist."
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "CHOWN_NOT_SUPPORTED",
+  "define": "COMMAND_ERROR_CHOWN_NOT_SUPPORTED",
+  "message": "en/The chown command is not supported on Win95 and Win98"
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "CHOWN_SET_OWNER",
+  "define": "COMMAND_ERROR_CHOWN_SET_OWNER",
+  "message": "en/Can not change owner."
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "INVALID_FILE_NAME",
+  "define": "COMMAND_ERROR_INVALID_FILE_NAME",
+  "message": "en/The file name is invalid."
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "INVALID_TIME_FORMAT",
+  "define": "COMMAND_ERROR_INVALID_TIME_FORMAT",
+  "message": "en/The specified time format is invalid"
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "INVALID_TIME",
+  "define": "COMMAND_ERROR_INVALID_TIME",
+  "message": "en/The time is not valid, cannot be earlier than January 1, 1970. 00:00"
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "EXTENSION_SPECIFIC",
+  "define": "COMMAND_ERROR_EXTENSION_SPECIFIC",
+  "message": "en/Extension specific error: %s"
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "SOCKET_FILE",
+  "define": "COMMAND_ERROR_SOCKET_FILE",
+  "message": "en/The operation can be done on files only and not on sockets."
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "INVALID_CODE",
+  "define": "COMMAND_ERROR_INVALID_CODE",
+  "message": "en/The embedding application tried to start the code at an invalid location"
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "MANDARG",
+  "define": "COMMAND_ERROR_MANDARG",
+  "message": "en/Mandatory argument is missing"
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "TIMEOUT",
+  "define": "COMMAND_ERROR_TIMEOUT",
+  "message": "en/Subprocess did not finish within time limits"
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "STAYS_IN_MEMORY",
+  "define": "COMMAND_ERROR_STAYS_IN_MEMORY",
+  "message": "en/The module can not be unloaded"
+ },
+ {
+  "module": "COMMAND",
+  "kind": "",
+  "id": "PREPROCESSOR_ABORT",
+  "define": "COMMAND_ERROR_PREPROCESSOR_ABORT",
+  "message": "en/The preprocessor said to abort program compilation or execution."
+ },
+ {
+  "module": "BU",
+  "kind": "",
+  "id": "FILE_CORRUPT",
+  "define": "BU_ERROR_FILE_CORRUPT",
+  "message": "en/The file is either corrupt or was written with a different version of sb."
+ },
+ {
+  "module": "BU",
+  "kind": "",
+  "id": "NO_CODE",
+  "define": "BU_ERROR_NO_CODE",
+  "message": "en/The compiled program contains no executable code."
+ },
+ {
+  "module": "BU",
+  "kind": "",
+  "id": "FAIL",
+  "define": "BU_ERROR_FAIL",
+  "message": "en/Code file can not be saved."
+ },
+ {
+  "module": "BU",
+  "kind": "",
+  "id": "ECODE_INPUT",
+  "define": "BU_ERROR_ECODE_INPUT",
+  "message": "en/The interpreter file can not be read"
+ },
+ {
+  "module": "READER",
+  "kind": "",
+  "id": "INCLUDE_SYNTAX",
+  "define": "READER_ERROR_INCLUDE_SYNTAX",
+  "message": "en/Bad syntax in include statement."
+ },
+ {
+  "module": "READER",
+  "kind": "",
+  "id": "INCLUDE_FILE",
+  "define": "READER_ERROR_INCLUDE_FILE",
+  "message": "en/Include file is not found"
+ },
+ {
+  "module": "READER",
+  "kind": "",
+  "id": "TOOMANY_INCLUDE",
+  "define": "READER_ERROR_TOOMANY_INCLUDE",
+  "message": "en/Too many includes, probably recursive include"
+ },
+ {
+  "module": "READER",
+  "kind": "",
+  "id": "PREPROC_UNDEF",
+  "define": "READER_ERROR_PREPROC_UNDEF",
+  "message": "en/Preprocessor \\\"%s\\\" is not defined."
+ },
+ {
+  "module": "READER",
+  "kind": "",
+  "id": "PREPROC_LONG",
+  "define": "READER_ERROR_PREPROC_LONG",
+  "message": "en/Preprocessor name is too long."
+ },
+ {
+  "module": "READER",
+  "kind": "",
+  "id": "PREPROC_NOTAVA",
+  "define": "READER_ERROR_PREPROC_NOTAVA",
+  "message": "en/Preprocessor \\\"%s\\\" is not available."
+ },
+ {
+  "module": "READER",
+  "kind": "",
+  "id": "PREPROC_NOTVAL",
+  "define": "READER_ERROR_PREPROC_NOTVAL",
+  "message": "en/Preprocessor \\\"%s\\\" is invalid."
+ },
+ {
+  "module": "READER",
+  "kind": "",
+  "id": "FILE_OPEN",
+  "define": "READER_ERROR_FILE_OPEN",
+  "message": "en/The file can not be read."
+ },
+ {
+  "module": "READER",
+  "kind": "",
+  "id": "EMPTY_INPUT",
+  "define": "READER_ERROR_EMPTY_INPUT",
+  "message": "en/The file is empty or is not readable."
+ },
+ {
+  "module": "PREPROC",
+  "kind": "",
+  "id": "FAIL",
+  "define": "PREPROC_ERROR_FAIL",
+  "message": "en/The external preprocessor failed."
+ },
+ {
+  "module": "PREPROC",
+  "kind": "",
+  "id": "CONFIG_EXE",
+  "define": "PREPROC_ERROR_CONFIG_EXE",
+  "message": "en/The preprocessor executable is not configured."
+ },
+ {
+  "module": "PREPROC",
+  "kind": "",
+  "id": "CONFIG_DIR",
+  "define": "PREPROC_ERROR_CONFIG_DIR",
+  "message": "en/The preprocessor temporary directory is not configured."
+ },
+ {
+  "module": "LEX",
+  "kind": "",
+  "id": "TOO_LONG_SYMBOL",
+  "define": "LEX_ERROR_TOO_LONG_SYMBOL",
+  "message": "en/Symbol is too long"
+ },
+ {
+  "module": "LEX",
+  "kind": "",
+  "id": "STRING_NOT_TERMINATED",
+  "define": "LEX_ERROR_STRING_NOT_TERMINATED",
+  "message": "en/string is not terminated anywhere before end of file"
+ },
+ {
+  "module": "LEX",
+  "kind": "",
+  "id": "STRING_NEW_LINE",
+  "define": "LEX_ERROR_STRING_NEW_LINE",
+  "message": "en/string is not terminated anywhere before end of line"
+ },
+ {
+  "module": "LEX",
+  "kind": "",
+  "id": "BAD_RADIX",
+  "define": "LEX_ERROR_BAD_RADIX",
+  "message": "en/the number contains invalid radix. BASE#NNN numbers areavailable for 2<=BASE<=36 only."
+ },
+ {
+  "module": "LEX",
+  "kind": "",
+  "id": "INVALID_NUMBER",
+  "define": "LEX_ERROR_INVALID_NUMBER",
+  "message": "en/the BASE#NNN formatted number digit is out of range"
+ },
+ {
+  "module": "EXE",
+  "kind": "",
+  "id": "INVALID_PC",
+  "define": "EXE_ERROR_INVALID_PC",
+  "message": "en/Program counter points out of the code. The executed code is corrupt."
+ },
+ {
+  "module": "EXE",
+  "kind": "",
+  "id": "INVALID_PC1",
+  "define": "EXE_ERROR_INVALID_PC1",
+  "message": "en/Internal error or the cached code is corrupt."
+ },
+ {
+  "module": "EXE",
+  "kind": "",
+  "id": "INVALID_NODE",
+  "define": "EXE_ERROR_INVALID_NODE",
+  "message": "en/Internal error or the cached code is corrupt."
+ },
+ {
+  "module": "EXE",
+  "kind": "",
+  "id": "INVALID_OPCODE",
+  "define": "EXE_ERROR_INVALID_OPCODE",
+  "message": "en/invalid op code is in the code table"
+ },
+ {
+  "module": "EXE",
+  "kind": "",
+  "id": "NOT_IMPLEMENTED",
+  "define": "EXE_ERROR_NOT_IMPLEMENTED",
+  "message": "en/The code exists, but it is not implemented."
+ },
+ {
+  "module": "EXE",
+  "kind": "",
+  "id": "INVALID_EXPRESSION_NODE",
+  "define": "EXE_ERROR_INVALID_EXPRESSION_NODE",
+  "message": "en/Internal error or the cached code is corrupt."
+ },
+ {
+  "module": "EXE",
+  "kind": "",
+  "id": "INVALID_EXPRESSION_NODE1",
+  "define": "EXE_ERROR_INVALID_EXPRESSION_NODE1",
+  "message": "en/Internal error or the cached code is corrupt."
+ },
+ {
+  "module": "EXE",
+  "kind": "",
+  "id": "INTERNAL_DEFAULTTYPE",
+  "define": "EXE_ERROR_INTERNAL_DEFAULTTYPE",
+  "message": "en/Internal error when releasing a variable it has no correct type"
+ },
+ {
+  "module": "EXE",
+  "kind": "",
+  "id": "INTERNAL_UNDEF",
+  "define": "EXE_ERROR_INTERNAL_UNDEF",
+  "message": "en/Internal error when releasing undefined variable, nonsense"
+ },
+ {
+  "module": "EXE",
+  "kind": "",
+  "id": "INTERNAL_MEMREF",
+  "define": "EXE_ERROR_INTERNAL_MEMREF",
+  "message": "en/Internal error when releasing variable reference found"
+ },
+ {
+  "module": "EXE",
+  "kind": "",
+  "id": "INTERNAL",
+  "define": "EXE_ERROR_INTERNAL",
+  "message": "en/any non classified internal error"
+ },
+ {
+  "module": "EXE",
+  "kind": "",
+  "id": "NO_LOCAL",
+  "define": "EXE_ERROR_NO_LOCAL",
+  "message": "en/local variable referenced in global context or in a local context having no local variables"
+ },
+ {
+  "module": "EXE",
+  "kind": "",
+  "id": "INVALID_LVALNODE0",
+  "define": "EXE_ERROR_INVALID_LVALNODE0",
+  "message": "en/Internal error or the cached code is corrupt."
+ },
+ {
+  "module": "EXE",
+  "kind": "",
+  "id": "INVALID_LVALNODE1",
+  "define": "EXE_ERROR_INVALID_LVALNODE1",
+  "message": "en/Internal error or the cached code is corrupt."
+ },
+ {
+  "module": "EXE",
+  "kind": "",
+  "id": "INVALID_LVALNODE2",
+  "define": "EXE_ERROR_INVALID_LVALNODE2",
+  "message": "en/Internal error or the cached code is corrupt."
+ },
+ {
+  "module": "EXE",
+  "kind": "",
+  "id": "INVALID_LVALNODE3",
+  "define": "EXE_ERROR_INVALID_LVALNODE3",
+  "message": "en/Internal error or the cached code is corrupt."
+ },
+ {
+  "module": "EXE",
+  "kind": "",
+  "id": "INVALID_LVALNODE4",
+  "define": "EXE_ERROR_INVALID_LVALNODE4",
+  "message": "en/Internal error or the cached code is corrupt."
+ },
+ {
+  "module": "EXE",
+  "kind": "",
+  "id": "INVALID_LVALNODE5",
+  "define": "EXE_ERROR_INVALID_LVALNODE5",
+  "message": "en/Internal error or the cached code is corrupt."
+ },
+ {
+  "module": "EXE",
+  "kind": "",
+  "id": "INVALID_LVALNODE6",
+  "define": "EXE_ERROR_INVALID_LVALNODE6",
+  "message": "en/Internal error or the cached code is corrupt."
+ },
+ {
+  "module": "EXE",
+  "kind": "",
+  "id": "USERFUN_UNDEFINED",
+  "define": "EXE_ERROR_USERFUN_UNDEFINED",
+  "message": "en/the user function is undefined"
+ },
+ {
+  "module": "EXE",
+  "kind": "",
+  "id": "TOO_DEEP_CALL",
+  "define": "EXE_ERROR_TOO_DEEP_CALL",
+  "message": "en/Recursive function calls exceeded configuration limit."
+ },
+ {
+  "module": "EXE",
+  "kind": "",
+  "id": "TOO_LONG_RUN",
+  "define": "EXE_ERROR_TOO_LONG_RUN",
+  "message": "en/Program is running too long, probably infinite loop."
+ },
+ {
+  "module": "EX",
+  "kind": "",
+  "id": "INTERNAL",
+  "define": "EX_ERROR_INTERNAL",
+  "message": "en/Internal error in the syntax analyzer"
+ },
+ {
+  "module": "EX",
+  "kind": "",
+  "id": "LABEL_DOUBLE_DEFINED",
+  "define": "EX_ERROR_LABEL_DOUBLE_DEFINED",
+  "message": "en/A line label was defined more than once."
+ },
+ {
+  "module": "EX",
+  "kind": "",
+  "id": "LABEL_NOT_DEFINED",
+  "define": "EX_ERROR_LABEL_NOT_DEFINED",
+  "message": "en/A label \\\"%s\\\" was not defined during syntax analysis."
+ },
+ {
+  "module": "EX",
+  "kind": "",
+  "id": "FUNCTION_DOUBLE_DEFINED",
+  "define": "EX_ERROR_FUNCTION_DOUBLE_DEFINED",
+  "message": "en/The user function was already defined."
+ },
+ {
+  "module": "EX",
+  "kind": "",
+  "id": "FUNCTION_NOT_DEFINED",
+  "define": "EX_ERROR_FUNCTION_NOT_DEFINED",
+  "message": "en/The user function \\\"%s\\\" is used but is not defined."
+ },
+ {
+  "module": "EX",
+  "kind": "",
+  "id": "NO_OLD_NAMESPACE",
+  "define": "EX_ERROR_NO_OLD_NAMESPACE",
+  "message": "en/There was no module started when an end module statement was found."
+ },
+ {
+  "module": "EX",
+  "kind": "",
+  "id": "UNFINISHED_MODULE",
+  "define": "EX_ERROR_UNFINISHED_MODULE",
+  "message": "en/A module was not closed at end of file."
+ },
+ {
+  "module": "EX",
+  "kind": "",
+  "id": "TOO_LONG_NAME_SPACE",
+  "define": "EX_ERROR_TOO_LONG_NAME_SPACE",
+  "message": "en/the name space grew too long"
+ },
+ {
+  "module": "EX",
+  "kind": "",
+  "id": "TOO_LONG_VARIABLE",
+  "define": "EX_ERROR_TOO_LONG_VARIABLE",
+  "message": "en/variable and namespace does not fit into the buffer"
+ },
+ {
+  "module": "EX",
+  "kind": "",
+  "id": "MISSING_PAREN",
+  "define": "EX_ERROR_MISSING_PAREN",
+  "message": "en/ closing ) is missing in expression"
+ },
+ {
+  "module": "EX",
+  "kind": "",
+  "id": "MISSING_OPAREN",
+  "define": "EX_ERROR_MISSING_OPAREN",
+  "message": "en/ opening ( is missing in sub call"
+ },
+ {
+  "module": "EX",
+  "kind": "",
+  "id": "MISSING_APAREN",
+  "define": "EX_ERROR_MISSING_APAREN",
+  "message": "en/ closing ] is missing following array indeces"
+ },
+ {
+  "module": "EX",
+  "kind": "",
+  "id": "MISSING_SAPAREN",
+  "define": "EX_ERROR_MISSING_SAPAREN",
+  "message": "en/ closing } is missing following associative array indices"
+ },
+ {
+  "module": "EX",
+  "kind": "",
+  "id": "FUNCTION_NEEDS_ARGUMENTS",
+  "define": "EX_ERROR_FUNCTION_NEEDS_ARGUMENTS",
+  "message": "en/ built in function needs arguments"
+ },
+ {
+  "module": "EX",
+  "kind": "",
+  "id": "TOO_FEW_ARGUMENTS",
+  "define": "EX_ERROR_TOO_FEW_ARGUMENTS",
+  "message": "en/ Built in function has too few arguments"
+ },
+ {
+  "module": "EX",
+  "kind": "",
+  "id": "TOO_MANY_ARGUMENTS",
+  "define": "EX_ERROR_TOO_MANY_ARGUMENTS",
+  "message": "en/ Built in function has too many arguments"
+ },
+ {
+  "module": "EX",
+  "kind": "",
+  "id": "BAD_NESTING",
+  "define": "EX_ERROR_BAD_NESTING",
+  "message": "en/erroneous nesting of constructs like IF/ELSIF/ELSE/ENDIF/REPEAT/LOOP/WHILE and so on"
+ },
+ {
+  "module": "EX",
+  "kind": "",
+  "id": "UNFINISHED_NESTING",
+  "define": "EX_ERROR_UNFINISHED_NESTING",
+  "message": "en/nested construct remained unclosed when local_end"
+ },
+ {
+  "module": "EX",
+  "kind": "",
+  "id": "SYNTAX",
+  "define": "EX_ERROR_SYNTAX",
+  "message": "en/syntax error, no syntax defintion matches the line or syntax defintion does not match the line"
+ },
+ {
+  "module": "EX",
+  "kind": "",
+  "id": "SYNTAX_FATAL",
+  "define": "EX_ERROR_SYNTAX_FATAL",
+  "message": "en/syntax error during checking the line and also noting that the syntax error so serious that none of the other syntax defintions can match the current line"
+ },
+ {
+  "module": "EX",
+  "kind": "",
+  "id": "TOO_MANY_WAITING_LABEL",
+  "define": "EX_ERROR_TOO_MANY_WAITING_LABEL",
+  "message": "en/there are more then MAX_SAME_LABEL labels referencing the same line"
+ },
+ {
+  "module": "EX",
+  "kind": "",
+  "id": "UNDEF_GLOBAL",
+  "define": "EX_ERROR_UNDEF_GLOBAL",
+  "message": "en/Global variable was not declared."
+ },
+ {
+  "module": "EX",
+  "kind": "",
+  "id": "UNDEF_PRAGMA",
+  "define": "EX_ERROR_UNDEF_PRAGMA",
+  "message": "en/Compiler option \\\"%s\\\" is not implemented"
+ },
+ {
+  "module": "EX",
+  "kind": "",
+  "id": "GREDEF",
+  "define": "EX_ERROR_GREDEF",
+  "message": "en/Global variable \\\"%s\\\" is redefined."
+ },
+ {
+  "module": "EX",
+  "kind": "",
+  "id": "GLODEF",
+  "define": "EX_ERROR_GLODEF",
+  "message": "en/Variable \\\"%s\\\" can not be used as global and local in a sub."
+ },
+ {
+  "module": "EX",
+  "kind": "",
+  "id": "CONST_LVAL",
+  "define": "EX_ERROR_CONST_LVAL",
+  "message": "en/The variable is declared as constant. Needs 'var' declaration."
+ },
+ {
+  "module": "MEM",
+  "kind": "",
+  "id": "INTERNAL001",
+  "define": "MEM_ERROR_INTERNAL001",
+  "message": "en/DupVar can not duplicate array. This is an internal error."
+ },
+ {
+  "module": "MATCH",
+  "kind": "",
+  "id": "INDEX_OUT_OF_RANGE",
+  "define": "MATCH_ERROR_INDEX_OUT_OF_RANGE",
+  "message": "en/The format string contains $n where n is out of range."
+ },
+ {
+  "module": "MATCH",
+  "kind": "",
+  "id": "BUFFER_SHORT",
+  "define": "MATCH_ERROR_BUFFER_SHORT",
+  "message": "en/The provided buffer is too short."
+ },
+ {
+  "module": "MATCH",
+  "kind": "",
+  "id": "SYNTAX_ERROR",
+  "define": "MATCH_ERROR_SYNTAX_ERROR",
+  "message": "en/Invalid pattern contains no character after the ~ sign."
+ },
+ {
+  "module": "MATCH",
+  "kind": "",
+  "id": "ARRAY_SHORT",
+  "define": "MATCH_ERROR_ARRAY_SHORT",
+  "message": "en/The provided string array is too short."
+ },
+ {
+  "module": "SCRIBA",
+  "kind": "",
+  "id": "FAIL",
+  "define": "SCRIBA_ERROR_FAIL",
+  "message": "en/Operation failed"
+ },
+ {
+  "module": "SCRIBA",
+  "kind": "",
+  "id": "BUFFER_SHORT",
+  "define": "SCRIBA_ERROR_BUFFER_SHORT",
+  "message": "en/The provided buffer is too short."
+ }
+]

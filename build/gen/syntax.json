@@ -1,0 +1,5373 @@
+{
+ "COMMANDS": [
+  {
+   "name": "EMPTY",
+   "raw": "nl noexec",
+   "terminals": [],
+   "symbols": [
+    "nl",
+    "noexec"
+   ]
+  },
+  {
+   "name": "MODULE",
+   "raw": "'module' name_space nl noexec",
+   "terminals": [
+    "module"
+   ],
+   "symbols": [
+    "name_space",
+    "nl",
+    "noexec"
+   ]
+  },
+  {
+   "name": "ENDMODULE",
+   "raw": "'end' 'module' end_name_space nl noexec",
+   "terminals": [
+    "end",
+    "module"
+   ],
+   "symbols": [
+    "end_name_space",
+    "nl",
+    "noexec"
+   ]
+  },
+  {
+   "name": "LOCAL",
+   "raw": "'local' local_list nl noexec",
+   "terminals": [
+    "local"
+   ],
+   "symbols": [
+    "local_list",
+    "nl",
+    "noexec"
+   ]
+  },
+  {
+   "name": "STOP",
+   "raw": "'stop' nl",
+   "terminals": [
+    "stop"
+   ],
+   "symbols": [
+    "nl"
+   ]
+  },
+  {
+   "name": "END",
+   "raw": "'end' nl",
+   "terminals": [
+    "end"
+   ],
+   "symbols": [
+    "nl"
+   ]
+  },
+  {
+   "name": "PRAGMA",
+   "raw": "'declare' 'option' pragma nl noexec",
+   "terminals": [
+    "declare",
+    "option"
+   ],
+   "symbols": [
+    "pragma",
+    "nl",
+    "noexec"
+   ]
+  },
+  {
+   "name": "OPTION",
+   "raw": "'option' absolute_symbol expression",
+   "terminals": [
+    "option"
+   ],
+   "symbols": [
+    "absolute_symbol",
+    "expression"
+   ]
+  },
+  {
+   "name": "LABEL",
+   "raw": "label_def ':' noexec",
+   "terminals": [
+    ":"
+   ],
+   "symbols": [
+    "label_def",
+    "noexec"
+   ]
+  },
+  {
+   "name": "CONST",
+   "raw": "'const' cname '=' cval nl noexec",
+   "terminals": [
+    "const",
+    "="
+   ],
+   "symbols": [
+    "cname",
+    "cval",
+    "nl",
+    "noexec"
+   ]
+  },
+  {
+   "name": "GCONST",
+   "raw": "'global' 'const' gcname '=' cval nl noexec",
+   "terminals": [
+    "global",
+    "const",
+    "="
+   ],
+   "symbols": [
+    "gcname",
+    "cval",
+    "nl",
+    "noexec"
+   ]
+  },
+  {
+   "name": "GLOBAL",
+   "raw": "'global' global_list nl noexec",
+   "terminals": [
+    "global"
+   ],
+   "symbols": [
+    "global_list",
+    "nl",
+    "noexec"
+   ]
+  },
+  {
+   "name": "VAR",
+   "raw": "'var' cname nl noexec",
+   "terminals": [
+    "var"
+   ],
+   "symbols": [
+    "cname",
+    "nl",
+    "noexec"
+   ]
+  },
+  {
+   "name": "SWAP",
+   "raw": "'swap' lval ',' lval nl",
+   "terminals": [
+    "swap",
+    ","
+   ],
+   "symbols": [
+    "lval",
+    "lval",
+    "nl"
+   ]
+  },
+  {
+   "name": "FPRINTNL",
+   "raw": "'printnl' '#' expression nl",
+   "terminals": [
+    "printnl",
+    "#"
+   ],
+   "symbols": [
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "FPRINT",
+   "raw": "'print' '#' expression ',' expression_list nl",
+   "terminals": [
+    "print",
+    "#",
+    ","
+   ],
+   "symbols": [
+    "expression",
+    "expression_list",
+    "nl"
+   ]
+  },
+  {
+   "name": "PRINTNL",
+   "raw": "'printnl' nl",
+   "terminals": [
+    "printnl"
+   ],
+   "symbols": [
+    "nl"
+   ]
+  },
+  {
+   "name": "PRINTNL",
+   "raw": "'print' nl",
+   "terminals": [
+    "print"
+   ],
+   "symbols": [
+    "nl"
+   ]
+  },
+  {
+   "name": "PRINT",
+   "raw": "'print' expression_list nl",
+   "terminals": [
+    "print"
+   ],
+   "symbols": [
+    "expression_list",
+    "nl"
+   ]
+  },
+  {
+   "name": "FUNCTIONARG",
+   "raw": "'function' function '(' local_start local_list arg_num ')' go_forward(FUNCTION) nl",
+   "terminals": [
+    "function",
+    "(",
+    ")"
+   ],
+   "symbols": [
+    "function",
+    "local_start",
+    "local_list",
+    "arg_num",
+    "go_forward(FUNCTION)",
+    "nl"
+   ]
+  },
+  {
+   "name": "FUNCTION",
+   "raw": "'function' function nl local_start arg_num go_forward(FUNCTION)",
+   "terminals": [
+    "function"
+   ],
+   "symbols": [
+    "function",
+    "nl",
+    "local_start",
+    "arg_num",
+    "go_forward(FUNCTION)"
+   ]
+  },
+  {
+   "name": "EXITFUNC",
+   "raw": "'exit' 'function' nl",
+   "terminals": [
+    "exit",
+    "function"
+   ],
+   "symbols": [
+    "nl"
+   ]
+  },
+  {
+   "name": "ENDFUNC",
+   "raw": "'end' 'function' local_end come_forward(FUNCTION) nl",
+   "terminals": [
+    "end",
+    "function"
+   ],
+   "symbols": [
+    "local_end",
+    "come_forward(FUNCTION)",
+    "nl"
+   ]
+  },
+  {
+   "name": "SUBARG",
+   "raw": "'sub' function '(' local_start local_list arg_num ')' go_forward(SUB) nl",
+   "terminals": [
+    "sub",
+    "(",
+    ")"
+   ],
+   "symbols": [
+    "function",
+    "local_start",
+    "local_list",
+    "arg_num",
+    "go_forward(SUB)",
+    "nl"
+   ]
+  },
+  {
+   "name": "SUB",
+   "raw": "'sub' function nl local_start arg_num go_forward(SUB)",
+   "terminals": [
+    "sub"
+   ],
+   "symbols": [
+    "function",
+    "nl",
+    "local_start",
+    "arg_num",
+    "go_forward(SUB)"
+   ]
+  },
+  {
+   "name": "EXITSUB",
+   "raw": "'exit' 'sub' nl",
+   "terminals": [
+    "exit",
+    "sub"
+   ],
+   "symbols": [
+    "nl"
+   ]
+  },
+  {
+   "name": "ENDSUB",
+   "raw": "'end' 'sub' local_end come_forward(SUB) nl",
+   "terminals": [
+    "end",
+    "sub"
+   ],
+   "symbols": [
+    "local_end",
+    "come_forward(SUB)",
+    "nl"
+   ]
+  },
+  {
+   "name": "ICALL",
+   "raw": "'icall' expression_list nl",
+   "terminals": [
+    "icall"
+   ],
+   "symbols": [
+    "expression_list",
+    "nl"
+   ]
+  },
+  {
+   "name": "FLET",
+   "raw": "thisfn '=' expression nl",
+   "terminals": [
+    "="
+   ],
+   "symbols": [
+    "thisfn",
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "LETM",
+   "raw": "lval '-=' expression nl",
+   "terminals": [
+    "-="
+   ],
+   "symbols": [
+    "lval",
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "LETP",
+   "raw": "lval '+=' expression nl",
+   "terminals": [
+    "+="
+   ],
+   "symbols": [
+    "lval",
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "LETS",
+   "raw": "lval '*=' expression nl",
+   "terminals": [
+    "*="
+   ],
+   "symbols": [
+    "lval",
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "LETD",
+   "raw": "lval '/=' expression nl",
+   "terminals": [
+    "/="
+   ],
+   "symbols": [
+    "lval",
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "LETI",
+   "raw": "lval '\\=' expression nl",
+   "terminals": [
+    "\\="
+   ],
+   "symbols": [
+    "lval",
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "LETC",
+   "raw": "lval '&=' expression nl",
+   "terminals": [
+    "&="
+   ],
+   "symbols": [
+    "lval",
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "REF",
+   "raw": "'ref' lval '=' lval nl",
+   "terminals": [
+    "ref",
+    "="
+   ],
+   "symbols": [
+    "lval",
+    "lval",
+    "nl"
+   ]
+  },
+  {
+   "name": "NLABEL",
+   "raw": "label_def noexec",
+   "terminals": [],
+   "symbols": [
+    "label_def",
+    "noexec"
+   ]
+  },
+  {
+   "name": "GOTO",
+   "raw": "'goto' label nl",
+   "terminals": [
+    "goto"
+   ],
+   "symbols": [
+    "label",
+    "nl"
+   ]
+  },
+  {
+   "name": "GOTO",
+   "raw": "'go' 'to' label nl",
+   "terminals": [
+    "go",
+    "to"
+   ],
+   "symbols": [
+    "label",
+    "nl"
+   ]
+  },
+  {
+   "name": "GOSUB",
+   "raw": "'gosub' label nl",
+   "terminals": [
+    "gosub"
+   ],
+   "symbols": [
+    "label",
+    "nl"
+   ]
+  },
+  {
+   "name": "GOSUB",
+   "raw": "'go' 'sub' label nl",
+   "terminals": [
+    "go",
+    "sub"
+   ],
+   "symbols": [
+    "label",
+    "nl"
+   ]
+  },
+  {
+   "name": "RETURNC",
+   "raw": "'return' nl",
+   "terminals": [
+    "return"
+   ],
+   "symbols": [
+    "nl"
+   ]
+  },
+  {
+   "name": "POP",
+   "raw": "'pop' nl",
+   "terminals": [
+    "pop"
+   ],
+   "symbols": [
+    "nl"
+   ]
+  },
+  {
+   "name": "CUNDEF",
+   "raw": "'undef' lval_list nl",
+   "terminals": [
+    "undef"
+   ],
+   "symbols": [
+    "lval_list",
+    "nl"
+   ]
+  },
+  {
+   "name": "CBYVAL",
+   "raw": "'byval' lval_list nl",
+   "terminals": [
+    "byval"
+   ],
+   "symbols": [
+    "lval_list",
+    "nl"
+   ]
+  },
+  {
+   "name": "ONERRORGOTONULL",
+   "raw": "'on' 'error' 'goto' 'null' nl",
+   "terminals": [
+    "on",
+    "error",
+    "goto",
+    "null"
+   ],
+   "symbols": [
+    "nl"
+   ]
+  },
+  {
+   "name": "ONERRORGOTO",
+   "raw": "'on' 'error' 'goto' label nl",
+   "terminals": [
+    "on",
+    "error",
+    "goto"
+   ],
+   "symbols": [
+    "label",
+    "nl"
+   ]
+  },
+  {
+   "name": "ONERRORRESUMENEXT",
+   "raw": "'on' 'error' 'resume' 'next' nl",
+   "terminals": [
+    "on",
+    "error",
+    "resume",
+    "next"
+   ],
+   "symbols": [
+    "nl"
+   ]
+  },
+  {
+   "name": "ONERRORRESUMELABEL",
+   "raw": "'on' 'error' 'resume' label nl",
+   "terminals": [
+    "on",
+    "error",
+    "resume"
+   ],
+   "symbols": [
+    "label",
+    "nl"
+   ]
+  },
+  {
+   "name": "RESUME",
+   "raw": "'resume' nl",
+   "terminals": [
+    "resume"
+   ],
+   "symbols": [
+    "nl"
+   ]
+  },
+  {
+   "name": "RESUMENEXT",
+   "raw": "'resume' 'next' nl",
+   "terminals": [
+    "resume",
+    "next"
+   ],
+   "symbols": [
+    "nl"
+   ]
+  },
+  {
+   "name": "RESUMELABEL",
+   "raw": "'resume' label nl",
+   "terminals": [
+    "resume"
+   ],
+   "symbols": [
+    "label",
+    "nl"
+   ]
+  },
+  {
+   "name": "CERROR",
+   "raw": "'error' expression nl",
+   "terminals": [
+    "error"
+   ],
+   "symbols": [
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "WHILE",
+   "raw": "'while' expression  go_forward(WHILE) come_back(WHILE) nl",
+   "terminals": [
+    "while"
+   ],
+   "symbols": [
+    "expression",
+    "go_forward(WHILE)",
+    "come_back(WHILE)",
+    "nl"
+   ]
+  },
+  {
+   "name": "WEND",
+   "raw": "'wend' go_back(WHILE) come_forward(WHILE) nl",
+   "terminals": [
+    "wend"
+   ],
+   "symbols": [
+    "go_back(WHILE)",
+    "come_forward(WHILE)",
+    "nl"
+   ]
+  },
+  {
+   "name": "DOWHILE",
+   "raw": "'do' 'while' expression go_forward(DO) come_back(DO) nl",
+   "terminals": [
+    "do",
+    "while"
+   ],
+   "symbols": [
+    "expression",
+    "go_forward(DO)",
+    "come_back(DO)",
+    "nl"
+   ]
+  },
+  {
+   "name": "DOUNTIL",
+   "raw": "'do' 'until' expression go_forward(DO) come_back(DO) nl",
+   "terminals": [
+    "do",
+    "until"
+   ],
+   "symbols": [
+    "expression",
+    "go_forward(DO)",
+    "come_back(DO)",
+    "nl"
+   ]
+  },
+  {
+   "name": "LOOPWHILE",
+   "raw": "'loop' 'while' expression go_back(LOOP) come_forward(LOOP) nl",
+   "terminals": [
+    "loop",
+    "while"
+   ],
+   "symbols": [
+    "expression",
+    "go_back(LOOP)",
+    "come_forward(LOOP)",
+    "nl"
+   ]
+  },
+  {
+   "name": "LOOPUNTIL",
+   "raw": "'loop' 'until' expression go_back(LOOP) come_forward(LOOP) nl",
+   "terminals": [
+    "loop",
+    "until"
+   ],
+   "symbols": [
+    "expression",
+    "go_back(LOOP)",
+    "come_forward(LOOP)",
+    "nl"
+   ]
+  },
+  {
+   "name": "UNTIL",
+   "raw": "'until' expression go_back(REPEAT) come_forward(REPEAT) nl",
+   "terminals": [
+    "until"
+   ],
+   "symbols": [
+    "expression",
+    "go_back(REPEAT)",
+    "come_forward(REPEAT)",
+    "nl"
+   ]
+  },
+  {
+   "name": "LOOP",
+   "raw": "'loop' go_back(DO) come_forward(DO) nl",
+   "terminals": [
+    "loop"
+   ],
+   "symbols": [
+    "go_back(DO)",
+    "come_forward(DO)",
+    "nl"
+   ]
+  },
+  {
+   "name": "REPEAT",
+   "raw": "'repeat' go_forward(REPEAT) come_back(REPEAT) nl",
+   "terminals": [
+    "repeat"
+   ],
+   "symbols": [
+    "go_forward(REPEAT)",
+    "come_back(REPEAT)",
+    "nl"
+   ]
+  },
+  {
+   "name": "DO",
+   "raw": "'do' go_forward(LOOP) come_back(LOOP) nl",
+   "terminals": [
+    "do"
+   ],
+   "symbols": [
+    "go_forward(LOOP)",
+    "come_back(LOOP)",
+    "nl"
+   ]
+  },
+  {
+   "name": "FOR",
+   "raw": "'for' lval '=' expression come_back(FORTO)",
+   "terminals": [
+    "for",
+    "="
+   ],
+   "symbols": [
+    "lval",
+    "expression",
+    "come_back(FORTO)"
+   ]
+  },
+  {
+   "name": "FORTO",
+   "raw": "'to' expression go_back(FORTO) go_forward(FOR) come_back(FOR)",
+   "terminals": [
+    "to"
+   ],
+   "symbols": [
+    "expression",
+    "go_back(FORTO)",
+    "go_forward(FOR)",
+    "come_back(FOR)"
+   ]
+  },
+  {
+   "name": "FORSTEP",
+   "raw": "'step' expression nl",
+   "terminals": [
+    "step"
+   ],
+   "symbols": [
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "NEXTI",
+   "raw": "'next' symbol go_back(FOR) come_forward(FOR) nl",
+   "terminals": [
+    "next"
+   ],
+   "symbols": [
+    "symbol",
+    "go_back(FOR)",
+    "come_forward(FOR)",
+    "nl"
+   ]
+  },
+  {
+   "name": "NEXT",
+   "raw": "'next' go_back(FOR) come_forward(FOR) nl",
+   "terminals": [
+    "next"
+   ],
+   "symbols": [
+    "go_back(FOR)",
+    "come_forward(FOR)",
+    "nl"
+   ]
+  },
+  {
+   "name": "ELSIF",
+   "raw": "'elseif' * expression 'then' come_forward(IF) go_forward(IF) nl",
+   "terminals": [
+    "elseif",
+    "then"
+   ],
+   "symbols": [
+    "*",
+    "expression",
+    "come_forward(IF)",
+    "go_forward(IF)",
+    "nl"
+   ]
+  },
+  {
+   "name": "ELSIF",
+   "raw": "'else' 'if' * expression 'then' come_forward(IF) go_forward(IF) nl",
+   "terminals": [
+    "else",
+    "if",
+    "then"
+   ],
+   "symbols": [
+    "*",
+    "expression",
+    "come_forward(IF)",
+    "go_forward(IF)",
+    "nl"
+   ]
+  },
+  {
+   "name": "ELSIF",
+   "raw": "'elif' * expression 'then' come_forward(IF) go_forward(IF) nl",
+   "terminals": [
+    "elif",
+    "then"
+   ],
+   "symbols": [
+    "*",
+    "expression",
+    "come_forward(IF)",
+    "go_forward(IF)",
+    "nl"
+   ]
+  },
+  {
+   "name": "ELSIF",
+   "raw": "'elsif' * expression 'then' come_forward(IF) go_forward(IF) nl",
+   "terminals": [
+    "elsif",
+    "then"
+   ],
+   "symbols": [
+    "*",
+    "expression",
+    "come_forward(IF)",
+    "go_forward(IF)",
+    "nl"
+   ]
+  },
+  {
+   "name": "ELSE",
+   "raw": "'else' * come_forward(IF) go_forward(ELSE) nl",
+   "terminals": [
+    "else"
+   ],
+   "symbols": [
+    "*",
+    "come_forward(IF)",
+    "go_forward(ELSE)",
+    "nl"
+   ]
+  },
+  {
+   "name": "ENDIF",
+   "raw": "'endif' * come_forward(IF,ELSE) nl",
+   "terminals": [
+    "endif"
+   ],
+   "symbols": [
+    "*",
+    "come_forward(IF,ELSE)",
+    "nl"
+   ]
+  },
+  {
+   "name": "ENDIF",
+   "raw": "'end' 'if' * come_forward(IF,ELSE) nl",
+   "terminals": [
+    "end",
+    "if"
+   ],
+   "symbols": [
+    "*",
+    "come_forward(IF,ELSE)",
+    "nl"
+   ]
+  },
+  {
+   "name": "OPENDIR",
+   "raw": "'open' 'directory' expression 'pattern' expression 'option' expression 'as' expression nl",
+   "terminals": [
+    "open",
+    "directory",
+    "pattern",
+    "option",
+    "as"
+   ],
+   "symbols": [
+    "expression",
+    "expression",
+    "expression",
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "RESETDIR",
+   "raw": "'reset' 'directory' '#' expression nl",
+   "terminals": [
+    "reset",
+    "directory",
+    "#"
+   ],
+   "symbols": [
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "RESETDIR",
+   "raw": "'reset' 'directory' expression nl",
+   "terminals": [
+    "reset",
+    "directory"
+   ],
+   "symbols": [
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "CLOSEDIR",
+   "raw": "'close' 'directory' '#' expression nl",
+   "terminals": [
+    "close",
+    "directory",
+    "#"
+   ],
+   "symbols": [
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "CLOSEDIR",
+   "raw": "'close' 'directory' expression nl",
+   "terminals": [
+    "close",
+    "directory"
+   ],
+   "symbols": [
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "CLOSE",
+   "raw": "'close' '#' expression nl",
+   "terminals": [
+    "close",
+    "#"
+   ],
+   "symbols": [
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "CLOSE",
+   "raw": "'close' expression nl",
+   "terminals": [
+    "close"
+   ],
+   "symbols": [
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "SEEK",
+   "raw": "'seek' '#' expression ',' expression nl",
+   "terminals": [
+    "seek",
+    "#",
+    ","
+   ],
+   "symbols": [
+    "expression",
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "SEEK",
+   "raw": "'seek' expression ',' expression nl",
+   "terminals": [
+    "seek",
+    ","
+   ],
+   "symbols": [
+    "expression",
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "REWIND",
+   "raw": "'rewind' '#' expression nl",
+   "terminals": [
+    "rewind",
+    "#"
+   ],
+   "symbols": [
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "REWIND",
+   "raw": "'rewind' expression nl",
+   "terminals": [
+    "rewind"
+   ],
+   "symbols": [
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "RESET",
+   "raw": "'reset' nl",
+   "terminals": [
+    "reset"
+   ],
+   "symbols": [
+    "nl"
+   ]
+  },
+  {
+   "name": "LINPUTF",
+   "raw": "'line' 'input' '#' expression ',' lval nl",
+   "terminals": [
+    "line",
+    "input",
+    "#",
+    ","
+   ],
+   "symbols": [
+    "expression",
+    "lval",
+    "nl"
+   ]
+  },
+  {
+   "name": "LINPUT",
+   "raw": "'line' 'input' lval nl",
+   "terminals": [
+    "line",
+    "input"
+   ],
+   "symbols": [
+    "lval",
+    "nl"
+   ]
+  },
+  {
+   "name": "TRUNCATEF",
+   "raw": "'truncate' '#' expression ',' expression nl",
+   "terminals": [
+    "truncate",
+    "#",
+    ","
+   ],
+   "symbols": [
+    "expression",
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "RLOCK",
+   "raw": "'lock' 'region' '#' expression 'from' expression 'to' expression 'for' absolute_symbol nl",
+   "terminals": [
+    "lock",
+    "region",
+    "#",
+    "from",
+    "to",
+    "for"
+   ],
+   "symbols": [
+    "expression",
+    "expression",
+    "expression",
+    "absolute_symbol",
+    "nl"
+   ]
+  },
+  {
+   "name": "RLOCK",
+   "raw": "'lock' 'region'  expression 'from' expression 'to' expression 'for' absolute_symbol nl",
+   "terminals": [
+    "lock",
+    "region",
+    "from",
+    "to",
+    "for"
+   ],
+   "symbols": [
+    "expression",
+    "expression",
+    "expression",
+    "absolute_symbol",
+    "nl"
+   ]
+  },
+  {
+   "name": "FLOCK",
+   "raw": "'lock' '#' expression ',' absolute_symbol nl",
+   "terminals": [
+    "lock",
+    "#",
+    ","
+   ],
+   "symbols": [
+    "expression",
+    "absolute_symbol",
+    "nl"
+   ]
+  },
+  {
+   "name": "FLOCK",
+   "raw": "'lock' expression ',' absolute_symbol nl",
+   "terminals": [
+    "lock",
+    ","
+   ],
+   "symbols": [
+    "expression",
+    "absolute_symbol",
+    "nl"
+   ]
+  },
+  {
+   "name": "MKDIR",
+   "raw": "'mkdir' expression nl",
+   "terminals": [
+    "mkdir"
+   ],
+   "symbols": [
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "DELETEF",
+   "raw": "'deltree' expression nl",
+   "terminals": [
+    "deltree"
+   ],
+   "symbols": [
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "DELETE",
+   "raw": "'delete' expression nl",
+   "terminals": [
+    "delete"
+   ],
+   "symbols": [
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "FCOPY",
+   "raw": "'filecopy' expression ',' expression nl",
+   "terminals": [
+    "filecopy",
+    ","
+   ],
+   "symbols": [
+    "expression",
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "NAME",
+   "raw": "'name' expression ',' expression nl",
+   "terminals": [
+    "name",
+    ","
+   ],
+   "symbols": [
+    "expression",
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "CHDIR",
+   "raw": "'chdir' expression nl",
+   "terminals": [
+    "chdir"
+   ],
+   "symbols": [
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "SETFILE",
+   "raw": "'set' 'file' expression absolute_symbol '=' expression nl",
+   "terminals": [
+    "set",
+    "file",
+    "="
+   ],
+   "symbols": [
+    "expression",
+    "absolute_symbol",
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "BINMO",
+   "raw": "'binmode' 'output' nl",
+   "terminals": [
+    "binmode",
+    "output"
+   ],
+   "symbols": [
+    "nl"
+   ]
+  },
+  {
+   "name": "BINMI",
+   "raw": "'binmode' 'input' nl",
+   "terminals": [
+    "binmode",
+    "input"
+   ],
+   "symbols": [
+    "nl"
+   ]
+  },
+  {
+   "name": "TXTMO",
+   "raw": "'textmode' 'output' nl",
+   "terminals": [
+    "textmode",
+    "output"
+   ],
+   "symbols": [
+    "nl"
+   ]
+  },
+  {
+   "name": "TXTMI",
+   "raw": "'textmode' 'input' nl",
+   "terminals": [
+    "textmode",
+    "input"
+   ],
+   "symbols": [
+    "nl"
+   ]
+  },
+  {
+   "name": "BINMF",
+   "raw": "'binmode' '#' expression nl",
+   "terminals": [
+    "binmode",
+    "#"
+   ],
+   "symbols": [
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "BINMF",
+   "raw": "'binmode' expression nl",
+   "terminals": [
+    "binmode"
+   ],
+   "symbols": [
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "TXTMF",
+   "raw": "'textmode' '#' expression nl",
+   "terminals": [
+    "textmode",
+    "#"
+   ],
+   "symbols": [
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "TXTMF",
+   "raw": "'textmode' expression nl",
+   "terminals": [
+    "textmode"
+   ],
+   "symbols": [
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "SPLITAQ",
+   "raw": "'splitaq' expression 'by' expression 'quote' expression 'to' lval nl",
+   "terminals": [
+    "splitaq",
+    "by",
+    "quote",
+    "to"
+   ],
+   "symbols": [
+    "expression",
+    "expression",
+    "expression",
+    "lval",
+    "nl"
+   ]
+  },
+  {
+   "name": "SPLITA",
+   "raw": "'splita' expression 'by' expression 'to' lval nl",
+   "terminals": [
+    "splita",
+    "by",
+    "to"
+   ],
+   "symbols": [
+    "expression",
+    "expression",
+    "lval",
+    "nl"
+   ]
+  },
+  {
+   "name": "SPLIT",
+   "raw": "'split' expression 'by' expression 'to' lval_list nl",
+   "terminals": [
+    "split",
+    "by",
+    "to"
+   ],
+   "symbols": [
+    "expression",
+    "expression",
+    "lval_list",
+    "nl"
+   ]
+  },
+  {
+   "name": "UNPACK",
+   "raw": "'unpack' expression 'by' expression 'to' lval_list nl",
+   "terminals": [
+    "unpack",
+    "by",
+    "to"
+   ],
+   "symbols": [
+    "expression",
+    "expression",
+    "lval_list",
+    "nl"
+   ]
+  },
+  {
+   "name": "RANDOMIZA",
+   "raw": "'randomize' nl",
+   "terminals": [
+    "randomize"
+   ],
+   "symbols": [
+    "nl"
+   ]
+  },
+  {
+   "name": "RANDOMIZE",
+   "raw": "'randomize' expression nl",
+   "terminals": [
+    "randomize"
+   ],
+   "symbols": [
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "SETJOKER",
+   "raw": "'set' 'joker' expression 'to' expression nl",
+   "terminals": [
+    "set",
+    "joker",
+    "to"
+   ],
+   "symbols": [
+    "expression",
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "SETWILD",
+   "raw": "'set' 'wild' expression 'to' expression nl",
+   "terminals": [
+    "set",
+    "wild",
+    "to"
+   ],
+   "symbols": [
+    "expression",
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "SETNOJO",
+   "raw": "'set' 'no' 'joker' expression nl",
+   "terminals": [
+    "set",
+    "no",
+    "joker"
+   ],
+   "symbols": [
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "SETNOJO",
+   "raw": "'set' 'no' 'wild' expression nl",
+   "terminals": [
+    "set",
+    "no",
+    "wild"
+   ],
+   "symbols": [
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "SLEEP",
+   "raw": "'sleep' expression nl",
+   "terminals": [
+    "sleep"
+   ],
+   "symbols": [
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "PAUSE",
+   "raw": "'pause' expression nl",
+   "terminals": [
+    "pause"
+   ],
+   "symbols": [
+    "expression",
+    "nl"
+   ]
+  },
+  {
+   "name": "EXTERNAL",
+   "raw": "'declare' 'sub' * function 'alias' string 'lib' string nl",
+   "terminals": [
+    "declare",
+    "sub",
+    "alias",
+    "lib"
+   ],
+   "symbols": [
+    "*",
+    "function",
+    "string",
+    "string",
+    "nl"
+   ]
+  },
+  {
+   "name": "EXTERNAM",
+   "raw": "'declare' 'command' * function 'alias' string 'lib' string nl",
+   "terminals": [
+    "declare",
+    "command",
+    "alias",
+    "lib"
+   ],
+   "symbols": [
+    "*",
+    "function",
+    "string",
+    "string",
+    "nl"
+   ]
+  }
+ ],
+ "UNARIES": [
+  {
+   "name": "PLUS",
+   "raw": "+",
+   "token": "+"
+  },
+  {
+   "name": "MINUS",
+   "raw": "-",
+   "token": "-"
+  },
+  {
+   "name": "NOT",
+   "raw": "not",
+   "token": "not"
+  },
+  {
+   "name": "BYVAL",
+   "raw": "byval",
+   "token": "byval"
+  },
+  {
+   "name": "EXTOPF",
+   "raw": "?",
+   "token": "?"
+  },
+  {
+   "name": "EXTOPK",
+   "raw": "!",
+   "token": "!"
+  },
+  {
+   "name": "EXTOPL",
+   "raw": "#",
+   "token": "#"
+  },
+  {
+   "name": "EXTOPO",
+   "raw": "`",
+   "token": "`"
+  },
+  {
+   "name": "EXTOPQ",
+   "raw": "@",
+   "token": "@"
+  },
+  {
+   "name": "EXTOPAC",
+   "raw": "+^",
+   "token": "+^"
+  },
+  {
+   "name": "EXTOPAD",
+   "raw": "+<",
+   "token": "+<"
+  },
+  {
+   "name": "EXTOPAE",
+   "raw": "+>",
+   "token": "+>"
+  },
+  {
+   "name": "EXTOPAF",
+   "raw": "+?",
+   "token": "+?"
+  },
+  {
+   "name": "EXTOPAG",
+   "raw": "+=",
+   "token": "+="
+  },
+  {
+   "name": "EXTOPAH",
+   "raw": "+*",
+   "token": "+*"
+  },
+  {
+   "name": "EXTOPAI",
+   "raw": "+/",
+   "token": "+/"
+  },
+  {
+   "name": "EXTOPAJ",
+   "raw": "+%",
+   "token": "+%"
+  },
+  {
+   "name": "EXTOPAK",
+   "raw": "+!",
+   "token": "+!"
+  },
+  {
+   "name": "EXTOPAL",
+   "raw": "+#",
+   "token": "+#"
+  },
+  {
+   "name": "EXTOPAM",
+   "raw": "+&",
+   "token": "+&"
+  },
+  {
+   "name": "EXTOPAN",
+   "raw": "+\\",
+   "token": "+\\"
+  },
+  {
+   "name": "EXTOPAO",
+   "raw": "+`",
+   "token": "+`"
+  },
+  {
+   "name": "EXTOPAP",
+   "raw": "+'",
+   "token": "+'"
+  },
+  {
+   "name": "EXTOPAQ",
+   "raw": "+@",
+   "token": "+@"
+  },
+  {
+   "name": "EXTOPBC",
+   "raw": "-^",
+   "token": "-^"
+  },
+  {
+   "name": "EXTOPBD",
+   "raw": "-<",
+   "token": "-<"
+  },
+  {
+   "name": "EXTOPBE",
+   "raw": "->",
+   "token": "->"
+  },
+  {
+   "name": "EXTOPBF",
+   "raw": "-?",
+   "token": "-?"
+  },
+  {
+   "name": "EXTOPBG",
+   "raw": "-=",
+   "token": "-="
+  },
+  {
+   "name": "EXTOPBH",
+   "raw": "-*",
+   "token": "-*"
+  },
+  {
+   "name": "EXTOPBI",
+   "raw": "-/",
+   "token": "-/"
+  },
+  {
+   "name": "EXTOPBJ",
+   "raw": "-%",
+   "token": "-%"
+  },
+  {
+   "name": "EXTOPBK",
+   "raw": "-!",
+   "token": "-!"
+  },
+  {
+   "name": "EXTOPBL",
+   "raw": "-#",
+   "token": "-#"
+  },
+  {
+   "name": "EXTOPBM",
+   "raw": "-&",
+   "token": "-&"
+  },
+  {
+   "name": "EXTOPBN",
+   "raw": "-\\",
+   "token": "-\\"
+  },
+  {
+   "name": "EXTOPBO",
+   "raw": "-`",
+   "token": "-`"
+  },
+  {
+   "name": "EXTOPBP",
+   "raw": "-'",
+   "token": "-'"
+  },
+  {
+   "name": "EXTOPBQ",
+   "raw": "-@",
+   "token": "-@"
+  },
+  {
+   "name": "EXTOPCC",
+   "raw": "^^",
+   "token": "^^"
+  },
+  {
+   "name": "EXTOPCD",
+   "raw": "^<",
+   "token": "^<"
+  },
+  {
+   "name": "EXTOPCE",
+   "raw": "^>",
+   "token": "^>"
+  },
+  {
+   "name": "EXTOPCF",
+   "raw": "^?",
+   "token": "^?"
+  },
+  {
+   "name": "EXTOPCG",
+   "raw": "^=",
+   "token": "^="
+  },
+  {
+   "name": "EXTOPCH",
+   "raw": "^*",
+   "token": "^*"
+  },
+  {
+   "name": "EXTOPCI",
+   "raw": "^/",
+   "token": "^/"
+  },
+  {
+   "name": "EXTOPCJ",
+   "raw": "^%",
+   "token": "^%"
+  },
+  {
+   "name": "EXTOPCK",
+   "raw": "^!",
+   "token": "^!"
+  },
+  {
+   "name": "EXTOPCL",
+   "raw": "^#",
+   "token": "^#"
+  },
+  {
+   "name": "EXTOPCM",
+   "raw": "^&",
+   "token": "^&"
+  },
+  {
+   "name": "EXTOPCN",
+   "raw": "^\\",
+   "token": "^\\"
+  },
+  {
+   "name": "EXTOPCO",
+   "raw": "^`",
+   "token": "^`"
+  },
+  {
+   "name": "EXTOPCP",
+   "raw": "^'",
+   "token": "^'"
+  },
+  {
+   "name": "EXTOPCQ",
+   "raw": "^@",
+   "token": "^@"
+  },
+  {
+   "name": "EXTOPDC",
+   "raw": "<^",
+   "token": "<^"
+  },
+  {
+   "name": "EXTOPDD",
+   "raw": "<<",
+   "token": "<<"
+  },
+  {
+   "name": "EXTOPDF",
+   "raw": "<?",
+   "token": "<?"
+  },
+  {
+   "name": "EXTOPDH",
+   "raw": "<*",
+   "token": "<*"
+  },
+  {
+   "name": "EXTOPDI",
+   "raw": "</",
+   "token": "</"
+  },
+  {
+   "name": "EXTOPDJ",
+   "raw": "<%",
+   "token": "<%"
+  },
+  {
+   "name": "EXTOPDK",
+   "raw": "<!",
+   "token": "<!"
+  },
+  {
+   "name": "EXTOPDL",
+   "raw": "<#",
+   "token": "<#"
+  },
+  {
+   "name": "EXTOPDM",
+   "raw": "<&",
+   "token": "<&"
+  },
+  {
+   "name": "EXTOPDN",
+   "raw": "<\\",
+   "token": "<\\"
+  },
+  {
+   "name": "EXTOPDO",
+   "raw": "<`",
+   "token": "<`"
+  },
+  {
+   "name": "EXTOPDP",
+   "raw": "<'",
+   "token": "<'"
+  },
+  {
+   "name": "EXTOPDQ",
+   "raw": "<@",
+   "token": "<@"
+  },
+  {
+   "name": "EXTOPEC",
+   "raw": ">^",
+   "token": ">^"
+  },
+  {
+   "name": "EXTOPED",
+   "raw": "><",
+   "token": "><"
+  },
+  {
+   "name": "EXTOPEE",
+   "raw": ">>",
+   "token": ">>"
+  },
+  {
+   "name": "EXTOPEF",
+   "raw": ">?",
+   "token": ">?"
+  },
+  {
+   "name": "EXTOPEH",
+   "raw": ">*",
+   "token": ">*"
+  },
+  {
+   "name": "EXTOPEI",
+   "raw": ">/",
+   "token": ">/"
+  },
+  {
+   "name": "EXTOPEJ",
+   "raw": ">%",
+   "token": ">%"
+  },
+  {
+   "name": "EXTOPEK",
+   "raw": ">!",
+   "token": ">!"
+  },
+  {
+   "name": "EXTOPEL",
+   "raw": ">#",
+   "token": ">#"
+  },
+  {
+   "name": "EXTOPEM",
+   "raw": ">&",
+   "token": ">&"
+  },
+  {
+   "name": "EXTOPEN",
+   "raw": ">\\",
+   "token": ">\\"
+  },
+  {
+   "name": "EXTOPEO",
+   "raw": ">`",
+   "token": ">`"
+  },
+  {
+   "name": "EXTOPEP",
+   "raw": ">'",
+   "token": ">'"
+  },
+  {
+   "name": "EXTOPEQ",
+   "raw": ">@",
+   "token": ">@"
+  },
+  {
+   "name": "EXTOPFC",
+   "raw": "?^",
+   "token": "?^"
+  },
+  {
+   "name": "EXTOPFD",
+   "raw": "?<",
+   "token": "?<"
+  },
+  {
+   "name": "EXTOPFE",
+   "raw": "?>",
+   "token": "?>"
+  },
+  {
+   "name": "EXTOPFF",
+   "raw": "??",
+   "token": "??"
+  },
+  {
+   "name": "EXTOPFG",
+   "raw": "?=",
+   "token": "?="
+  },
+  {
+   "name": "EXTOPFH",
+   "raw": "?*",
+   "token": "?*"
+  },
+  {
+   "name": "EXTOPFI",
+   "raw": "?/",
+   "token": "?/"
+  },
+  {
+   "name": "EXTOPFJ",
+   "raw": "?%",
+   "token": "?%"
+  },
+  {
+   "name": "EXTOPFK",
+   "raw": "?!",
+   "token": "?!"
+  },
+  {
+   "name": "EXTOPFL",
+   "raw": "?#",
+   "token": "?#"
+  },
+  {
+   "name": "EXTOPFM",
+   "raw": "?&",
+   "token": "?&"
+  },
+  {
+   "name": "EXTOPFN",
+   "raw": "?\\",
+   "token": "?\\"
+  },
+  {
+   "name": "EXTOPFO",
+   "raw": "?`",
+   "token": "?`"
+  },
+  {
+   "name": "EXTOPFP",
+   "raw": "?'",
+   "token": "?'"
+  },
+  {
+   "name": "EXTOPFQ",
+   "raw": "?@",
+   "token": "?@"
+  },
+  {
+   "name": "EXTOPGC",
+   "raw": "=^",
+   "token": "=^"
+  },
+  {
+   "name": "EXTOPGD",
+   "raw": "=<",
+   "token": "=<"
+  },
+  {
+   "name": "EXTOPGE",
+   "raw": "=>",
+   "token": "=>"
+  },
+  {
+   "name": "EXTOPGF",
+   "raw": "=?",
+   "token": "=?"
+  },
+  {
+   "name": "EXTOPGG",
+   "raw": "==",
+   "token": "=="
+  },
+  {
+   "name": "EXTOPGH",
+   "raw": "=*",
+   "token": "=*"
+  },
+  {
+   "name": "EXTOPGI",
+   "raw": "=/",
+   "token": "=/"
+  },
+  {
+   "name": "EXTOPGJ",
+   "raw": "=%",
+   "token": "=%"
+  },
+  {
+   "name": "EXTOPGK",
+   "raw": "=!",
+   "token": "=!"
+  },
+  {
+   "name": "EXTOPGL",
+   "raw": "=#",
+   "token": "=#"
+  },
+  {
+   "name": "EXTOPGM",
+   "raw": "=&",
+   "token": "=&"
+  },
+  {
+   "name": "EXTOPGN",
+   "raw": "=\\",
+   "token": "=\\"
+  },
+  {
+   "name": "EXTOPGO",
+   "raw": "=`",
+   "token": "=`"
+  },
+  {
+   "name": "EXTOPGP",
+   "raw": "='",
+   "token": "='"
+  },
+  {
+   "name": "EXTOPGQ",
+   "raw": "=@",
+   "token": "=@"
+  },
+  {
+   "name": "EXTOPHC",
+   "raw": "*^",
+   "token": "*^"
+  },
+  {
+   "name": "EXTOPHD",
+   "raw": "*<",
+   "token": "*<"
+  },
+  {
+   "name": "EXTOPHE",
+   "raw": "*>",
+   "token": "*>"
+  },
+  {
+   "name": "EXTOPHF",
+   "raw": "*?",
+   "token": "*?"
+  },
+  {
+   "name": "EXTOPHG",
+   "raw": "*=",
+   "token": "*="
+  },
+  {
+   "name": "EXTOPHH",
+   "raw": "**",
+   "token": "**"
+  },
+  {
+   "name": "EXTOPHI",
+   "raw": "*/",
+   "token": "*/"
+  },
+  {
+   "name": "EXTOPHJ",
+   "raw": "*%",
+   "token": "*%"
+  },
+  {
+   "name": "EXTOPHK",
+   "raw": "*!",
+   "token": "*!"
+  },
+  {
+   "name": "EXTOPHL",
+   "raw": "*#",
+   "token": "*#"
+  },
+  {
+   "name": "EXTOPHM",
+   "raw": "*&",
+   "token": "*&"
+  },
+  {
+   "name": "EXTOPHN",
+   "raw": "*\\",
+   "token": "*\\"
+  },
+  {
+   "name": "EXTOPHO",
+   "raw": "*`",
+   "token": "*`"
+  },
+  {
+   "name": "EXTOPHP",
+   "raw": "*'",
+   "token": "*'"
+  },
+  {
+   "name": "EXTOPHQ",
+   "raw": "*@",
+   "token": "*@"
+  },
+  {
+   "name": "EXTOPIC",
+   "raw": "/^",
+   "token": "/^"
+  },
+  {
+   "name": "EXTOPID",
+   "raw": "/<",
+   "token": "/<"
+  },
+  {
+   "name": "EXTOPIE",
+   "raw": "/>",
+   "token": "/>"
+  },
+  {
+   "name": "EXTOPIF",
+   "raw": "/?",
+   "token": "/?"
+  },
+  {
+   "name": "EXTOPIG",
+   "raw": "/=",
+   "token": "/="
+  },
+  {
+   "name": "EXTOPIH",
+   "raw": "/*",
+   "token": "/*"
+  },
+  {
+   "name": "EXTOPII",
+   "raw": "//",
+   "token": "//"
+  },
+  {
+   "name": "EXTOPIJ",
+   "raw": "/%",
+   "token": "/%"
+  },
+  {
+   "name": "EXTOPIK",
+   "raw": "/!",
+   "token": "/!"
+  },
+  {
+   "name": "EXTOPIL",
+   "raw": "/#",
+   "token": "/#"
+  },
+  {
+   "name": "EXTOPIM",
+   "raw": "/&",
+   "token": "/&"
+  },
+  {
+   "name": "EXTOPIN",
+   "raw": "/\\",
+   "token": "/\\"
+  },
+  {
+   "name": "EXTOPIO",
+   "raw": "/`",
+   "token": "/`"
+  },
+  {
+   "name": "EXTOPIP",
+   "raw": "/'",
+   "token": "/'"
+  },
+  {
+   "name": "EXTOPIQ",
+   "raw": "/@",
+   "token": "/@"
+  },
+  {
+   "name": "EXTOPJC",
+   "raw": "%^",
+   "token": "%^"
+  },
+  {
+   "name": "EXTOPJD",
+   "raw": "%<",
+   "token": "%<"
+  },
+  {
+   "name": "EXTOPJE",
+   "raw": "%>",
+   "token": "%>"
+  },
+  {
+   "name": "EXTOPJF",
+   "raw": "%?",
+   "token": "%?"
+  },
+  {
+   "name": "EXTOPJG",
+   "raw": "%=",
+   "token": "%="
+  },
+  {
+   "name": "EXTOPJH",
+   "raw": "%*",
+   "token": "%*"
+  },
+  {
+   "name": "EXTOPJI",
+   "raw": "%/",
+   "token": "%/"
+  },
+  {
+   "name": "EXTOPJJ",
+   "raw": "%%",
+   "token": "%%"
+  },
+  {
+   "name": "EXTOPJK",
+   "raw": "%!",
+   "token": "%!"
+  },
+  {
+   "name": "EXTOPJL",
+   "raw": "%#",
+   "token": "%#"
+  },
+  {
+   "name": "EXTOPJM",
+   "raw": "%&",
+   "token": "%&"
+  },
+  {
+   "name": "EXTOPJN",
+   "raw": "%\\",
+   "token": "%\\"
+  },
+  {
+   "name": "EXTOPJO",
+   "raw": "%`",
+   "token": "%`"
+  },
+  {
+   "name": "EXTOPJP",
+   "raw": "%'",
+   "token": "%'"
+  },
+  {
+   "name": "EXTOPJQ",
+   "raw": "%@",
+   "token": "%@"
+  },
+  {
+   "name": "EXTOPKC",
+   "raw": "!^",
+   "token": "!^"
+  },
+  {
+   "name": "EXTOPKD",
+   "raw": "!<",
+   "token": "!<"
+  },
+  {
+   "name": "EXTOPKE",
+   "raw": "!>",
+   "token": "!>"
+  },
+  {
+   "name": "EXTOPKF",
+   "raw": "!?",
+   "token": "!?"
+  },
+  {
+   "name": "EXTOPKG",
+   "raw": "!=",
+   "token": "!="
+  },
+  {
+   "name": "EXTOPKH",
+   "raw": "!*",
+   "token": "!*"
+  },
+  {
+   "name": "EXTOPKI",
+   "raw": "!/",
+   "token": "!/"
+  },
+  {
+   "name": "EXTOPKJ",
+   "raw": "!%",
+   "token": "!%"
+  },
+  {
+   "name": "EXTOPKK",
+   "raw": "!!",
+   "token": "!!"
+  },
+  {
+   "name": "EXTOPKL",
+   "raw": "!#",
+   "token": "!#"
+  },
+  {
+   "name": "EXTOPKM",
+   "raw": "!&",
+   "token": "!&"
+  },
+  {
+   "name": "EXTOPKN",
+   "raw": "!\\",
+   "token": "!\\"
+  },
+  {
+   "name": "EXTOPKO",
+   "raw": "!`",
+   "token": "!`"
+  },
+  {
+   "name": "EXTOPKP",
+   "raw": "!'",
+   "token": "!'"
+  },
+  {
+   "name": "EXTOPKQ",
+   "raw": "!@",
+   "token": "!@"
+  },
+  {
+   "name": "EXTOPLC",
+   "raw": "#^",
+   "token": "#^"
+  },
+  {
+   "name": "EXTOPLD",
+   "raw": "#<",
+   "token": "#<"
+  },
+  {
+   "name": "EXTOPLE",
+   "raw": "#>",
+   "token": "#>"
+  },
+  {
+   "name": "EXTOPLF",
+   "raw": "#?",
+   "token": "#?"
+  },
+  {
+   "name": "EXTOPLG",
+   "raw": "#=",
+   "token": "#="
+  },
+  {
+   "name": "EXTOPLH",
+   "raw": "#*",
+   "token": "#*"
+  },
+  {
+   "name": "EXTOPLI",
+   "raw": "#/",
+   "token": "#/"
+  },
+  {
+   "name": "EXTOPLJ",
+   "raw": "#%",
+   "token": "#%"
+  },
+  {
+   "name": "EXTOPLK",
+   "raw": "#!",
+   "token": "#!"
+  },
+  {
+   "name": "EXTOPLL",
+   "raw": "##",
+   "token": "##"
+  },
+  {
+   "name": "EXTOPLM",
+   "raw": "#&",
+   "token": "#&"
+  },
+  {
+   "name": "EXTOPLN",
+   "raw": "#\\",
+   "token": "#\\"
+  },
+  {
+   "name": "EXTOPLO",
+   "raw": "#`",
+   "token": "#`"
+  },
+  {
+   "name": "EXTOPLP",
+   "raw": "#'",
+   "token": "#'"
+  },
+  {
+   "name": "EXTOPLQ",
+   "raw": "#@",
+   "token": "#@"
+  },
+  {
+   "name": "EXTOPMC",
+   "raw": "&^",
+   "token": "&^"
+  },
+  {
+   "name": "EXTOPMD",
+   "raw": "&<",
+   "token": "&<"
+  },
+  {
+   "name": "EXTOPME",
+   "raw": "&>",
+   "token": "&>"
+  },
+  {
+   "name": "EXTOPMF",
+   "raw": "&?",
+   "token": "&?"
+  },
+  {
+   "name": "EXTOPMG",
+   "raw": "&=",
+   "token": "&="
+  },
+  {
+   "name": "EXTOPMH",
+   "raw": "&*",
+   "token": "&*"
+  },
+  {
+   "name": "EXTOPMI",
+   "raw": "&/",
+   "token": "&/"
+  },
+  {
+   "name": "EXTOPMJ",
+   "raw": "&%",
+   "token": "&%"
+  },
+  {
+   "name": "EXTOPMK",
+   "raw": "&!",
+   "token": "&!"
+  },
+  {
+   "name": "EXTOPML",
+   "raw": "&#",
+   "token": "&#"
+  },
+  {
+   "name": "EXTOPMM",
+   "raw": "&&",
+   "token": "&&"
+  },
+  {
+   "name": "EXTOPMN",
+   "raw": "&\\",
+   "token": "&\\"
+  },
+  {
+   "name": "EXTOPMO",
+   "raw": "&`",
+   "token": "&`"
+  },
+  {
+   "name": "EXTOPMP",
+   "raw": "&'",
+   "token": "&'"
+  },
+  {
+   "name": "EXTOPMQ",
+   "raw": "&@",
+   "token": "&@"
+  },
+  {
+   "name": "EXTOPNC",
+   "raw": "\\^",
+   "token": "\\^"
+  },
+  {
+   "name": "EXTOPND",
+   "raw": "\\<",
+   "token": "\\<"
+  },
+  {
+   "name": "EXTOPNE",
+   "raw": "\\>",
+   "token": "\\>"
+  },
+  {
+   "name": "EXTOPNF",
+   "raw": "\\?",
+   "token": "\\?"
+  },
+  {
+   "name": "EXTOPNG",
+   "raw": "\\=",
+   "token": "\\="
+  },
+  {
+   "name": "EXTOPNH",
+   "raw": "\\*",
+   "token": "\\*"
+  },
+  {
+   "name": "EXTOPNI",
+   "raw": "\\/",
+   "token": "\\/"
+  },
+  {
+   "name": "EXTOPNJ",
+   "raw": "\\%",
+   "token": "\\%"
+  },
+  {
+   "name": "EXTOPNK",
+   "raw": "\\!",
+   "token": "\\!"
+  },
+  {
+   "name": "EXTOPNL",
+   "raw": "\\#",
+   "token": "\\#"
+  },
+  {
+   "name": "EXTOPNM",
+   "raw": "\\&",
+   "token": "\\&"
+  },
+  {
+   "name": "EXTOPNN",
+   "raw": "\\\\",
+   "token": "\\\\"
+  },
+  {
+   "name": "EXTOPNO",
+   "raw": "\\`",
+   "token": "\\`"
+  },
+  {
+   "name": "EXTOPNP",
+   "raw": "\\'",
+   "token": "\\'"
+  },
+  {
+   "name": "EXTOPNQ",
+   "raw": "\\@",
+   "token": "\\@"
+  },
+  {
+   "name": "EXTOPOC",
+   "raw": "`^",
+   "token": "`^"
+  },
+  {
+   "name": "EXTOPOD",
+   "raw": "`<",
+   "token": "`<"
+  },
+  {
+   "name": "EXTOPOE",
+   "raw": "`>",
+   "token": "`>"
+  },
+  {
+   "name": "EXTOPOF",
+   "raw": "`?",
+   "token": "`?"
+  },
+  {
+   "name": "EXTOPOG",
+   "raw": "`=",
+   "token": "`="
+  },
+  {
+   "name": "EXTOPOH",
+   "raw": "`*",
+   "token": "`*"
+  },
+  {
+   "name": "EXTOPOI",
+   "raw": "`/",
+   "token": "`/"
+  },
+  {
+   "name": "EXTOPOJ",
+   "raw": "`%",
+   "token": "`%"
+  },
+  {
+   "name": "EXTOPOK",
+   "raw": "`!",
+   "token": "`!"
+  },
+  {
+   "name": "EXTOPOL",
+   "raw": "`#",
+   "token": "`#"
+  },
+  {
+   "name": "EXTOPOM",
+   "raw": "`&",
+   "token": "`&"
+  },
+  {
+   "name": "EXTOPON",
+   "raw": "`\\",
+   "token": "`\\"
+  },
+  {
+   "name": "EXTOPOO",
+   "raw": "``",
+   "token": "``"
+  },
+  {
+   "name": "EXTOPOP",
+   "raw": "`'",
+   "token": "`'"
+  },
+  {
+   "name": "EXTOPOQ",
+   "raw": "`@",
+   "token": "`@"
+  },
+  {
+   "name": "EXTOPPC",
+   "raw": "'^",
+   "token": "'^"
+  },
+  {
+   "name": "EXTOPPD",
+   "raw": "'<",
+   "token": "'<"
+  },
+  {
+   "name": "EXTOPPE",
+   "raw": "'>",
+   "token": "'>"
+  },
+  {
+   "name": "EXTOPPF",
+   "raw": "'?",
+   "token": "'?"
+  },
+  {
+   "name": "EXTOPPG",
+   "raw": "'=",
+   "token": "'="
+  },
+  {
+   "name": "EXTOPPH",
+   "raw": "'*",
+   "token": "'*"
+  },
+  {
+   "name": "EXTOPPI",
+   "raw": "'/",
+   "token": "'/"
+  },
+  {
+   "name": "EXTOPPJ",
+   "raw": "'%",
+   "token": "'%"
+  },
+  {
+   "name": "EXTOPPK",
+   "raw": "'!",
+   "token": "'!"
+  },
+  {
+   "name": "EXTOPPL",
+   "raw": "'#",
+   "token": "'#"
+  },
+  {
+   "name": "EXTOPPM",
+   "raw": "'&",
+   "token": "'&"
+  },
+  {
+   "name": "EXTOPPN",
+   "raw": "'\\",
+   "token": "'\\"
+  },
+  {
+   "name": "EXTOPPO",
+   "raw": "'`",
+   "token": "'`"
+  },
+  {
+   "name": "EXTOPPP",
+   "raw": "''",
+   "token": "''"
+  },
+  {
+   "name": "EXTOPPQ",
+   "raw": "'@",
+   "token": "'@"
+  },
+  {
+   "name": "EXTOPQC",
+   "raw": "@^",
+   "token": "@^"
+  },
+  {
+   "name": "EXTOPQD",
+   "raw": "@<",
+   "token": "@<"
+  },
+  {
+   "name": "EXTOPQE",
+   "raw": "@>",
+   "token": "@>"
+  },
+  {
+   "name": "EXTOPQF",
+   "raw": "@?",
+   "token": "@?"
+  },
+  {
+   "name": "EXTOPQG",
+   "raw": "@=",
+   "token": "@="
+  },
+  {
+   "name": "EXTOPQH",
+   "raw": "@*",
+   "token": "@*"
+  },
+  {
+   "name": "EXTOPQI",
+   "raw": "@/",
+   "token": "@/"
+  },
+  {
+   "name": "EXTOPQJ",
+   "raw": "@%",
+   "token": "@%"
+  },
+  {
+   "name": "EXTOPQK",
+   "raw": "@!",
+   "token": "@!"
+  },
+  {
+   "name": "EXTOPQL",
+   "raw": "@#",
+   "token": "@#"
+  },
+  {
+   "name": "EXTOPQM",
+   "raw": "@&",
+   "token": "@&"
+  },
+  {
+   "name": "EXTOPQN",
+   "raw": "@\\",
+   "token": "@\\"
+  },
+  {
+   "name": "EXTOPQO",
+   "raw": "@`",
+   "token": "@`"
+  },
+  {
+   "name": "EXTOPQP",
+   "raw": "@'",
+   "token": "@'"
+  },
+  {
+   "name": "EXTOPQQ",
+   "raw": "@@",
+   "token": "@@"
+  }
+ ],
+ "BINARIES": [
+  {
+   "name": "EXTOPF",
+   "raw": "?",
+   "token": "?"
+  },
+  {
+   "name": "EXTOPK",
+   "raw": "!",
+   "token": "!"
+  },
+  {
+   "name": "EXTOPL",
+   "raw": "#",
+   "token": "#"
+  },
+  {
+   "name": "EXTOPO",
+   "raw": "`",
+   "token": "`"
+  },
+  {
+   "name": "EXTOPQ",
+   "raw": "@",
+   "token": "@"
+  },
+  {
+   "name": "EXTOPAC",
+   "raw": "+^",
+   "token": "+^"
+  },
+  {
+   "name": "EXTOPAD",
+   "raw": "+<",
+   "token": "+<"
+  },
+  {
+   "name": "EXTOPAE",
+   "raw": "+>",
+   "token": "+>"
+  },
+  {
+   "name": "EXTOPAF",
+   "raw": "+?",
+   "token": "+?"
+  },
+  {
+   "name": "EXTOPAG",
+   "raw": "+=",
+   "token": "+="
+  },
+  {
+   "name": "EXTOPAH",
+   "raw": "+*",
+   "token": "+*"
+  },
+  {
+   "name": "EXTOPAI",
+   "raw": "+/",
+   "token": "+/"
+  },
+  {
+   "name": "EXTOPAJ",
+   "raw": "+%",
+   "token": "+%"
+  },
+  {
+   "name": "EXTOPAK",
+   "raw": "+!",
+   "token": "+!"
+  },
+  {
+   "name": "EXTOPAL",
+   "raw": "+#",
+   "token": "+#"
+  },
+  {
+   "name": "EXTOPAM",
+   "raw": "+&",
+   "token": "+&"
+  },
+  {
+   "name": "EXTOPAN",
+   "raw": "+\\",
+   "token": "+\\"
+  },
+  {
+   "name": "EXTOPAO",
+   "raw": "+`",
+   "token": "+`"
+  },
+  {
+   "name": "EXTOPAP",
+   "raw": "+'",
+   "token": "+'"
+  },
+  {
+   "name": "EXTOPAQ",
+   "raw": "+@",
+   "token": "+@"
+  },
+  {
+   "name": "EXTOPBC",
+   "raw": "-^",
+   "token": "-^"
+  },
+  {
+   "name": "EXTOPBD",
+   "raw": "-<",
+   "token": "-<"
+  },
+  {
+   "name": "EXTOPBE",
+   "raw": "->",
+   "token": "->"
+  },
+  {
+   "name": "EXTOPBF",
+   "raw": "-?",
+   "token": "-?"
+  },
+  {
+   "name": "EXTOPBG",
+   "raw": "-=",
+   "token": "-="
+  },
+  {
+   "name": "EXTOPBH",
+   "raw": "-*",
+   "token": "-*"
+  },
+  {
+   "name": "EXTOPBI",
+   "raw": "-/",
+   "token": "-/"
+  },
+  {
+   "name": "EXTOPBJ",
+   "raw": "-%",
+   "token": "-%"
+  },
+  {
+   "name": "EXTOPBK",
+   "raw": "-!",
+   "token": "-!"
+  },
+  {
+   "name": "EXTOPBL",
+   "raw": "-#",
+   "token": "-#"
+  },
+  {
+   "name": "EXTOPBM",
+   "raw": "-&",
+   "token": "-&"
+  },
+  {
+   "name": "EXTOPBN",
+   "raw": "-\\",
+   "token": "-\\"
+  },
+  {
+   "name": "EXTOPBO",
+   "raw": "-`",
+   "token": "-`"
+  },
+  {
+   "name": "EXTOPBP",
+   "raw": "-'",
+   "token": "-'"
+  },
+  {
+   "name": "EXTOPBQ",
+   "raw": "-@",
+   "token": "-@"
+  },
+  {
+   "name": "EXTOPCC",
+   "raw": "^^",
+   "token": "^^"
+  },
+  {
+   "name": "EXTOPCD",
+   "raw": "^<",
+   "token": "^<"
+  },
+  {
+   "name": "EXTOPCE",
+   "raw": "^>",
+   "token": "^>"
+  },
+  {
+   "name": "EXTOPCF",
+   "raw": "^?",
+   "token": "^?"
+  },
+  {
+   "name": "EXTOPCG",
+   "raw": "^=",
+   "token": "^="
+  },
+  {
+   "name": "EXTOPCH",
+   "raw": "^*",
+   "token": "^*"
+  },
+  {
+   "name": "EXTOPCI",
+   "raw": "^/",
+   "token": "^/"
+  },
+  {
+   "name": "EXTOPCJ",
+   "raw": "^%",
+   "token": "^%"
+  },
+  {
+   "name": "EXTOPCK",
+   "raw": "^!",
+   "token": "^!"
+  },
+  {
+   "name": "EXTOPCL",
+   "raw": "^#",
+   "token": "^#"
+  },
+  {
+   "name": "EXTOPCM",
+   "raw": "^&",
+   "token": "^&"
+  },
+  {
+   "name": "EXTOPCN",
+   "raw": "^\\",
+   "token": "^\\"
+  },
+  {
+   "name": "EXTOPCO",
+   "raw": "^`",
+   "token": "^`"
+  },
+  {
+   "name": "EXTOPCP",
+   "raw": "^'",
+   "token": "^'"
+  },
+  {
+   "name": "EXTOPCQ",
+   "raw": "^@",
+   "token": "^@"
+  },
+  {
+   "name": "EXTOPDC",
+   "raw": "<^",
+   "token": "<^"
+  },
+  {
+   "name": "EXTOPDD",
+   "raw": "<<",
+   "token": "<<"
+  },
+  {
+   "name": "EXTOPDF",
+   "raw": "<?",
+   "token": "<?"
+  },
+  {
+   "name": "EXTOPDH",
+   "raw": "<*",
+   "token": "<*"
+  },
+  {
+   "name": "EXTOPDI",
+   "raw": "</",
+   "token": "</"
+  },
+  {
+   "name": "EXTOPDJ",
+   "raw": "<%",
+   "token": "<%"
+  },
+  {
+   "name": "EXTOPDK",
+   "raw": "<!",
+   "token": "<!"
+  },
+  {
+   "name": "EXTOPDL",
+   "raw": "<#",
+   "token": "<#"
+  },
+  {
+   "name": "EXTOPDM",
+   "raw": "<&",
+   "token": "<&"
+  },
+  {
+   "name": "EXTOPDN",
+   "raw": "<\\",
+   "token": "<\\"
+  },
+  {
+   "name": "EXTOPDO",
+   "raw": "<`",
+   "token": "<`"
+  },
+  {
+   "name": "EXTOPDP",
+   "raw": "<'",
+   "token": "<'"
+  },
+  {
+   "name": "EXTOPDQ",
+   "raw": "<@",
+   "token": "<@"
+  },
+  {
+   "name": "EXTOPEC",
+   "raw": ">^",
+   "token": ">^"
+  },
+  {
+   "name": "EXTOPED",
+   "raw": "><",
+   "token": "><"
+  },
+  {
+   "name": "EXTOPEE",
+   "raw": ">>",
+   "token": ">>"
+  },
+  {
+   "name": "EXTOPEF",
+   "raw": ">?",
+   "token": ">?"
+  },
+  {
+   "name": "EXTOPEH",
+   "raw": ">*",
+   "token": ">*"
+  },
+  {
+   "name": "EXTOPEI",
+   "raw": ">/",
+   "token": ">/"
+  },
+  {
+   "name": "EXTOPEJ",
+   "raw": ">%",
+   "token": ">%"
+  },
+  {
+   "name": "EXTOPEK",
+   "raw": ">!",
+   "token": ">!"
+  },
+  {
+   "name": "EXTOPEL",
+   "raw": ">#",
+   "token": ">#"
+  },
+  {
+   "name": "EXTOPEM",
+   "raw": ">&",
+   "token": ">&"
+  },
+  {
+   "name": "EXTOPEN",
+   "raw": ">\\",
+   "token": ">\\"
+  },
+  {
+   "name": "EXTOPEO",
+   "raw": ">`",
+   "token": ">`"
+  },
+  {
+   "name": "EXTOPEP",
+   "raw": ">'",
+   "token": ">'"
+  },
+  {
+   "name": "EXTOPEQ",
+   "raw": ">@",
+   "token": ">@"
+  },
+  {
+   "name": "EXTOPFC",
+   "raw": "?^",
+   "token": "?^"
+  },
+  {
+   "name": "EXTOPFD",
+   "raw": "?<",
+   "token": "?<"
+  },
+  {
+   "name": "EXTOPFE",
+   "raw": "?>",
+   "token": "?>"
+  },
+  {
+   "name": "EXTOPFF",
+   "raw": "??",
+   "token": "??"
+  },
+  {
+   "name": "EXTOPFG",
+   "raw": "?=",
+   "token": "?="
+  },
+  {
+   "name": "EXTOPFH",
+   "raw": "?*",
+   "token": "?*"
+  },
+  {
+   "name": "EXTOPFI",
+   "raw": "?/",
+   "token": "?/"
+  },
+  {
+   "name": "EXTOPFJ",
+   "raw": "?%",
+   "token": "?%"
+  },
+  {
+   "name": "EXTOPFK",
+   "raw": "?!",
+   "token": "?!"
+  },
+  {
+   "name": "EXTOPFL",
+   "raw": "?#",
+   "token": "?#"
+  },
+  {
+   "name": "EXTOPFM",
+   "raw": "?&",
+   "token": "?&"
+  },
+  {
+   "name": "EXTOPFN",
+   "raw": "?\\",
+   "token": "?\\"
+  },
+  {
+   "name": "EXTOPFO",
+   "raw": "?`",
+   "token": "?`"
+  },
+  {
+   "name": "EXTOPFP",
+   "raw": "?'",
+   "token": "?'"
+  },
+  {
+   "name": "EXTOPFQ",
+   "raw": "?@",
+   "token": "?@"
+  },
+  {
+   "name": "EXTOPGC",
+   "raw": "=^",
+   "token": "=^"
+  },
+  {
+   "name": "EXTOPGD",
+   "raw": "=<",
+   "token": "=<"
+  },
+  {
+   "name": "EXTOPGE",
+   "raw": "=>",
+   "token": "=>"
+  },
+  {
+   "name": "EXTOPGF",
+   "raw": "=?",
+   "token": "=?"
+  },
+  {
+   "name": "EXTOPGG",
+   "raw": "==",
+   "token": "=="
+  },
+  {
+   "name": "EXTOPGH",
+   "raw": "=*",
+   "token": "=*"
+  },
+  {
+   "name": "EXTOPGI",
+   "raw": "=/",
+   "token": "=/"
+  },
+  {
+   "name": "EXTOPGJ",
+   "raw": "=%",
+   "token": "=%"
+  },
+  {
+   "name": "EXTOPGK",
+   "raw": "=!",
+   "token": "=!"
+  },
+  {
+   "name": "EXTOPGL",
+   "raw": "=#",
+   "token": "=#"
+  },
+  {
+   "name": "EXTOPGM",
+   "raw": "=&",
+   "token": "=&"
+  },
+  {
+   "name": "EXTOPGN",
+   "raw": "=\\",
+   "token": "=\\"
+  },
+  {
+   "name": "EXTOPGO",
+   "raw": "=`",
+   "token": "=`"
+  },
+  {
+   "name": "EXTOPGP",
+   "raw": "='",
+   "token": "='"
+  },
+  {
+   "name": "EXTOPGQ",
+   "raw": "=@",
+   "token": "=@"
+  },
+  {
+   "name": "EXTOPHC",
+   "raw": "*^",
+   "token": "*^"
+  },
+  {
+   "name": "EXTOPHD",
+   "raw": "*<",
+   "token": "*<"
+  },
+  {
+   "name": "EXTOPHE",
+   "raw": "*>",
+   "token": "*>"
+  },
+  {
+   "name": "EXTOPHF",
+   "raw": "*?",
+   "token": "*?"
+  },
+  {
+   "name": "EXTOPHG",
+   "raw": "*=",
+   "token": "*="
+  },
+  {
+   "name": "EXTOPHH",
+   "raw": "**",
+   "token": "**"
+  },
+  {
+   "name": "EXTOPHI",
+   "raw": "*/",
+   "token": "*/"
+  },
+  {
+   "name": "EXTOPHJ",
+   "raw": "*%",
+   "token": "*%"
+  },
+  {
+   "name": "EXTOPHK",
+   "raw": "*!",
+   "token": "*!"
+  },
+  {
+   "name": "EXTOPHL",
+   "raw": "*#",
+   "token": "*#"
+  },
+  {
+   "name": "EXTOPHM",
+   "raw": "*&",
+   "token": "*&"
+  },
+  {
+   "name": "EXTOPHN",
+   "raw": "*\\",
+   "token": "*\\"
+  },
+  {
+   "name": "EXTOPHO",
+   "raw": "*`",
+   "token": "*`"
+  },
+  {
+   "name": "EXTOPHP",
+   "raw": "*'",
+   "token": "*'"
+  },
+  {
+   "name": "EXTOPHQ",
+   "raw": "*@",
+   "token": "*@"
+  },
+  {
+   "name": "EXTOPIC",
+   "raw": "/^",
+   "token": "/^"
+  },
+  {
+   "name": "EXTOPID",
+   "raw": "/<",
+   "token": "/<"
+  },
+  {
+   "name": "EXTOPIE",
+   "raw": "/>",
+   "token": "/>"
+  },
+  {
+   "name": "EXTOPIF",
+   "raw": "/?",
+   "token": "/?"
+  },
+  {
+   "name": "EXTOPIG",
+   "raw": "/=",
+   "token": "/="
+  },
+  {
+   "name": "EXTOPIH",
+   "raw": "/*",
+   "token": "/*"
+  },
+  {
+   "name": "EXTOPII",
+   "raw": "//",
+   "token": "//"
+  },
+  {
+   "name": "EXTOPIJ",
+   "raw": "/%",
+   "token": "/%"
+  },
+  {
+   "name": "EXTOPIK",
+   "raw": "/!",
+   "token": "/!"
+  },
+  {
+   "name": "EXTOPIL",
+   "raw": "/#",
+   "token": "/#"
+  },
+  {
+   "name": "EXTOPIM",
+   "raw": "/&",
+   "token": "/&"
+  },
+  {
+   "name": "EXTOPIN",
+   "raw": "/\\",
+   "token": "/\\"
+  },
+  {
+   "name": "EXTOPIO",
+   "raw": "/`",
+   "token": "/`"
+  },
+  {
+   "name": "EXTOPIP",
+   "raw": "/'",
+   "token": "/'"
+  },
+  {
+   "name": "EXTOPIQ",
+   "raw": "/@",
+   "token": "/@"
+  },
+  {
+   "name": "EXTOPJC",
+   "raw": "%^",
+   "token": "%^"
+  },
+  {
+   "name": "EXTOPJD",
+   "raw": "%<",
+   "token": "%<"
+  },
+  {
+   "name": "EXTOPJE",
+   "raw": "%>",
+   "token": "%>"
+  },
+  {
+   "name": "EXTOPJF",
+   "raw": "%?",
+   "token": "%?"
+  },
+  {
+   "name": "EXTOPJG",
+   "raw": "%=",
+   "token": "%="
+  },
+  {
+   "name": "EXTOPJH",
+   "raw": "%*",
+   "token": "%*"
+  },
+  {
+   "name": "EXTOPJI",
+   "raw": "%/",
+   "token": "%/"
+  },
+  {
+   "name": "EXTOPJJ",
+   "raw": "%%",
+   "token": "%%"
+  },
+  {
+   "name": "EXTOPJK",
+   "raw": "%!",
+   "token": "%!"
+  },
+  {
+   "name": "EXTOPJL",
+   "raw": "%#",
+   "token": "%#"
+  },
+  {
+   "name": "EXTOPJM",
+   "raw": "%&",
+   "token": "%&"
+  },
+  {
+   "name": "EXTOPJN",
+   "raw": "%\\",
+   "token": "%\\"
+  },
+  {
+   "name": "EXTOPJO",
+   "raw": "%`",
+   "token": "%`"
+  },
+  {
+   "name": "EXTOPJP",
+   "raw": "%'",
+   "token": "%'"
+  },
+  {
+   "name": "EXTOPJQ",
+   "raw": "%@",
+   "token": "%@"
+  },
+  {
+   "name": "EXTOPKC",
+   "raw": "!^",
+   "token": "!^"
+  },
+  {
+   "name": "EXTOPKD",
+   "raw": "!<",
+   "token": "!<"
+  },
+  {
+   "name": "EXTOPKE",
+   "raw": "!>",
+   "token": "!>"
+  },
+  {
+   "name": "EXTOPKF",
+   "raw": "!?",
+   "token": "!?"
+  },
+  {
+   "name": "EXTOPKG",
+   "raw": "!=",
+   "token": "!="
+  },
+  {
+   "name": "EXTOPKH",
+   "raw": "!*",
+   "token": "!*"
+  },
+  {
+   "name": "EXTOPKI",
+   "raw": "!/",
+   "token": "!/"
+  },
+  {
+   "name": "EXTOPKJ",
+   "raw": "!%",
+   "token": "!%"
+  },
+  {
+   "name": "EXTOPKK",
+   "raw": "!!",
+   "token": "!!"
+  },
+  {
+   "name": "EXTOPKL",
+   "raw": "!#",
+   "token": "!#"
+  },
+  {
+   "name": "EXTOPKM",
+   "raw": "!&",
+   "token": "!&"
+  },
+  {
+   "name": "EXTOPKN",
+   "raw": "!\\",
+   "token": "!\\"
+  },
+  {
+   "name": "EXTOPKO",
+   "raw": "!`",
+   "token": "!`"
+  },
+  {
+   "name": "EXTOPKP",
+   "raw": "!'",
+   "token": "!'"
+  },
+  {
+   "name": "EXTOPKQ",
+   "raw": "!@",
+   "token": "!@"
+  },
+  {
+   "name": "EXTOPLC",
+   "raw": "#^",
+   "token": "#^"
+  },
+  {
+   "name": "EXTOPLD",
+   "raw": "#<",
+   "token": "#<"
+  },
+  {
+   "name": "EXTOPLE",
+   "raw": "#>",
+   "token": "#>"
+  },
+  {
+   "name": "EXTOPLF",
+   "raw": "#?",
+   "token": "#?"
+  },
+  {
+   "name": "EXTOPLG",
+   "raw": "#=",
+   "token": "#="
+  },
+  {
+   "name": "EXTOPLH",
+   "raw": "#*",
+   "token": "#*"
+  },
+  {
+   "name": "EXTOPLI",
+   "raw": "#/",
+   "token": "#/"
+  },
+  {
+   "name": "EXTOPLJ",
+   "raw": "#%",
+   "token": "#%"
+  },
+  {
+   "name": "EXTOPLK",
+   "raw": "#!",
+   "token": "#!"
+  },
+  {
+   "name": "EXTOPLL",
+   "raw": "##",
+   "token": "##"
+  },
+  {
+   "name": "EXTOPLM",
+   "raw": "#&",
+   "token": "#&"
+  },
+  {
+   "name": "EXTOPLN",
+   "raw": "#\\",
+   "token": "#\\"
+  },
+  {
+   "name": "EXTOPLO",
+   "raw": "#`",
+   "token": "#`"
+  },
+  {
+   "name": "EXTOPLP",
+   "raw": "#'",
+   "token": "#'"
+  },
+  {
+   "name": "EXTOPLQ",
+   "raw": "#@",
+   "token": "#@"
+  },
+  {
+   "name": "EXTOPMC",
+   "raw": "&^",
+   "token": "&^"
+  },
+  {
+   "name": "EXTOPMD",
+   "raw": "&<",
+   "token": "&<"
+  },
+  {
+   "name": "EXTOPME",
+   "raw": "&>",
+   "token": "&>"
+  },
+  {
+   "name": "EXTOPMF",
+   "raw": "&?",
+   "token": "&?"
+  },
+  {
+   "name": "EXTOPMG",
+   "raw": "&=",
+   "token": "&="
+  },
+  {
+   "name": "EXTOPMH",
+   "raw": "&*",
+   "token": "&*"
+  },
+  {
+   "name": "EXTOPMI",
+   "raw": "&/",
+   "token": "&/"
+  },
+  {
+   "name": "EXTOPMJ",
+   "raw": "&%",
+   "token": "&%"
+  },
+  {
+   "name": "EXTOPMK",
+   "raw": "&!",
+   "token": "&!"
+  },
+  {
+   "name": "EXTOPML",
+   "raw": "&#",
+   "token": "&#"
+  },
+  {
+   "name": "EXTOPMM",
+   "raw": "&&",
+   "token": "&&"
+  },
+  {
+   "name": "EXTOPMN",
+   "raw": "&\\",
+   "token": "&\\"
+  },
+  {
+   "name": "EXTOPMO",
+   "raw": "&`",
+   "token": "&`"
+  },
+  {
+   "name": "EXTOPMP",
+   "raw": "&'",
+   "token": "&'"
+  },
+  {
+   "name": "EXTOPMQ",
+   "raw": "&@",
+   "token": "&@"
+  },
+  {
+   "name": "EXTOPNC",
+   "raw": "\\^",
+   "token": "\\^"
+  },
+  {
+   "name": "EXTOPND",
+   "raw": "\\<",
+   "token": "\\<"
+  },
+  {
+   "name": "EXTOPNE",
+   "raw": "\\>",
+   "token": "\\>"
+  },
+  {
+   "name": "EXTOPNF",
+   "raw": "\\?",
+   "token": "\\?"
+  },
+  {
+   "name": "EXTOPNG",
+   "raw": "\\=",
+   "token": "\\="
+  },
+  {
+   "name": "EXTOPNH",
+   "raw": "\\*",
+   "token": "\\*"
+  },
+  {
+   "name": "EXTOPNI",
+   "raw": "\\/",
+   "token": "\\/"
+  },
+  {
+   "name": "EXTOPNJ",
+   "raw": "\\%",
+   "token": "\\%"
+  },
+  {
+   "name": "EXTOPNK",
+   "raw": "\\!",
+   "token": "\\!"
+  },
+  {
+   "name": "EXTOPNL",
+   "raw": "\\#",
+   "token": "\\#"
+  },
+  {
+   "name": "EXTOPNM",
+   "raw": "\\&",
+   "token": "\\&"
+  },
+  {
+   "name": "EXTOPNN",
+   "raw": "\\\\",
+   "token": "\\\\"
+  },
+  {
+   "name": "EXTOPNO",
+   "raw": "\\`",
+   "token": "\\`"
+  },
+  {
+   "name": "EXTOPNP",
+   "raw": "\\'",
+   "token": "\\'"
+  },
+  {
+   "name": "EXTOPNQ",
+   "raw": "\\@",
+   "token": "\\@"
+  },
+  {
+   "name": "EXTOPOC",
+   "raw": "`^",
+   "token": "`^"
+  },
+  {
+   "name": "EXTOPOD",
+   "raw": "`<",
+   "token": "`<"
+  },
+  {
+   "name": "EXTOPOE",
+   "raw": "`>",
+   "token": "`>"
+  },
+  {
+   "name": "EXTOPOF",
+   "raw": "`?",
+   "token": "`?"
+  },
+  {
+   "name": "EXTOPOG",
+   "raw": "`=",
+   "token": "`="
+  },
+  {
+   "name": "EXTOPOH",
+   "raw": "`*",
+   "token": "`*"
+  },
+  {
+   "name": "EXTOPOI",
+   "raw": "`/",
+   "token": "`/"
+  },
+  {
+   "name": "EXTOPOJ",
+   "raw": "`%",
+   "token": "`%"
+  },
+  {
+   "name": "EXTOPOK",
+   "raw": "`!",
+   "token": "`!"
+  },
+  {
+   "name": "EXTOPOL",
+   "raw": "`#",
+   "token": "`#"
+  },
+  {
+   "name": "EXTOPOM",
+   "raw": "`&",
+   "token": "`&"
+  },
+  {
+   "name": "EXTOPON",
+   "raw": "`\\",
+   "token": "`\\"
+  },
+  {
+   "name": "EXTOPOO",
+   "raw": "``",
+   "token": "``"
+  },
+  {
+   "name": "EXTOPOP",
+   "raw": "`'",
+   "token": "`'"
+  },
+  {
+   "name": "EXTOPOQ",
+   "raw": "`@",
+   "token": "`@"
+  },
+  {
+   "name": "EXTOPPC",
+   "raw": "'^",
+   "token": "'^"
+  },
+  {
+   "name": "EXTOPPD",
+   "raw": "'<",
+   "token": "'<"
+  },
+  {
+   "name": "EXTOPPE",
+   "raw": "'>",
+   "token": "'>"
+  },
+  {
+   "name": "EXTOPPF",
+   "raw": "'?",
+   "token": "'?"
+  },
+  {
+   "name": "EXTOPPG",
+   "raw": "'=",
+   "token": "'="
+  },
+  {
+   "name": "EXTOPPH",
+   "raw": "'*",
+   "token": "'*"
+  },
+  {
+   "name": "EXTOPPI",
+   "raw": "'/",
+   "token": "'/"
+  },
+  {
+   "name": "EXTOPPJ",
+   "raw": "'%",
+   "token": "'%"
+  },
+  {
+   "name": "EXTOPPK",
+   "raw": "'!",
+   "token": "'!"
+  },
+  {
+   "name": "EXTOPPL",
+   "raw": "'#",
+   "token": "'#"
+  },
+  {
+   "name": "EXTOPPM",
+   "raw": "'&",
+   "token": "'&"
+  },
+  {
+   "name": "EXTOPPN",
+   "raw": "'\\",
+   "token": "'\\"
+  },
+  {
+   "name": "EXTOPPO",
+   "raw": "'`",
+   "token": "'`"
+  },
+  {
+   "name": "EXTOPPP",
+   "raw": "''",
+   "token": "''"
+  },
+  {
+   "name": "EXTOPPQ",
+   "raw": "'@",
+   "token": "'@"
+  },
+  {
+   "name": "EXTOPQC",
+   "raw": "@^",
+   "token": "@^"
+  },
+  {
+   "name": "EXTOPQD",
+   "raw": "@<",
+   "token": "@<"
+  },
+  {
+   "name": "EXTOPQE",
+   "raw": "@>",
+   "token": "@>"
+  },
+  {
+   "name": "EXTOPQF",
+   "raw": "@?",
+   "token": "@?"
+  },
+  {
+   "name": "EXTOPQG",
+   "raw": "@=",
+   "token": "@="
+  },
+  {
+   "name": "EXTOPQH",
+   "raw": "@*",
+   "token": "@*"
+  },
+  {
+   "name": "EXTOPQI",
+   "raw": "@/",
+   "token": "@/"
+  },
+  {
+   "name": "EXTOPQJ",
+   "raw": "@%",
+   "token": "@%"
+  },
+  {
+   "name": "EXTOPQK",
+   "raw": "@!",
+   "token": "@!"
+  },
+  {
+   "name": "EXTOPQL",
+   "raw": "@#",
+   "token": "@#"
+  },
+  {
+   "name": "EXTOPQM",
+   "raw": "@&",
+   "token": "@&"
+  },
+  {
+   "name": "EXTOPQN",
+   "raw": "@\\",
+   "token": "@\\"
+  },
+  {
+   "name": "EXTOPQO",
+   "raw": "@`",
+   "token": "@`"
+  },
+  {
+   "name": "EXTOPQP",
+   "raw": "@'",
+   "token": "@'"
+  },
+  {
+   "name": "EXTOPQQ",
+   "raw": "@@",
+   "token": "@@"
+  }
+ ],
+ "PRECEDENCE": [
+  "POWER: ^",
+  "MULT: *",
+  "DIV: /",
+  "IDIV: \\",
+  "MOD: %",
+  "PLUS: +",
+  "MINUS: -",
+  "CONCATENATE: &",
+  "LIKEOP: like",
+  "EQ: =",
+  "LT: <",
+  "LE: <=",
+  "GT: >",
+  "GE: >=",
+  "NE: <>",
+  "AND: and",
+  "OR: or",
+  "XOR: xor"
+ ],
+ "FUNCTIONS": [
+  {
+   "name": "SIN",
+   "raw": "sin 1 1",
+   "token": "sin",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "ASIN",
+   "raw": "asin 1 1",
+   "token": "asin",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "COS",
+   "raw": "cos 1 1",
+   "token": "cos",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "ACOS",
+   "raw": "acos 1 1",
+   "token": "acos",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "SGN",
+   "raw": "sgn 1 1",
+   "token": "sgn",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "ODD",
+   "raw": "odd 1 1",
+   "token": "odd",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "GCD",
+   "raw": "gcd 2 100000",
+   "token": "gcd",
+   "minargs": 2,
+   "maxargs": 100000
+  },
+  {
+   "name": "LCM",
+   "raw": "lcm 2 100000",
+   "token": "lcm",
+   "minargs": 2,
+   "maxargs": 100000
+  },
+  {
+   "name": "EVEN",
+   "raw": "even 1 1",
+   "token": "even",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "SQR",
+   "raw": "sqr 1 1",
+   "token": "sqr",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "RND",
+   "raw": "rnd 0 0",
+   "token": "rnd",
+   "minargs": 0,
+   "maxargs": 0
+  },
+  {
+   "name": "ABS",
+   "raw": "abs 1 1",
+   "token": "abs",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "VAL",
+   "raw": "val 1 1",
+   "token": "val",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "PI",
+   "raw": "pi 0 0",
+   "token": "pi",
+   "minargs": 0,
+   "maxargs": 0
+  },
+  {
+   "name": "MAXINT",
+   "raw": "maxint 0 0",
+   "token": "maxint",
+   "minargs": 0,
+   "maxargs": 0
+  },
+  {
+   "name": "MININT",
+   "raw": "minint 0 0",
+   "token": "minint",
+   "minargs": 0,
+   "maxargs": 0
+  },
+  {
+   "name": "TRUE",
+   "raw": "true 0 0",
+   "token": "true",
+   "minargs": 0,
+   "maxargs": 0
+  },
+  {
+   "name": "FALSE",
+   "raw": "false 0 0",
+   "token": "false",
+   "minargs": 0,
+   "maxargs": 0
+  },
+  {
+   "name": "FIX",
+   "raw": "fix 1 1",
+   "token": "fix",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "INT",
+   "raw": "int 1 1",
+   "token": "int",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "INT",
+   "raw": "cint 1 1",
+   "token": "cint",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "FRAC",
+   "raw": "frac 1 1",
+   "token": "frac",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "CVD",
+   "raw": "cvd 1 1",
+   "token": "cvd",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "CVI",
+   "raw": "cvi 1 1",
+   "token": "cvi",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "CVL",
+   "raw": "cvl 1 1",
+   "token": "cvl",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "CVS",
+   "raw": "cvs 1 1",
+   "token": "cvs",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "MKD",
+   "raw": "mkd 1 1",
+   "token": "mkd",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "MKD",
+   "raw": "mkd$ 1 1",
+   "token": "mkd$",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "MKI",
+   "raw": "mki 1 1",
+   "token": "mki",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "MKI",
+   "raw": "mki$ 1 1",
+   "token": "mki$",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "MKS",
+   "raw": "mks 1 1",
+   "token": "mks",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "MKS",
+   "raw": "mks$ 1 1",
+   "token": "mks$",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "MKL",
+   "raw": "mkl 1 1",
+   "token": "mkl",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "MKL",
+   "raw": "mkl$ 1 1",
+   "token": "mkl$",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "UNDEF",
+   "raw": "undef 0 0",
+   "token": "undef",
+   "minargs": 0,
+   "maxargs": 0
+  },
+  {
+   "name": "ROUND",
+   "raw": "round 1 2",
+   "token": "round",
+   "minargs": 1,
+   "maxargs": 2
+  },
+  {
+   "name": "LOG",
+   "raw": "log 1 1",
+   "token": "log",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "LOG10",
+   "raw": "log10 1 1",
+   "token": "log10",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "POW",
+   "raw": "pow 1 1",
+   "token": "pow",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "EXP",
+   "raw": "exp 1 1",
+   "token": "exp",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "LEN",
+   "raw": "len 1 1",
+   "token": "len",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "ASC",
+   "raw": "asc 1 1",
+   "token": "asc",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "UCASE",
+   "raw": "ucase 1 1",
+   "token": "ucase",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "LCASE",
+   "raw": "lcase 1 1",
+   "token": "lcase",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "LTRIM",
+   "raw": "ltrim 1 1",
+   "token": "ltrim",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "RTRIM",
+   "raw": "rtrim 1 1",
+   "token": "rtrim",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "TRIM",
+   "raw": "trim 1 1",
+   "token": "trim",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "MID",
+   "raw": "mid 2 3",
+   "token": "mid",
+   "minargs": 2,
+   "maxargs": 3
+  },
+  {
+   "name": "LEFT",
+   "raw": "left 2 2",
+   "token": "left",
+   "minargs": 2,
+   "maxargs": 2
+  },
+  {
+   "name": "RIGHT",
+   "raw": "right 2 2",
+   "token": "right",
+   "minargs": 2,
+   "maxargs": 2
+  },
+  {
+   "name": "SPACE",
+   "raw": "space 1 1",
+   "token": "space",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "STRING",
+   "raw": "string 2 2",
+   "token": "string",
+   "minargs": 2,
+   "maxargs": 2
+  },
+  {
+   "name": "CHR",
+   "raw": "chr 1 1",
+   "token": "chr",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "STRREVERSE",
+   "raw": "strreverse 1 1",
+   "token": "strreverse",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "STR",
+   "raw": "str 1 1",
+   "token": "str",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "HEX",
+   "raw": "hex 1 1",
+   "token": "hex",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "OCT",
+   "raw": "oct 1 1",
+   "token": "oct",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "JOKER",
+   "raw": "joker 1 1",
+   "token": "joker",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "CHOMP",
+   "raw": "chomp 1 1",
+   "token": "chomp",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "LBOUND",
+   "raw": "lbound 1 1",
+   "token": "lbound",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "UBOUND",
+   "raw": "ubound 1 1",
+   "token": "ubound",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "ISARRAY",
+   "raw": "isarray 1 1",
+   "token": "isarray",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "ISSTRING",
+   "raw": "isstring 1 1",
+   "token": "isstring",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "ISLONG",
+   "raw": "isinteger 1 1",
+   "token": "isinteger",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "ISDOUBLE",
+   "raw": "isreal 1 1",
+   "token": "isreal",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "ISNUMERIC",
+   "raw": "isnumeric 1 1",
+   "token": "isnumeric",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "ISDEF",
+   "raw": "isdefined 1 1",
+   "token": "isdefined",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "ISUNDEF",
+   "raw": "isundef 1 1",
+   "token": "isundef",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "ISEMPTY",
+   "raw": "isempty 1 1",
+   "token": "isempty",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "TYPE",
+   "raw": "type 1 1",
+   "token": "type",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "ACOSECANT",
+   "raw": "acosecant 1 1",
+   "token": "acosecant",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "ACTAN",
+   "raw": "actan 1 1",
+   "token": "actan",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "ASECANT",
+   "raw": "asecant 1 1",
+   "token": "asecant",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "ATAN",
+   "raw": "atan 1 1",
+   "token": "atan",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "ATN",
+   "raw": "atn 1 1",
+   "token": "atn",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "COSECANT",
+   "raw": "cosecant 1 1",
+   "token": "cosecant",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "COTAN",
+   "raw": "cotan 1 1",
+   "token": "cotan",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "COTAN2",
+   "raw": "cotan2 2 2",
+   "token": "cotan2",
+   "minargs": 2,
+   "maxargs": 2
+  },
+  {
+   "name": "HCOS",
+   "raw": "hcos 1 1",
+   "token": "hcos",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "HCOSECANT",
+   "raw": "hcosecant 1 1",
+   "token": "hcosecant",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "HCTAN",
+   "raw": "hctan 1 1",
+   "token": "hctan",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "HSECANT",
+   "raw": "hsecant 1 1",
+   "token": "hsecant",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "HSIN",
+   "raw": "hsin 1 1",
+   "token": "hsin",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "HTAN",
+   "raw": "htan 1 1",
+   "token": "htan",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "SECANT",
+   "raw": "secant 1 1",
+   "token": "secant",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "TAN",
+   "raw": "tan 1 1",
+   "token": "tan",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "TAN2",
+   "raw": "tan2 2 2",
+   "token": "tan2",
+   "minargs": 2,
+   "maxargs": 2
+  },
+  {
+   "name": "BIN",
+   "raw": "bin 1 1",
+   "token": "bin",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "UCASE",
+   "raw": "ucase$ 1 1",
+   "token": "ucase$",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "UCASE",
+   "raw": "upper 1 1",
+   "token": "upper",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "UCASE",
+   "raw": "upper$ 1 1",
+   "token": "upper$",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "LCASE",
+   "raw": "lcase$ 1 1",
+   "token": "lcase$",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "LCASE",
+   "raw": "lower 1 1",
+   "token": "lower",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "LCASE",
+   "raw": "lower$ 1 1",
+   "token": "lower$",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "LTRIM",
+   "raw": "ltrim$ 1 1",
+   "token": "ltrim$",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "RTRIM",
+   "raw": "rtrim$ 1 1",
+   "token": "rtrim$",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "TRIM",
+   "raw": "trim$ 1 1",
+   "token": "trim$",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "MID",
+   "raw": "mid$ 2 3",
+   "token": "mid$",
+   "minargs": 2,
+   "maxargs": 3
+  },
+  {
+   "name": "LEFT",
+   "raw": "left$ 2 2",
+   "token": "left$",
+   "minargs": 2,
+   "maxargs": 2
+  },
+  {
+   "name": "RIGHT",
+   "raw": "right$ 2 2",
+   "token": "right$",
+   "minargs": 2,
+   "maxargs": 2
+  },
+  {
+   "name": "SPACE",
+   "raw": "space$ 1 1",
+   "token": "space$",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "STRING",
+   "raw": "string$ 2 2",
+   "token": "string$",
+   "minargs": 2,
+   "maxargs": 2
+  },
+  {
+   "name": "CHR",
+   "raw": "chr$ 1 1",
+   "token": "chr$",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "STRREVERSE",
+   "raw": "strreverse$ 1 1",
+   "token": "strreverse$",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "STR",
+   "raw": "str$ 1 1",
+   "token": "str$",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "HEX",
+   "raw": "hex$ 1 1",
+   "token": "hex$",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "OCT",
+   "raw": "oct$ 1 1",
+   "token": "oct$",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "INSTR",
+   "raw": "instr 2 3",
+   "token": "instr",
+   "minargs": 2,
+   "maxargs": 3
+  },
+  {
+   "name": "INSTRREV",
+   "raw": "instrrev 2 3",
+   "token": "instrrev",
+   "minargs": 2,
+   "maxargs": 3
+  },
+  {
+   "name": "REPLACE",
+   "raw": "replace 3 5",
+   "token": "replace",
+   "minargs": 3,
+   "maxargs": 5
+  },
+  {
+   "name": "JOIN",
+   "raw": "join 2 100000",
+   "token": "join",
+   "minargs": 2,
+   "maxargs": 100000
+  },
+  {
+   "name": "MAX",
+   "raw": "max 1 100000",
+   "token": "max",
+   "minargs": 1,
+   "maxargs": 100000
+  },
+  {
+   "name": "MIN",
+   "raw": "min 1 100000",
+   "token": "min",
+   "minargs": 1,
+   "maxargs": 100000
+  },
+  {
+   "name": "IMAX",
+   "raw": "imax 1 100000",
+   "token": "imax",
+   "minargs": 1,
+   "maxargs": 100000
+  },
+  {
+   "name": "IMIN",
+   "raw": "imin 1 100000",
+   "token": "imin",
+   "minargs": 1,
+   "maxargs": 100000
+  },
+  {
+   "name": "OPTIONF",
+   "raw": "option 1 1",
+   "token": "option",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "ERROR",
+   "raw": "error 0 0",
+   "token": "error",
+   "minargs": 0,
+   "maxargs": 0
+  },
+  {
+   "name": "ERRORDOLLAR",
+   "raw": "error$ 0 1",
+   "token": "error$",
+   "minargs": 0,
+   "maxargs": 1
+  },
+  {
+   "name": "LOC",
+   "raw": "loc 1 1",
+   "token": "loc",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "LOF",
+   "raw": "lof 1 1",
+   "token": "lof",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "FILELEN",
+   "raw": "filelen 1 1",
+   "token": "filelen",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "FREEFILE",
+   "raw": "freefile 0 1",
+   "token": "freefile",
+   "minargs": 0,
+   "maxargs": 1
+  },
+  {
+   "name": "INPUTFUN",
+   "raw": "input 1 2",
+   "token": "input",
+   "minargs": 1,
+   "maxargs": 2
+  },
+  {
+   "name": "EOFFUN",
+   "raw": "eof 1 1",
+   "token": "eof",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "EODFUN",
+   "raw": "eod 1 1",
+   "token": "eod",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "FTACCESS",
+   "raw": "fileaccesstime 1 1",
+   "token": "fileaccesstime",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "FTMODIFY",
+   "raw": "filemodifytime 1 1",
+   "token": "filemodifytime",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "FTCREATED",
+   "raw": "filecreatetime 1 1",
+   "token": "filecreatetime",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "FOWNER",
+   "raw": "fileowner 1 1",
+   "token": "fileowner",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "ISDIR",
+   "raw": "isdirectory 1 1",
+   "token": "isdirectory",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "ISREG",
+   "raw": "isfile 1 1",
+   "token": "isfile",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "FILEXISTS",
+   "raw": "fileexists 1 1",
+   "token": "fileexists",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "NEXTFILE",
+   "raw": "nextfile 1 1",
+   "token": "nextfile",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "ENVIRON",
+   "raw": "environ 1 1",
+   "token": "environ",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "ENVIRON",
+   "raw": "environ$ 1 1",
+   "token": "environ$",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "CURDIR",
+   "raw": "curdir 0 0",
+   "token": "curdir",
+   "minargs": 0,
+   "maxargs": 0
+  },
+  {
+   "name": "COMMANDF",
+   "raw": "command 0 0",
+   "token": "command",
+   "minargs": 0,
+   "maxargs": 0
+  },
+  {
+   "name": "ADDRESSF",
+   "raw": "address 1 1",
+   "token": "address",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "FORMATDATE",
+   "raw": "formatdate 1 2",
+   "token": "formatdate",
+   "minargs": 1,
+   "maxargs": 2
+  },
+  {
+   "name": "FORMATDATE",
+   "raw": "formattime 1 2",
+   "token": "formattime",
+   "minargs": 1,
+   "maxargs": 2
+  },
+  {
+   "name": "FORMAT",
+   "raw": "format 1 2000000",
+   "token": "format",
+   "minargs": 1,
+   "maxargs": 2000000
+  },
+  {
+   "name": "PACK",
+   "raw": "pack 1 2000000",
+   "token": "pack",
+   "minargs": 1,
+   "maxargs": 2000000
+  },
+  {
+   "name": "NOW",
+   "raw": "time 0 0",
+   "token": "time",
+   "minargs": 0,
+   "maxargs": 0
+  },
+  {
+   "name": "NOW",
+   "raw": "now 0 0",
+   "token": "now",
+   "minargs": 0,
+   "maxargs": 0
+  },
+  {
+   "name": "GMTIME",
+   "raw": "gmtime 0 0",
+   "token": "gmtime",
+   "minargs": 0,
+   "maxargs": 0
+  },
+  {
+   "name": "YEAR",
+   "raw": "year 0 1",
+   "token": "year",
+   "minargs": 0,
+   "maxargs": 1
+  },
+  {
+   "name": "MONTH",
+   "raw": "month 0 1",
+   "token": "month",
+   "minargs": 0,
+   "maxargs": 1
+  },
+  {
+   "name": "DAY",
+   "raw": "day 0 1",
+   "token": "day",
+   "minargs": 0,
+   "maxargs": 1
+  },
+  {
+   "name": "WDAY",
+   "raw": "weekday 0 1",
+   "token": "weekday",
+   "minargs": 0,
+   "maxargs": 1
+  },
+  {
+   "name": "YDAY",
+   "raw": "yearday 0 1",
+   "token": "yearday",
+   "minargs": 0,
+   "maxargs": 1
+  },
+  {
+   "name": "MINUTE",
+   "raw": "minute 0 1",
+   "token": "minute",
+   "minargs": 0,
+   "maxargs": 1
+  },
+  {
+   "name": "SEC",
+   "raw": "sec 0 1",
+   "token": "sec",
+   "minargs": 0,
+   "maxargs": 1
+  },
+  {
+   "name": "HOUR",
+   "raw": "hour 0 1",
+   "token": "hour",
+   "minargs": 0,
+   "maxargs": 1
+  },
+  {
+   "name": "TIMEVALUE",
+   "raw": "timevalue 0 6",
+   "token": "timevalue",
+   "minargs": 0,
+   "maxargs": 6
+  },
+  {
+   "name": "GM2LOCAL",
+   "raw": "gmtimetolocaltime 1 1",
+   "token": "gmtimetolocaltime",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "LOCAL2GM",
+   "raw": "localtimetogmtime 1 1",
+   "token": "localtimetogmtime",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "ADDYEAR",
+   "raw": "addyear 2 2",
+   "token": "addyear",
+   "minargs": 2,
+   "maxargs": 2
+  },
+  {
+   "name": "ADDMONTH",
+   "raw": "addmonth 2 2",
+   "token": "addmonth",
+   "minargs": 2,
+   "maxargs": 2
+  },
+  {
+   "name": "ADDDAY",
+   "raw": "addday 2 2",
+   "token": "addday",
+   "minargs": 2,
+   "maxargs": 2
+  },
+  {
+   "name": "ADDHOUR",
+   "raw": "addhour 2 2",
+   "token": "addhour",
+   "minargs": 2,
+   "maxargs": 2
+  },
+  {
+   "name": "ADDMINUTE",
+   "raw": "addminute 2 2",
+   "token": "addminute",
+   "minargs": 2,
+   "maxargs": 2
+  },
+  {
+   "name": "ADDSECOND",
+   "raw": "addsecond 2 2",
+   "token": "addsecond",
+   "minargs": 2,
+   "maxargs": 2
+  },
+  {
+   "name": "ADDWEEK",
+   "raw": "addweek 2 2",
+   "token": "addweek",
+   "minargs": 2,
+   "maxargs": 2
+  },
+  {
+   "name": "HOSTNAME",
+   "raw": "hostname 0 0",
+   "token": "hostname",
+   "minargs": 0,
+   "maxargs": 0
+  },
+  {
+   "name": "CONF",
+   "raw": "conf 1 1",
+   "token": "conf",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "KILL",
+   "raw": "kill 1 1",
+   "token": "kill",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "ICALLFUN",
+   "raw": "icall 1 2000000",
+   "token": "icall",
+   "minargs": 1,
+   "maxargs": 2000000
+  },
+  {
+   "name": "FCRYPT",
+   "raw": "crypt 2 2",
+   "token": "crypt",
+   "minargs": 2,
+   "maxargs": 2
+  },
+  {
+   "name": "CREATEPROCESS",
+   "raw": "system 1 1",
+   "token": "system",
+   "minargs": 1,
+   "maxargs": 1
+  },
+  {
+   "name": "CREATEPROCESSEX",
+   "raw": "execute 3 3",
+   "token": "execute",
+   "minargs": 3,
+   "maxargs": 3
+  },
+  {
+   "name": "WAITPID",
+   "raw": "waitpid 2 2",
+   "token": "waitpid",
+   "minargs": 2,
+   "maxargs": 2
+  },
+  {
+   "name": "FORK",
+   "raw": "fork 0 0",
+   "token": "fork",
+   "minargs": 0,
+   "maxargs": 0
+  }
+ ]
+}
