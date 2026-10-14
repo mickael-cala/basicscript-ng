@@ -1,0 +1,22 @@
+name: Rapport de bug
+description: Signaler un comportement incorrect
+labels: [bug]
+body:
+  - type: textarea
+    attributes:
+      label: Description
+      placeholder: Attendu vs obtenu
+    validations: {required: true}
+  - type: textarea
+    attributes:
+      label: Script reproducteur minimal (.bas)
+      render: basic
+    validations: {required: true}
+  - type: input
+    attributes: {label: Version / commit, description: "ex. old/ 2.0 ou src@abc1234"}
+  - type: dropdown
+    attributes:
+      label: Moteur concerné
+      options: [Ancien (old/), Nouveau (src/), Extensions, Build/outils]
+  - type: input
+    attributes: {label: Plateforme, placeholder: "Ubuntu 24.04 x86_64, gcc 14..."}
