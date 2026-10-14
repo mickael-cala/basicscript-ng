@@ -43,18 +43,18 @@
 | 29 | `INVALID_JOKER` | — | `COMMAND_ERROR_INVALID_JOKER` |  | en/The character can not be a joker or wild card character. |
 | 30 | `NO_RESUME` | — | `COMMAND_ERROR_NO_RESUME` |  | en/The code tried to execute a resume while not being in error correction code. |
 | 31 | `INV_DNAME` | InvalidDirectoryName | `COMMAND_ERROR_INV_DNAME` |  | en/The directory name in open directory is invalid. |
-| 31 | `INV_DNAME` *(implicite)* | InvalidDirectoryName | `COMMAND_ERROR_INV_DNAME` | RT | The directory name is invalid. |
+| 31 | `INV_DNAME` *(implicite)* | sbErrorInvalidDirectoryName | `COMMAND_ERROR_INV_DNAME` | RT | The directory name is invalid. |
 | 32 | `INV_DO_OPTION` | InvalidOptionDirOpen | `COMMAND_ERROR_INV_DO_OPTION` |  | en/Invalid option for directory open. |
-| 32 | `INV_DO_OPTION` *(implicite)* | InvalidDirOption | `COMMAND_ERROR_INV_DO_OPTION` | RT | The directory option argument is undefined. |
+| 32 | `INV_DO_OPTION` *(implicite)* | sbErrorInvalidOptionDirOpen | `COMMAND_ERROR_INV_DO_OPTION` | RT | The directory option argument is undefined. |
 | 33 | `DIR_NO_OPEN` | DirectoryNoOpen | `COMMAND_ERROR_DIR_NO_OPEN` |  | en/The directory can not be opened. |
-| 33 | `DIR_NO_OPEN` *(implicite)* | DirNoOpen | `COMMAND_ERROR_DIR_NO_OPEN` | RT | The directory can not be opened. |
+| 33 | `DIR_NO_OPEN` *(implicite)* | sbErrorDirectoryNoOpen | `COMMAND_ERROR_DIR_NO_OPEN` | RT | The directory can not be opened. |
 | 34 | `BAD_RECORD_LENGTH` | — | `COMMAND_ERROR_BAD_RECORD_LENGTH` |  | en/The record length is invalid in the open statements (undefined, zero or negative) |
 | 35 | `CURDIR` | NoCurrentDirectory | `COMMAND_ERROR_CURDIR` |  | en/The current directory can not be retrieved for some reason. |
-| 35 | `CURDIR` *(implicite)* | CurDir | `COMMAND_ERROR_CURDIR` | RT | The current directory can not be retrieved for some reason. |
+| 35 | `CURDIR` *(implicite)* | sbErrorNoCurrentDirectory | `COMMAND_ERROR_CURDIR` | RT | The current directory can not be retrieved for some reason. |
 | 36 | `UNDEF_DIR` | ChDirUndef | `COMMAND_ERROR_UNDEF_DIR` |  | en/The directory name in chdir can not be undef. |
-| 36 | `UNDEF_DIR` *(implicite)* | UndefDir | `COMMAND_ERROR_UNDEF_DIR` | RT | The directory argument is undefined. |
+| 36 | `UNDEF_DIR` *(implicite)* | sbErrorChDirUndef | `COMMAND_ERROR_UNDEF_DIR` | RT | The directory argument is undefined. |
 | 37 | `CHDIR` | ChDir | `COMMAND_ERROR_CHDIR` |  | en/Cannot change the current working directory to the desired directory. |
-| 37 | `CHDIR` *(implicite)* | ChDir | `COMMAND_ERROR_CHDIR` | RT | The current directory can not be changed. |
+| 37 | `CHDIR` *(implicite)* | sbErrorChDir | `COMMAND_ERROR_CHDIR` | RT | The current directory can not be changed. |
 | 38 | `RETURN_WITHOUT_GOSUB` | — | `COMMAND_ERROR_RETURN_WITHOUT_GOSUB` |  | en/The command RETURN can not be executed, because there is no where to return. |
 | 39 | `INVALID_ARGUMENT_FOR_FUNCTION_ADDRESS` | — | `COMMAND_ERROR_INVALID_ARGUMENT_FOR_FUNCTION_ADDRESS` |  | en/The argument for the function address is invalid. |
 | 40 | `SETFILE_INVALID_ATTRIBUTE` | — | `COMMAND_ERROR_SETFILE_INVALID_ATTRIBUTE` |  | en/The attribute value or symbol is invalid in the set file command. |
@@ -63,11 +63,11 @@
 | 43 | `CHOWN_SET_OWNER` | — | `COMMAND_ERROR_CHOWN_SET_OWNER` |  | en/Can not change owner. |
 | 44 | `INVALID_FILE_NAME` | — | `COMMAND_ERROR_INVALID_FILE_NAME` |  | en/The file name is invalid. |
 | 45 | `CREATIME_FAIL` | SetCreateTime | `COMMAND_ERROR_CREATIME_FAIL` |  | en/Setting the create time of the file has failed. |
-| 45 | `CREATIME_FAIL` *(implicite)* | SetCreateTime | `COMMAND_ERROR_CREATIME_FAIL` | RT | Setting the create time of the file has failed. |
+| 45 | `CREATIME_FAIL` *(implicite)* | sbErrorSetCreateTime | `COMMAND_ERROR_CREATIME_FAIL` | RT | Setting the create time of the file has failed. |
 | 46 | `MODTIME_FAIL` | SetModifyTime | `COMMAND_ERROR_MODTIME_FAIL` |  | en/Setting the modify time of the file has failed. |
-| 46 | `MODTIME_FAIL` *(implicite)* | SetModifyTime | `COMMAND_ERROR_MODTIME_FAIL` | RT | Setting the modify time of the file has failed. |
+| 46 | `MODTIME_FAIL` *(implicite)* | sbErrorSetModifyTime | `COMMAND_ERROR_MODTIME_FAIL` | RT | Setting the modify time of the file has failed. |
 | 47 | `ACCTIM_FAIL` | SetAccessTime | `COMMAND_ERROR_ACCTIM_FAIL` |  | en/Setting the access time of the file has failed |
-| 47 | `ACCTIM_FAIL` *(implicite)* | SetAccessTime | `COMMAND_ERROR_ACCTIM_FAIL` | RT | Setting the access time of the file has failed |
+| 47 | `ACCTIM_FAIL` *(implicite)* | sbErrorSetAccessTime | `COMMAND_ERROR_ACCTIM_FAIL` | RT | Setting the access time of the file has failed |
 | 48 | `INVALID_TIME_FORMAT` | — | `COMMAND_ERROR_INVALID_TIME_FORMAT` |  | en/The specified time format is invalid |
 | 49 | `INVALID_TIME` | — | `COMMAND_ERROR_INVALID_TIME` |  | en/The time is not valid, cannot be earlier than January 1, 1970. 00:00 |
 | 50 | `EXTENSION_SPECIFIC` | — | `COMMAND_ERROR_EXTENSION_SPECIFIC` |  | en/Extension specific error: %s |

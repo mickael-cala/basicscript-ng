@@ -68,9 +68,11 @@ _(À remplir au fil de l'audit du code `old/`. Pistes initiales issues de la lec
 - **Traitement :** `tools/gen/extract_errors.py` injecte désormais les paires
   SUCCESS/MEMORY_LOW, les sentinelles et les 9 codes ; `doc/spec/errors.md` (171 lignes)
   porte les colonnes N°/Alias/Type avec marquage *(implicite)* et type `SYN`.
-- **Statut portage :** à valider en Phase 1 (gel de la numérotation) puis figer dans la
-  spec v2 (`doc/spec/`) ; vérifier aussi les trous de numérotation (34, 38-44 non définis
-  dans COMMAND → espaces réservés à confirmer contre `include/basicscript/error.imp`).
+- **Statut portage :** validé en partie — numéros et aliases BASIC des 9 codes vérifiés
+  contre `old/include/error.bas` (constantes `sbError*`, l. 31→47 : aucune lacune, les
+  trous apparents 34/38-44 correspondent en fait à des erreurs définies dans le `.def`).
+  Reste à confirmer la plage complète 0→133 de `error.bas` vs table C, puis figer la
+  numérotation v2 dans `doc/spec/`.
 
 <!-- Les entrées suivantes seront ajoutées après audit systématique :
      gestion mémoire (myalloc), fuites connues du thread model, limites de

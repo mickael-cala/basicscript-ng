@@ -22,16 +22,16 @@ OUT_MD = ROOT / "doc" / "spec" / "errors.md"
 # Codes implicites : jamais passés par ERROR() avec message catalogue, donc absents
 # de errors.def, mais référencés dans le code legacy (source des messages : usage).
 IMPLICIT = [
-    # id, basic_alias, message, source legacy
-    ("CREATIME_FAIL", "SetCreateTime", "Setting the create time of the file has failed.", "old/filesys.c"),
-    ("MODTIME_FAIL", "SetModifyTime", "Setting the modify time of the file has failed.", "old/hookers.c"),
-    ("ACCTIM_FAIL", "SetAccessTime", "Setting the access time of the file has failed", "old/hookers.c"),
-    ("CHDIR", "ChDir", "The current directory can not be changed.", "old/commands/file.c"),
-    ("CURDIR", "CurDir", "The current directory can not be retrieved for some reason.", "old/commands/file.c"),
-    ("DIR_NO_OPEN", "DirNoOpen", "The directory can not be opened.", "old/commands/file.c"),
-    ("INV_DNAME", "InvalidDirectoryName", "The directory name is invalid.", "old/commands/file.c"),
-    ("INV_DO_OPTION", "InvalidDirOption", "The directory option argument is undefined.", "old/commands/file.c"),
-    ("UNDEF_DIR", "UndefDir", "The directory argument is undefined.", "old/commands/file.c"),
+    # id, basic_alias (vérifié contre old/include/error.bas), message, source legacy
+    ("CREATIME_FAIL", "sbErrorSetCreateTime", "Setting the create time of the file has failed.", "old/filesys.c"),
+    ("MODTIME_FAIL", "sbErrorSetModifyTime", "Setting the modify time of the file has failed.", "old/hookers.c"),
+    ("ACCTIM_FAIL", "sbErrorSetAccessTime", "Setting the access time of the file has failed", "old/hookers.c"),
+    ("CHDIR", "sbErrorChDir", "The current directory can not be changed.", "old/commands/file.c"),
+    ("CURDIR", "sbErrorNoCurrentDirectory", "The current directory can not be retrieved for some reason.", "old/commands/file.c"),
+    ("DIR_NO_OPEN", "sbErrorDirectoryNoOpen", "The directory can not be opened.", "old/commands/file.c"),
+    ("INV_DNAME", "sbErrorInvalidDirectoryName", "The directory name is invalid.", "old/commands/file.c"),
+    ("INV_DO_OPTION", "sbErrorInvalidOptionDirOpen", "The directory option argument is undefined.", "old/commands/file.c"),
+    ("UNDEF_DIR", "sbErrorChDirUndef", "The directory argument is undefined.", "old/commands/file.c"),
 ]
 
 
