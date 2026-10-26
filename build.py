@@ -212,6 +212,13 @@ COMMON = [
 # `dbg` n'est pas ici, et ne peut pas y etre : ce n'est pas un module mais un
 # preprocesseur externe (interface prepext.h, charge par `scriba -p`), sans
 # versmodu ni bootmodu. Voir docs/MODULES.md § 6.
+#
+# Cles optionnelles de la fusion (docs/PLAN.md phase 2) : `include_dirs`
+# ajoute des -I vers les en-tetes vendorises de src/vendor/ ; `libs` donne
+# des bibliotheques de lien par famille d'OS ; `arch` restreint la largeur
+# de mots (32 ou 64) quand une DLL d'execution n'existe qu'en une taille ;
+# `import_def` fabrique la bibliotheque d'import Windows par `zig dlltool`
+# depuis un .def vendorise.
 # ---------------------------------------------------------------------------
 MODULES = {
     "hash": {
@@ -261,6 +268,63 @@ MODULES = {
         "declare": "unix.bas",
         "os": ("linux", "macos"),
         "defines": ["-include", "unistd.h", "-include", "sys/stat.h"],
+    },
+    # zlib : les sources 1.3.1 sont vendorisees dans src/vendor/zlib
+    # (intouchables, voir le README du dossier). L'interface porte la
+    # correction venue de ScriptBasic-master-ng : des donnees incompressibles
+    # rendent un flux plus long que l'entree, le tampon de sortie double au
+    # lieu de rendre ZLIB_ERROR_NOCOMPRESS (PATCHES B.10 de -ng).
+    "zlib": {
+        "sources": ["extensions/zlib/interface.c",
+                    "vendor/zlib/adler32.c", "vendor/zlib/compress.c",
+                    "vendor/zlib/crc32.c", "vendor/zlib/deflate.c",
+                    "vendor/zlib/gzclose.c", "vendor/zlib/gzlib.c",
+                    "vendor/zlib/gzread.c", "vendor/zlib/gzwrite.c",
+                    "vendor/zlib/infback.c", "vendor/zlib/inffast.c",
+                    "vendor/zlib/inflate.c", "vendor/zlib/inftrees.c",
+                    "vendor/zlib/trees.c", "vendor/zlib/uncompr.c",
+                    "vendor/zlib/zutil.c"],
+        "include_dirs": ("vendor/zlib",),
+        "declare": "zlib.bas",
+    },
+    # odbc : le gestionnaire de pilotes ODBC de Windows (odbc32.dll). Les
+    # deux architectures sont construites et testees ; l'interface porte la
+    # correction E11 : SQLGetData rend un SQLLEN*, qui fait 64 bits sous
+    # Windows 64. Linux est pret mais non lie : les en-tetes unixODBC sont
+    # vendorises (src/vendor/odbc), reste le libodbc.so du systeme hote,
+    # invisible du sysroot zig en cross-compilation (ERRATA E42).
+    "odbc": {
+        "sources": ["extensions/odbc/interface.c"],
+        "declare": "odbc.bas",
+        "os": ("windows",),
+        "libs": {"windows": ("-lodbc32",)},
+    },
+    # dyc : appel dynamique de fonctions de DLL par nom, interface Windows
+    # (LoadLibrary/GetProcAddress). ABI 32 bits seulement (ERRATA E10) :
+    # le DynaCall empile les arguments dans un tampon et passe un call nu ;
+    # en 64 bits, l'appele lit ses registres et meurt en SIGSEGV. Une
+    # ebauche x64 venait avec le noyau (commit 82f4b41) : elle ne compile
+    # pas sous zig cc (code inacheve d'un autre atelier, ERRATA E41), la
+    # version 32 bits de -ng la remplace.
+    "dyc": {
+        "sources": ["extensions/dyc/interface.c"],
+        "declare": "dyc.bas",
+        "os": ("windows",),
+        "arch": (32,),
+    },
+    # curl : en-tetes 8.21.0 vendorises (src/vendor/curl), liaison vers la
+    # libcurl du systeme. Windows : l'import est genere par `zig dlltool`
+    # depuis le .def vendor, la DLL d'execution est celle de MinGW
+    # (libcurl-4.dll, dans le PATH). 64 bits seulement ici : aucune DLL
+    # 32 bits sur la machine, et pas de libcurl de developpement sous UNIX
+    # (ERRATA E40).
+    "curl": {
+        "sources": ["extensions/curl/interface.c"],
+        "declare": "curl.bas",
+        "include_dirs": ("vendor/curl/include",),
+        "os": ("windows",),
+        "arch": (64,),
+        "import_def": "vendor/curl/libcurl-4.def",
     },
 }
 
@@ -517,8 +581,11 @@ def build_modules(name, zig, opt, verbose, release=False):
     print(f"== {name}  modules  ({triple})")
     ok = True
     built = []
+    bits = 32 if name.endswith("-x86") else 64
     for mod, m in MODULES.items():
         if "os" in m and osfam not in m["os"]:
+            continue
+        if "arch" in m and bits not in m["arch"]:
             continue
         lib = outdir / (mod + ext)
         if release and m.get("test_only"):
@@ -529,6 +596,10 @@ def build_modules(name, zig, opt, verbose, release=False):
             print(f"  saute  {mod} (module de test)")
             continue
         flags = base + m.get("defines", [])
+        incs = m.get("include_dirs", ())
+        if isinstance(incs, dict):
+            incs = incs.get(osfam, ())
+        flags += ["-I" + str(SRC / d) for d in incs]
         objects, failed = [], []
         for rel in m["sources"]:
             src = SRC / rel
@@ -547,12 +618,34 @@ def build_modules(name, zig, opt, verbose, release=False):
             ok = False
             continue
 
+        # Un .def vendorise devient une bibliotheque d'import par zig
+        # dlltool : c'est le chemin de curl, dont le .def decrit la DLL de
+        # MinGW, jamais versionnee ici.
+        extra = list(m.get("libs", {}).get(osfam, ()))
+        if "import_def" in m:
+            implib = objdir / (mod + "-import.lib")
+            deffile = SRC / m["import_def"]
+            if (not implib.exists()
+                    or implib.stat().st_mtime < deffile.stat().st_mtime):
+                # zig dlltool : `i386` se declare, le 64 bits est sa machine
+                # par defaut ("x86_64" n'est pas une valeur acceptee).
+                cmd_dt = [zig, "dlltool", "-d", str(deffile), "-l", str(implib)]
+                if bits == 32:
+                    cmd_dt[2:2] = ["-m", "i386"]
+                proc = run(cmd_dt, verbose)
+                if proc.returncode != 0:
+                    print(f"  ECHEC  {mod} (dlltool)\n{proc.stderr.strip()}")
+                    ok = False
+                    continue
+            extra.append(str(implib))
+
         # Le lien se fait dans obj/ : sous Windows, l'editeur de liens ecrit
         # a cote de la sortie un fichier .pdb (et, avec --out-implib, un .lib)
         # qui n'ont rien a faire dans dist/. Le module termine est ensuite
         # deplace a sa place.
         tmp_lib = objdir / (mod + ext)
-        cmd = flags + spec["libs"] + [str(o) for o in objects] + ["-o", str(tmp_lib)]
+        cmd = (flags + spec["libs"] + extra + [str(o) for o in objects]
+               + ["-o", str(tmp_lib)])
         if osfam == "windows":
             i = cmd.index("-o")
             cmd[i:i] = [f"-Wl,--out-implib,{objdir / (mod + '.lib')}"]
@@ -878,7 +971,9 @@ def main():
     ap.add_argument("--httpd", action="store_true",
                     help="construit sbhttpd (serveur HTTP) au lieu de scriba")
     ap.add_argument("--modules", action="store_true",
-                    help="construit les modules (hash, re, t, trial, cio, win, unix)")
+                    help="construit les modules (hash, re, t, trial, cgi, mt, "
+                         "zlib, odbc, dyc, curl 64 bits, cio et win sous "
+                         "Windows, unix sous UNIX)")
     ap.add_argument("--standalone", nargs="?", const="tests/hello.bas",
                     default=None, metavar="SCRIPT",
                     help="construit un executable autonome (tests/hello.bas par defaut)")
