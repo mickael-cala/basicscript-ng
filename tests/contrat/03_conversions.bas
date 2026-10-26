@@ -1,0 +1,10 @@
+' contrat 03 : conversions - sans module
+print "str   : ", str(42), "\n"
+print "str.  : ", str(2.5), "\n"
+print "val   : ", val("17") + 1, "\n"
+print "int   : ", int(2.7), " et ", int(-2.7), "\n"
+print "fix   : ", fix(2.7), " et ", fix(-2.7), "\n"
+print "frac  : ", frac(2.75), "\n"
+print "round : ", round(2.5), " et ", round(3.5), "\n"
+print "chr   : ", chr(66), chr(67), "\n"
+print "fin 03\n"

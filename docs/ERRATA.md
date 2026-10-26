@@ -50,6 +50,8 @@ surprise de terrain.
 | [E41](#e41) | l'ébauche x64 de `dyc` ne compilait pas | défaut | écartée |
 | [E42](#e42) | `odbc` : `libodbc` invisible du sysroot zig sous Linux | limite | ouvert |
 | [E43](#e43) | `free()` sur la mémoire de libcurl : corruption de tas | défaut | corrigé |
+| [E44](#e44) | `manuel` sous Linux : cinq affirmations encodent LLP64 | limite | documenté |
+| [E45](#e45) | formes historiques refusées à l'analyse (`open` nu, `sub` dans `module`) | limite | documenté |
 
 ---
 
@@ -1213,3 +1215,40 @@ libcurl fournit `curl_free()`. Le défaut, hérité de l'amont, n'avait jamais
 
 **Couverture** — `tests/curl.bas` (aller-retour escape/unescape), qui
 plantait avant correction et passe depuis.
+
+---
+
+## E44
+
+**Symptôme** — le harnais `tests/manuel.bas` échoue sous Linux sur cinq
+affirmations : `maxint` rend 9223372036854775807 (attendu 2147483647),
+`minint` rend 0, le test d'intervalle de `rnd` rend faux, `randomize`
+rend une autre graine, et `lof` compte deux octets de moins.
+
+**Cause** — les cinq affirmations encodent la plateforme LLP64 de
+Windows : `long` y fait 32 bits (Linux est LP64, 64 bits), le générateur
+aléatoire suit le modulo de la plateforme, et `print#` traduit les `\n`
+en CRLF sous Windows seulement (d'où le `lof`).
+
+**État** — documenté : `manuel` entre dans le jeu par défaut des cibles
+Windows seulement (`MANUEL_TESTS_BY_OS` de `tests/run.py`) ; sous Linux
+et macOS, les écarts restent visibles en le lançant à la main. Le
+harnais tourne 156/156 sur windows-x64 et windows-x86. L'harmonisation
+(valeurs d'ABI par fonctions dédiées, politique par plateforme) est
+remise à la passe langage — [PLAN.md](PLAN.md), phase 8.
+
+## E45
+
+**Symptôme** — plusieurs formes acceptées par l'histoire sont refusées à
+l'analyse par cette grammaire (`error &H77`) : `open … as #n` sans clause
+`for`, `open directory` sans `pattern`, un `sub` niché dans un `module`.
+
+**Cause** — la grammaire épurée du portage n'a gardé que les formes
+portées par ses règles ; ces formes-là n'ont pas de règle.
+
+**État** — documenté et noté par les contrats (les commentaires de
+`tests/contrat/06` et `07` l'expliquent sur place) : `open` exige sa
+clause `for`, `open directory` exige `pattern … option … as #n`, les
+modules ne portent que constantes et déclarations. Étendre la grammaire
+est un travail de la passe langage (PLAN phase 8), chaque forme nouvelle
+entrant avec son contrat et son refus.

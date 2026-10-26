@@ -12,6 +12,7 @@ tests/run.py - execute les tests ScriptBasic sur un binaire construit.
     python tests/run.py --target windows-x64 --re-engine
     python tests/run.py --target windows-x64 --cgi-post
     python tests/run.py --grammaire
+    python tests/run.py --contrat
     python tests/run.py --exe dist/macos-arm64/scriba
 
 Le jeu par defaut ne contient que des tests SANS module externe (pas de re,
@@ -156,6 +157,13 @@ MODULE_TESTS_SKIP = {
              "macos-x64": "ni -lodbc ni en-tetes ODBC dans le sysroot",
              "macos-arm64": "ni -lodbc ni en-tetes ODBC dans le sysroot"},
 }
+
+# Le harnais du manuel (156 affirmations sur les exemples de MANUEL.md) :
+# ses attentes encodent la plateforme LLP64 de Windows (maxint et minint,
+# le generateur aleatoire, lof et les fins de ligne). Sous Linux, les cinq
+# ecarts d'ABI sont documentes a l'ERRATA E44 : il entre dans le jeu par
+# defaut des cibles Windows seulement.
+MANUEL_TESTS_BY_OS = {"windows": ["manuel"]}
 
 MODULE_TESTS_ALL = MODULE_TESTS + [t for v in MODULE_TESTS_BY_OS.values()
                                   for t in v]
@@ -1371,6 +1379,64 @@ def check_grammar():
     return 0
 
 
+def run_contrat(exe, target):
+    """Joue les contrats snapshot de tests/contrat/.
+
+    Un contrat est un couple <nom>.bas + <nom>.out : la sortie standard
+    attendue, octet pour octet apres normalisation des fins de ligne, et
+    un <nom>.rc optionnel pour le code de sortie (ScriptBasic rend 0 meme
+    en erreur, E3 : le .rc ne sert qu'aux harnais qui plantent expres,
+    comme manuel). Les .out sont regeneres par l'interpreteur, jamais
+    ecrits a la main ; toute divergence est une modification de
+    comportement a assumer consciemment.
+    """
+    cdir = ROOT / "tests" / "contrat"
+    scripts = sorted(cdir.glob("*.bas"))
+    if not scripts:
+        print(f"aucun contrat dans {cdir}")
+        return 1
+    config = exe.parent / "scriba.conf"
+    failures = 0
+    print(f"binaire : {exe}")
+    for script in scripts:
+        nom = script.stem
+        out_file = script.with_suffix(".out")
+        if not out_file.exists():
+            print(f"  ECHEC   {nom} : {out_file.name} absent "
+                  f"(regenerez-le, ne l'editez pas)")
+            failures += 1
+            continue
+        attendu_rc = 0
+        rc_file = script.with_suffix(".rc")
+        if rc_file.exists():
+            attendu_rc = int(rc_file.read_text(encoding="utf-8").strip())
+        cmd, cwd, env = command(exe, target, script, ROOT, config, None)
+        proc = subprocess.run(cmd, cwd=cwd, env=env, capture_output=True)
+        obtenu = proc.stdout.replace(b"\r\n", b"\n")
+        attendu = out_file.read_bytes().replace(b"\r\n", b"\n")
+        if proc.returncode == attendu_rc and obtenu == attendu:
+            print(f"  OK      {nom}")
+        else:
+            failures += 1
+            if proc.returncode != attendu_rc:
+                raison = f"code {proc.returncode} (attendu {attendu_rc})"
+            else:
+                raison = "sortie differente"
+            print(f"  ECHEC   {nom} ({raison})")
+            lo = obtenu.split(b"\n")
+            la = attendu.split(b"\n")
+            for i in range(max(len(lo), len(la))):
+                l1 = lo[i] if i < len(lo) else b"<fin>"
+                l2 = la[i] if i < len(la) else b"<fin>"
+                if l1 != l2:
+                    print(f"          ligne {i + 1} attendue : {l2[:60]!r}")
+                    print(f"                  obtenue : {l1[:60]!r}")
+                    break
+    total = len(scripts)
+    print(f"\n{total - failures}/{total} contrat(s) respecte(s)")
+    return 0 if failures == 0 else 1
+
+
 def main():
     ap = argparse.ArgumentParser(description="Tests ScriptBasic.")
     ap.add_argument("--target", help="cible construite dans dist/")
@@ -1394,6 +1460,8 @@ def main():
                     help="verifie le POST CGI par scriba -c et par sbhttpd")
     ap.add_argument("--cgi-post-timeout", type=int, default=30,
                     help="delai du test CGI POST, en secondes (defaut 30)")
+    ap.add_argument("--contrat", action="store_true",
+                    help="joue les contrats snapshot de tests/contrat/")
     ap.add_argument("--grammaire", action="store_true",
                     help="verifie statiquement que tout nom de la grammaire "
                          "a un corps (ne lance rien, ne demande aucun binaire)")
@@ -1453,13 +1521,20 @@ def main():
     if args.upstream or args.upstream_all:
         return run_upstream(exe, target, args.upstream_all,
                             args.upstream_timeout)
+    if args.contrat:
+        return run_contrat(exe, target)
 
     extra = []
     if args.modules and target:
         family = target.split("-")[0]
         extra = MODULE_TESTS_BY_OS.get(
             "windows" if family == "windows" else "unix", [])
-    names = args.test or (TESTS +
+    manuel = []
+    if target:
+        family = target.split("-")[0]
+        manuel = MANUEL_TESTS_BY_OS.get(
+            "windows" if family == "windows" else "unix", [])
+    names = args.test or (TESTS + manuel +
                           (MODULE_TESTS + extra if args.modules else []))
     config = exe.parent / "scriba.conf"
     failures = 0

@@ -1,0 +1,17 @@
+mid     : Bonjo
+left    : [  ]
+right   : [  ]
+ucase   : ABC
+ucase$  : ABC
+lcase   : abc
+trim    : [Bonjour le Monde]
+ltrim   : [Bonjour le Monde  ]
+rtrim   : [  Bonjour le Monde]
+reverse : cba
+instr   : 4
+string$ : aaa
+space   : [   ]
+chr     : AB
+hex     : FF
+oct     : 10
+fin 02

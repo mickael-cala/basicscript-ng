@@ -1,0 +1,19 @@
+entier  : 42
+negatif : -7
+reel    : 2.500000e+00
+chaine  : bonjour
+concat  : abc
+egal    : -1
+diff    : 0
+sup     : -1
+boucle for 1
+boucle for 2
+boucle for 3
+boucle while 1
+boucle while 2
+boucle while 3
+boucle repeat 1
+boucle repeat 2
+boucle repeat 3
+if/else : le sinon marche
+fin 01

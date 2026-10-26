@@ -1,0 +1,15 @@
+add     : 8888888
+mul     : 827115
+div-int : 142
+sqrt    : 2
+puiss   : 1024
+abs     : 5
+sgn     : -1 0 1
+max     : 9
+min     : 3
+gcd     : 6
+lcm     : 12
+odd     : -1 0
+even    : 0 -1
+bin     : 1010
+fin 05

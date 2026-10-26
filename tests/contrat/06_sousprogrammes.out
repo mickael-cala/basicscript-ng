@@ -1,0 +1,8 @@
+  sub(1)
+  sub(2)
+  sub(3)
+compteur : 3
+fact(5)  : 120
+fact(0)  : 1
+boite    : 7
+fin 06

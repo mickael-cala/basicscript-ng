@@ -1,0 +1,9 @@
+str   : 42
+str.  : 2.500000
+val   : 18
+int   : 2 et -3
+fix   : 2 et -2
+frac  : 7.500000e-01
+round : 3 et 4
+chr   : BC
+fin 03

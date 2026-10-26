@@ -1,0 +1,10 @@
+isundef  : -1
+isdef    : 0
+isarray  : -1
+isstr    : -1
+isint    : -1
+isreal   : -1
+isnumint : -1
+isnumstr : -1
+isempty  : -1
+fin 08
