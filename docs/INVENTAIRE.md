@@ -29,22 +29,27 @@ scriptbasic2-ng/
 
 ## 2. Comptes
 
+<!-- DEBUT COMPTES ENGENDRES - scripts/inventory.py -->
+
 | dossier | fichiers | nature |
 |---|---|---|
-| `src/` | 230 | 93 `.c`, 55 `.h`, 20 `.bas` de modules, 49 fichiers vendors (`zlib/`, `curl/`, `odbc/`), plus données (`regex.h`, `engine.ci`, `notunix.txt`, `copyright.txt`…) |
-| `tests/` | 108 | 44 `.bas` locaux (dont 8 contrats et leurs 8 `.out`) + `run.py` + `re_engine.c` + 32 `.bas` de `upstream/` + `MANIFEST.tsv` |
-| `examples/` | 200 | 178 `.bas`, 3 `.inc`, 7 `.sb`, et les données de `sibawa/` |
+| `src/vendor/` | 49 | zlib 1.3.1, en-tetes curl 8.21.0 et unixODBC - intouchables, avec leur README de provenance |
+| `src/` | 181 | le code C : 93 `.c`, 55 `.h`, 20 `.bas` de modules, donnees (`regex.h`, `notunix.txt`, `copyright.txt`...) |
+| `tests/contrat/` | 16 | les contrats snapshot (`.bas` + `.out`), compares octet par octet |
+| `tests/upstream/` | 33 | la suite d'origine, telle quelle, et son manifeste |
+| `tests/` | 59 | les programmes d'essai, le harnais du manuel et `run.py` |
+| `docs/modules/` | 15 | pages engendrees par `pod2md.py` |
+| `docs/` | 11 | la memoire du depot (dont PLAN, ERRATA, et ANNEXE-GRAMMAIRE engendree par `scripts/docs.py`) |
+| `examples/` | 200 | les exemples d'origine (copie de l'amont, ne pas reformater) |
 | `include/` | 3 | `error.bas`, `time.bas`, `modinst.bas` |
-| `docs/` | 26 | 11 documents `.md` (README, PLAN, PROGRAMMES, MODULES, GRAMMAIRE, ERRATA, EVOLUTIONS, ROADMAP, INVENTAIRE, REPRISE, MANUEL) + `modules/` (15 pages engendrées) |
 | `webtest/` | 2 | `index.bas`, `404.bas` |
-| `.github/` | 1 | le workflow de CI |
-| `scripts/` | 1 | `gen_grammaire.py`, le générateur de `docs/GRAMMAIRE.md` |
+| `scripts/` | 1 | l'outillage documentaire : `gen_grammaire.py`, `docs.py`, `arch.py`, `inventory.py` |
+| `.github/` | 1 | le workflow de CI (en pause, PLAN phase 5) |
 | racine | 8 | `build.py`, `pod2md.py`, `scriba.conf.lsp`, `README.md`, `AGENTS.md`, `LICENSE`, `.gitignore`, `.gitattributes` |
 
-Total : **579 fichiers versionnés**, dont **300 fichiers `.bas`** (modules,
-tests, exemples, pages web d'essai et `include/`). `GRAMMAIRE.md` et
-`MANUEL.md` sont engendrés (`scripts/gen_grammaire.py`, `pod2md.py`) et
-versionnés avec eux.
+Total : **579 fichiers versionnes**, dont **300 fichiers `.bas`** (modules, tests, exemples, pages web d'essai et `include/`). `GRAMMAIRE.md`, `MANUEL.md`, `ANNEXE-GRAMMAIRE.md` et la table ci-dessus sont engendres (`scripts/gen_grammaire.py`, `pod2md.py`, `scripts/docs.py`, `scripts/inventory.py`) et versionnes avec eux.
+
+<!-- FIN COMPTES ENGENDRES -->
 
 ## 3. Les sources C, en détail
 
