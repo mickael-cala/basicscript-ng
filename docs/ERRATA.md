@@ -1318,8 +1318,12 @@ module `mt` meurt en SIGSEGV (code -11) ; les vingt autres tests du jeu
 modules passent.
 
 **Cause** — inconnue : le module multi-thread n'avait jamais été exécuté
-sur macOS (README : « compilé, non exécuté ici »). Soupçon : taille de
-pile ou TLS des threads sur arm64 Apple.
+sur macOS (README : « compilé, non exécuté ici »). Analyse de 2026-10-26
+(phase 7) : `thread.c` ne touche ni pile ni attributs (`pthread_create`
+par défaut, puis `pthread_detach`), les macros de compteur de `basext.h`
+sont de simples mutex — aucun suspect déterminé dans les parties
+portables. Restent à instrumenter les verrous de session de `mt` et le
+chargement dynamique sur arm64 Apple.
 
 **État** — ouvert : le module se construit, son test est sauté avec
 raison (`MODULE_TESTS_SKIP`, ERRATA E47 cité) — retirer le saut fait
