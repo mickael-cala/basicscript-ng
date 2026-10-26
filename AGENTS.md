@@ -49,6 +49,9 @@ python tests/run.py --target linux-x64           # via WSL automatiquement
 python build.py --clean
 python pod2md.py            # regenere docs/MANUEL.md et docs/modules/
 python pod2md.py --check    # echoue si la doc a diverge des sources
+python scripts/docs.py --check       # annexe grammaire a jour (syntax.c)
+python scripts/inventory.py --check  # comptes de l'inventaire a jour
+python scripts/arch.py               # produits conformes a leur cible
 ```
 
 Zig **0.17.0 épinglée** (installée localement en `C:\outils\zig\0.17.0`).
@@ -103,12 +106,13 @@ documents concernés sont mis à jour.
 |---|---|
 | nouveau programme, nouvelle cible | `docs/PROGRAMMES.md`, `README.md` |
 | document ajouté ou renommé | `docs/README.md` (sommaire) |
+| grammaire modifiée (`syntax.c`) | `scripts/docs.py --write` (ANNEXE-GRAMMAIRE) |
 | module qui compile / ne compile plus | `docs/PROGRAMMES.md` § 4, `docs/MODULES.md` § 3 et § 6 |
 | défaut trouvé, limite assumée | `docs/ERRATA.md` (nouvel identifiant `E…`, ne jamais réutiliser un numéro) |
 | décision de conception | `docs/EVOLUTIONS.md` |
 | décision de fusion, phase, périmètre | `docs/PLAN.md` |
 | tâche terminée ou ajoutée | `docs/ROADMAP.md` (cocher / ajouter) |
-| fichier ajouté ou retiré | `docs/INVENTAIRE.md` |
+| fichier ajouté ou retiré | `scripts/inventory.py --write` (comptes de INVENTAIRE) |
 
 ## Pièges à connaître (détail dans docs/ERRATA.md)
 

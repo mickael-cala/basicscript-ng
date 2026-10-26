@@ -149,25 +149,32 @@ curl/odbc (win-x64) ou leurs exclusions documentées dans ERRATA.
 **Critère de sortie** : campagne contrat verte sur windows-x64 et
 linux-x64 (WSL), exécutée dans la CI.
 
-### Phase 4 — Doc as code réelle (v0.4)
+### Phase 4 — Doc as code réelle (v0.4) — réalisée, amendée
 
-1. Adopter le **vrai** `syntax.def` de `-ng` (481 lignes, format
-   ScriptBasic) comme référence de grammaire, à la racine.
-2. Réécrire `scripts/docs.py` : parser ce format (sessions `%NOM`),
-   générer les tables (mots-clés, fonctions, arités, alias `$`) entre
-   marqueurs dans `docs/MANUEL.md`, avec `--write` / `--check` conformes
-   au README et à AGENTS.md (règle n°2). Le cahier des charges est
-   `sb_doc.c`/`sb_docsrc.c` de `-ng`.
-3. Vérification croisée : docs.py contrôle aussi la cohérence
-   `syntax.def` ↔ `src/syntax.c` (NASYMBOLS/ASYMBOLS) pour éviter la
-   double vérité — c'est l'équivalent Python du couple `sb doc` +
-   essai `--grammaire`.
-4. Porter `scripts/arch.py` (lecture PE/ELF, refus arch mensongère) et
-   `scripts/inventory.py` (inventaire entre marqueurs dans
-   `docs/REGLES.md`) ; les brancher dans la CI.
+**Amendement d'autorité** : adopter le `syntax.def` de `-ng` comme
+référence créerait un faux oracle — les deux grammaires ont divergé
+(95 terminaux déclarés chez `-ng`, 475 symboles dans notre `syntax.c`,
+et des noms différents : `curdir` ici, `curdir$` là). L'autorité de la
+phase 4 est donc **notre `src/syntax.c`** ; une grammaire déclarative
+(`syntax.def`) fidèle au langage réel sera recréée à la passe langage
+(phase 8), où les changements de grammaire la mettront à jour de
+conserve.
 
-**Critère de sortie** : `docs.py --check`, `arch.py`, `inventory.py`
-verts dans la CI ; toucher syntax.def sans régénérer fait échouer le build.
+1. `scripts/docs.py` : extrait les tables de `syntax.c` (symboles
+   d'expression `CMD_`, mots-clés d'instruction avec leur id), vérifie la
+   cohérence des codes avec `syntax.h`, et engendre
+   `docs/ANNEXE-GRAMMAIRE.md` entre marqueurs, `--write`/`--check`
+   déterministes (pas d'horodatage).
+2. `scripts/arch.py` : lit chaque produit de `dist/` (PE, ELF, Mach-O) et
+   refuse un binaire qui ment sur son architecture.
+3. `scripts/inventory.py` : les comptes de `docs/INVENTAIRE.md` § 2 sont
+   générés entre marqueurs depuis `git ls-files` ; les natures restent
+   une décision écrite dans le script.
+
+**Critère de sortie** : `docs.py --check`, `inventory.py --check`,
+`arch.py` verts et reproductibles ; toucher `syntax.c` sans régénérer
+l'annexe fait échouer la vérification. (Le branchement CI attend la
+réactivation, phase 5.)
 
 ### Phase 5 — Fonctions killer et finitions (v1.0)
 
@@ -237,7 +244,7 @@ Total réaliste : **5 à 9 jours** de travail effectif, l'essentiel du risque
 | 1 — noyau scriba-zig | 2026-10-26 | import verbatim prouvé (`diff -rq` vide sur `src/`) ; build windows-x64 ; campagnes 30/30 et 21/21 ; `pod2md --check` vert ; CI des six cibles importée ; push GitHub (`master`), l'ancien contenu du distant archivé sur `archive/portage-20261026` |
 | 2 — modules de -ng | 2026-10-26 | zlib vendorisé 1.3.1 (win32/64 + linux) ; odbc win32/64 avec E11 fermé (E42 ouvert : liaison Linux) ; dyc 32 bits (E41 : ébauche x64 écartée) ; curl win64 avec E43 corrigé (`curl_free`) ; vendors `src/vendor/` intangibles ; campagnes : 30/30 noyau ×3 cibles, modules 24/24 + 24/24 + 21/21, chaque saut documenté et hors compte ; 563 fichiers versionnés |
 | 3 — contrats snapshot | 2026-10-26 | `tests/contrat/` : 8 contrats plateforme-neutres, 8/8 sur windows-x64, windows-x86 et linux-x64 (WSL) ; `manuel` (156 affirmations) entre en jeu Windows — 31/31, 31/31, 30/30 ; E44 (écarts LLP64) et E45 (strictures de grammaire) documentés |
-| 4 — doc depuis syntax.def | — | à venir |
+| 4 — doc as code | 2026-10-26 | amendé : l'autorité est `syntax.c` (le `syntax.def` de `-ng` documenterait une autre langue) ; `scripts/docs.py` engendre ANNEXE-GRAMMAIRE (557 symboles, déterministe), `scripts/arch.py` vérifie 36/36 produits (PE/ELF/Mach-O), `scripts/inventory.py` génère les comptes ; défaut corrigé au passage : `zig_path` de build.py retenait le chemin Windows sans vérifier son existence (c'était la cause des échecs CI en 32 s) ; **CI en pause** (déclencheur manuel), réactivation = phase 5 |
 | 5 — consolidation v1.0 | — | à venir |
 
 ### Phase 6 — Embarquer (v1.1)

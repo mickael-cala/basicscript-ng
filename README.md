@@ -30,8 +30,9 @@ feuille de route [docs/PLAN.md](docs/PLAN.md).
   [PLAN](docs/PLAN.md), le contrat de la fusion).
 
 Il n'y a **ni Perl, ni TinyCC, ni générateur d'en-têtes, ni fichier `.jam` de
-build**. `build.py` est le seul outil de compilation ; `pod2md.py` et
-`scripts/gen_grammaire.py` ne font que de la documentation.
+build**. `build.py` est le seul outil de compilation ; `pod2md.py` et les
+scripts de `scripts/` (`gen_grammaire.py`, `docs.py`, `arch.py`,
+`inventory.py`) ne font que de la documentation et des contrôles.
 
 ## Prérequis
 
@@ -293,6 +294,7 @@ Tout ce qu'il faut pour reprendre le dépôt est dans [`docs/`](docs/README.md) 
 | [docs/PROGRAMMES.md](docs/PROGRAMMES.md) | les exécutables : `scriba`, `sbhttpd`, formes embarquées, CGI |
 | [docs/MODULES.md](docs/MODULES.md) | les 20 modules et le remplacement des `.jam` |
 | [docs/MANUEL.md](docs/MANUEL.md) | le manuel du langage, engendré depuis le code |
+| [docs/ANNEXE-GRAMMAIRE.md](docs/ANNEXE-GRAMMAIRE.md) | la table des symboles de la grammaire, engendrée depuis `syntax.c` par `scripts/docs.py` |
 | [docs/ERRATA.md](docs/ERRATA.md) | défauts connus et pièges (`E1`…`E43`) |
 | [docs/ROADMAP.md](docs/ROADMAP.md) | ce qui reste, par priorité |
 | [docs/EVOLUTIONS.md](docs/EVOLUTIONS.md) | décisions et historique |
