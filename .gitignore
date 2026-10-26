@@ -1,0 +1,25 @@
+# objets et binaires de compilation
+obj/
+dist/
+
+# Python
+__pycache__/
+*.pyc
+
+# sorties de debogage
+*.pdb
+*.ilk
+*.o
+*.obj
+*.exe
+*.dll
+
+# editeurs
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# journaux et fichier pid du serveur d essai (sbhttpd)
+logs/
+/panic.txt

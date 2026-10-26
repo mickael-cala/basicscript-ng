@@ -1,0 +1,13 @@
+# Les fins de ligne des fichiers executes et des fixtures sont figees dans
+# le depot : un .sh materialise en CRLF casse son shebang (/bin/sh\r : No
+# such file or directory) des la premiere execution sous Linux. L'attribut
+# eol=lf force la materialisation LF au checkout, dans les deux sens, quel
+# que soit le core.autocrlf du poste ; les blobs restent LF.
+# Les .bas/.out/.err/.rc anticipent les contrats snapshot (docs/PLAN.md
+# phase 3) : une fixture comparee octet par octet ne doit pas dependre de
+# l'ordinateur qui l'a extraite.
+*.sh eol=lf
+*.bas eol=lf
+*.out eol=lf
+*.err eol=lf
+*.rc eol=lf
