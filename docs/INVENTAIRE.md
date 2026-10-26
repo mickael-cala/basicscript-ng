@@ -1,25 +1,28 @@
 # INVENTAIRE — ce que contient le dépôt, et ce qu'il ne contient pas
 
-État au **2026-10-24**. Les nombres excluent `.git/`, `obj/` et `dist/`
-(produits de compilation, tous deux ignorés par Git).
+État au **2026-10-26** (mise à jour pour la fusion scriptbasic2-ng). Les
+nombres sont ceux de Git : les produits (`obj/`, `dist/`, `logs/`) sont
+ignorés et donc exclus.
 
 ## 1. Vue d'ensemble
 
 ```
-scriba-zig/
+scriptbasic2-ng/
 ├── build.py                 le seul outil de compilation (6 cibles, sbhttpd, modules)
+├── pod2md.py                la fabrique de documentation (lit le C, écrit le markdown)
 ├── scriba.conf.lsp          configuration en texte
 ├── README.md                présentation et démarrage rapide
 ├── LICENSE                  GNU LGPL 2.1 (licence d'origine)
 ├── AGENTS.md                consignes pour un agent qui reprend le dépôt
 ├── .gitignore .gitattributes
 ├── .github/workflows/build.yml
+├── scripts/                 gen_grammaire.py, le générateur de docs/GRAMMAIRE.md
 ├── src/                     le code C
 ├── tests/                   les programmes d'essai + run.py
 │   └── upstream/            la suite d'origine, telle quelle, et son manifeste
 ├── examples/                les exemples d'origine
 ├── webtest/                 deux pages servies par sbhttpd
-└── docs/                    ces documents
+└── docs/                    ces documents, plus PLAN.md (la feuille de route de la fusion)
 ```
 
 ## 2. Comptes
@@ -30,13 +33,16 @@ scriba-zig/
 | `tests/` | 69 | 34 `.bas` locaux + `run.py` + `re_engine.c` + 32 `.bas` de `upstream/` + `MANIFEST.tsv` |
 | `examples/` | 200 | 178 `.bas`, 3 `.inc`, 7 `.sb`, et les données de `sibawa/` |
 | `include/` | 3 | `error.bas`, `time.bas`, `modinst.bas` |
-| `docs/` | 8 | README (sommaire), PROGRAMMES, MODULES, ERRATA, EVOLUTIONS, ROADMAP, INVENTAIRE, REPRISE |
+| `docs/` | 26 | 11 documents `.md` (README, PLAN, PROGRAMMES, MODULES, GRAMMAIRE, ERRATA, EVOLUTIONS, ROADMAP, INVENTAIRE, REPRISE, MANUEL) + `modules/` (15 pages engendrées) |
 | `webtest/` | 2 | `index.bas`, `404.bas` |
 | `.github/` | 1 | le workflow de CI |
-| racine | 7 | `build.py`, `scriba.conf.lsp`, `README.md`, `AGENTS.md`, `LICENSE`, `.gitignore`, `.gitattributes` |
+| `scripts/` | 1 | `gen_grammaire.py`, le générateur de `docs/GRAMMAIRE.md` |
+| racine | 8 | `build.py`, `pod2md.py`, `scriba.conf.lsp`, `README.md`, `AGENTS.md`, `LICENSE`, `.gitignore`, `.gitattributes` |
 
-Total : 466 fichiers de contenu, dont **264 fichiers `.bas`** (modules,
-tests, exemples, pages web d'essai et `include/`).
+Total : **512 fichiers versionnés**, dont **290 fichiers `.bas`** (modules,
+tests, exemples, pages web d'essai et `include/`). `GRAMMAIRE.md` et
+`MANUEL.md` sont engendrés (`scripts/gen_grammaire.py`, `pod2md.py`) et
+versionnés avec eux.
 
 ## 3. Les sources C, en détail
 
@@ -120,6 +126,10 @@ Aucun outil du dépôt ne les lit ; les régénérer demande Jamal. Détail :
 
 ## 6. Provenance
 
+- 2026-10-26 : import **verbatim** dans scriptbasic2-ng depuis scriba-zig
+  (branche `backup/pre-fusion-20261026`, commit `063572f`) ; `PLAN.md`,
+  `pod2md.py` en racine et `scripts/gen_grammaire.py` sont propres à la
+  fusion, la suite est pilotée par [PLAN.md](PLAN.md) ;
 - code C, tests, exemples : distribution **ScriptBasic** de Peter Verhas
   (LGPL 2.1), reprise telle quelle sauf les corrections listées dans
   [EVOLUTIONS.md](EVOLUTIONS.md) ;
