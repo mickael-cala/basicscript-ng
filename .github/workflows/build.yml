@@ -43,13 +43,10 @@ jobs:
 
       - name: Serveur HTTP et CGI POST
         shell: bash
-        # E46 : sous Linux, sbhttpd rend le code etendu exact mais le texte
-        # du module reste un %s brut - correction phase 7 (serveur). La
-        # mesure cgi-post ne juge donc que windows-x64 pour l'instant.
         run: |
           for t in ${{ matrix.tests }}; do
             case "$t" in
-              windows-x64)
+              windows-x64|linux-x64)
                 python build.py --target "$t" --httpd || exit 1
                 python tests/run.py --target "$t" --cgi-post || exit 1
                 ;;

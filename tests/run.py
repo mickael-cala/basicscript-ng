@@ -263,13 +263,14 @@ CGI_FILEMAX_CODE = 0x00080008
 CGI_TOO_BIG_NAME = "trop-gros.bin"
 CGI_TOO_BIG_BYTES = bytes(CGI_FILE_MAX + 1)
 CGI_TOO_BIG_BODY = multipart_body(CGI_TOO_BIG_NAME, CGI_TOO_BIG_BYTES)
-# En mode externe le rapporteur recoit un message NULL : il affiche donc la
-# chaine de format elle-meme ("Extension specific error: %s"). En interne
-# sbhttpd fournit "program terminated with error". Seul le code est commun
-# aux deux modes, c'est lui que le test exige partout.
+# Depuis E46 (corrige), le module fournit son message sur tous les chemins
+# et sur les deux plateformes : le rapporteur affiche donc son texte, et le
+# code complet reste l'attente commune (POSIX ne transmet que 8 bits de
+# code de sortie, le verifier le relit dans la page quand il faut).
 CGI_TOO_BIG_EXPECT = ("error 0x00080008",)
 CGI_TOO_BIG_EXPECT_HTTPD = CGI_TOO_BIG_EXPECT + (
-    "Extension specific error: program terminated with error",)
+    "Extension specific error: File is larger than the configured "
+    "allowed size.",)
 
 # Second refus, avec 256 Ko au-dela de la limite. Le module a deja lu tout ce
 # qu'il pouvait quand il refuse : le reste du corps est encore dans la socket
@@ -295,7 +296,8 @@ CGI_BIG_CONTENT_CODE = 0x00080002
 CGI_BIG_CONTENT_DECLARED = CGI_CONTENT_MAX + 1
 CGI_BIG_CONTENT_EXPECT = ("error 0x00080002",)
 CGI_BIG_CONTENT_EXPECT_HTTPD = CGI_BIG_CONTENT_EXPECT + (
-    "Extension specific error: program terminated with error",)
+    "Extension specific error: http request is larger than the allowed "
+    "and configured maximal size.",)
 
 # Erreur d'execution, pour figer ERRATA E24 : HttpProc passait le code
 # d'erreur comme mot de drapeaux a httpd_report, qui y teste REPORT_F_FRST
@@ -800,7 +802,14 @@ def cgi_post_problems(code, output, expect, expect_status, expect_code=0,
     """
     problems = []
     if code != expect_code:
-        problems.append(f"code {code}, {expect_code} attendu")
+        # POSIX ne transmet que 8 bits de code de sortie : sous UNIX,
+        # exit(0x00080008) rend 8, et un code etendu dont les 8 bits bas
+        # sont nuls (0x00080000) devient 0, indiscernable d'un succes.
+        # Le code complet, lui, est affiche noir sur blanc par le
+        # rapporteur ("error 0x........") : on l'y relit avant de crier.
+        lu = re.search(r"error 0x([0-9a-fA-F]{8})", output)
+        if not (lu and int(lu.group(1), 16) == expect_code):
+            problems.append(f"code {code}, {expect_code} attendu")
     for line in expect:
         if line not in output:
             problems.append(f"ligne absente : {line}")

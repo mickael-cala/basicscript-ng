@@ -582,11 +582,23 @@ CUT*/
   /* call the module initializer function */
   FunctionPointer = modu_GetModuleFunctionByName(*ThisModule,MODULE_INITIALIZER);
   if( FunctionPointer ){
+    char *(*pfszErrMsg)(pSupportTable, void **, int);
     ExternalFunction = FunctionPointer;
     (*ThisModule)->ModuleIsActive = 1;
     iResult = ExternalFunction(pEo->pST,&((*ThisModule)->ModuleInternalParameters),NULL,NULL);
     (*ThisModule)->ModuleIsActive = 0;
-    if( iResult != 0 )return iResult;
+    if( iResult != 0 ){
+      /* E46 : le message du module n'etait rempli que sur le chemin des
+         appels de fonction (commands/external.c) ; une erreur rendue par
+         bootmodu arrivait au rapporteur sans son texte, qui restait le
+         %s brut de "Extension specific error: %s". */
+      pfszErrMsg = modu_GetModuleFunctionByName(*ThisModule,MODULE_ERRMSG);
+      if( pfszErrMsg )
+        pEo->pszModuleError = pfszErrMsg(pEo->pST,
+                                         &((*ThisModule)->ModuleInternalParameters),
+                                         iResult);
+      return iResult;
+      }
     }
   return COMMAND_ERROR_SUCCESS;
   }

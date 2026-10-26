@@ -52,7 +52,7 @@ surprise de terrain.
 | [E43](#e43) | `free()` sur la mémoire de libcurl : corruption de tas | défaut | corrigé |
 | [E44](#e44) | `manuel` sous Linux : cinq affirmations encodent LLP64 | limite | documenté |
 | [E45](#e45) | formes historiques refusées à l'analyse (`open` nu, `sub` dans `module`) | limite | documenté |
-| [E46](#e46) | sbhttpd sous Linux : `%s` brut dans les erreurs étendues | défaut | ouvert |
+| [E46](#e46) | erreurs étendues : code tronqué par POSIX et message du module perdu sur le chemin bootmodu | défaut | corrigé |
 | [E47](#e47) | `mt` en Apple Silicon : SIGSEGV au test | défaut | ouvert |
 
 ---
@@ -1269,25 +1269,35 @@ entrant avec son contrat et son refus.
 
 ## E46
 
-**Symptôme** — en CI (ubuntu), `--cgi-post` via sbhttpd échoue sur les
-cas à code étendu : la page d'erreur porte le bon code
-(`0x00080008`, `0x00080002`) mais le texte du module reste un `%s` brut
-(`Extension specific error: %s`) au lieu du message rempli. Windows, lui,
-remplit le message.
+**Symptôme** — en CI (ubuntu), `--cgi-post` échouait sur les cas à code
+étendu avec « code 8, 524296 attendu », et la page d'erreur portait un
+`%s` brut (`Extension specific error: %s`) au lieu du texte du module.
 
-**Cause** — la substitution du message de module dans le rapporteur
-d'erreurs étendues ne se fait pas sous Linux ; le chemin exact (fmt du
-rapporteur, liaison statique de `cgi` dans sbhttpd, ou varargs) reste à
-trancher. Le défaut n'était pas visible avant : cette campagne n'avait
-jamais été jouée hors Windows.
+**Cause** — deux défauts distincts qui se masquaient l'un l'autre :
 
-**État** — ouvert, diagnostic affiné le 2026-10-26 : `scriba -c` remplit
-le message sous Linux comme sous Windows (chemin dynamique) ; seul le
-chemin statique de sbhttpd perd le `szErrorString` entre la SLFST et le
-rapporteur. Reproduction locale : WSL, `python3 tests/run.py --target
-linux-x64 --cgi-post` rend 18/22, les quatre rouges sont exactement les
-cas externes à code étendu. La CI ne juge toujours `--cgi-post` que sur
-windows-x64 (commentaire dans le workflow).
+1. le code de sortie : `exit()` POSIX ne transmet que 8 bits —
+   `exit(0x00080008)` rend 8 sous Linux, 524296 sous Windows (exit 32
+   bits). Le code complet, lui, est affiché par le rapporteur ;
+2. le message : `pEo->pszModuleError` n'était rempli que sur le chemin
+   des appels de fonction (`commands/external.c`) ; une erreur rendue
+   par `bootmodu` (exactement les refus FILE_MAX/CONTENT_MAX, qui tombent
+   au démarrage du module) arrivait au rapporteur sans son texte, sur
+   les deux plateformes — Windows passait parce que la campagne n'y
+   exigeait que le code.
+
+**Correctif** — `modu_LoadModule` (modumana.c) interroge `emsgmodu` du
+module après un bootmodu en erreur, selon le pattern d'external.c, si
+bien que le texte réel du module (« File is larger than the configured
+allowed size. »…) remplace le repli ; la campagne relit le code complet
+dans la page (`error 0x........`) quand le code de sortie POSIX ne peut
+pas le porter.
+
+**Couverture** — `--cgi-post` 22/22 sur windows-x64 ET linux-x64 (WSL) ;
+la CI rejoue les deux cibles (restriction retirée du workflow). Les
+`EXPECT_HTTPD` de `tests/run.py` exigent désormais les textes du module.
+
+**Portée** — un programme qui dépendait du repli « program terminated
+with error » voit le texte du module : plus d'information, pas moins.
 
 ## E47
 
