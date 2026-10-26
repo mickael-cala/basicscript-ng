@@ -15,10 +15,10 @@ Though this module does not deliver all functions of the ODBC system it does imp
 most of the functions that are needed to write SQL based applications. You can connect to
 ODBC databases, disconnect, issue SQL commands and retrieve the data resulted by the queries.
 
-To use this module from a BASIC program you have to include the file `odbc.bas` with the line
+To use this module from a BASIC program you have to include the file `odbc.sbm` with the line
 
 ```
-import odbc.bas
+import odbc.sbm
 ```
 
 to have all the neccessary function defintiions. This file and the neccessary `odbc.dll` (or `odbc.so`)

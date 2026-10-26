@@ -5,11 +5,10 @@
 
 Source : `src/extensions/dyc/interface.c`
 
-.function dyc
 ## DYC("format", arguments)
 
 ```
-import dyc.bas
+import dyc.sbm
 print dyc::dyc("ms,i,USER32.DLL,MessageBox,PZZL",0,"test message","title",3)
 ```
 
@@ -122,7 +121,7 @@ does not append the terminating zero character to the string. Thus you have to a
 pass it as zero terminated string. For example:
 
 ```
-import dyc.bas
+import dyc.sbm
 
 a$ = "message"
 a$ &= " text"
@@ -138,20 +137,6 @@ contain an extra zero character following their normal characters.
 
 - `d` specifies that the argument is a double value. The BASIC argument is converted to a real value if needed, which is stored in BASIC
 internally as double and is passed to the function.
-
-- `S` as the LAST character of the format (majuscule, so a legitimate final short argument 's' stays what it is) requests a STRUCTURE
-return: the function fills a caller-provided buffer instead of returning a register value. Announce it with the return code 's' (lowercase)
-and pass as the last BASIC argument that buffer, a string of at least 16 bytes (create it with string(n,chr$(0))). The dyc call returns 0
-and the caller reads the filled string. Example: lldiv of ucrtbase.dll returns a 16-byte lldiv_t (quotient and remainder as 64-bit integers):
-
-```
-import dyc.bas
-' long long passed as 8-byte binary strings (type 8), 16-byte buffer last
-a$ = chr$(100) & string(7,chr$(0))
-b$ = chr$(7) & string(7,chr$(0))
-res$ = string(16,chr$(0))
-dyc::dyc("cs,s,ucrtbase.dll,lldiv,88S",a$,b$,res$)
-```
 
 Note that this is a wise idea to write a wrapper function in BASIC that gets the arguments performs some checks if needed and calls the
 module `dyc` instead of putting the dyc call into the main BASIC code.

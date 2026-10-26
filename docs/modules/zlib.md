@@ -7,10 +7,10 @@ Source : `src/extensions/zlib/interface.c`
 
 ## Zlib functions
 
-To use these function the program has to import the file `zlib.bas`
+To use these function the program has to import the file `zlib.sbm`
 
 ```
-import zlib.bas
+import zlib.sbm
 ```
 --------------------------------------
 

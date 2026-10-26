@@ -10,11 +10,11 @@ oriented actions that are based on URL to access data. For example CURL can perf
 getting data via HTTP, HTTPS from web pages, POST data to web pages, transer file to
 and from servers via FTP and so on.
 
-To use the module the program has to import the BASIC "header" file named `curl.bas`. This
+To use the module the program has to import the BASIC "header" file named `curl.sbm`. This
 should be done using the command import:
 
 ```
-import curl.bas
+import curl.sbm
 ```
 
 Note that there are no double quotes around the file name to include the definition of the
@@ -31,7 +31,7 @@ action. When a connection is not used anymore the function `curl::finish` can be
 function is executed automatically for each connection when the interpreter exists.
 
 ```
-import curl.bas
+import curl.sbm
 ON ERROR GOTO CURL_ERROR
 CURL = curl::init()
 curl::option CURL,"URL","http://scriptbasic.com/html/index.html"
