@@ -62,6 +62,7 @@ jobs:
           for t in ${{ matrix.tests }}; do
             python tests/run.py --target "$t" --modules || exit 1
             python tests/run.py --target "$t" --upstream || exit 1
+            python tests/run.py --target "$t" --embed || exit 1
           done
 
       - name: Moteur re

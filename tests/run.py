@@ -13,6 +13,7 @@ tests/run.py - execute les tests ScriptBasic sur un binaire construit.
     python tests/run.py --target windows-x64 --cgi-post
     python tests/run.py --grammaire
     python tests/run.py --contrat
+    python tests/run.py --embed
     python tests/run.py --exe dist/macos-arm64/scriba
 
 Le jeu par defaut ne contient que des tests SANS module externe (pas de re,
@@ -1384,6 +1385,60 @@ def check_grammar():
     return 0
 
 
+def run_embed(exe, target):
+    """Joue les hotes embed construits par --libscriba.
+
+    Chaque programme de examples/embed/ prouve un aspect de l'embarquement
+    (charger-executer, appeler une fonction BASIC avec argument, lire une
+    variable) et affiche sa propre ligne de verdict, attendue ici. Le
+    repertoire courant est examples/embed/ : les hotes ouvrent bonus.bas
+    relatif. Aucune configuration n'est requise : le langage pur suffit.
+    """
+    famille = target.split("-")[0] if target else "windows"
+    edir = exe.parent / "embed"
+    attendu = {
+        "lancer": "embed lancer : OK",
+        "appeler": "embed appeler : OK - Double(21) = 42",
+        "variable": "embed variable : OK - total = 21",
+    }
+    suffix = ".exe" if famille == "windows" else ""
+    # Les .pdb que l'editeur de liens depose a cote ne sont pas des hotes :
+    # on vise par nom, jamais par glob.
+    hotes = [(nom, edir / (nom + suffix)) for nom in attendu
+             if (edir / (nom + suffix)).exists()]
+    if not hotes:
+        print(f"aucun hote dans {edir} : construisez avec --libscriba")
+        return 1
+
+    travaux = ROOT / "examples" / "embed"
+    failures = 0
+    print(f"hotes : {edir}")
+    for nom, hote in hotes:
+        if famille == "linux" and sys.platform == "win32":
+            def wsl(p):
+                p = Path(p).resolve().as_posix()
+                return "/mnt/" + p[0].lower() + p[2:] if p[1] == ":" else p
+            inner = f"cd '{wsl(travaux)}' && '{wsl(hote)}'"
+            cmd = ["wsl.exe", "-d", "Ubuntu-26.04", "--", "sh", "-c", inner]
+            cwd = ROOT
+        else:
+            cmd = [str(hote)]
+            cwd = travaux
+        proc = subprocess.run(cmd, cwd=cwd, capture_output=True,
+                              text=True, errors="replace")
+        sortie = proc.stdout + proc.stderr
+        if proc.returncode == 0 and attendu[nom] in proc.stdout:
+            print(f"  OK      {nom}")
+        else:
+            failures += 1
+            print(f"  ECHEC   {nom} (code {proc.returncode})")
+            for ligne in sortie.strip().splitlines()[-3:]:
+                print(f"          {ligne}")
+    total = len(hotes)
+    print(f"\n{total - failures}/{total} hote(s) embed respecte(s)")
+    return 0 if failures == 0 else 1
+
+
 def run_contrat(exe, target):
     """Joue les contrats snapshot de tests/contrat/.
 
@@ -1467,6 +1522,8 @@ def main():
                     help="delai du test CGI POST, en secondes (defaut 30)")
     ap.add_argument("--contrat", action="store_true",
                     help="joue les contrats snapshot de tests/contrat/")
+    ap.add_argument("--embed", action="store_true",
+                    help="joue les hotes embed de dist/<cible>/embed/")
     ap.add_argument("--grammaire", action="store_true",
                     help="verifie statiquement que tout nom de la grammaire "
                          "a un corps (ne lance rien, ne demande aucun binaire)")
@@ -1528,6 +1585,8 @@ def main():
                             args.upstream_timeout)
     if args.contrat:
         return run_contrat(exe, target)
+    if args.embed:
+        return run_embed(exe, target)
 
     extra = []
     if args.modules and target:

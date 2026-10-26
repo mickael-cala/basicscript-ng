@@ -811,10 +811,15 @@ def build_standalone(name, zig, opt, verbose, script):
 def build_libscriba(name, zig, opt, verbose):
     """Construit dist/<cible>/libscriba.a et copie les en-tetes.
 
-    L'archive contient le coeur, les commandes, lmt_none.c et libscriba.c.
-    Ce dernier porte un main() : il n'est tire de l'archive que si un hote
-    le demande explicitement, ce qui permet de lier l'archive a un programme
-    C ordinaire sans collision avec son propre main.
+    L'archive contient le coeur, les commandes et lmt_none.c, SANS
+    variations/standalone/libscriba.c ni scribacmd.c : le premier porte un
+    main() de demonstration, le second le main() du CLI. Un hote qui lie
+    l'archive fournit les siens (main, GetC que le coeur reference,
+    _environ sous UNIX) - voir examples/embed/ et libscriba.h. Amont, la
+    collision etait evitee parce que l'objet de demonstration n'etait tire
+    de l'archive qu'a la demande ; lld tire aussi des symboles dont
+    l'hote a defini sondouble : sortir l'objet est plus simple et sans
+    exception de plateforme.
     """
     if not build_target(name, zig, opt, verbose):
         print(f"  ECHEC  {name} : coeur non construit, archive abandonnee")
@@ -822,21 +827,13 @@ def build_libscriba(name, zig, opt, verbose):
 
     spec = TARGETS[name]
     triple = spec["triples"][0]
-    source = "variations/standalone/libscriba.c"
-    obj = object_path(name, source)
-    flags = [zig, "cc", "-target", triple] + COMMON + spec["defines"] + [
-        opt, "-I" + str(SRC), "-c"]
-    if not obj.exists() or obj.stat().st_mtime < (SRC / source).stat().st_mtime:
-        proc = run(flags + [str(SRC / source), "-o", str(obj)], verbose)
-        if proc.returncode != 0:
-            print(proc.stderr.strip())
-            print(f"  ECHEC  {name} : compilation de libscriba.c")
-            return False
 
-    # libscriba remplace scribacmd.c (deux main) et garde lmt_none.c
-    # (StaticallyLinkedModules), contrairement a stndlone qui le definit lui-meme.
-    sources = [s for s in SOURCES if s != "variations/standard/scribacmd.c"]
-    members = [object_path(name, s) for s in sources] + [obj]
+    # scribacmd.c (main du CLI) et libscriba.c (main de demonstration)
+    # restent dehors : l'hote apporte le sien.
+    exclus = ("variations/standard/scribacmd.c",
+              "variations/standalone/libscriba.c")
+    sources = [s for s in SOURCES if s not in exclus]
+    members = [object_path(name, s) for s in sources]
     missing = [p for p in members if not p.is_file()]
     if missing:
         print(f"  ECHEC  {name} : objet(s) absent(s) : "
@@ -857,6 +854,29 @@ def build_libscriba(name, zig, opt, verbose):
     incdir.mkdir(parents=True, exist_ok=True)
     for header in sorted(SRC.glob("*.h")):
         shutil.copy2(header, incdir / header.name)
+    # la notice de l'hôte, à côté des en-têtes qu'elle inclut
+    shutil.copy2(SRC / "variations" / "standalone" / "libscriba.h",
+                 incdir / "libscriba.h")
+
+    # Les hôtes embed : la preuve vivante que l'archive se consomme
+    # (PLAN phase 6). Chaque .c de examples/embed/ devient un exécutable
+    # dans dist/<cible>/embed/, joué par `tests/run.py --embed`.
+    hotes = sorted((ROOT / "examples" / "embed").glob("*.c"))
+    if hotes:
+        edir = DIST / name / "embed"
+        edir.mkdir(parents=True, exist_ok=True)
+        suffix = ".exe" if target_os(name) == "windows" else ""
+        for hote in hotes:
+            produit = edir / (hote.stem + suffix)
+            cmd = ([zig, "cc", "-target", triple] + spec["defines"] +
+                   [opt, "-I" + str(incdir), str(hote),
+                    str(out), "-o", str(produit)] + list(spec["libs"]))
+            proc = run(cmd, verbose)
+            if proc.returncode != 0 or not produit.is_file():
+                print(proc.stderr.strip())
+                print(f"  ECHEC  {name} : hote embed {hote.name}")
+                return False
+            print(f"  hote   {produit.relative_to(ROOT)}")
     print(f"  archive {out.relative_to(ROOT)}  "
           f"({len(members)} objets) + {incdir.relative_to(ROOT)}/")
     return True
