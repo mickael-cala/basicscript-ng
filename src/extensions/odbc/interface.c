@@ -839,3 +839,21 @@ besFUNCTION(odbc_config_connect)
     }
 
 besEND
+
+/* Table pour le lien statique (phase 6) : generee depuis les
+   alias de odbc.bas, selon le modele CGI_SLFST. Sous
+   -DSTATIC_LINK=1, la table est la seule porte du module. */
+SLFST ODBC_SLFST[] ={
+{ "versmodu" , versmodu },
+{ "bootmodu" , bootmodu },
+{ "finimodu" , finimodu },
+{ "odbc_config_connect" , odbc_config_connect },
+{ "odbc_real_connect" , odbc_real_connect },
+{ "odbc_close" , odbc_close },
+{ "odbc_query" , odbc_query },
+{ "odbc_fetcharray" , odbc_fetcharray },
+{ "odbc_fetchhash" , odbc_fetchhash },
+{ "odbc_affected_rows" , odbc_affected_rows },
+{ "odbc_error" , odbc_error },
+{ NULL , NULL }
+};

@@ -808,6 +808,172 @@ def build_standalone(name, zig, opt, verbose, script):
     return True
 
 
+def build_standalone_modules(name, zig, opt, verbose, script):
+    """`--standalone --modules` : l'autonome colle aussi les modules.
+
+    Une variante de `scriba` est liee avec les modules du jeu cible
+    compiles en -DSTATIC_LINK=1 : leurs fonctions deviennent internes et
+    la table generee lmt_standalone.c (StaticallyLinkedModules) donne a
+    modumana la porte de chacun - la SLFST du module. `scriba -E` sur
+    cette variante recopie donc un exécutable qui n'a besoin de rien a
+    cote de lui : ni modules/, ni scriba.conf.
+    """
+    if not can_run_target(name):
+        print(f"  ECHEC  {name} : --standalone exige une cible executable ici")
+        return False
+
+    spec = TARGETS[name]
+    triple = spec["triples"][0]
+    fam = target_os(name)
+    bits = 32 if name.endswith("-x86") else 64
+
+    # Le jeu de modules : les memes regles que build_modules, sans trial.
+    choix = []
+    for mod, m in MODULES.items():
+        if m.get("test_only"):
+            continue
+        if "os" in m and fam not in m["os"]:
+            continue
+        if "arch" in m and bits not in m["arch"]:
+            continue
+        choix.append((mod, m))
+    if not choix:
+        print(f"  ECHEC  {name} : aucun module a coller")
+        return False
+
+    if not build_target(name, zig, opt, verbose):
+        print(f"  ECHEC  {name} : coeur non construit, variante abandonnee")
+        return False
+    conf = DIST / name / "scriba.conf"
+    if not conf.exists() and not make_config(name):
+        print(f"  ECHEC  {name} : configuration binaire impossible")
+        return False
+
+    sdir = OBJ / name / "statique"
+    sdir.mkdir(parents=True, exist_ok=True)
+    base = [zig, "cc", "-target", triple] + COMMON + spec["defines"] + [
+        opt, "-I" + str(SRC), "-DSTATIC_LINK=1"]
+    headers = newest_header_mtime()
+    objets = []
+    extras = []
+    for mod, m in choix:
+        incs = m.get("include_dirs", ())
+        if isinstance(incs, dict):
+            incs = incs.get(fam, ())
+        flags = base + list(m.get("defines", ()))
+        flags += ["-I" + str(SRC / d) for d in incs]
+        extras += list(m.get("libs", {}).get(fam, ()))
+        if "import_def" in m:
+            implib = sdir / (mod + "-import.lib")
+            deffile = SRC / m["import_def"]
+            if (not implib.exists()
+                    or implib.stat().st_mtime < deffile.stat().st_mtime):
+                cmd_dt = [zig, "dlltool", "-d", str(deffile),
+                          "-l", str(implib)]
+                if bits == 32:
+                    cmd_dt[2:2] = ["-m", "i386"]
+                proc = run(cmd_dt, verbose)
+                if proc.returncode != 0:
+                    print(f"  ECHEC  {mod} (dlltool)\n{proc.stderr.strip()}")
+                    return False
+            extras.append(str(implib))
+        for rel in m["sources"]:
+            src = SRC / rel
+            obj = sdir / (mod + "_" + rel.replace("/", "_")[:-2] + ".o")
+            objets.append(obj)
+            if obj.exists() and obj.stat().st_mtime >= max(
+                    src.stat().st_mtime, headers):
+                continue
+            proc = run(flags + ["-c", str(src), "-o", str(obj)], verbose)
+            if proc.returncode != 0:
+                print(f"  ECHEC  {mod}/{rel}\n{proc.stderr.strip()}")
+                return False
+
+    # La table : le nom de chaque module -> sa SLFST. cgi, mt, cio et dyc
+    # la portaient deja ; les autres l'ont recue a la phase 6.
+    lmt_c = OBJ / name / "lmt_standalone.c"
+    lmt = ['#include <stdio.h>',
+           '#include "basext.h"',
+           '/* Genere par build.py pour --standalone --modules : ne pas',
+           '   editer, changer le jeu de modules dans MODULES. */']
+    for mod, _ in choix:
+        lmt.append(f"extern SLFST {mod.upper()}_SLFST[];")
+    lmt.append("MODLIST StaticallyLinkedModules[] ={")
+    for mod, _ in choix:
+        lmt.append('{"%s" , (void *)%s_SLFST },' % (mod, mod.upper()))
+    lmt += ["{ NULL, NULL },", "};", ""]
+    lmt_c.write_text("\n".join(lmt), encoding="utf-8", newline="")
+    lmt_obj = OBJ / name / "lmt_standalone.o"
+    proc = run(base + ["-c", str(lmt_c), "-o", str(lmt_obj)], verbose)
+    if proc.returncode != 0:
+        print(f"  ECHEC  lmt_standalone\n{proc.stderr.strip()}")
+        return False
+
+    # La variante : le coeur sans lmt_none (table vide) plus les modules.
+    coeur = [object_path(name, s) for s in SOURCES if s != "lmt_none.c"]
+    manquants = [p for p in coeur + [lmt_obj] + objets if not p.is_file()]
+    if manquants:
+        print(f"  ECHEC  {name} : objet(s) absent(s) : "
+              f"{', '.join(p.name for p in manquants)}")
+        return False
+    variante = DIST / name / ("scriba_modules" +
+                              (".exe" if fam == "windows" else ""))
+    cmd = ([zig, "cc", "-target", triple] + list(spec["libs"]) + extras +
+           [str(p) for p in coeur] + [str(lmt_obj)] +
+           [str(p) for p in objets] + ["-o", str(variante)])
+    # Pas de --out-implib ici : c'est un EXE, pas une DLL (l'implib fait
+    # tirer le CRT de DLL et DllMain entre en collision).
+    proc = run(cmd, verbose)
+    if proc.returncode != 0 or not variante.is_file():
+        print(proc.stderr.strip())
+        print(f"  ECHEC  {name} : liaison de la variante a modules statiques")
+        return False
+    print(f"  variante {variante.relative_to(ROOT)} "
+          f"({len(choix)} modules statiques)")
+
+    # -E sur la variante : le produit embarque bytecode ET modules.
+    out = DIST / name / (script.stem + "_standalone" +
+                         (".exe" if fam == "windows" else ""))
+    if out.is_file() or out.is_symlink():
+        out.unlink()
+    try:
+        if os.name == "nt" and name == "linux-x64":
+            inner = (
+                f"cd {shlex.quote(to_wsl(DIST / name))} && "
+                f"SCRIBACONF={shlex.quote(to_wsl(conf))} "
+                f"{shlex.quote(to_wsl(variante))} -E -o "
+                f"{shlex.quote(to_wsl(out))} {shlex.quote(to_wsl(script))} && "
+                f"chmod +x {shlex.quote(to_wsl(out))}")
+            proc = run(["wsl.exe", "-d", WSL_DISTRO, "--", "sh", "-c", inner],
+                       verbose)
+        else:
+            env = dict(os.environ)
+            if fam != "windows":
+                env["SCRIBACONF"] = str(conf)
+            proc = run([str(variante), "-E", "-o", str(out), str(script)],
+                       verbose, cwd=str(DIST / name), env=env)
+    except OSError as exc:
+        print(f"  ECHEC  {name} : {exc}")
+        return False
+
+    output = (proc.stdout or "") + (proc.stderr or "")
+    if (proc.returncode != 0 or "error &H" in output or
+            "error 0x" in output or not out.is_file() or
+            out.stat().st_size == 0):
+        if proc.stdout.strip():
+            print(proc.stdout.strip())
+        if proc.stderr.strip():
+            print(proc.stderr.strip())
+        if out.is_file() or out.is_symlink():
+            out.unlink()
+        print(f"  ECHEC  {name} : generation de {out.name}")
+        return False
+    if fam != "windows" and os.name != "nt":
+        out.chmod(out.stat().st_mode | 0o111)
+    print(f"  autonome {out.relative_to(ROOT)} (modules colles)")
+    return True
+
+
 def build_libscriba(name, zig, opt, verbose):
     """Construit dist/<cible>/libscriba.a et copie les en-tetes.
 
@@ -1016,10 +1182,11 @@ def main():
                     help="avec --modules : exclut les modules de test (trial)")
     args = ap.parse_args()
 
-    if args.standalone is not None and (args.all or args.modules or args.httpd or
+    if args.standalone is not None and (args.all or args.httpd or
                                        args.stndlone is not None or args.libscriba):
         ap.error("--standalone exige une seule cible et ne se combine pas "
-                 "avec --all, --modules, --httpd, --stndlone ou --libscriba")
+                 "avec --all, --httpd, --stndlone ou --libscriba "
+                 "(--modules est permis : modules colles dans l'autonome)")
     if args.stndlone is not None and (args.all or args.modules or args.httpd or
                                       args.libscriba):
         ap.error("--stndlone exige une seule cible et ne se combine pas "
@@ -1081,6 +1248,9 @@ def main():
         elif args.stndlone is not None:
             results[name] = build_stndlone(name, zig, args.opt, args.verbose,
                                            script)
+        elif args.standalone is not None and args.modules:
+            results[name] = build_standalone_modules(name, zig, args.opt,
+                                                     args.verbose, script)
         elif args.standalone is not None:
             results[name] = build_standalone(name, zig, args.opt, args.verbose,
                                              script)

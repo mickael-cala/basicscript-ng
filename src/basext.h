@@ -991,6 +991,13 @@ int _init(void);
 int _fini(void);
 #endif
 
+/* Un module lie statiquement n'est pas une DLL : pas de DllMain. Sans
+   cette garde, chaque module statique Windows en definissait un et
+   l'edition de liens de la variante autonome refusait les doublons
+   (phase 6). */
+#if STATIC_LINK
+#define besDLL_MAIN
+#else
 #define besDLL_MAIN \
 BOOL __declspec(dllexport) WINAPI DllMain(\
   HINSTANCE hinstDLL,\
@@ -1009,6 +1016,7 @@ BOOL __declspec(dllexport) WINAPI DllMain(\
     }\
   return TRUE;\
   }
+#endif /* STATIC_LINK */
 #else
 #define besDLL_MAIN
 #endif

@@ -735,3 +735,22 @@ besFUNCTION(replace)
   ReleaseList(root);
 
 besEND
+
+/* Table pour le lien statique (phase 6) : generee depuis les
+   alias de re.bas, selon le modele CGI_SLFST. Sous
+   -DSTATIC_LINK=1, la table est la seule porte du module. */
+SLFST RE_SLFST[] ={
+{ "versmodu" , versmodu },
+{ "bootmodu" , bootmodu },
+{ "finimodu" , finimodu },
+{ "match" , match },
+{ "match" , match },
+{ "nmatch" , nmatch },
+{ "dollar" , dollar },
+{ "dollar" , dollar },
+{ "format" , format },
+{ "reset" , reset },
+{ "replace" , replace },
+{ "replace" , replace },
+{ NULL , NULL }
+};

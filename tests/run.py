@@ -1142,14 +1142,24 @@ def run_cgi_post(exe, target, timeout=30):
     return 0 if failures == 0 else 1
 
 
-def run_standalone(exe, target, timeout=30, kind="standalone"):
+def run_standalone(exe, target, timeout=30, kind="standalone", modules=False):
     """Verifie l'executable autonome produit par --standalone ou --stndlone.
 
     Le lanceur ne le construit pas : il execute `hello_<kind>` tel quel, sans
     script ni compilateur, et exige les deux lignes de tests/hello.bas. C'est
     la difference avec un test ordinaire, qui recoit toujours un .bas.
+
+    Avec modules=True, l'artifact attendu est
+    `standalone_modules_standalone` (construit par
+    `build.py --standalone --modules tests/standalone_modules.bas`) et la
+    verification se fait depuis la racine du depot : le repertoire n'a ni
+    modules/ ni scriba.conf, donc un succes prouve que les modules sont
+    reellement colles dans l'executable (phase 6).
     """
-    name = "hello_" + kind
+    if modules:
+        name = "standalone_modules_standalone"
+    else:
+        name = "hello_" + kind
     suffix = ".exe" if (target or "").startswith("windows") or (
         not target and os.name == "nt") else ""
     artifact = exe.parent / (name + suffix)
@@ -1185,14 +1195,20 @@ def run_standalone(exe, target, timeout=30, kind="standalone"):
         print(f"  ECHEC   {name} : {exc}")
         return 1
 
+    if modules:
+        cwd = str(ROOT)  # neutre : ni modules/ ni scriba.conf a cote
     output = proc.stdout + proc.stderr
     problems = []
     if proc.returncode != 0:
         problems.append(f"code {proc.returncode}")
-    if "Hello from ScriptBasic" not in output:
-        problems.append("premiere ligne absente")
-    if "Compilation reussie" not in output:
-        problems.append("seconde ligne absente")
+    if modules:
+        if "standalone modules : OK" not in output:
+            problems.append("verdict des modules absents")
+    else:
+        if "Hello from ScriptBasic" not in output:
+            problems.append("premiere ligne absente")
+        if "Compilation reussie" not in output:
+            problems.append("seconde ligne absente")
     if "ECHEC" in output or "error &H" in output or "error 0x" in output:
         problems.append("erreur du rapporteur")
 
@@ -1577,7 +1593,7 @@ def main():
     if args.cgi_post:
         return run_cgi_post(exe, target, args.cgi_post_timeout)
     if args.standalone:
-        return run_standalone(exe, target)
+        return run_standalone(exe, target, modules=args.modules)
     if args.stndlone:
         return run_standalone(exe, target, kind="stndlone")
     if args.upstream or args.upstream_all:

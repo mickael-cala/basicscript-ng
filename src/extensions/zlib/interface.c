@@ -600,3 +600,17 @@ besFUNCTION(gunzpfnc)
   besFREE(pszInputFileName);
 besEND
 
+
+/* Table pour le lien statique (phase 6) : generee depuis les
+   alias de zlib.bas, selon le modele CGI_SLFST. Sous
+   -DSTATIC_LINK=1, la table est la seule porte du module. */
+SLFST ZLIB_SLFST[] ={
+{ "versmodu" , versmodu },
+{ "bootmodu" , bootmodu },
+{ "finimodu" , finimodu },
+{ "zlbcmprs" , zlbcmprs },
+{ "zlbucprs" , zlbucprs },
+{ "gzipfunc" , gzipfunc },
+{ "gunzpfnc" , gunzpfnc },
+{ NULL , NULL }
+};

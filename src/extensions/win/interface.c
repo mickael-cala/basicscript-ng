@@ -1147,3 +1147,24 @@ static int CreateJunction(char *LinkDirectory, char *LinkTarget){
   }
 
 
+
+/* Table pour le lien statique (phase 6) : generee depuis les
+   alias de win.bas, selon le modele CGI_SLFST. Sous
+   -DSTATIC_LINK=1, la table est la seule porte du module. */
+SLFST WIN_SLFST[] ={
+{ "versmodu" , versmodu },
+{ "bootmodu" , bootmodu },
+{ "finimodu" , finimodu },
+{ "regread" , regread },
+{ "regdel" , regdel },
+{ "regwrite" , regwrite },
+{ "msgbox" , msgbox },
+{ "win_shutdown" , win_shutdown },
+{ "proclist" , proclist },
+{ "win_startservice" , win_startservice },
+{ "win_stopservice" , win_stopservice },
+{ "win_pauseservice" , win_pauseservice },
+{ "win_continueservice" , win_continueservice },
+{ "win_hardlink" , win_hardlink },
+{ NULL , NULL }
+};

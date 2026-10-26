@@ -81,6 +81,14 @@ jobs:
           for t in ${{ matrix.tests }}; do
             python build.py --target "$t" --standalone || exit 1
             python tests/run.py --target "$t" --standalone || exit 1
+            case "$t" in
+              windows-x64|linux-x64)
+                # --standalone --modules : le lien statique des modules n'a
+                # pas encore ete eprouve sur macOS (phase 6, comme E47).
+                python build.py --target "$t" --standalone tests/standalone_modules.bas --modules || exit 1
+                python tests/run.py --target "$t" --standalone --modules || exit 1
+                ;;
+            esac
             python build.py --target "$t" --stndlone || exit 1
             python tests/run.py --target "$t" --stndlone || exit 1
           done

@@ -588,3 +588,27 @@ besFUNCTION(toolExit)
   exit(retcode);
 besEND
 
+
+/* Table pour le lien statique (phase 6) : generee depuis les
+   alias de t.bas, selon le modele CGI_SLFST. Sous
+   -DSTATIC_LINK=1, la table est la seule porte du module. */
+SLFST T_SLFST[] ={
+{ "versmodu" , versmodu },
+{ "bootmodu" , bootmodu },
+{ "finimodu" , finimodu },
+{ "md5fun" , md5fun },
+{ "serialize" , serialize },
+{ "xmlserialize" , xmlserialize },
+{ "unserialize" , unserialize },
+{ "serialize" , serialize },
+{ "xmlserialize" , xmlserialize },
+{ "unserialize" , unserialize },
+{ "md5serialize" , md5serialize },
+{ "md5unserialize" , md5unserialize },
+{ "md5serialize" , md5serialize },
+{ "md5unserialize" , md5unserialize },
+{ "savestring" , savestring },
+{ "loadstring" , loadstring },
+{ "toolExit" , toolExit },
+{ NULL , NULL }
+};

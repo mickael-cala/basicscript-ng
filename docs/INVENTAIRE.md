@@ -40,14 +40,14 @@ scriptbasic2-ng/
 | `tests/` | 59 | les programmes d'essai, le harnais du manuel et `run.py` |
 | `docs/modules/` | 15 | pages engendrees par `pod2md.py` |
 | `docs/` | 14 | la memoire du depot (dont PLAN, ERRATA, et ANNEXE-GRAMMAIRE engendree par `scripts/docs.py`) |
-| `examples/` | 200 | les exemples d'origine (copie de l'amont, ne pas reformater) |
+| `examples/` | 205 | les exemples d'origine (copie de l'amont, ne pas reformater) |
 | `include/` | 3 | `error.bas`, `time.bas`, `modinst.bas` |
 | `webtest/` | 2 | `index.bas`, `404.bas` |
 | `scripts/` | 5 | l'outillage documentaire : `gen_grammaire.py`, `docs.py`, `arch.py`, `inventory.py` |
 | `.github/` | 1 | le workflow de CI (en pause, PLAN phase 5) |
 | racine | 8 | `build.py`, `pod2md.py`, `scriba.conf.lsp`, `README.md`, `AGENTS.md`, `LICENSE`, `.gitignore`, `.gitattributes` |
 
-Total : **586 fichiers versionnes**, dont **300 fichiers `.bas`** (modules, tests, exemples, pages web d'essai et `include/`). `GRAMMAIRE.md`, `MANUEL.md`, `ANNEXE-GRAMMAIRE.md` et la table ci-dessus sont engendres (`scripts/gen_grammaire.py`, `pod2md.py`, `scripts/docs.py`, `scripts/inventory.py`) et versionnes avec eux.
+Total : **591 fichiers versionnes**, dont **301 fichiers `.bas`** (modules, tests, exemples, pages web d'essai et `include/`). `GRAMMAIRE.md`, `MANUEL.md`, `ANNEXE-GRAMMAIRE.md` et la table ci-dessus sont engendres (`scripts/gen_grammaire.py`, `pod2md.py`, `scripts/docs.py`, `scripts/inventory.py`) et versionnes avec eux.
 
 <!-- FIN COMPTES ENGENDRES -->
 

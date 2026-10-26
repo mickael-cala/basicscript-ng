@@ -673,3 +673,25 @@ besFUNCTION(relh)
     *Lval = NULL;
     }
 besEND
+
+/* Table pour le lien statique (phase 6) : generee depuis les
+   alias de hash.bas, selon le modele CGI_SLFST. Sous
+   -DSTATIC_LINK=1, la table est la seule porte du module. */
+SLFST HASH_SLFST[] ={
+{ "versmodu" , versmodu },
+{ "bootmodu" , bootmodu },
+{ "finimodu" , finimodu },
+{ "newh" , newh },
+{ "sethv" , sethv },
+{ "gethv" , gethv },
+{ "ivhv" , ivhv },
+{ "delhk" , delhk },
+{ "starth" , starth },
+{ "endh" , endh },
+{ "nexthk" , nexthk },
+{ "pervhk" , pervhk },
+{ "thishk" , thishk },
+{ "thishv" , thishv },
+{ "relh" , relh },
+{ NULL , NULL }
+};

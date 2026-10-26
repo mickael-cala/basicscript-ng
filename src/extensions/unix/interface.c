@@ -92,3 +92,15 @@ besFUNCTION(unixchmod)
   Argument = besCONVERT2LONG(Argument);
   chmod(pszFileName,(mode_t)LONGVALUE(Argument));
 besEND
+
+/* Table pour le lien statique (phase 6) : generee depuis les
+   alias de unix.bas, selon le modele CGI_SLFST. Sous
+   -DSTATIC_LINK=1, la table est la seule porte du module. */
+SLFST UNIX_SLFST[] ={
+{ "versmodu" , versmodu },
+{ "bootmodu" , bootmodu },
+{ "finimodu" , finimodu },
+{ "unixfork" , unixfork },
+{ "unixchmod" , unixchmod },
+{ NULL , NULL }
+};
