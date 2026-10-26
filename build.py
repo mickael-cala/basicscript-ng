@@ -245,6 +245,11 @@ MODULES = {
     "mt": {
         "sources": ["extensions/mt/interface.c"],
         "declare": "mt.bas",
+        # macOS exclu (ERRATA E47) : le test meurt en SIGSEGV sur Apple
+        # Silicon ; le module n'est pas declare utilisable la-bas, ni
+        # construit - le jeu modules et la suite amont sautent alors
+        # tout seuls avec leur raison.
+        "os": ("windows", "linux"),
     },
     # trial est un module d'essai de l'ABI : il reste dans --modules pour
     # tests/trial.bas, mais --release l'exclut d'un artefact de production.

@@ -52,6 +52,7 @@ python pod2md.py --check    # echoue si la doc a diverge des sources
 python scripts/docs.py --check       # annexe grammaire a jour (syntax.c)
 python scripts/inventory.py --check  # comptes de l'inventaire a jour
 python scripts/arch.py               # produits conformes a leur cible
+python scripts/exemples.py --target windows-x64 --write  # l'etat des exemples amont
 ```
 
 Zig **0.17.0 épinglée** (installée localement en `C:\outils\zig\0.17.0`).

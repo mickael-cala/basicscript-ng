@@ -88,7 +88,7 @@ bibliothèques partagées, dans `dist/<cible>/modules/` :
 | `t` | md5, sérialisation de tableaux, fichiers | `t.*` |
 | `trial` | module d'essai de l'ABI (compteur, `iff`, `pprint`) ; `test_only`, exclu par `--release` | `trial.*` |
 | `cgi` | environnement CGI, paramètres GET/POST, gabarits | `cgi.*` |
-| `mt` | sessions et verrous pour le serveur multi-thread | `mt.*` |
+| `mt` | sessions et verrous pour le serveur multi-thread | `mt.*` (pas de build macOS, E47) |
 | `cio` | console Windows (curseur, touches, titre) | `cio.dll` (Windows seulement) |
 | `win` | registre, services, processus (ex-`nt`) | `win.dll` (Windows seulement) |
 | `unix` | `fork`, `chmod` (ex-`ux`) | `unix.*` (Linux/macOS) |
@@ -295,7 +295,9 @@ Tout ce qu'il faut pour reprendre le dépôt est dans [`docs/`](docs/README.md) 
 | [docs/MODULES.md](docs/MODULES.md) | les 20 modules et le remplacement des `.jam` |
 | [docs/MANUEL.md](docs/MANUEL.md) | le manuel du langage, engendré depuis le code |
 | [docs/ANNEXE-GRAMMAIRE.md](docs/ANNEXE-GRAMMAIRE.md) | la table des symboles de la grammaire, engendrée depuis `syntax.c` par `scripts/docs.py` |
-| [docs/ERRATA.md](docs/ERRATA.md) | défauts connus et pièges (`E1`…`E43`) |
+| [docs/COMPATIBILITE.md](docs/COMPATIBILITE.md) | ce qu'on a cassé exprès, ce qu'on garantit, la procédure du jour du renommage |
+| [docs/EXEMPLES.md](docs/EXEMPLES.md) | l'état réel des 178 exemples amont, mesuré par `scripts/exemples.py` |
+| [docs/ERRATA.md](docs/ERRATA.md) | défauts connus et pièges (`E1`…`E47`) |
 | [docs/ROADMAP.md](docs/ROADMAP.md) | ce qui reste, par priorité |
 | [docs/EVOLUTIONS.md](docs/EVOLUTIONS.md) | décisions et historique |
 | [docs/INVENTAIRE.md](docs/INVENTAIRE.md) | contenu du dépôt |

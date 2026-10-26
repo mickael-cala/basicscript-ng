@@ -156,7 +156,6 @@ MODULE_TESTS_SKIP = {
                           "zig (ERRATA E42)",
              "macos-x64": "ni -lodbc ni en-tetes ODBC dans le sysroot",
              "macos-arm64": "ni -lodbc ni en-tetes ODBC dans le sysroot"},
-    "mt": {"macos-arm64": "SIGSEGV au test, Apple Silicon (ERRATA E47)"},
 }
 
 # Le harnais du manuel (156 affirmations sur les exemples de MANUEL.md) :

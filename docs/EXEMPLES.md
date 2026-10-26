@@ -1,116 +1,112 @@
 <!-- DEBUT EXEMPLES ENGENDRES - scripts/exemples.py -->
 
-_Mesure du 2026-10-26 sur `windows-x64`, delai 5 s par exemple, publication par `scripts/exemples.py --write`. Un exemple n'est jamais repare dans la copie de l'amont._
+_Mesure du 2026-10-26 sur `windows-x64`, delai 5 s par exemple, configuration du depot fournie (include + modules construits), publication par `scripts/exemples.py --write`. Un exemple n'est jamais repare dans la copie de l'amont._
 
 | verdict | exemples |
 |---|---|
-| `OK` | 83 |
-| `module` | 0 |
-| `analyse` | 90 |
-| `interaction` | 7 |
-| `execution` | 0 |
-| **total** | **180** |
+| `OK` | 87 |
+| `module` | 16 |
+| `include` | 48 |
+| `analyse` | 11 |
+| `interaction` | 9 |
+| `execution` | 1 |
+| `ecarte` | 6 |
+| **total** | **178** |
 
-Les verdicts `module` et `interaction` sont normaux : ils attendent un module non construit, une saisie, un reseau ou un serveur. Les `analyse` listent la face du langage que les exemples amont frappent - matiere de la passe langage (PLAN phase 8). Detail par exemple :
+`module` et `interaction` sont normaux (module non construit, saisie, reseau, serveur). `include` attend une declaration d'un module hors distribution (bdb, mysql...). Les `analyse` listent la face du langage que les exemples amont frappent - matiere de la passe langage (PLAN phase 8). Detail des exemples hors OK :
 
 | exemple | verdict | detail |
 |---|---|---|
-| `examples/1runrestart.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\1runrestart.bas(1): erro |
-| `examples/bdbtransact.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\bdbtransact.bas(1): erro |
-| `examples/cgi-bin/echo.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\cgi-bin\echo.bas(6): err |
-| `examples/cgi-bin/echoquerystring.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\cgi-bin\echoquerystring. |
-| `examples/cgi-bin/getparam.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\cgi-bin\getparam.bas(2): |
-| `examples/cgi-bin/listenv.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\cgi-bin\listenv.bas(2):  |
-| `examples/cgi-bin/mysqlcgi.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\cgi-bin\mysqlcgi.bas(1): |
-| `examples/cgi-bin/postparam.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\cgi-bin\postparam.bas(2) |
+| `examples/1runrestart.bas` | ecarte | redemarrage presume (nom) |
+| `examples/bdbtransact.bas` | include | fichier d'inclusion absent |
+| `examples/cgi-bin/echo.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\cgi-bin\echo.bas(2): err |
+| `examples/cgi-bin/echoquerystring.bas` | module | module non construit |
+| `examples/cgi-bin/getparam.bas` | module | module non construit |
+| `examples/cgi-bin/listenv.bas` | module | module non construit |
+| `examples/cgi-bin/mysqlcgi.bas` | include | fichier d'inclusion absent |
+| `examples/cgi-bin/postparam.bas` | module | module non construit |
 | `examples/cgi-proba.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/CGI(0): error &H44:The f |
-| `examples/cgigetex.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\cgigetex.bas(1): error & |
-| `examples/cgimodtest.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\cgimodtest.bas(1): error |
-| `examples/cgitest.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\cgitest.bas(2): error &H |
-| `examples/concol.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\concol.bas(1): error &H3 |
-| `examples/curltest.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\curltest.bas(1): error & |
-| `examples/debug.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\debug.bas(1): error &H3e |
+| `examples/cgigetex.bas` | module | module non construit |
+| `examples/cgimodtest.bas` | module | module non construit |
+| `examples/cgitest.bas` | module | module non construit |
+| `examples/concol.bas` | interaction | > 5 s |
+| `examples/debug.bas` | include | fichier d'inclusion absent |
 | `examples/debugtest2.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\debugtest2.bas(1): error |
-| `examples/echo.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\echo.bas(5): error &H3e: |
-| `examples/echoquerystring.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\echoquerystring.bas(2):  |
+| `examples/echo.bas` | module | module non construit |
+| `examples/echoquerystring.bas` | module | module non construit |
 | `examples/external.bas` | analyse | (0): error &H10:The requested module can not be loaded. |
-| `examples/gdtest.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\gdtest.bas(1): error &H3 |
-| `examples/getparam.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\getparam.bas(2): error & |
-| `examples/hash.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\hash.bas(1): error &H3e: |
-| `examples/hello.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\hello.bas(1): error &H3e |
+| `examples/gdtest.bas` | include | fichier d'inclusion absent |
+| `examples/getparam.bas` | module | module non construit |
+| `examples/hello.bas` | include | fichier d'inclusion absent |
 | `examples/hello_cgi.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\hello_cgi.bas(4): error  |
 | `examples/kakukk.bas` | analyse | (0): error &H16:The file can not be opened. |
-| `examples/listenv.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\listenv.bas(2): error &H |
-| `examples/mandel1.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\mandel1.bas(1): error &H |
-| `examples/msgbox.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\msgbox.bas(1): error &H3 |
-| `examples/mt.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\mt.bas(5): error &H3e:In |
-| `examples/mtlock.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\mtlock.bas(11): error &H |
-| `examples/mysqlcgi.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\mysqlcgi.bas(1): error & |
-| `examples/postparam.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\postparam.bas(2): error  |
+| `examples/listenv.bas` | module | module non construit |
+| `examples/mandel1.bas` | include | fichier d'inclusion absent |
+| `examples/msgbox.bas` | ecarte | popup GUI bloquante |
+| `examples/mt.bas` | module | module non construit |
+| `examples/mtlock.bas` | module | module non construit |
+| `examples/mysqlcgi.bas` | include | fichier d'inclusion absent |
+| `examples/postparam.bas` | module | module non construit |
 | `examples/reftest5.bas` | analyse | (0): error &H2:Function can not return a whole array |
-| `examples/runrestart.bas` | interaction | > 5 s |
-| `examples/sibawa/cgi-bin/addacl.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/addacltype.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/addgroup.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/addrole.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/adduser.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/chpass.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/delacl.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/delacltype.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/delgroup.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/delrole.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/deluser.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/descacltbit.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/editacl.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/editacltype.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/editgroup.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/editrole.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/edituser.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/listacls.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/listacltypes.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/listgroups.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/listroles.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/listusers.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/logout.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/newacl.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/newacltype.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/newgroup.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/newrole.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/newuser.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/setacl.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/setacltype.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/setgroup.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/setrole.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/setuser.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/cgi-bin/sibawa.bas` | analyse | C:/Users/micka/4QWEN/scriptbasic2-ng/examples/sibawa/sibawa.ini(6): er |
-| `examples/sibawa/create_tables.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\sibawa\create_tables.bas |
-| `examples/sibawa/sibawastart.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\sibawa\sibawastart.bas(9 |
+| `examples/runrestart.bas` | ecarte | redemarrage presume (nom) |
+| `examples/sibawa/cgi-bin/addacl.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/addacltype.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/addgroup.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/addrole.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/adduser.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/chpass.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/delacl.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/delacltype.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/delgroup.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/delrole.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/deluser.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/descacltbit.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/editacl.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/editacltype.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/editgroup.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/editrole.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/edituser.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/listacls.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/listacltypes.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/listgroups.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/listroles.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/listusers.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/logout.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/newacl.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/newacltype.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/newgroup.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/newrole.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/newuser.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/setacl.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/setacltype.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/setgroup.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/setrole.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/setuser.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/cgi-bin/sibawa.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/create_tables.bas` | include | fichier d'inclusion absent |
+| `examples/sibawa/sibawastart.bas` | include | fichier d'inclusion absent |
 | `examples/sleep.bas` | interaction | > 5 s |
 | `examples/test_ext_trial.bas` | analyse | (0): error &H10:The requested module can not be loaded. |
 | `examples/test_sleep.bas` | interaction | > 5 s |
-| `examples/testbdb.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\testbdb.bas(1): error &H |
-| `examples/testbdbtransaction.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\testbdbtransaction.bas(1 |
-| `examples/testcio.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\testcio.bas(1): error &H |
-| `examples/testconcol.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\testconcol.bas(6): error |
-| `examples/testfork.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\testfork.bas(1): error & |
-| `examples/testhash.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\testhash.bas(1): error & |
+| `examples/testbdb.bas` | include | fichier d'inclusion absent |
+| `examples/testbdbtransaction.bas` | include | fichier d'inclusion absent |
+| `examples/testcio.bas` | interaction | > 5 s |
+| `examples/testconcol.bas` | interaction | > 5 s |
+| `examples/testfork.bas` | include | fichier d'inclusion absent |
 | `examples/testhostname.bas` | interaction | > 5 s |
 | `examples/testhttp.bas` | interaction | > 5 s |
-| `examples/testjapi.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\testjapi.bas(1): error & |
+| `examples/testjapi.bas` | include | fichier d'inclusion absent |
 | `examples/testmathop.bas` | analyse | (0): error &H68:The user function "sqr" is used but is not defined. |
 | `examples/testmodl.bas` | analyse | (0): error &H10:The requested module can not be loaded. |
-| `examples/testmsgbox.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\testmsgbox.bas(1): error |
-| `examples/testmt.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\testmt.bas(5): error &H3 |
-| `examples/testmtlock.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\testmtlock.bas(11): erro |
-| `examples/testmysql.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\testmysql.bas(1): error  |
-| `examples/testnt.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\testnt.bas(1): error &H3 |
+| `examples/testmsgbox.bas` | ecarte | popup GUI bloquante |
+| `examples/testmt.bas` | module | module non construit |
+| `examples/testmtlock.bas` | module | module non construit |
+| `examples/testmysql.bas` | include | fichier d'inclusion absent |
+| `examples/testnt.bas` | execution | code 528385 |
 | `examples/testpow.bas` | analyse | (0): error &H68:The user function "sqr" is used but is not defined. |
-| `examples/testproclist.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\testproclist.bas(1): err |
-| `examples/testre.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\testre.bas(1): error &H3 |
-| `examples/testshutdown.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\testshutdown.bas(1): err |
-| `examples/teststservice.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\teststservice.bas(1): er |
+| `examples/testshutdown.bas` | ecarte | arret machine presume (nom) |
+| `examples/teststservice.bas` | ecarte | services Windows (nom) |
 | `examples/testtime.bas` | interaction | > 5 s |
 | `examples/time.bas` | interaction | > 5 s |
-| `examples/toolstest.bas` | analyse | C:\Users\micka\4QWEN\scriptbasic2-ng\examples\toolstest.bas(1): error  |
 
 <!-- FIN EXEMPLES ENGENDRES -->
