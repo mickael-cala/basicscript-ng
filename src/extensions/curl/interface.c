@@ -1,4 +1,5 @@
-/* FILE: curlintrfc.c
+/*
+FILE: curlintrfc.c
 
 This file contains code the CURL interface
 
@@ -20,11 +21,71 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 NTLIBS: libcurl.lib ws2_32.lib
 UXLIBS: -lcurl -lssl -lcrypto -ldl -lc
 
+# BAS declare l'import du module : sans cette ligne, sbtool headers
+# n'ecrit pas de curl.sbm, et un programme BASIC ne peut appeler les
+# fonctions du module que par des declare ecrites a la main. Meme
+# retouche que t, mt, hash et trial (PATCHES.md B.8).
+BAS: curl.bas
+
+Les dix =section ci-dessous portent le nom court (init, option...) : le nom
+declare dans l'import est celui du marqueur, precede du module, et le bloc de
+documentation qui suit annonce deja curl::init(). Voir PATCHES.md B.15.
+
 */
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 #include <curl/curl.h>
 #include "../../basext.h"
+
+/* Compatibilite libcurl moderne : quatre options que cette interface
+(originaire de 2001) adresse ont disparu des en-tetes, pas toutes de
+la bibliotheque. Les trois premieres gardent leur valeur historique,
+portee par un alias que les en-tetes actuels definissent encore
+(FILE, INFILE et WRITEHEADER ne sont que les anciens noms de
+WRITEDATA, READDATA et HEADERDATA). CLOSEPOLICY, elle, a perdu sa
+fonction : les en-tetes actuels la gardent sous forme d'alias vers
+l'emplacement obsolete 72, que curl_easy_setopt rejette desormais
+(CURLE_UNKNOWN_OPTION) ; erreur remontee comme n'importe quelle
+autre. Les noms, eux aussi, ont bouge : les constantes TIMECOND_*
+se nomment desormais CURL_TIMECOND_*, et la structure des formulaires
+multipart se nomme desormais curl_httppost (HttpPost en 2001).
+Voir PATCHES.md B.14. */
+#define CURLOPT_FILE        CURLOPT_WRITEDATA   /* meme valeur, 10001 */
+#define CURLOPT_INFILE      CURLOPT_READDATA    /* meme valeur, 10009 */
+#define CURLOPT_WRITEHEADER CURLOPT_HEADERDATA  /* meme valeur, 10029 */
+#define TIMECOND_IFMODSINCE   CURL_TIMECOND_IFMODSINCE
+#define TIMECOND_IFUNMODSINCE CURL_TIMECOND_IFUNMODSINCE
+#define TIMECOND_LASTMOD      CURL_TIMECOND_LASTMOD
+#define TIMECOND_NONE         CURL_TIMECOND_NONE
+#define HttpPost curl_httppost
+
+/* curl_formparse a ete retire de libcurl : son analyse d'une chaine
+"name=value&name=value" vit desormais ici, ses paires alimentant
+curl_formadd (deprece, mais encore exporte, comme le reste du module).
+Voir PATCHES.md B.14. */
+static CURLcode sb_formparse(const char *psz,
+                             struct curl_httppost **first,
+                             struct curl_httppost **last)
+{
+  const char *p = psz;
+  if( psz == NULL || *psz == 0 )return CURLE_BAD_FUNCTION_ARGUMENT;
+  while( *p ){
+    const char *eq = strchr(p,'=');
+    const char *amp = strchr(p,'&');
+    size_t nlen, vlen;
+    if( eq == NULL || (amp && eq > amp) )return CURLE_BAD_FUNCTION_ARGUMENT;
+    nlen = (size_t)(eq - p);
+    vlen = amp ? (size_t)(amp - eq - 1) : strlen(eq + 1);
+    if( curl_formadd(first, last,
+                     CURLFORM_COPYNAME, p, nlen,
+                     CURLFORM_COPYCONTENTS, eq + 1, vlen,
+                     CURLFORM_END) != CURL_FORMADD_OK )
+      return CURLE_FAILED_INIT;
+    p = amp ? amp + 1 : eq + 1 + vlen;
+    }
+  return CURLE_OK;
+}
 
 /**
 The CURL module provides easy and still powerful functions to perform various network
@@ -32,11 +93,11 @@ oriented actions that are based on URL to access data. For example CURL can perf
 getting data via HTTP, HTTPS from web pages, POST data to web pages, transer file to
 and from servers via FTP and so on.
 
-To use the module the program has to import the BASIC "header" file named T<curl.bas>. This
+To use the module the program has to import the BASIC "header" file named T<curl.sbm>. This
 should be done using the command import:
 
 =verbatim
-import curl.bas
+import curl.sbm
 =noverbatim
 
 Note that there are no double quotes around the file name to include the definition of the
@@ -53,7 +114,7 @@ action. When a connection is not used anymore the function T<curl::finish> can b
 function is executed automatically for each connection when the interpreter exists. 
 
 =verbatim
-import curl.bas
+import curl.sbm
 ON ERROR GOTO CURL_ERROR
 CURL = curl::init()
 curl::option CURL,"URL","http://scriptbasic.com/html/index.html"
@@ -242,7 +303,7 @@ besEND
 
 
 /**
-=section curl_init
+=section init
 =H curl::init
 
 Call this function before any other curl action. This function will return a handle
@@ -330,7 +391,7 @@ static size_t buffersend(char *buffer, size_t size, size_t count, pCurlConnectio
   }
 
 /**
-=section curl_option
+=section option
 =H curl::option
 
 Call this function to set the various options of the actual curl session.
@@ -1436,8 +1497,9 @@ besFUNCTION(sb_curl_option)
     besDEREFERENCE(Argument);
     if( Argument == NULL )return COMMAND_ERROR_ARGUMENT_RANGE;
     besCONVERT2ZCHAR(Argument,pszOption);
-    curl_formparse(pszOption,&(pCon->firstitem),&(pCon->lastitem));
+    res = sb_formparse(pszOption,&(pCon->firstitem),&(pCon->lastitem));
     besFREE(pszOption);
+    if( res != CURLE_OK )return 0x00081100+res;
     return COMMAND_ERROR_SUCCESS;
     }
 
@@ -1560,7 +1622,7 @@ static size_t buffercollect(char *buffer,size_t size,size_t count,pCurlConnectio
   }
 
 /**
-=section curl_perform
+=section perform
 =H curl::perform
 
 Call this function to perform the action that was initialized using the function
@@ -1632,7 +1694,7 @@ besFUNCTION(sb_curl_perform)
 besEND
 
 /**
-=section curl_info
+=section info
 =H curl::info
 
 Call this function to get information on the performed action
@@ -1796,7 +1858,7 @@ CHECK_INFOPT_D (CONTENT_LENGTH_UPLOAD)
 besEND
 
 /**
-=section curl_finish
+=section finish
 =H curl::finish
 
 You can call this function to close the connection that was used by CURL and to release
@@ -1865,7 +1927,7 @@ STRING_OPTIONS
 besEND
 
 /**
-=section curl_error
+=section error
 =H curl::error
 
 If any error has happened this function can be used to retrieve the error message that the underlying
@@ -1890,7 +1952,7 @@ besEND
 
 
 /**
-=section curl_escape
+=section escape
 =H curl::escape
 
 This function will convert the given input string to an URL encoded string and
@@ -1920,11 +1982,12 @@ besFUNCTION(sb_curl_escape)
   if( s == NULL )return COMMAND_ERROR_MEMORY_LOW;
   besALLOC_RETURN_STRING(strlen(s));
   memcpy(STRINGVALUE(besRETURNVALUE),s,STRLEN(besRETURNVALUE));
-  free(s);
+  curl_free(s); /* le tas est celui de libcurl-4.dll, pas le notre : */
+                 /* free() local = corruption de tas (0xC0000374, sonde2) */
 besEND
 
 /**
-=section curl_unescape
+=section unescape
 =H curl::unescape
 
 This function will convert the given URL encoded input string to a "plain
@@ -1971,11 +2034,12 @@ besFUNCTION(sb_curl_unescape)
   if( s == NULL )return COMMAND_ERROR_MEMORY_LOW;
   besALLOC_RETURN_STRING(strlen(s));
   memcpy(STRINGVALUE(besRETURNVALUE),s,STRLEN(besRETURNVALUE));
-  free(s);
+  curl_free(s); /* le tas est celui de libcurl-4.dll, pas le notre : */
+                 /* free() local = corruption de tas (0xC0000374, sonde2) */
 besEND
 
 /**
-=section curl_getdate
+=section getdate
 =H curl::getdate
 
 This function returns the number of seconds since January 1st 1970, for the
@@ -2063,7 +2127,7 @@ besFUNCTION(sb_curl_getdate)
 besEND
 
 /**
-=section curl_version
+=section version
 =H curl::version
 
 Returns a human readable string with the version number of

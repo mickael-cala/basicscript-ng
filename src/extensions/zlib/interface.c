@@ -1,11 +1,17 @@
-/* FILE: zlbintrf.c
+/*
+FILE: zlbintrf.c
 
 This file is a ScriptBasic interface file to the library zlib.
 
+The zlib library itself lives here, next to this interface: the fifteen .c and
+the eleven .h of zlib 1.3.1 (see LICENSE and docs/PATCHES.md B.10). The target
+rsp/ext_zlib.rsp compiles them into modules/zlib.dll, so the module carries its
+library instead of asking the machine for zlibs.lib.
 
 NTLIBS: zlibs.lib
 UXLIBS: -lc -lz
 DWLIBS: -lc -lz
+BAS: zlib.bas
 */
 #include <stdio.h>
 #include "../../basext.h"
@@ -70,10 +76,10 @@ static void zlibfree_interface(void *opaque, voidpf address){
 /**
 =H Zlib functions
 
-To use these function the program has to import the file T<zlib.bas>
+To use these function the program has to import the file T<zlib.sbm>
 
 =verbatim
-import zlib.bas
+import zlib.sbm
 =noverbatim
 --------------------------------------
 
@@ -93,7 +99,8 @@ besFUNCTION(zlbcmprs)
   VARIABLE Argument;
   z_stream zsStream;
   int iCompressionLevel;
-  unsigned char *pszBuffer;
+  long lBufferSize,lNewBufferSize;
+  unsigned char *pszBuffer,*pszNewBuffer;
   int iZError;
 
   besRETURNVALUE = NULL;
@@ -141,7 +148,8 @@ besFUNCTION(zlbcmprs)
   if( Argument->vType != VTYPE_STRING )
     Argument = besCONVERT2STRING(Argument);
 
-  pszBuffer = besALLOC(STRLEN(Argument));
+  lBufferSize = STRLEN(Argument);
+  pszBuffer = besALLOC(lBufferSize);
   if( pszBuffer == NULL )return COMMAND_ERROR_MEMORY_LOW;
 
   zsStream.next_in = STRINGVALUE(Argument);
@@ -158,9 +166,34 @@ besFUNCTION(zlbcmprs)
   /* this happens if the module was built using an incorrect version of the static lib file */
   if( iZError == Z_VERSION_ERROR )return ZLIB_ERROR_INTERNAL002;
 
-  iZError = deflate(&zsStream,Z_FINISH);
+  /* The output buffer starts as large as the input, which is enough only when
+     the data compresses. Incompressible data gives a compressed image LONGER
+     than the input -- stored blocks plus the zlib header and the Adler-32
+     trailer -- and a single deflate call then cannot finish: the upstream code
+     called it once and gave up with ZLIB_ERROR_NOCOMPRESS. This loop grows the
+     buffer like zlbucprs does; it is the only retouche of this interface (see
+     docs/PATCHES.md B.10). */
+  for(;;){
+    iZError = deflate(&zsStream,Z_FINISH);
+    if( iZError == Z_STREAM_END )break;
+    if( iZError != Z_OK ){
+      besFREE(pszBuffer);
+      return ZLIB_ERROR_NOCOMPRESS;
+      }
 
-  if( iZError != Z_STREAM_END )return ZLIB_ERROR_NOCOMPRESS;
+    lNewBufferSize = 2 * lBufferSize;
+    pszNewBuffer = besALLOC(lNewBufferSize);
+    if( pszNewBuffer == NULL ){
+      besFREE(pszBuffer);
+      return COMMAND_ERROR_MEMORY_LOW;
+      }
+    memcpy(pszNewBuffer,pszBuffer,zsStream.total_out);
+    besFREE(pszBuffer);
+    pszBuffer = pszNewBuffer;
+    zsStream.next_out = pszBuffer + zsStream.total_out;
+    zsStream.avail_out = lNewBufferSize - zsStream.total_out;
+    lBufferSize = lNewBufferSize;
+    }
 
   besALLOC_RETURN_STRING(zsStream.total_out);
 
@@ -400,9 +433,10 @@ besFUNCTION(gzipfunc)
       return ZLIB_ERROR_FILE_READ;
       }
     if( len == 0 )break;
-#pragma warning (disable:4018)
+    /* Les deux `#pragma warning (disable:4018)` / (default:4018) qui
+       encadraient cette comparaison sont du MSVC ; TCC les ignore en
+       avertissant, et la construction doit rester muette (PATCHES.md B.10). */
     if( gzwrite(out, buf, (unsigned)len) != len ){
-#pragma warning (default:4018)
       besFREE(pszInputFileName);
       gzclose(out);
       besHOOK_FCLOSE(fin);

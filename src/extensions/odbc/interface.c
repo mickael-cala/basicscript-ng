@@ -3,6 +3,12 @@
 NTLIBS: odbc32.lib odbccp32.lib
 UXLIBS: -lodbc
 
+# BAS declare l'import du module : sans cette ligne, headerer.pl (ou sbtool
+# headers) n'ecrit pas de odbc.bas, et un programme BASIC ne peut appeler les
+# fonctions ci-dessous que par des declare ecrites a la main. L'amont de
+# developpement porte la meme ligne ; voir docs/AMONT.md 6.
+BAS: odbc.bas
+
 */
 #ifdef WIN32
 #include <windows.h>
@@ -44,10 +50,10 @@ Though this module does not deliver all functions of the ODBC system it does imp
 most of the functions that are needed to write SQL based applications. You can connect to
 ODBC databases, disconnect, issue SQL commands and retrieve the data resulted by the queries.
 
-To use this module from a BASIC program you have to include the file T<odbc.bas> with the line
+To use this module from a BASIC program you have to include the file T<odbc.sbm> with the line
 
 =verbatim
-import odbc.bas
+import odbc.sbm
 =noverbatim
 
 to have all the neccessary function defintiions. This file and the neccessary T<odbc.dll> (or T<odbc.so>)
@@ -212,7 +218,8 @@ static int _GetData(pSupportTable pSt,
                     long j
   ){
   char szTmp[256];
-  SQLINTEGER cbCol,cbrCol;
+  SQLINTEGER cbCol;
+  SQLLEN cbrCol; /* SQLGetData rend un SQLLEN* : 64 bits sous Windows 64 */
   SQLRETURN ret;
   VARIABLE vDebug;
   long iIndex;
@@ -365,7 +372,7 @@ besFUNCTION(odbc_fetchhash)
   SQLSMALLINT cbColNameBuffer;
   SQLSMALLINT cbrColNameBuffer;
   SQLSMALLINT DataType;
-  SQLUINTEGER ColSize;
+  SQLULEN ColSize; /* SQLDescribeCol rend un SQLULEN* : 64 bits sous Windows 64 */
   SQLSMALLINT DecimalDigits;
   SQLSMALLINT Nullable;
   SQLRETURN ret;
@@ -472,7 +479,7 @@ besFUNCTION(odbc_affected_rows)
   VARIABLE Argument;
   podbcHANDLE q;
   podbcOBJECT p;
-  SQLINTEGER nRow;
+  SQLLEN nRow; /* SQLRowCount rend un SQLLEN* : 64 bits sous Windows 64 */
   SQLRETURN ret;
 
   p = (podbcOBJECT)besMODULEPOINTER;

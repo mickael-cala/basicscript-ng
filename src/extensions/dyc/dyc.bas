@@ -10,8 +10,6 @@ file: edit it here.
 module dyc
 
 ' FUNCTION DECLARATIONS 
-declare sub     ::dyc        alias "dyc"        lib "dyc"
-declare sub     ::ProbeLive  alias "ProbeLive"  lib "dyc"
-declare sub     ::LeakReport alias "LeakReport" lib "dyc"
+declare sub     ::dyc alias "dyc" lib "dyc"
 
 end module
