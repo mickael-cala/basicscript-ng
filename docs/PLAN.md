@@ -1,0 +1,222 @@
+# PLAN.md — Feuille de route ScriptBasic2-ng
+
+> Établi le 2026-10-26 après audit complet des quatre répertoires :
+> `ScriptBasic-master` (dump historique), `ScriptBasic-master\scriba-zig`,
+> `ScriptBasic-master-ng` et l'état réel de `scriptbasic2-ng`.
+> Ce document est la référence de la fusion. Il remplace les intentions
+> du README tant que les phases 0–5 ne sont pas bouclées.
+
+---
+
+## 0. Constat de départ (audit du 2026-10-26)
+
+Le squelette actuel de `scriptbasic2-ng` n'est **pas un point de départ exploitable** :
+
+| Élément | État réel |
+|---|---|
+| Code C | **Aucun** (un unique `src/main/commands.h` squelette de 35 lignes) |
+| `scripts/build.py` | **Corrompu** : fragment PowerShell collé en tête + deux versions du script Python concaténées (723 lignes, `SyntaxError` dès la ligne 2) |
+| `scripts/docs.py` | Bogué : `import sys` manquant (NameError prouvé), CLI régressé (positionnel vs `--write`/`--check` du README), parseur à code mort — la liste des fonctions est toujours vide |
+| `syntax.def` | **Troisième format inventé**, incompatible avec le vrai format ScriptBasic (celui de `-ng`, 481 lignes) et avec le parseur de docs.py lui-même |
+| `test/contrat/basic_syntax.bas` | Utilise `DIM a AS INTEGER`, `AS`, `INTEGER`, `STRING`… absents de syntax.def |
+| `.gitignore` | Ignore `*.out` → exclurait les fixtures de contrat du versionnement |
+| `src/vendor/`, `src/modules/*`, `resources/` | 13 dossiers vides |
+| Git | **Aucun dépôt initialisé** |
+| Zig | Non installé sur la machine |
+| Restes | `finalisation.ps1` (bogué : `$modified` jamais armé dans la boucle C23), `scripts_test/` vide, et le premier jet abandonné `scriba-zig\ScriptBasic-ng\` (11 fichiers divergents) |
+
+Conclusion : on ne « répare » pas ce squelette. On repart d'une base saine
+(scriba-zig, déjà compilable et testée) et on y greffe les apports de `-ng`.
+La conception de la fusion (quoi prendre d'où) reste valable ; son exécution
+par scripts de copie + conversion regex est abandonnée (voir §5).
+
+---
+
+## 1. Décisions d'architecture — « quoi prendre d'où »
+
+| Sujet | Choix | Source | Justification |
+|---|---|---|---|
+| Noyau C | `src/` de scriba-zig **verbatim** (93 .c / 55 .h, cœur 45 565 lignes) | scriba-zig | Seule version : headers plats (zéro `TO_HEADER:`), déjà compilée par `zig cc -std=c23`, campagne 30/30 verte |
+| C23 | Flag compilateur uniquement. **Aucune conversion de types par regex** | scriba-zig | Le code compile déjà en C23 ; remplacer `int`→`int32_t`, `long`→`int32_t` casserait l'ABI LP64 (long = 64 bits sous Linux) et 45 000 lignes de C |
+| Build | `build.py` de scriba-zig (1 015 lignes) étendu, pas réécrit | scriba-zig | Contient les leçons durement acquises : `-include stdio.h…` (les .h plats n'incluent pas leurs dépendances), `-Wno-*` ciblés, mtime des headers (E38), conf par ABI via WSL, incremental |
+| Cibles | 6 cibles zig natives : windows-x86/x64, linux-x64/arm64, macos-x64/arm64 | scriba-zig | La cross-compilation zig remplace toute la machinerie qemu de `-ng` ; riscv64/armv7 ajoutables plus tard pour ~5 lignes |
+| Tests — moteur | `tests/run.py` de scriba-zig (1 519 lignes) | scriba-zig | 30 essais dont 17 refus codifiés, `--modules`, `--upstream`, `--cgi-post`, `--grammaire`, `--standalone` |
+| Tests — corpus | Corps BASIC de `-ng` : `manuel.bas` (114 exemples), `test/*.bas`, essais extensions | `-ng` | Volume de couverture langue que scriba-zig n'a pas ; entré comme snapshots `.bas`+`.out` (phase 3) |
+| Documentation — prose | `pod2md.py` (POD dans le C → MANUEL.md, 212 entrées + docs/modules/) | scriba-zig | Cohérent avec les headers plats : la doc vit dans le C |
+| Documentation — tables | `docs.py` **réécrit** pour parser le VRAI `syntax.def` de `-ng` (481 lignes) et générer les tables du manuel entre marqueurs, avec vérif croisée `syntax.def` ↔ `syntax.c` | `-ng` | C'est le vrai « doc as code » : grammaire autoritaire + vérification programmatique (`sb_doc`/`sb_docsrc` de `-ng` servent de cahier des charges) |
+| Modules — base (9) | hash, re, t, trial, cgi, mt, cio, win, unix | scriba-zig | Zéro dépendance tierce, déjà construits et testés |
+| Modules — ajoutés | zlib (vendor 1.3.1, 32+64 bits prouvé), odbc (Windows, E11 ouvert en 64), curl (headers vendor 8.21.0, runtime système), dyc (source conservé, exclu ARCH 32) | `-ng` | Demandés explicitement ; état réel documenté dans `-ng` |
+| Modules — exclus | dbg (coquille vide, retiré dans `-ng`), bdb/curses/gd/mysql/psql/xml (tierces non planifiées, E13) | `-ng` | — |
+| Renommage `t`→`serialize` | Différé (v1.1), pas bloquant pour v1.0 | `-ng` | Le renommage existe dans `-ng` avec ses tests ; à porter en un commit dédié une fois la base verte |
+| Vendors | `src/vendor/zlib/` (sources), `src/vendor/curl/include/` (headers) — INTANGIBLES | `-ng` | Règle déjà inscrite dans AGENTS.md |
+| Validation d'architecture | `scripts/arch.py` : lecture PE `e_machine` / ELF, refus d'un binaire renommé | `-ng` (portage de `sb_arch`) | Invariant « un produit ment rarement sur son arch » ; en Python ici, pas en C |
+| Inventaire | `scripts/inventory.py` générant la section inventaire de docs/REGLES.md entre marqueurs | `-ng` (simplifié) | Rend réelle la règle n°4 d'AGENTS.md |
+| Git | Dépôt frais, commits atomiques conformes à AGENTS.md, `.gitattributes` figeant les fins de ligne | `-ng` | Leçon `b8dc114` (« les fins de ligne des scripts exécutés sont figées ») |
+| Version Zig | 0.17.0 épinglée (URL + sha256), script d'installation porté | scriba-zig + `-ng` | `setup-zig.sh` de `-ng` prouve la recette ; `-std=c23` exige un clang récent |
+
+## 2. Phases
+
+### Phase 0 — Assainissement et gardes-fous (préalable absolu)
+
+1. **Sauvegarder le travail non commité** : scriba-zig n'a qu'un seul commit et
+   toute la vague E23–E39 / passes 10–24 est dans l'arbre de travail ;
+   `-ng` porte 71 fichiers modifiés + 9 non suivis sur `vibe/curl`.
+   Dans chacun : `git add -A && git commit` sur une branche de sauvegarde
+   (ou archive zip). Ne rien perdre avant toute manipulation.
+2. **Purger le squelette scriptbasic2-ng** : supprimer `scripts/build.py`
+   (corrompu), `scripts/docs.py` (régressé), `syntax.def` (3e format),
+   `finalisation.ps1`, `scripts_test/`, `src/main/commands.h`,
+   `test/contrat/basic_syntax.{bas,out}` (incohérents avec la grammaire).
+3. **Corriger `.gitignore`** : retirer l'exclusion `*.out` (ou la réancrer
+   pour ne viser que les produits) ; ajouter `!test/contrat/**`.
+4. **Supprimer le premier jet** `scriba-zig\ScriptBasic-ng\` (11 fichiers
+   divergents, non suivis) après vérification qu'il ne contient rien
+   d'unique (l'audit du 2026-10-26 confirme : tout est soit obsolète, soit
+   régénérable).
+5. **Installer Zig 0.17.0** épinglée (recette `setup-zig.sh` de `-ng`,
+   adaptée Windows : zip officiel + sha256, ex. `C:\outils\zig\0.17.0`).
+6. `git init` dans scriptbasic2-ng + commit initial du squelette nettoyé.
+
+**Critère de sortie** : dépôt git propre, `zig version` → 0.17.0, aucun
+fichier corrompu restant.
+
+### Phase 1 — Noyau scriba-zig tel quel (v0.1)
+
+1. Copier **sans modification** : `src/` (noyau + commands + extensions +
+   variations + tools), `build.py`, `pod2md.py`, `tests/` (run.py + .bas +
+   upstream + re_engine.c + MANIFEST.tsv), `include/`, `scriba.conf.lsp`,
+   `LICENSE`, et les docs utiles (ERRATA, GRAMMAIRE, ROADMAP).
+2. Nettoyer en copiant : ne pas emporter `panic.txt`, `__pycache__/`,
+   `obj/`, `dist/`, `logs/` (produits/déchets).
+3. Adapter uniquement les chemins si besoin (aucun prévu : arborescence
+   conservée à l'identique — pas de déplacement `src/`→`src/main/`).
+4. `python build.py --target windows-x64` puis
+   `python tests/run.py --target windows-x64` → **30/30 attendu**.
+5. `python build.py --target windows-x64 --modules` → **21/21 attendu**.
+6. `python pod2md.py --check` → OK.
+7. Commit par bouchon atomique (`feat: noyau scriba-zig importé tel quel`,
+   `feat: campagne de tests importée`, `docs: ERRATA et grammaire importés`).
+8. Corriger au passage deux scories héritées : la table sommaire d'ERRATA
+   (n'a que E1–E31, le corps va jusqu'à E39) et le paramètre mort
+   `--jobs` (l'implémenter ou le retirer).
+
+**Critère de sortie** : windows-x64 compilé + 30/30 + 21/21 modules +
+doc vérifiée, premier run CI (porter `.github/workflows/build.yml`).
+
+### Phase 2 — Modules complémentaires de `-ng` (v0.2)
+
+1. **zlib** : vendoriser les sources zlib 1.3.1 dans `src/vendor/zlib/`
+   (depuis `-ng/src/modules/zlib/`), porter le module `zlib` de `-ng`
+   dans `src/extensions/zlib/`, ajuster includes/lien dans build.py
+   (`-Isrc/vendor/zlib`, lien statique vers les objets vendor).
+   Test : `-ng/test/` essai zlib rejoué sur windows-x64 et linux-x64.
+2. **curl** : vendoriser les headers 8.21.0 (`-ng/resources/curl/`) dans
+   `src/vendor/curl/include/` ; porter le module curl de `-ng` ; décision
+   runtime : liaison vers libcurl **système** (documentée, comme `-ng` ;
+   la vendorisation du binaire est exclue du périmètre v1). Cible
+   windows-x64 uniquement au départ (`vibe/curl` de `-ng` = cahier des
+   charges, le module n'y est pas encore produit).
+3. **odbc** : porter le module de `-ng` ; windows-x64 d'abord, E11
+   (échec 64 bits connu) traité en boîte de temps bornée ; si ouvert,
+   le documenter dans ERRATA et livrer windows-x86.
+4. **dyc** : copier la source, exclusion `ARCH 32` documentée dans
+   build.py (leçon d'ABI : `call` nu 32 bits, SIGSEGV garanti en 64).
+5. Optionnel (peut glisser en v1.1) : renommage `t`→`serialize` (+ ses
+   tests) en un commit dédié.
+
+**Critère de sortie** : `--modules` étendu vert avec zlib (unix+win) et
+curl/odbc (win-x64) ou leurs exclusions documentées dans ERRATA.
+
+### Phase 3 — Contrats snapshot façon `-ng` (v0.3)
+
+1. Créer `test/contrat/` au format `.bas` + `.out` (+ `.rc`, `.err` si
+   besoin) : chaque script BASIC a sa sortie figée, comparaison octet par
+   octet après normalisation des fins de ligne (`.gitattributes`).
+2. Semer le corpus depuis `-ng` : découper `manuel.bas` (114 exemples) en
+   contrats par thématique ; porter `test/*.bas` utiles ; convertir
+   `retires.txt` en essais de refus (le mécanisme `REFUS_ANALYSE` de
+   run.py existe déjà, il suffit d'ajouter les entrées).
+3. Ajouter à `tests/run.py` un mode `--contrat` qui joue et compare.
+4. Régénérer les `.out` avec l'interpréteur de la phase 1 (jamais écrits
+   à la main) ; les fixture `test/contrat/**` sont **versionnées**.
+
+**Critère de sortie** : campagne contrat verte sur windows-x64 et
+linux-x64 (WSL), exécutée dans la CI.
+
+### Phase 4 — Doc as code réelle (v0.4)
+
+1. Adopter le **vrai** `syntax.def` de `-ng` (481 lignes, format
+   ScriptBasic) comme référence de grammaire, à la racine.
+2. Réécrire `scripts/docs.py` : parser ce format (sessions `%NOM`),
+   générer les tables (mots-clés, fonctions, arités, alias `$`) entre
+   marqueurs dans `docs/MANUEL.md`, avec `--write` / `--check` conformes
+   au README et à AGENTS.md (règle n°2). Le cahier des charges est
+   `sb_doc.c`/`sb_docsrc.c` de `-ng`.
+3. Vérification croisée : docs.py contrôle aussi la cohérence
+   `syntax.def` ↔ `src/syntax.c` (NASYMBOLS/ASYMBOLS) pour éviter la
+   double vérité — c'est l'équivalent Python du couple `sb doc` +
+   essai `--grammaire`.
+4. Porter `scripts/arch.py` (lecture PE/ELF, refus arch mensongère) et
+   `scripts/inventory.py` (inventaire entre marqueurs dans
+   `docs/REGLES.md`) ; les brancher dans la CI.
+
+**Critère de sortie** : `docs.py --check`, `arch.py`, `inventory.py`
+verts dans la CI ; toucher syntax.def sans régénérer fait échouer le build.
+
+### Phase 5 — Fonctions killer et finitions (v1.0)
+
+1. Confirmer/porter `--standalone` (`scriba -E` : interpréteur + bytecode
+   embarqué), `--stndlone` (`scriba -C` + `stndlone.c`), `--libscriba`
+   (archive statique + headers) — déjà fonctionnels dans scriba-zig ;
+   leurs essais (`hello_standalone`, `hello_stndlone`) tournent déjà
+   dans run.py.
+2. CI élargie : build des 6 cibles + tests natifs (windows-x64, linux-x64
+   via WSL) + doc + contrat + arch + inventory.
+3. Pédagogie (recommandation héritée de l'audit `-ng`) : `docs/START_HERE.md`
+   (premier pas guidé : build, test, ajout d'un mot-clé) + diagramme
+   d'architecture (lexer→parser→bytecode→exécuteur→modules).
+4. Consolidation docs : ERRATA à jour (table E1–E39+), ROADMAP, tag `v1.0.0`.
+
+## 3. Pièges hérités à respecter (extraits d'AGENTS/ERRATA/REGLES)
+
+- **dyc** : 32 bits uniquement (ABI `call` nu). Exclusion `ARCH 32`, jamais un build 64.
+- **odbc 64 bits** : E11 ouvert — échec constaté, à temps borner.
+- **`waitpid`/`execute`** : exigent des lvalues pour PID et status (erreur `&H5c` sinon).
+- **Vendors intangibles** : `src/vendor/` ne se modifie pas, se remplace par script dédié.
+- **Opérateurs étendus** : les 256 opérateurs (`+^`, `!<`…) restent morts ; seul `#` survit.
+- **Headers** : plat, maintenus à la main ; ne jamais toucher un `.h` sans le `.c`.
+- **Fins de ligne** : `.gitattributes` dès le premier commit (leçon `-ng` b8dc114).
+- **Conf Linux depuis Windows** : `scriba.conf` binaire généré via WSL (même ABI), réutiliser `make_config()` de build.py.
+- **Flags** : conserver le jeu `-Wno-*` + `-include` de scriba-zig ; ne jamais ajouter `-Werror` global sur le noyau legacy.
+- **Zig** : 0.17.0 épinglée ; `zig ar` n'existe pas en 0.17 → utiliser `zig cc` en mode archive ou l'`ar` de la chaîne.
+
+## 4. Ce qu'on ne fera PAS (erreurs de la conversation Qwen à ne pas reproduire)
+
+1. **Aucune « conversion C23 » par regex** (`int`→`int32_t`, `long`→`int32_t`…) :
+   fausse pour LP64 (long=64 bits Linux), casse `main`, les casts, les
+   déclarations Windows, et inutile — le code compile déjà avec `-std=c23`.
+2. **Pas de `--standalone` maison** via `scriba -C file -o out.bc` (option
+   inexistante) ni de `scriba_execute_bytecode()` (fonction inventée) :
+   les chemins réels sont `-E` et `-C`+`stndlone.c`.
+3. **Pas de copie en bloc** `src/* → src/main/` qui écraserait le layout
+   (extensions/ et variations/ se retrouveraient sous main/) ni de
+   contrat sbtool copié depuis `-ng` (ses 330 baselines testent la
+   **parole de sbtool**, un outil qui n'existe pas ici).
+4. **Pas de `syntax.def` réinventé** : le format autoritaire est celui de `-ng`.
+5. **Pas de génération magique de headers** : règle n°3 d'AGENTS.md.
+6. **Jamais revendiquer un fichier créé sans relecture** : chaque écriture
+   est suivie d'une vérification (syntaxe Python, exécution, diff).
+
+## 5. Estimation
+
+| Phase | Contenu | Effort indicatif |
+|---|---|---|
+| 0 | Sauvegardes, purge, zig, git | 2–3 h |
+| 1 | Import noyau + campagne verte + CI | 0,5–1 j |
+| 2 | zlib (+ curl, odbc bornés) | 1–2 j |
+| 3 | Contrats snapshot (corpus `-ng`) | 1–2 j |
+| 4 | docs.py réel + arch + inventory | 1–2 j |
+| 5 | Killer features déjà là + docs + tag v1.0.0 | 0,5–1 j |
+
+Total réaliste : **5 à 9 jours** de travail effectif, l'essentiel du risque
+étant concentré sur curl/odbc (phase 2).
