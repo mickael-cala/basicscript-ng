@@ -157,6 +157,7 @@ typedef struct _WebData {
 
   /* number of seconds to sleep between examining the pid file if that still exists */
   unsigned long lWaitLoop;
+  long lAutoHeaders; /* 1 : le serveur emet les en-tetes HTTP/1.x (E6) */
 
   /* where to send error messages bit0 client bit1 errlog */
 #define ERRMSGCLIENT 0x01
@@ -185,6 +186,13 @@ typedef struct _ApplicationThreadData {
   char *pszFtpCommand; /* the actual command including the line terminating \r\n */
   char szThreadIndex[20]; /* the thread index decimal */
   int FirstHeaderLine;
+  /* phase 7 (E6) : le serveur emet lui-meme les en-tetes HTTP/1.x quand
+     le script n'ecrit ni Status: ni HTTP/ en premiere ligne. */
+  int WrapMode;    /* 0 : pas encore tranche, 1 : passthrough, 2 : accumulation */
+  int AutoHeaders; /* copie de la configuration servers.autoheaders */
+  char *pszWrap;   /* la reponse accumulee en mode 2 */
+  unsigned long cbWrap;
+  unsigned long cbWrapMax;
   }ApplicationThreadData, *pApplicationThreadData;
 
 #ifdef WIN32
@@ -569,6 +577,12 @@ int AppInit(int argc,char *argv[],pHttpdThread pHT,void **AppData){
 
   if( ! cft_GetEx(pWD->pProgramConfig->pCONF,"servers.threads",NULL,NULL,&myV,NULL,NULL) )
     pHT->threadmax = myV;
+  /* E6 : par defaut le serveur parle HTTP/1.x (statut, Content-Type par
+     defaut et Content-Length) des que le script n'ecrit pas lui-meme sa
+     premiere ligne. servers.autoheaders 0 restaure le passthrough amont. */
+  pWD->lAutoHeaders = 1;
+  if( ! cft_GetEx(pWD->pProgramConfig->pCONF,"servers.autoheaders",NULL,NULL,&myV,NULL,NULL) )
+    pWD->lAutoHeaders = myV;
   log_printf(&(pWD->AppLog),"Maximum number of serving threads: %d",pHT->threadmax);
 
   if( ! cft_GetEx(pWD->pProgramConfig->pCONF,"servers.proxyip",NULL,NULL,&myV,NULL,NULL) )
@@ -1098,6 +1112,7 @@ static void pfStdOut(int ch,
                      void *pE){
   pThreadData pT;
   pApplicationThreadData pATD;
+  unsigned long i;
   char c;
 
   ch = (char)ch;
@@ -1105,12 +1120,34 @@ static void pfStdOut(int ch,
 
   pT = pE;
   pATD = pT->AppThreadData;
+
+  /* phase 7 : en mode accumulation, chaque octet rejoint la reponse
+     gardee ; les en-tetes ne partiront qu'a la fin du script. */
+  if( pATD->WrapMode == 2 ){
+    if( pATD->cbWrap + 1 > pATD->cbWrapMax ){
+      pATD->cbWrapMax = pATD->cbWrapMax ? pATD->cbWrapMax * 2 : 4096;
+      pATD->pszWrap = realloc(pATD->pszWrap,pATD->cbWrapMax);
+      if( pATD->pszWrap == NULL ){ pATD->WrapMode = 1; return; }
+      }
+    pATD->pszWrap[pATD->cbWrap++] = c;
+    return;
+    }
+
   if( ! pATD->FirstHeaderLine ){
     WriteClient(&c,1);
     return;
     }
 
   if( pATD->cbBuffer == OBLEN ){
+    /* premiere ligne plus longue que le tampon : en auto-en-tetes rien
+       n'est encore parti, on bascule en accumulation ; sinon passthrough */
+    if( pATD->AutoHeaders && pATD->WrapMode == 0 ){
+      pATD->WrapMode = 2;
+      pATD->FirstHeaderLine = 0;
+      for( i = 0 ; i < pATD->cbBuffer ; i++ )pfStdOut(pATD->szBuffer[i],pE);
+      pfStdOut(ch,pE);
+      return;
+      }
     WriteClient(pATD->szBuffer,pATD->cbBuffer);
     pATD->cbBuffer = 0;
     pATD->FirstHeaderLine = 0;
@@ -1123,16 +1160,28 @@ static void pfStdOut(int ch,
   if( ch == '\n' ){
     pATD->FirstHeaderLine = 0;
     if( pATD->cbBuffer > 7 && ! strncmp(pATD->szBuffer,"Status:",7) ){
+      pATD->WrapMode = 1;
       WriteClient("HTTP/1.0",8);
       WriteClient(pATD->szBuffer+7,pATD->cbBuffer-7);
       pATD->cbBuffer = 0;
       return;
-      }else{
+      }
+    if( pATD->cbBuffer > 5 && ! strncmp(pATD->szBuffer,"HTTP/",5) ){
+      pATD->WrapMode = 1;
       WriteClient(pATD->szBuffer,pATD->cbBuffer);
       pATD->cbBuffer = 0;
+      return;
       }
+    if( pATD->AutoHeaders ){
+      pATD->WrapMode = 2;
+      for( i = 0 ; i < pATD->cbBuffer ; i++ )pfStdOut(pATD->szBuffer[i],pE);
+      pfStdOut(ch,pE);
+      pATD->cbBuffer = 0;
+      return;
+      }
+    WriteClient(pATD->szBuffer,pATD->cbBuffer);
+    pATD->cbBuffer = 0;
     }
-
   }
 
 static int pfStdIn(void *pE){
@@ -1535,6 +1584,10 @@ void HttpProc(pHttpdThread pHT,pThreadData pT){
   ATD.cbBuffer = 0;
   ATD.FirstHeaderLine = 1;
   ATD.cbInBuffer = 0;
+  ATD.WrapMode = 0;
+  ATD.AutoHeaders = (int)pWD->lAutoHeaders;
+  ATD.pszWrap = NULL;
+  ATD.cbWrap = ATD.cbWrapMax = 0;
 
   /*
    *  Get the BASIC authentication parameters
@@ -1644,6 +1697,17 @@ void HttpProc(pHttpdThread pHT,pThreadData pT){
   if( iErrorCode )
     httpd_report(pT,szInputFile,0,iErrorCode,REPORT_ERROR,&iErrorCounter,
                  pProgram->pEXE->pszModuleError ? pProgram->pEXE->pszModuleError : "program terminated with error",&fErrorFlags);
+  /* phase 7 : vider l'accumulation du mode auto-en-tetes. Si une page
+     d'erreur a deja ete ecrite directement par le serveur, FirstHeaderLine
+     est retombe (E25) et WrapMode vaut 1 : rien ne se double. */
+  if( ATD.WrapMode == 2 && ATD.pszWrap ){
+    char szEntete[128];
+    sprintf(szEntete,"HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length: %lu\r\n\r\n",ATD.cbWrap);
+    WriteClient(szEntete,strlen(szEntete));
+    WriteClient(ATD.pszWrap,ATD.cbWrap);
+    }
+  free(ATD.pszWrap);
+  ATD.pszWrap = NULL;
   scriba_destroy(pProgram);
   }
 

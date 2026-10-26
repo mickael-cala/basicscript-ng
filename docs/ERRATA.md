@@ -12,7 +12,7 @@ surprise de terrain.
 | [E3](#e3) | seuls 6 tests tournent dans le jeu par défaut | limite | assumé |
 | [E4](#e4) | `tests/upstream/` n'est exécuté que par le sous-ensemble du manifeste | limite | encadré |
 | [E5](#e5) | les binaires macOS et ARM ne sont pas exécutés ici | limite | assumé |
-| [E6](#e6) | `sbhttpd` : sans en-têtes, la réponse n'est pas du HTTP/1.x | piège | documenté |
+| [E6](#e6) | `sbhttpd` : sans en-têtes, la réponse n'est pas du HTTP/1.x | piège | corrigé |
 | [E7](#e7) | `sbhttpd` ne compile pas sous Linux/macOS | défaut | corrigé |
 | [E8](#e8) | le C produit par `scriba -C` est du C K&R | piège | documenté |
 | [E9](#e9) | lier la sortie de `-C` demande d'écarter deux objets | piège | documenté |
@@ -203,7 +203,17 @@ n'affiche aucun corps, alors que le script s'est bien exécuté (visible dans
 écrire sa ligne de statut et ses `Content-type`. Un script qui commence par
 `print "bonjour\n"` produit une réponse que HTTP/1.x n'autorise pas.
 
-**Parade** — deux possibilités, au choix :
+**Correctif (2026-10-26, phase 7)** — le serveur parle désormais
+HTTP/1.x lui-même : quand la première ligne du script n'est ni
+`Status:` ni `HTTP/`, toute la réponse est accumulée puis émise
+avec `HTTP/1.1 200 OK`, `Content-Type: text/html` et
+`Content-Length` exact. Un script qui écrit son `Status:` garde le
+passthrough d'origine, et `servers.autoheaders 0` dans la
+configuration restaure l'ancien comportement. Les pages d'erreur
+du serveur (E23-E25) ne se doublent pas : toute écriture directe
+fait retomber le drapeau de première ligne.
+
+**Parade historique (avant correctif) — deux possibilités, au choix :
 
 ```
 print "HTTP/1.0 200 OK\nContent-type: text/plain\n\nbonjour\n"
@@ -1271,10 +1281,13 @@ rapporteur, liaison statique de `cgi` dans sbhttpd, ou varargs) reste à
 trancher. Le défaut n'était pas visible avant : cette campagne n'avait
 jamais été jouée hors Windows.
 
-**État** — ouvert, renvoyé à la phase 7 (serveur) où toute la surface
-HTTP est retravaillée, reproduction locale possible via WSL. En attendant,
-la CI ne juge `--cgi-post` que sur windows-x64 (commentaire dans le
-workflow).
+**État** — ouvert, diagnostic affiné le 2026-10-26 : `scriba -c` remplit
+le message sous Linux comme sous Windows (chemin dynamique) ; seul le
+chemin statique de sbhttpd perd le `szErrorString` entre la SLFST et le
+rapporteur. Reproduction locale : WSL, `python3 tests/run.py --target
+linux-x64 --cgi-post` rend 18/22, les quatre rouges sont exactement les
+cas externes à code étendu. La CI ne juge toujours `--cgi-post` que sur
+windows-x64 (commentaire dans le workflow).
 
 ## E47
 

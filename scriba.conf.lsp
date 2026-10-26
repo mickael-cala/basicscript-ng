@@ -65,6 +65,9 @@ servers (
   port 18080
   ip "127.0.0.1"
   threads 4
+  ; E6 : 1 (defaut) — le serveur emet les en-tetes HTTP/1.x quand le
+  ; script n'ecrit pas sa premiere ligne ; 0 restaure le passthrough
+  autoheaders 1
   listenbacklog 30
   home "webtest/"
   run404 "webtest/404.bas"
