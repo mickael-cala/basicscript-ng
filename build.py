@@ -304,6 +304,10 @@ MODULES = {
         "include_dirs": {"linux": ("vendor/odbc",)},
         "libs": {"windows": ("-lodbc32",)},
         "shim": {"linux": "libodbc.so.2"},
+        # Hors autonome a modules sous Linux : ses symboles seraient
+        # demandes au lien d'un executable (pas au loader), et il exigerait
+        # libodbc2 a cote — donc pas autonome (E42).
+        "no_static_os": ("linux",),
     },
     # dyc : appel dynamique de fonctions de DLL par nom, interface Windows
     # (LoadLibrary/GetProcAddress). ABI 32 bits seulement (ERRATA E10) :
@@ -859,6 +863,9 @@ def build_standalone_modules(name, zig, opt, verbose, script):
     bits = 32 if name.endswith("-x86") else 64
 
     # Le jeu de modules : les memes regles que build_modules, sans trial.
+    # Les modules declares no_static_os pour cette famille sont exclus :
+    # leurs symboles seraient demandes au lien de l'executable, et ils
+    # exigent une dependance a cote — donc pas autonomes (E42, odbc).
     choix = []
     for mod, m in MODULES.items():
         if m.get("test_only"):
@@ -866,6 +873,8 @@ def build_standalone_modules(name, zig, opt, verbose, script):
         if "os" in m and fam not in m["os"]:
             continue
         if "arch" in m and bits not in m["arch"]:
+            continue
+        if fam in m.get("no_static_os", ()):
             continue
         choix.append((mod, m))
     if not choix:
