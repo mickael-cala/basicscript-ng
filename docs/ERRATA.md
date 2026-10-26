@@ -52,6 +52,8 @@ surprise de terrain.
 | [E43](#e43) | `free()` sur la mémoire de libcurl : corruption de tas | défaut | corrigé |
 | [E44](#e44) | `manuel` sous Linux : cinq affirmations encodent LLP64 | limite | documenté |
 | [E45](#e45) | formes historiques refusées à l'analyse (`open` nu, `sub` dans `module`) | limite | documenté |
+| [E46](#e46) | sbhttpd sous Linux : `%s` brut dans les erreurs étendues | défaut | ouvert |
+| [E47](#e47) | `mt` en Apple Silicon : SIGSEGV au test | défaut | ouvert |
 
 ---
 
@@ -1252,3 +1254,39 @@ clause `for`, `open directory` exige `pattern … option … as #n`, les
 modules ne portent que constantes et déclarations. Étendre la grammaire
 est un travail de la passe langage (PLAN phase 8), chaque forme nouvelle
 entrant avec son contrat et son refus.
+
+---
+
+## E46
+
+**Symptôme** — en CI (ubuntu), `--cgi-post` via sbhttpd échoue sur les
+cas à code étendu : la page d'erreur porte le bon code
+(`0x00080008`, `0x00080002`) mais le texte du module reste un `%s` brut
+(`Extension specific error: %s`) au lieu du message rempli. Windows, lui,
+remplit le message.
+
+**Cause** — la substitution du message de module dans le rapporteur
+d'erreurs étendues ne se fait pas sous Linux ; le chemin exact (fmt du
+rapporteur, liaison statique de `cgi` dans sbhttpd, ou varargs) reste à
+trancher. Le défaut n'était pas visible avant : cette campagne n'avait
+jamais été jouée hors Windows.
+
+**État** — ouvert, renvoyé à la phase 7 (serveur) où toute la surface
+HTTP est retravaillée, reproduction locale possible via WSL. En attendant,
+la CI ne juge `--cgi-post` que sur windows-x64 (commentaire dans le
+workflow).
+
+## E47
+
+**Symptôme** — en CI (macos-arm64, Apple Silicon natif), le test du
+module `mt` meurt en SIGSEGV (code -11) ; les vingt autres tests du jeu
+modules passent.
+
+**Cause** — inconnue : le module multi-thread n'avait jamais été exécuté
+sur macOS (README : « compilé, non exécuté ici »). Soupçon : taille de
+pile ou TLS des threads sur arm64 Apple.
+
+**État** — ouvert : le module se construit, son test est sauté avec
+raison (`MODULE_TESTS_SKIP`, ERRATA E47 cité) — retirer le saut fait
+revenir le rouge, le défaut ne peut pas se perdre. Reprendre avec un
+macOS réel ; en attendant, mt n'est pas déclaré utilisable sur macOS.
