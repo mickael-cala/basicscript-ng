@@ -407,7 +407,10 @@ def zig_path(args):
     if env:
         return env
     for cand in (DEFAULT_ZIG, shutil.which("zig")):
-        if cand:
+        # Un chemin propose mais inexistant n'est pas un compilateur : le
+        # defaut Windows ne doit pas masquer le PATH des autres postes ni
+        # des coureurs de CI (diagnostic de la passe CI, 2026-10-26).
+        if cand and os.path.isfile(cand):
             return cand
     sys.exit("zig introuvable : passez --zig CHEMIN ou posez la variable ZIG.")
 

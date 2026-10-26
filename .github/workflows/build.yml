@@ -1,8 +1,12 @@
 name: build
 
+# CI EN PAUSE (2026-10-26) : jobs en echec des 32 s sur les trois systemes,
+# cause diagnostiquee et corrigee (zig_path retenait le chemin Windows par
+# defaut sans verifier son existence). Reste en pause jusqu'a la validation
+# complete des six cibles (PLAN phase 5) ; remettre le declencheur ci-dessous
+# pour la reactiver.
 on:
-  push:
-  pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
