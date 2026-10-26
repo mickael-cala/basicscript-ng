@@ -156,6 +156,11 @@ MODULE_TESTS_SKIP = {
                           "zig (ERRATA E42)",
              "macos-x64": "ni -lodbc ni en-tetes ODBC dans le sysroot",
              "macos-arm64": "ni -lodbc ni en-tetes ODBC dans le sysroot"},
+    # mt n'est pas construit sur macOS (E47) : sans ce saut, le test
+    # chercherait sa declaration dans modules/include/ et mourrait en
+    # &H3e au lieu de sauter avec sa raison.
+    "mt": {"macos-arm64": "non construit sur macOS (ERRATA E47)",
+           "macos-x64": "non construit sur macOS (ERRATA E47)"},
 }
 
 # Le harnais du manuel (156 affirmations sur les exemples de MANUEL.md) :
