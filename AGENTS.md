@@ -33,7 +33,8 @@ python build.py --target windows-x64 --modules --release  # sans trial
 python build.py --target windows-x64 --httpd     # le serveur (scriba d'abord)
 python build.py --target windows-x64 --standalone  # executable autonome (hello.bas)
 python build.py --target windows-x64 --stndlone    # chemin -C + stndlone
-python build.py --target windows-x64 --libscriba   # archive statique + en-tetes
+python build.py --target windows-x64 --libscriba   # archive statique + hotes embed + en-tetes
+python build.py --target windows-x64 --standalone tests/standalone_modules.bas --modules  # autonome a modules colles
 python build.py --target windows-x64 --re-engine   # essai C du moteur Spencer
 python tests/run.py --target windows-x64         # 31/31 attendu (manuel inclus ; 30/30 sous UNIX, E44)
 python tests/run.py --target windows-x64 --modules   # 24/24 attendu (dyc saute : 32 bits seulement)
@@ -45,6 +46,7 @@ python tests/run.py --target windows-x64 --re-engine  # moteur re, essai C direc
 python tests/run.py --target windows-x64 --cgi-post  # POST CGI urlencoded + multipart ASCII/binaire/depassement
 python tests/run.py --grammaire                  # statique : aucun nom sans corps
 python tests/run.py --contrat                    # 8/8 contrats, cible apres cible
+python tests/run.py --embed                      # 3/3 hotes embed
 python tests/run.py --target linux-x64           # via WSL automatiquement
 python build.py --clean
 python pod2md.py            # regenere docs/MANUEL.md et docs/modules/

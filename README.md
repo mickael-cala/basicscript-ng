@@ -55,6 +55,7 @@ python build.py --target windows-x64 --modules   # hash, re, t, trial, cgi, mt, 
 python build.py --target windows-x64 --modules --release   # sans trial
 python build.py --target windows-x64 --httpd     # serveur sbhttpd
 python build.py --target windows-x64 --standalone  # executable autonome (hello.bas)
+python build.py --target windows-x64 --standalone tests/standalone_modules.bas --modules  # autonome avec modules colles
 python build.py --target windows-x64 --stndlone    # chemin -C + stndlone
 python build.py --target windows-x64 --libscriba   # archive statique + en-tetes
 python build.py --target windows-x64 --re-engine   # essai C du moteur Spencer
@@ -105,6 +106,13 @@ la distribution porte des chemins absolus `D:\MyProjects\…`. Détail des
 règles (et du piège d'interposition des symboles) :
 [docs/MODULES.md § 6](docs/MODULES.md#6-construire-les-modules-aujourdhui).
 
+`--standalone --modules` construit la variante `scriba_modules` : les
+modules du jeu cible sont compilés en `-DSTATIC_LINK=1` et collés dans
+l'exécutable, la SLFST de chacun étant la seule porte du module
+statique. Le produit tourne sans `modules/` ni `scriba.conf` — preuve
+exigée par `python tests/run.py --standalone --modules`, qui
+l'exécute depuis la racine du dépôt.
+
 `--standalone` construit un exécutable autonome à partir de `tests/hello.bas`
 par défaut, ou du script donné : `scriba -E` recopie l'interpréteur et ajoute
 le bytecode. Le produit est `dist/<cible>/<script>_standalone[.exe]` ; il ne
@@ -125,7 +133,11 @@ vérifie la sortie de `tests/hello.bas`.
 commandes, `lmt_none.c`, `libscriba.c`) et copie les en-têtes dans
 `dist/<cible>/include/`. C'est une archive, pas un exécutable ; sous UNIX,
 l'hôte qui la lie doit fournir `char **_environ;` pour que l'archive ne tire
-pas `libscriba.o` et son `main()`.
+pas `libscriba.o` et son `main()`. L'archive n'embarque plus du tout
+cet objet de démonstration : l'hôte fournit `main`, `GetC` et
+`_environ` — voir [examples/embed/](examples/embed/README.md), dont
+les trois hôtes sont compilés par `--libscriba` et joués par
+`tests/run.py --embed`.
 
 `--re-engine` produit `dist/<cible>/re_engine[.exe]`, l'essai C direct du
 moteur d'expressions régulières : il atteint `REG_BASIC`, `REG_PEND`, les
@@ -143,6 +155,7 @@ python tests/run.py --target windows-x64 --upstream-all  # + essais longs et dia
 python tests/run.py --target windows-x64 --standalone  # hello_standalone, sans .bas
 python tests/run.py --target windows-x64 --stndlone   # hello_stndlone, sans .bas
 python tests/run.py --target windows-x64 --re-engine  # moteur re, essai C direct
+python tests/run.py --target windows-x64 --embed      # les hotes embed de dist/<cible>/embed/
 python tests/run.py --target windows-x64 --cgi-post  # POST CGI urlencoded + multipart ASCII/binaire/depassement, scriba -c et sbhttpd
 python tests/run.py --target linux-x64     # lance sous WSL si on est sous Windows
 python tests/run.py --contrat              # contrats snapshot de tests/contrat/, 8/8 sur chaque cible

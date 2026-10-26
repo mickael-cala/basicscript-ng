@@ -37,7 +37,7 @@ scriptbasic2-ng/
 | `src/` | 181 | le code C : 93 `.c`, 55 `.h`, 20 `.bas` de modules, donnees (`regex.h`, `notunix.txt`, `copyright.txt`...) |
 | `tests/contrat/` | 16 | les contrats snapshot (`.bas` + `.out`), compares octet par octet |
 | `tests/upstream/` | 33 | la suite d'origine, telle quelle, et son manifeste |
-| `tests/` | 59 | les programmes d'essai, le harnais du manuel et `run.py` |
+| `tests/` | 60 | les programmes d'essai, le harnais du manuel et `run.py` |
 | `docs/modules/` | 15 | pages engendrees par `pod2md.py` |
 | `docs/` | 14 | la memoire du depot (dont PLAN, ERRATA, et ANNEXE-GRAMMAIRE engendree par `scripts/docs.py`) |
 | `examples/` | 205 | les exemples d'origine (copie de l'amont, ne pas reformater) |
@@ -47,7 +47,7 @@ scriptbasic2-ng/
 | `.github/` | 1 | le workflow de CI (en pause, PLAN phase 5) |
 | racine | 8 | `build.py`, `pod2md.py`, `scriba.conf.lsp`, `README.md`, `AGENTS.md`, `LICENSE`, `.gitignore`, `.gitattributes` |
 
-Total : **591 fichiers versionnes**, dont **301 fichiers `.bas`** (modules, tests, exemples, pages web d'essai et `include/`). `GRAMMAIRE.md`, `MANUEL.md`, `ANNEXE-GRAMMAIRE.md` et la table ci-dessus sont engendres (`scripts/gen_grammaire.py`, `pod2md.py`, `scripts/docs.py`, `scripts/inventory.py`) et versionnes avec eux.
+Total : **592 fichiers versionnes**, dont **302 fichiers `.bas`** (modules, tests, exemples, pages web d'essai et `include/`). `GRAMMAIRE.md`, `MANUEL.md`, `ANNEXE-GRAMMAIRE.md` et la table ci-dessus sont engendres (`scripts/gen_grammaire.py`, `pod2md.py`, `scripts/docs.py`, `scripts/inventory.py`) et versionnes avec eux.
 
 <!-- FIN COMPTES ENGENDRES -->
 

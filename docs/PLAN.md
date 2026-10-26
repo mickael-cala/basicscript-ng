@@ -247,9 +247,33 @@ Total réaliste : **5 à 9 jours** de travail effectif, l'essentiel du risque
 | 4 — doc as code | 2026-10-26 | amendé : l'autorité est `syntax.c` (le `syntax.def` de `-ng` documenterait une autre langue) ; `scripts/docs.py` engendre ANNEXE-GRAMMAIRE (557 symboles, déterministe), `scripts/arch.py` vérifie 36/36 produits (PE/ELF/Mach-O), `scripts/inventory.py` génère les comptes ; défaut corrigé au passage : `zig_path` de build.py retenait le chemin Windows sans vérifier son existence (c'était la cause des échecs CI en 32 s) ; **CI en pause** (déclencheur manuel), réactivation = phase 5 |
 | 5 — consolidation v1.0 | 2026-10-26 | CI rebranchée : première run complète (7 min) — windows ✓ vert d'emblée, ubuntu et macos révèlent E46/E47, périmètres restreints explicitement ; `COMPATIBILITE.md` écrite ; 178 exemples mesurés par `scripts/exemples.py` (6 écartés de sécurité après deux arrêts machine) ; tag **v1.0.0** posé après la première run CI verte sur les trois systèmes (run 40331258934 : ubuntu 59 s, windows 3m52, macos 1m38) |
 
-### Phase 6 — Embarquer (v1.1)
+### Phase 6 — Embarquer (v1.1) — réalisée
 
-1. `libscriba.h` remplie : l'API vit déjà dans `src/scriba.h`
+1. `libscriba.h` remplie : inclut `scriba.h` et les standards que les
+   en-têtes supposent ; documente le cheminement (`new` → `Load` →
+   `Run` → `Call`/`GetVariable` → `destroy`) et les pièges éprouvés
+   (noms de fonctions en minuscules dans la table interne —
+   `main::double`, pas `main::Double` ; exécuter une fois avant
+   d'appeler ; `GetC`/`_environ` à fournir par l'hôte ; formats
+   d'arguments `u i r s b`, un `L` est ignoré).
+2. `examples/embed/` : `lancer`, `appeler` (Double(21)=42 depuis le
+   C) et `variable` (total=21 lu du BASIC), compilés par
+   `--libscriba` contre `libscriba.a`, joués par `--embed` — 3/3 sur
+   windows-x64, windows-x86 et linux-x64 (WSL). L'archive n'embarque
+   plus l'objet de démonstration (main/GetC/_environ) : l'hôte
+   fournit les siens, sans exception de plateforme.
+3. `--standalone --modules` : variante `scriba_modules` liée avec les
+   modules en `-DSTATIC_LINK=1` + `lmt_standalone.c` généré. Les
+   SLFST manquantes ont été ajoutées à 8 interfaces (hash, re, t,
+   win, unix, zlib, odbc ; curl en avait déjà une) d'après leurs
+   déclarations ; `besDLL_MAIN` est gardé hors `STATIC_LINK` dans
+   basext.h (un module statique n'est pas une DLL — trois DllMain
+   en doublon sinon). Preuve : l'autonome exécuté depuis un
+   répertoire sans `modules/` ni `scriba.conf` répond
+   « standalone modules : OK » (windows-x64 : 10 modules ;
+   linux-x64 : 7). Le lien statique macOS reste à éprouver.
+
+1. : l'API vit déjà dans `src/scriba.h`
    (`scriba_Call`, `scriba_CallArg`, `scriba_GetVariable`, `scriba_GetString`…,
    71 fonctions) ; décider et documenter statique vs dynamique (`.so`/`.dll`).
 2. Exemples consommateurs C dans `examples/embed/` : lancer un script ;
