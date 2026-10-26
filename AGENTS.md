@@ -28,7 +28,7 @@ tout travail.
 ```sh
 python build.py --target windows-x64            # l'interpreteur
 python build.py --all                           # les six cibles
-python build.py --target windows-x64 --modules  # hash, re, t, trial, cgi, mt, cio, win, unix
+python build.py --target windows-x64 --modules  # hash, re, t, trial, cgi, mt, zlib, odbc (Windows), dyc (32 bits), curl (64 bits), cio et win
 python build.py --target windows-x64 --modules --release  # sans trial
 python build.py --target windows-x64 --httpd     # le serveur (scriba d'abord)
 python build.py --target windows-x64 --standalone  # executable autonome (hello.bas)
@@ -36,7 +36,7 @@ python build.py --target windows-x64 --stndlone    # chemin -C + stndlone
 python build.py --target windows-x64 --libscriba   # archive statique + en-tetes
 python build.py --target windows-x64 --re-engine   # essai C du moteur Spencer
 python tests/run.py --target windows-x64         # 30/30 attendu (dont 17 refus)
-python tests/run.py --target windows-x64 --modules   # 21/21 attendu
+python tests/run.py --target windows-x64 --modules   # 24/24 attendu (dyc saute : 32 bits seulement)
 python tests/run.py --target windows-x64 --upstream  # 12 lances, 20 sautes
 python tests/run.py --target windows-x64 --upstream-all  # 15 lances, 17 sautes
 python tests/run.py --target windows-x64 --standalone  # hello_standalone, sans .bas
@@ -137,6 +137,14 @@ documents concernés sont mis à jour.
 - Les modules se compilent avec `-fvisibility=hidden` ; une fonction destinée
   au BASIC doit passer par `besFUNCTION`/`besCOMMAND`, sinon elle est cachée
   (E18, `re` en a fait les frais).
+- `curl` ne tourne qu'en 64 bits sous Windows : sa DLL d'exécution est celle
+  de MinGW (dans le PATH), et la mémoire qu'elle rend se libère par
+  `curl_free`, jamais par `free` (E40, E43).
+- `odbc` est livré Windows seulement : la liaison Linux bute sur le sysroot
+  de zig (E42). `dyc` est 32 bits (E10, E41).
+- Le test d'un module absent d'une cible est **sauté avec raison** et sort
+  du compte (`MODULE_TESTS_SKIP`) : un « SAUTE » n'est ni un OK ni un
+  échec, et le ratio ne l'inclut pas.
 
 ## Git
 

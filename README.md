@@ -13,6 +13,8 @@ feuille de route [docs/PLAN.md](docs/PLAN.md).
 ## Ce que ce dépôt contient
 
 - `src/` — les sources C de l'interpréteur (93 `.c`, 55 `.h`).
+- `src/vendor/` — les dépendances figées (zlib 1.3.1, en-têtes curl 8.21.0
+  et unixODBC), intouchables, chacune avec son `README.txt` de provenance.
 - `tests/` — programmes ScriptBasic autonomes, la suite amont (`upstream/`)
   et leur lanceur Python.
 - `build.py` — le pilote de compilation (un seul fichier, sans dépendance).
@@ -48,7 +50,7 @@ Zig est cherché dans cet ordre : `--zig CHEMIN`, la variable `ZIG`, puis
 python build.py --list                    # les six cibles
 python build.py --target windows-x64      # une cible
 python build.py --all                     # les six
-python build.py --target windows-x64 --modules   # hash, re, t, trial, cgi, mt, cio, win, unix
+python build.py --target windows-x64 --modules   # hash, re, t, trial, cgi, mt, zlib, odbc, dyc (32 bits), curl (64 bits), cio et win
 python build.py --target windows-x64 --modules --release   # sans trial
 python build.py --target windows-x64 --httpd     # serveur sbhttpd
 python build.py --target windows-x64 --standalone  # executable autonome (hello.bas)
@@ -89,10 +91,15 @@ bibliothèques partagées, dans `dist/<cible>/modules/` :
 | `cio` | console Windows (curseur, touches, titre) | `cio.dll` (Windows seulement) |
 | `win` | registre, services, processus (ex-`nt`) | `win.dll` (Windows seulement) |
 | `unix` | `fork`, `chmod` (ex-`ux`) | `unix.*` (Linux/macOS) |
+| `zlib` | compression deflate/gzip, sources vendorisées 1.3.1 | `zlib.*` |
+| `odbc` | gestionnaire de pilotes ODBC (E11 corrigé, 32 et 64 bits) | `odbc.dll` (Windows) |
+| `dyc` | appel dynamique de DLL par nom (ABI 32 bits, E10) | `dyc.dll` (Windows 32 bits) |
+| `curl` | HTTP/HTTPS/FTP, liaison vers la libcurl du système (E40) | `curl.dll` (Windows 64 bits) |
 
 Les déclarations `hash.bas`, `re.bas`, `t.bas`, `cgi.bas`, `mt.bas`,
-`cio.bas`, `win.bas` et `unix.bas` sont copiées dans `modules/include/`, ce
-qui rend `import re.bas` opérationnel. `trial.bas` n'est pas copié : celui de
+`zlib.bas`, `odbc.bas`, `dyc.bas`, `curl.bas`, `cio.bas`, `win.bas` et
+`unix.bas` sont copiées dans `modules/include/`, ce qui rend
+`import re.bas` opérationnel. `trial.bas` n'est pas copié : celui de
 la distribution porte des chemins absolus `D:\MyProjects\…`. Détail des
 règles (et du piège d'interposition des symboles) :
 [docs/MODULES.md § 6](docs/MODULES.md#6-construire-les-modules-aujourdhui).
@@ -129,7 +136,7 @@ exécuté par `python tests/run.py --target <cible> --re-engine`.
 
 ```sh
 python tests/run.py --target windows-x64
-python tests/run.py --target windows-x64 --modules   # + hash, re, t, trial, cgi, mt, cio, win
+python tests/run.py --target windows-x64 --modules   # + tous les tests des modules de la cible
 python tests/run.py --target windows-x64 --upstream  # suite d'origine, sous-ensemble declare
 python tests/run.py --target windows-x64 --upstream-all  # + essais longs et diagnostics
 python tests/run.py --target windows-x64 --standalone  # hello_standalone, sans .bas
@@ -169,9 +176,12 @@ refus de `dim` (`refus_dim.bas`, `refus_dim_imbrique.bas`,
 `cv*`/`mk*` sont sortis de la grammaire (E34).
 
 `--modules` ajoute `hash`, `re`, `md5` (le test du module `t`), `trial`,
-`cgi` et `mt` partout, puis `cio` et `win` sous Windows, `unix` sous Linux et
+`cgi`, `mt`, `zlib` et `odbc` là où ils sont construits, puis `cio`, `win`,
+`dyc` (32 bits) et `curl` (64 bits) sous Windows, `unix` sous Linux et
 macOS ; les tests partent de `dist/<cible>` pour que la clé `module` de la
-configuration trouve `modules/`.
+configuration trouve `modules/`. Un module absent d'une cible fait sauter
+son test **avec sa raison affichée**, et le saut sort du compte final —
+`24/24 test(s) reussi(s) (1 saute(s) avec raison)` ne gonfle pas le ratio.
 
 `--upstream` lit [tests/upstream/MANIFEST.tsv](tests/upstream/MANIFEST.tsv) :
 avec les modules construits, il lance 12 tests du coeur et des modules, et
@@ -233,10 +243,11 @@ considère donc comme échec un code non nul, une ligne `ECHEC` ou un message
 CGI d'erreur est le résultat attendu (`cgi_page` dans la table des cas). Voir
 [ERRATA E3](docs/ERRATA.md#e3).
 
-Les programmes de `tests/` qui restent hors du jeu (`dyc*.bas`,
-`manuel.bas`, `mt_leak.bas`, `odbc.bas`, `win_hardlink.bas`…) exigent `dyc`
-(ABI 32 bits), les threads, une base ODBC ou les modules à bibliothèque
-tierce — plusieurs d'entre eux deviennent jouables aux phases 2 et 3 de
+Les programmes de `tests/` qui restent hors du jeu (`dyc_abi.bas`,
+`dyc_bench.bas`, `dyc_com.bas`, `dyc_fixture.bas`, `manuel.bas`,
+`mt_leak.bas`, `win_hardlink.bas`…) exigent les sondes de l'ébauche x64 de
+`dyc`, les threads ou une base ODBC configurée — plusieurs d'entre eux
+deviennent jouables aux phases 3 et suivantes de
 [docs/PLAN.md](docs/PLAN.md).
 
 ## Comment les en-têtes ont été aplatis
@@ -271,7 +282,7 @@ Tout ce qu'il faut pour reprendre le dépôt est dans [`docs/`](docs/README.md) 
 | [docs/PROGRAMMES.md](docs/PROGRAMMES.md) | les exécutables : `scriba`, `sbhttpd`, formes embarquées, CGI |
 | [docs/MODULES.md](docs/MODULES.md) | les 20 modules et le remplacement des `.jam` |
 | [docs/MANUEL.md](docs/MANUEL.md) | le manuel du langage, engendré depuis le code |
-| [docs/ERRATA.md](docs/ERRATA.md) | défauts connus et pièges (`E1`…`E39`) |
+| [docs/ERRATA.md](docs/ERRATA.md) | défauts connus et pièges (`E1`…`E43`) |
 | [docs/ROADMAP.md](docs/ROADMAP.md) | ce qui reste, par priorité |
 | [docs/EVOLUTIONS.md](docs/EVOLUTIONS.md) | décisions et historique |
 | [docs/INVENTAIRE.md](docs/INVENTAIRE.md) | contenu du dépôt |

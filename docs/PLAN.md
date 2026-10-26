@@ -226,3 +226,16 @@ verts dans la CI ; toucher syntax.def sans régénérer fait échouer le build.
 
 Total réaliste : **5 à 9 jours** de travail effectif, l'essentiel du risque
 étant concentré sur curl/odbc (phase 2).
+
+---
+
+## 6. Suivi d'exécution
+
+| phase | quand | résultat |
+|---|---|---|
+| 0 — assainissement | 2026-10-26 | squelette Qwen archivé (`f41536b`) puis purgé ; Zig 0.17.0 épinglée (SHA-256 vérifié) installée en `C:\outils\zig\0.17.0` ; dépôt git initialisé |
+| 1 — noyau scriba-zig | 2026-10-26 | import verbatim prouvé (`diff -rq` vide sur `src/`) ; build windows-x64 ; campagnes 30/30 et 21/21 ; `pod2md --check` vert ; CI des six cibles importée ; push GitHub (`master`), l'ancien contenu du distant archivé sur `archive/portage-20261026` |
+| 2 — modules de -ng | 2026-10-26 | zlib vendorisé 1.3.1 (win32/64 + linux) ; odbc win32/64 avec E11 fermé (E42 ouvert : liaison Linux) ; dyc 32 bits (E41 : ébauche x64 écartée) ; curl win64 avec E43 corrigé (`curl_free`) ; vendors `src/vendor/` intangibles ; campagnes : 30/30 noyau ×3 cibles, modules 24/24 + 24/24 + 21/21, chaque saut documenté et hors compte ; 563 fichiers versionnés |
+| 3 — contrats snapshot | — | à venir |
+| 4 — doc depuis syntax.def | — | à venir |
+| 5 — consolidation v1.0 | — | à venir |
