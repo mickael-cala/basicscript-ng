@@ -148,14 +148,13 @@ MODULE_TESTS_BY_OS = {"windows": ["cio", "win", "dyc", "curl"],
 # Modules absents d'une cible malgre la bonne famille d'OS : le test est
 # saute avec sa raison, jamais compte en echec. curl exige la DLL
 # d'execution libcurl-4.dll, qui n'existe ici qu'en 64 bits (ERRATA E40) ;
-# dyc est 32 bits seulement (ERRATA E10) ; odbc n'est lie que sous Windows
-# en attendant le libodbc.so du systeme hote (ERRATA E42).
+# dyc est 32 bits seulement (ERRATA E10). odbc est revenu sous Linux par
+# le shim de SONAME (E42 corrige) : il demande juste libodbc2 installe
+# sur la machine d'execution.
 MODULE_TESTS_SKIP = {
     "curl": {"windows-x86": "pas de libcurl-4.dll 32 bits ici"},
     "dyc": {"windows-x64": "module 32 bits seulement (ERRATA E10)"},
-    "odbc": {"linux-x64": "liaison croisee : libodbc invisible du sysroot "
-                          "zig (ERRATA E42)",
-             "macos-x64": "ni -lodbc ni en-tetes ODBC dans le sysroot",
+    "odbc": {"macos-x64": "ni -lodbc ni en-tetes ODBC dans le sysroot",
              "macos-arm64": "ni -lodbc ni en-tetes ODBC dans le sysroot"},
     # mt n'est pas construit sur macOS (E47) : sans ce saut, le test
     # chercherait sa declaration dans modules/include/ et mourrait en

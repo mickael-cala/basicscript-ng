@@ -32,6 +32,13 @@ jobs:
         with:
           version: 0.17.0
 
+      - name: Prerequis Linux
+        if: runner.os == 'Linux'
+        shell: bash
+        # E42 : le module odbc lie un shim de SONAME et demande libodbc2
+        # a la machine d'execution (le test odbc verifie le chargement).
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq libodbc2
+
       - name: Construire
         shell: bash
         run: |

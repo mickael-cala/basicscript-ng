@@ -48,7 +48,7 @@ surprise de terrain.
 | [E39](#e39) | un `do … loop` nu était refusé à l'analyse | défaut | corrigé |
 | [E40](#e40) | `curl` : la DLL d'exécution n'existe qu'en 64 bits ici | limite | assumé |
 | [E41](#e41) | l'ébauche x64 de `dyc` ne compilait pas | défaut | écartée |
-| [E42](#e42) | `odbc` : `libodbc` invisible du sysroot zig sous Linux | limite | ouvert |
+| [E42](#e42) | `odbc` sous Linux : la dependance se nomme par un shim de SONAME | limite | corrigé |
 | [E43](#e43) | `free()` sur la mémoire de libcurl : corruption de tas | défaut | corrigé |
 | [E44](#e44) | `manuel` sous Linux : cinq affirmations encodent LLP64 | limite | documenté |
 | [E45](#e45) | formes historiques refusées à l'analyse (`open` nu, `sub` dans `module`) | limite | documenté |
@@ -1196,20 +1196,32 @@ l'historique git (commit `82f4b41`). `dyc` reste `ARCH 32` (`E10`).
 
 ## E42
 
-**Symptôme** — `odbc` ne se lie pas pour linux : `unable to find dynamic
+**Symptôme** — `odbc` ne se liait pas pour linux : `unable to find dynamic
 system library "odbc"`. Le sysroot de `zig cc` en cross-compilation
-n'embarque ni `libodbc.so` ni les en-têtes ODBC, et le `libodbc.so` de la
-machine hôte (WSL) est hors de portée de l'éditeur de liens.
+n'embarque ni `libodbc.so` ni les en-têtes ODBC, et le `libodbc.so.2` de
+la machine hôte (WSL) est hors de portée de l'éditeur de liens.
 
-**Cause** — l'ODBC n'appartient pas à la libc ; une liaison croisée ne voit
-que son sysroot.
+**Cause** — l'ODBC n'appartient pas à la libc ; une liaison croisée ne
+voit que son sysroot. Le lien n'a pas besoin des symboles (le loader les
+résout au chargement) — il a seulement besoin de nommer la dépendance.
 
-**État** — ouvert, effort borné : le module est livré `windows` seulement
-(construit et testé en 32 comme en 64 bits) ; les en-têtes unixODBC sont
-déjà vendorisés dans `src/vendor/odbc/` (la compilation linux passe
-entière), reste à résoudre la liaison — sysroot dédié, copie documentée de
-`libodbc.so.2`, ou construction native dans WSL. Le test est sauté avec
-raison sous linux et macOS.
+**Correctif (2026-10-26, phase 7)** — build.py génère au build un **shim** :
+un `.so` vide compilé avec `-Xlinker -soname libodbc.so.2`, lié au module
+précédé de `-Wl,--no-as-needed` (sinon lld élaguerait le `DT_NEEDED` dont
+aucun symbole n'est utilisé). Le `DT_NEEDED` nomme `libodbc.so.2`, et le
+loader de la machine d'exécution résout le vrai unixODBC — vérifié par
+`ldd`. Les en-têtes unixODBC restent vendorisés (`src/vendor/odbc/`). La
+machine d'exécution doit juste avoir le runtime `libodbc2` (la CI Linux
+l'installe ; WSL l'a via `unixodbc-dev`). Leçon au passage : `-Wl,a,b` ne
+traverse pas `zig cc` de façon fiable — `-Xlinker a -Xlinker b` si.
+
+**Couverture** — campagne `--modules` linux-x64 (WSL) : **22/22**, odbc
+construit, chargé, `bootmodu` alloue l'environnement ODBC réel ; Windows
+inchangé (32 et 64 bits).
+
+**Portée** — le shim ne fournit rien : un système sans `libodbc.so.2`
+charge le module en erreur, comme sans shim. macOS reste hors jeu (ni
+`-lodbc` ni en-têtes ODBC dans son sysroot).
 
 ## E43
 

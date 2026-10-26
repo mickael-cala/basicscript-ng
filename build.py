@@ -292,17 +292,18 @@ MODULES = {
         "include_dirs": ("vendor/zlib",),
         "declare": "zlib.bas",
     },
-    # odbc : le gestionnaire de pilotes ODBC de Windows (odbc32.dll). Les
-    # deux architectures sont construites et testees ; l'interface porte la
-    # correction E11 : SQLGetData rend un SQLLEN*, qui fait 64 bits sous
-    # Windows 64. Linux est pret mais non lie : les en-tetes unixODBC sont
-    # vendorises (src/vendor/odbc), reste le libodbc.so du systeme hote,
-    # invisible du sysroot zig en cross-compilation (ERRATA E42).
+    # odbc : le gestionnaire de pilotes ODBC — odbc32.dll sous Windows,
+    # unixODBC sous Linux (E11 corrige : SQLGetData rend un SQLLEN*).
+    # Sous Linux, le sysroot zig n'a pas libodbc : un shim vide portant le
+    # SONAME est genere au build (E42), le loader resout le vrai au
+    # chargement. macOS reste hors jeu : ni -lodbc ni en-tetes.
     "odbc": {
         "sources": ["extensions/odbc/interface.c"],
         "declare": "odbc.bas",
-        "os": ("windows",),
+        "os": ("windows", "linux"),
+        "include_dirs": {"linux": ("vendor/odbc",)},
         "libs": {"windows": ("-lodbc32",)},
+        "shim": {"linux": "libodbc.so.2"},
     },
     # dyc : appel dynamique de fonctions de DLL par nom, interface Windows
     # (LoadLibrary/GetProcAddress). ABI 32 bits seulement (ERRATA E10) :
@@ -630,6 +631,36 @@ def build_modules(name, zig, opt, verbose, release=False):
         # dlltool : c'est le chemin de curl, dont le .def decrit la DLL de
         # MinGW, jamais versionnee ici.
         extra = list(m.get("libs", {}).get(osfam, ()))
+        # Le shim d'une dependance dont le sysroot zig n'a pas la
+        # bibliotheque : un .so vide, compile au build avec le SONAME
+        # voulu. Le module liera DT_NEEDED vers ce nom, et le loader de
+        # la machine d'execution resoud la vraie bibliotheque (E42).
+        sonames = m.get("shim", {}).get(osfam, ())
+        if isinstance(sonames, str):
+            sonames = (sonames,)
+        for soname in sonames:
+            shim_c = objdir / f"shim-{mod}.c"
+            shim_c.write_text(f"int _{mod}_shim(void){{return 0;}}\n",
+                              encoding="utf-8", newline="")
+            shim_so = objdir / f"shim-{mod}.so"
+            if not shim_so.exists() or \
+                    shim_so.stat().st_mtime < shim_c.stat().st_mtime:
+                cmd_sh = [zig, "cc", "-target", triple, "-shared", "-fPIC",
+                          "-Xlinker", "-soname", "-Xlinker", soname,
+                          "-o", str(shim_so), str(shim_c)]
+                proc = run(cmd_sh, verbose)
+                if proc.returncode != 0:
+                    print(f"  ECHEC  {mod} (shim {soname})\n"
+                          f"{proc.stderr.strip()}")
+                    ok = False
+                    break
+            # lld elague un DT_NEEDED dont aucun symbole n'est utilise :
+            # no-as-needed, pose AVANT le shim, garde le NEEDED — qui est
+            # tout son usage : nommer la dependance pour le loader.
+            extra.append("-Wl,--no-as-needed")
+            extra.append(str(shim_so))
+        if not ok:
+            continue
         if "import_def" in m:
             implib = objdir / (mod + "-import.lib")
             deffile = SRC / m["import_def"]
