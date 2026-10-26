@@ -18,8 +18,9 @@ Le jeu par defaut ne contient que des tests SANS module externe (pas de re,
 hash, curl, odbc...) : ce sont les seuls qui doivent passer sur les six
 cibles. `operators.bas` y figure : il vérifie les opérateurs étendus qui
 restent (`<<`, `>>`, `??`, `**`, `//` et les affectations composées). `--modules` ajoute les tests des modules construits par
-`build.py --modules` : hash, re, t (via md5.bas), trial, cgi et mt partout,
-plus cio et win sous Windows, unix sous Linux/macOS.
+`build.py --modules` : hash, re, t (via md5.bas), trial, cgi, mt, zlib et
+odbc partout, cio, win, dyc et curl sous Windows (curl en 64 bits
+seulement, ERRATA E40), unix sous Linux/macOS.
 
 `--upstream` lance le sous-ensemble de `tests/upstream/` decrit par
 `tests/upstream/MANIFEST.tsv` : tests du coeur et tests des modules
@@ -133,12 +134,28 @@ REFUS_ANALYSE = [("refus_directory.bas", "error &H77"),
 # du module t : c'est son nom historique, il porte deja l'en-tete du module.
 # cgi et mt etaient lies dans sbhttpd seulement ; ils sont desormais des
 # modules ordinaires et ont chacun leur test.
-MODULE_TESTS = ["hash", "re", "md5", "trial", "cgi", "mt"]
+MODULE_TESTS = ["hash", "re", "md5", "trial", "cgi", "mt", "zlib", "odbc"]
 
-# Modules propres a une famille d'OS, dans le meme ordre que build.py : cio et
-# win n'existent que sous Windows, unix (ex-ux) que sous Linux/macOS. Les
-# lancer la ou le module n'est pas construit ferait un echec de chargement.
-MODULE_TESTS_BY_OS = {"windows": ["cio", "win"], "unix": ["unix"]}
+# Modules propres a une famille d'OS, dans le meme ordre que build.py : cio,
+# win, dyc et curl n'existent que sous Windows, unix (ex-ux) que sous
+# Linux/macOS. Les lancer la ou le module n'est pas construit ferait un
+# echec de chargement.
+MODULE_TESTS_BY_OS = {"windows": ["cio", "win", "dyc", "curl"],
+                      "unix": ["unix"]}
+
+# Modules absents d'une cible malgre la bonne famille d'OS : le test est
+# saute avec sa raison, jamais compte en echec. curl exige la DLL
+# d'execution libcurl-4.dll, qui n'existe ici qu'en 64 bits (ERRATA E40) ;
+# dyc est 32 bits seulement (ERRATA E10) ; odbc n'est lie que sous Windows
+# en attendant le libodbc.so du systeme hote (ERRATA E42).
+MODULE_TESTS_SKIP = {
+    "curl": {"windows-x86": "pas de libcurl-4.dll 32 bits ici"},
+    "dyc": {"windows-x64": "module 32 bits seulement (ERRATA E10)"},
+    "odbc": {"linux-x64": "liaison croisee : libodbc invisible du sysroot "
+                          "zig (ERRATA E42)",
+             "macos-x64": "ni -lodbc ni en-tetes ODBC dans le sysroot",
+             "macos-arm64": "ni -lodbc ni en-tetes ODBC dans le sysroot"},
+}
 
 MODULE_TESTS_ALL = MODULE_TESTS + [t for v in MODULE_TESTS_BY_OS.values()
                                   for t in v]
@@ -1446,6 +1463,7 @@ def main():
                           (MODULE_TESTS + extra if args.modules else []))
     config = exe.parent / "scriba.conf"
     failures = 0
+    skipped = 0
     print(f"binaire : {exe}")
     for name in names:
         script = ROOT / "tests" / f"{name}.bas"
@@ -1455,11 +1473,17 @@ def main():
             continue
         module_test = name in MODULE_TESTS_ALL
         workdir = exe.parent if module_test else ROOT
+        skip_reason = MODULE_TESTS_SKIP.get(name, {}).get(target)
+        if skip_reason:
+            print(f"  SAUTE   {name} : {skip_reason}")
+            skipped += 1
+            continue
         try:
             cmd, cwd, env = command(exe, target, script, workdir, config,
                                     TEST_ENV.get(name))
         except RuntimeError as exc:
             print(f"  SAUTE   {name} : {exc}")
+            skipped += 1
             continue
         proc = subprocess.run(cmd, cwd=cwd, env=env, capture_output=True,
                               text=True, errors="replace")
@@ -1497,6 +1521,7 @@ def main():
             cmd, cwd, env = command(exe, target, script, ROOT, config, None)
         except RuntimeError as exc:
             print(f"  SAUTE   {label} : {exc}")
+            skipped += 1
             continue
         proc = subprocess.run(cmd, cwd=cwd, env=env, capture_output=True,
                               text=True, errors="replace")
@@ -1509,9 +1534,14 @@ def main():
             for line in output.strip().splitlines()[-4:]:
                 print(f"          {line}")
 
-    total = len(names) + len(refus)
+    # Les sauts sortent du compte : un test non joue ne peut pas gonfler
+    # le ratio. Leur nombre est affiche, avec leur raison, plus haut.
+    total = len(names) + len(refus) - skipped
     print()
-    print(f"{total - failures}/{total} test(s) reussi(s)")
+    compte = f"{total - failures}/{total} test(s) reussi(s)"
+    if skipped:
+        compte += f" ({skipped} saute(s) avec raison)"
+    print(compte)
     return 0 if failures == 0 else 1
 
 
