@@ -1,0 +1,48 @@
+# MANIFESTE DES TESTS UPSTREAM
+#
+# Une ligne par fichier de tests/upstream/. Les colonnes sont separees par des
+# tabulations. Le lanceur `tests/run.py --upstream` lit ce fichier ; il ne
+# devine rien et ne modifie aucun .bas.
+#
+# chemin : chemin relatif a tests/upstream/
+# categorie : coeur, module, reseau, interactif, diagnostic
+# modules : modules exiges, separes par des virgules, ou - pour aucun
+# os : tous, windows ou unix
+# repertoire : racine (tests/run.py) ou dist (dist/<cible>, pour les modules)
+# mode : defaut (dans --upstream), all (seulement --upstream-all), jamais
+# attendu : ok (aucune erreur du rapporteur, code 0) ou - si non lance
+# raison : justification courte d'un saut, ou -
+#
+# chemin	categorie	modules	os	repertoire	mode	attendu	raison
+call/argpass.bas	coeur	-	tous	racine	defaut	ok	-
+call/callsyntax.bas	coeur	-	tous	racine	defaut	ok	-
+curl/test1_ftp_upload.bas	module	curl	tous	dist	jamais	-	module curl non construit et FTP externe
+curl/test2_https_get.bas	module	curl	tous	dist	jamais	-	module curl non construit et HTTPS externe
+curl/test3_http_get.bas	module	curl	tous	dist	jamais	-	module curl non construit et HTTP externe
+curl/test4_http_get_sbdoc.bas	module	curl	tous	dist	jamais	-	module curl non construit et HTTP externe
+curl/test5_ftp_get.bas	module	curl	tous	dist	jamais	-	module curl non construit et FTP externe
+file/mkdir.bas	interactif	-	tous	racine	jamais	-	attend une saisie et cree puis supprime des repertoires
+hostname.bas	coeur	-	tous	racine	defaut	ok	-
+http.bas	reseau	-	tous	racine	jamais	-	connexion a scriptbasic.com
+kill.bas	interactif	-	tous	racine	jamais	-	attend un PID a tuer
+onerror.bas	coeur	-	tous	racine	defaut	ok	-
+roundbugin1-0b27.bas	diagnostic	-	tous	racine	all	ok	-
+seggfault.bas	diagnostic	-	tous	racine	all	ok	-
+stresstest.bas	diagnostic	-	tous	racine	jamais	-	depasse la pile du parseur (0xC00000FD sous Windows x64)
+test.bas	coeur	-	tous	racine	defaut	ok	-
+test_ext_trial.bas	module	ext_trial	tous	dist	jamais	-	module ext_trial historique, remplace par trial
+test_sleep.bas	diagnostic	-	tous	racine	all	ok	dure 20 secondes
+testbasic.bas	coeur	-	tous	racine	defaut	ok	-
+testbdbtransaction.bas	module	bdb	tous	dist	jamais	-	module bdb non construit et attend une saisie
+testcio.bas	module	cio	windows	dist	jamais	-	module cio Windows et boucle interactive infinie
+testconcol.bas	module	cio	windows	dist	jamais	-	module cio Windows et attend une touche
+testeq.bas	coeur	-	tous	racine	defaut	ok	-
+testhash.bas	module	hash	tous	dist	defaut	ok	-
+testhttp.bas	reseau	-	tous	racine	jamais	-	connexion a scriptbasic.com
+testmath.bas	coeur	-	tous	racine	defaut	ok	-
+testmt.bas	module	cgi,mt	tous	dist	defaut	ok	-
+testmtlock.bas	module	cgi,mt	tous	dist	defaut	ok	-
+testmysql.bas	module	mysql	tous	dist	jamais	-	module mysql non construit et base externe
+testodbc.bas	module	odbc	tous	dist	jamais	-	module odbc non construit et DSN externe
+testwin.bas	module	win	windows	dist	jamais	-	ecrit dans le registre HKLM
+time.bas	coeur	-	tous	racine	defaut	ok	dure 5 secondes
