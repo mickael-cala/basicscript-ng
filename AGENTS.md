@@ -35,7 +35,7 @@ python build.py --target windows-x64 --standalone  # executable autonome (hello.
 python build.py --target windows-x64 --stndlone    # chemin -C + stndlone
 python build.py --target windows-x64 --libscriba   # archive statique + en-tetes
 python build.py --target windows-x64 --re-engine   # essai C du moteur Spencer
-python tests/run.py --target windows-x64         # 30/30 attendu (dont 17 refus)
+python tests/run.py --target windows-x64         # 31/31 attendu (manuel inclus ; 30/30 sous UNIX, E44)
 python tests/run.py --target windows-x64 --modules   # 24/24 attendu (dyc saute : 32 bits seulement)
 python tests/run.py --target windows-x64 --upstream  # 12 lances, 20 sautes
 python tests/run.py --target windows-x64 --upstream-all  # 15 lances, 17 sautes
@@ -44,6 +44,7 @@ python tests/run.py --target windows-x64 --stndlone   # hello_stndlone, sans .ba
 python tests/run.py --target windows-x64 --re-engine  # moteur re, essai C direct
 python tests/run.py --target windows-x64 --cgi-post  # POST CGI urlencoded + multipart ASCII/binaire/depassement
 python tests/run.py --grammaire                  # statique : aucun nom sans corps
+python tests/run.py --contrat                    # 8/8 contrats, cible apres cible
 python tests/run.py --target linux-x64           # via WSL automatiquement
 python build.py --clean
 python pod2md.py            # regenere docs/MANUEL.md et docs/modules/
@@ -76,6 +77,10 @@ documents concernés sont mis à jour.
   `*.o` sont ignorés. Ne pas les forcer avec `git add -f`.
 - **Ne pas reformater** `examples/` ni `tests/upstream/` : ce sont des copies
   de l'amont, gardées telles quelles.
+- **Ne jamais éditer un `.out` de contrat à la main** : il se régénère par
+  l'interpréteur (`./dist/<cible>/scriba tests/contrat/x.bas >
+  tests/contrat/x.out`), puis la divergence se discute — c'est elle qui
+  raconte un changement de comportement.
 - **Ne pas modifier un `.h` sans le `.c` qui l'accompagne** (et
   réciproquement) : rien ne les synchronise plus automatiquement.
 
@@ -145,6 +150,10 @@ documents concernés sont mis à jour.
 - Le test d'un module absent d'une cible est **sauté avec raison** et sort
   du compte (`MODULE_TESTS_SKIP`) : un « SAUTE » n'est ni un OK ni un
   échec, et le ratio ne l'inclut pas.
+- `manuel` n'est joué que sous Windows : ses attentes encodent LLP64
+  (E44). Les formes historiques refusées à l'analyse (`open` sans `for`,
+  `sub` dans `module`) sont notées à E45 — la passe langage les rouvrira
+  avec contrat et refus.
 
 ## Git
 

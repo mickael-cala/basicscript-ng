@@ -20,6 +20,7 @@ scriptbasic2-ng/
 ├── src/                     le code C
 │   └── vendor/              zlib 1.3.1, en-têtes curl 8.21.0 et unixODBC (intouchables)
 ├── tests/                   les programmes d'essai + run.py
+│   ├── contrat/             les contrats snapshot (.bas + .out)
 │   └── upstream/            la suite d'origine, telle quelle, et son manifeste
 ├── examples/                les exemples d'origine
 ├── webtest/                 deux pages servies par sbhttpd
@@ -31,7 +32,7 @@ scriptbasic2-ng/
 | dossier | fichiers | nature |
 |---|---|---|
 | `src/` | 230 | 93 `.c`, 55 `.h`, 20 `.bas` de modules, 49 fichiers vendors (`zlib/`, `curl/`, `odbc/`), plus données (`regex.h`, `engine.ci`, `notunix.txt`, `copyright.txt`…) |
-| `tests/` | 92 | 36 `.bas` locaux + `run.py` + `re_engine.c` + 32 `.bas` de `upstream/` + `MANIFEST.tsv` |
+| `tests/` | 108 | 44 `.bas` locaux (dont 8 contrats et leurs 8 `.out`) + `run.py` + `re_engine.c` + 32 `.bas` de `upstream/` + `MANIFEST.tsv` |
 | `examples/` | 200 | 178 `.bas`, 3 `.inc`, 7 `.sb`, et les données de `sibawa/` |
 | `include/` | 3 | `error.bas`, `time.bas`, `modinst.bas` |
 | `docs/` | 26 | 11 documents `.md` (README, PLAN, PROGRAMMES, MODULES, GRAMMAIRE, ERRATA, EVOLUTIONS, ROADMAP, INVENTAIRE, REPRISE, MANUEL) + `modules/` (15 pages engendrées) |
@@ -40,7 +41,7 @@ scriptbasic2-ng/
 | `scripts/` | 1 | `gen_grammaire.py`, le générateur de `docs/GRAMMAIRE.md` |
 | racine | 8 | `build.py`, `pod2md.py`, `scriba.conf.lsp`, `README.md`, `AGENTS.md`, `LICENSE`, `.gitignore`, `.gitattributes` |
 
-Total : **563 fichiers versionnés**, dont **292 fichiers `.bas`** (modules,
+Total : **579 fichiers versionnés**, dont **300 fichiers `.bas`** (modules,
 tests, exemples, pages web d'essai et `include/`). `GRAMMAIRE.md` et
 `MANUEL.md` sont engendrés (`scripts/gen_grammaire.py`, `pod2md.py`) et
 versionnés avec eux.

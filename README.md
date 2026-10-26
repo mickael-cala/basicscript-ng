@@ -144,12 +144,23 @@ python tests/run.py --target windows-x64 --stndlone   # hello_stndlone, sans .ba
 python tests/run.py --target windows-x64 --re-engine  # moteur re, essai C direct
 python tests/run.py --target windows-x64 --cgi-post  # POST CGI urlencoded + multipart ASCII/binaire/depassement, scriba -c et sbhttpd
 python tests/run.py --target linux-x64     # lance sous WSL si on est sous Windows
+python tests/run.py --contrat              # contrats snapshot de tests/contrat/, 8/8 sur chaque cible
 ```
 
 Le jeu par défaut exécute treize programmes : `hello`, `vars`, `loops`,
 `arrays`, `dim`, `functions`, `operators`, `commandes`, `mathfunc`, `trig`,
 `nombres`, `slif` et `exit` — les tests qui ne demandent aucun module, donc
-les seuls qui doivent passer sur les six cibles. `dim.bas` vérifie les
+les seuls qui doivent passer sur les six cibles. Sous Windows s'y ajoute
+`manuel`, le harnais des 114 exemples de [MANUEL.md](docs/MANUEL.md)
+(156 affirmations vérifiées une à une) : ses attentes encodent la
+plateforme LLP64 de Windows, et l'[ERRATA E44](docs/ERRATA.md#e44)
+documente les cinq écarts d'ABI constatés sous Linux.
+
+À côté du jeu, les **contrats snapshot** de `tests/contrat/` figent la
+sortie de petits programmes plateforme-neutres, octet pour octet
+(`python tests/run.py --contrat`) : un `.out` se régénère par
+l'interpréteur, jamais à la main — toute divergence est une modification
+de comportement à assumer consciemment. `dim.bas` vérifie les
 déclarations (simple, imbriquée, en liste), `slif.bas` le `if` d'une ligne
 avec ses `ELSEIF`/`ELSE` (E37), `exit.bas` les sorties de boucle et le
 `do … loop` nu (E39). `operators.bas` couvre les opérateurs qui restent

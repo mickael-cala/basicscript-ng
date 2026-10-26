@@ -236,6 +236,51 @@ Total réaliste : **5 à 9 jours** de travail effectif, l'essentiel du risque
 | 0 — assainissement | 2026-10-26 | squelette Qwen archivé (`f41536b`) puis purgé ; Zig 0.17.0 épinglée (SHA-256 vérifié) installée en `C:\outils\zig\0.17.0` ; dépôt git initialisé |
 | 1 — noyau scriba-zig | 2026-10-26 | import verbatim prouvé (`diff -rq` vide sur `src/`) ; build windows-x64 ; campagnes 30/30 et 21/21 ; `pod2md --check` vert ; CI des six cibles importée ; push GitHub (`master`), l'ancien contenu du distant archivé sur `archive/portage-20261026` |
 | 2 — modules de -ng | 2026-10-26 | zlib vendorisé 1.3.1 (win32/64 + linux) ; odbc win32/64 avec E11 fermé (E42 ouvert : liaison Linux) ; dyc 32 bits (E41 : ébauche x64 écartée) ; curl win64 avec E43 corrigé (`curl_free`) ; vendors `src/vendor/` intangibles ; campagnes : 30/30 noyau ×3 cibles, modules 24/24 + 24/24 + 21/21, chaque saut documenté et hors compte ; 563 fichiers versionnés |
-| 3 — contrats snapshot | — | à venir |
+| 3 — contrats snapshot | 2026-10-26 | `tests/contrat/` : 8 contrats plateforme-neutres, 8/8 sur windows-x64, windows-x86 et linux-x64 (WSL) ; `manuel` (156 affirmations) entre en jeu Windows — 31/31, 31/31, 30/30 ; E44 (écarts LLP64) et E45 (strictures de grammaire) documentés |
 | 4 — doc depuis syntax.def | — | à venir |
 | 5 — consolidation v1.0 | — | à venir |
+
+### Phase 6 — Embarquer (v1.1)
+
+1. `libscriba.h` remplie : l'API vit déjà dans `src/scriba.h`
+   (`scriba_Call`, `scriba_CallArg`, `scriba_GetVariable`, `scriba_GetString`…,
+   71 fonctions) ; décider et documenter statique vs dynamique (`.so`/`.dll`).
+2. Exemples consommateurs C dans `examples/embed/` : lancer un script ;
+   appeler une fonction BASIC avec arguments ; lire une variable — compilés
+   contre `libscriba.a` et exécutés sur windows-x64, windows-x86 et
+   linux-x64 (WSL), rejoués par la CI.
+3. `--standalone --modules` : bytecode ET modules liés en statique
+   (technique `lmt_*.c` de sbhttpd) — l'exécutable autonome ne demande plus
+   rien à côté de lui.
+
+### Phase 7 — Servir (v1.1)
+
+1. sbhttpd parle HTTP/1.x : ligne de statut et `Content-Length` émis par le
+   serveur (l'ancien mode « le script écrit ses en-têtes » reste disponible,
+   par configuration) — ferme E6.
+2. `--cgi-post` étendu : en-têtes servis et corps exact vérifiés, connexion
+   fermée proprement, curl sans `--http0.9`.
+
+### Phase 8 — Le langage, rapproché du classique (par passes, après v1.0.0)
+
+**Quand** : après le tag v1.0.0. Verdict argumenté : avant, chaque
+changement de mot-clé invaliderait le corpus (phase 3) et la doc (phase 4)
+pendant qu'on les consolide ; après, chaque passe s'appuie sur la machine
+qui existe — contrat écrit d'abord (rouge), implémentation (vert), doc
+régénérée, refus ajouté. La refonte se fait **par passes thématiques,
+jamais en big-bang** : une famille par passe (types déclarés
+`DIM x AS INTEGER`, `PRINT USING`, `DATA/READ/RESTORE`, `INPUT`,
+`ELSEIF`…), et les formes historiques refusées (E45) reviennent par la
+même porte.
+
+**Politique « ancien »** (à consigner dans `docs/COMPATIBILITE.md` à la
+phase 5) : pas de compatibilité bug-pour-bug ; les 178 exemples restent le
+corpus pédagogique (les jouables passent, les autres sont annotés «
+pourquoi ») ; la suite upstream reste un instrument de mesure des
+divergences volontaires, jamais un contrat ; le « look » BASIC (mots-clés
+insensibles à la casse, `module`/`declare … lib`, suffixes `$`) est
+garanti.
+
+**Identité** : le renommage `basicscript` — non décidé — se fera le jour J
+par la macro d'identité centralisée (phase 5) plus une passe de
+documentation ; rien d'autre ne devra bouger.
