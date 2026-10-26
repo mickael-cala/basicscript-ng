@@ -66,7 +66,11 @@ par scripts de copie + conversion regex est abandonnée (voir §5).
 2. **Purger le squelette scriptbasic2-ng** : supprimer `scripts/build.py`
    (corrompu), `scripts/docs.py` (régressé), `syntax.def` (3e format),
    `finalisation.ps1`, `scripts_test/`, `src/main/commands.h`,
-   `test/contrat/basic_syntax.{bas,out}` (incohérents avec la grammaire).
+   `test/contrat/basic_syntax.{bas,out}` (incohérents avec la grammaire),
+   ainsi que `README.md`, `AGENTS.md`, `REGLES.md`, `docs/EVOLUTIONS.md`
+   et `.gitignore` — remplacés en phase 1 par les versions éprouvées de
+   scriba-zig, adaptées. Le squelette est archivé au préalable dans le
+   commit initial du dépôt fraîchement initialisé.
 3. **Corriger `.gitignore`** : retirer l'exclusion `*.out` (ou la réancrer
    pour ne viser que les produits) ; ajouter `!test/contrat/**`.
 4. **Supprimer le premier jet** `scriba-zig\ScriptBasic-ng\` (11 fichiers
@@ -85,7 +89,9 @@ fichier corrompu restant.
 1. Copier **sans modification** : `src/` (noyau + commands + extensions +
    variations + tools), `build.py`, `pod2md.py`, `tests/` (run.py + .bas +
    upstream + re_engine.c + MANIFEST.tsv), `include/`, `scriba.conf.lsp`,
-   `LICENSE`, et les docs utiles (ERRATA, GRAMMAIRE, ROADMAP).
+   `LICENSE`, `.gitignore` et les docs utiles (ERRATA, GRAMMAIRE, ROADMAP) ;
+   importer aussi `AGENTS.md` et `README.md` adaptés à scriptbasic2-ng
+   (ils remplacent les squelettes supprimés en phase 0).
 2. Nettoyer en copiant : ne pas emporter `panic.txt`, `__pycache__/`,
    `obj/`, `dist/`, `logs/` (produits/déchets).
 3. Adapter uniquement les chemins si besoin (aucun prévu : arborescence
