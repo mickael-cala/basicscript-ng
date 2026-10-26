@@ -1,0 +1,78 @@
+name: build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    name: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            targets: windows-x86 windows-x64
+            tests: windows-x86 windows-x64
+          - os: ubuntu-latest
+            targets: linux-x64 linux-arm64
+            tests: linux-x64
+          - os: macos-latest
+            targets: macos-arm64 macos-x64
+            tests: macos-arm64
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: mlugg/setup-zig@v2
+        with:
+          version: 0.17.0
+
+      - name: Construire
+        shell: bash
+        run: |
+          for t in ${{ matrix.targets }}; do
+            python build.py --target "$t" || exit 1
+            python build.py --target "$t" --modules || exit 1
+            python build.py --target "$t" --libscriba || exit 1
+          done
+
+      - name: Serveur HTTP et CGI POST
+        shell: bash
+        run: |
+          for t in ${{ matrix.tests }}; do
+            case "$t" in
+              windows-x64|linux-x64)
+                python build.py --target "$t" --httpd || exit 1
+                python tests/run.py --target "$t" --cgi-post || exit 1
+                ;;
+            esac
+          done
+
+      - name: Tester
+        shell: bash
+        run: |
+          for t in ${{ matrix.tests }}; do
+            python tests/run.py --target "$t" --modules || exit 1
+            python tests/run.py --target "$t" --upstream || exit 1
+          done
+
+      - name: Moteur re
+        shell: bash
+        run: |
+          for t in ${{ matrix.targets }}; do
+            python build.py --target "$t" --re-engine || exit 1
+          done
+          for t in ${{ matrix.tests }}; do
+            python tests/run.py --target "$t" --re-engine || exit 1
+          done
+
+      - name: Autonome
+        shell: bash
+        run: |
+          for t in ${{ matrix.tests }}; do
+            python build.py --target "$t" --standalone || exit 1
+            python tests/run.py --target "$t" --standalone || exit 1
+            python build.py --target "$t" --stndlone || exit 1
+            python tests/run.py --target "$t" --stndlone || exit 1
+          done
