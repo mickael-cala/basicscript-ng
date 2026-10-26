@@ -1,0 +1,131 @@
+# INVENTAIRE — ce que contient le dépôt, et ce qu'il ne contient pas
+
+État au **2026-10-24**. Les nombres excluent `.git/`, `obj/` et `dist/`
+(produits de compilation, tous deux ignorés par Git).
+
+## 1. Vue d'ensemble
+
+```
+scriba-zig/
+├── build.py                 le seul outil de compilation (6 cibles, sbhttpd, modules)
+├── scriba.conf.lsp          configuration en texte
+├── README.md                présentation et démarrage rapide
+├── LICENSE                  GNU LGPL 2.1 (licence d'origine)
+├── AGENTS.md                consignes pour un agent qui reprend le dépôt
+├── .gitignore .gitattributes
+├── .github/workflows/build.yml
+├── src/                     le code C
+├── tests/                   les programmes d'essai + run.py
+│   └── upstream/            la suite d'origine, telle quelle, et son manifeste
+├── examples/                les exemples d'origine
+├── webtest/                 deux pages servies par sbhttpd
+└── docs/                    ces documents
+```
+
+## 2. Comptes
+
+| dossier | fichiers | nature |
+|---|---|---|
+| `src/` | 181 | 93 `.c`, 55 `.h`, 20 `.bas` de modules, plus données (`regex.h`, `engine.ci`, `notunix.txt`, `copyright.txt`…) |
+| `tests/` | 69 | 34 `.bas` locaux + `run.py` + `re_engine.c` + 32 `.bas` de `upstream/` + `MANIFEST.tsv` |
+| `examples/` | 200 | 178 `.bas`, 3 `.inc`, 7 `.sb`, et les données de `sibawa/` |
+| `include/` | 3 | `error.bas`, `time.bas`, `modinst.bas` |
+| `docs/` | 8 | README (sommaire), PROGRAMMES, MODULES, ERRATA, EVOLUTIONS, ROADMAP, INVENTAIRE, REPRISE |
+| `webtest/` | 2 | `index.bas`, `404.bas` |
+| `.github/` | 1 | le workflow de CI |
+| racine | 7 | `build.py`, `scriba.conf.lsp`, `README.md`, `AGENTS.md`, `LICENSE`, `.gitignore`, `.gitattributes` |
+
+Total : 466 fichiers de contenu, dont **264 fichiers `.bas`** (modules,
+tests, exemples, pages web d'essai et `include/`).
+
+## 3. Les sources C, en détail
+
+| catégorie | fichiers | rassemblés dans `build.py` |
+|---|---|---|
+| coeur | 26 | `SOURCES` |
+| commandes natives | 14 | `SOURCES` (`src/commands/`) |
+| utilitaires du coeur (logger, threads, handlers, licence) | 6 | `SOURCES` |
+| point d'entrée standard | 1 | `SOURCES` (`variations/standard/scribacmd.c`) |
+| serveur HTTP | 4 | `HTTPD_EXTRA` |
+| modules liés au serveur (`cgi`, `mt`) | 3 | `HTTPD_EXTRA`, avec `-DSTATIC_LINK=1` |
+
+Total compilé pour `scriba` : **47 unités** ; pour `sbhttpd` : **52** (les 45
+du coeur, sans `scribacmd.c` ni `lmt_none.c`, plus les 7 du serveur).
+L'union des deux listes fait 54 fichiers.
+
+`build.py --modules` ajoute **14 unités** : les `interface.c` de `hash`, `re`,
+`t`, `trial`, `cgi`, `mt`, `cio`, `win`, `unix`, le moteur `cgi.c`, et les
+quatre fichiers du moteur de `re` (`regcomp.c`, `regexec.c`, `regerror.c`,
+`regfree.c`). `cgi` et `mt` sont aussi liés en statique dans `sbhttpd` ; les
+autres ne sont liés à aucun exécutable : ce sont des bibliothèques chargées
+à l'exécution.
+
+`build.py --libscriba` assemble 47 objets : les 47 unités de `scriba` moins
+`scribacmd.c`, plus `variations/standalone/libscriba.c` (et `lmt_none.c` reste
+présent). `build.py --stndlone` compile `src/stndlone.c` et le C produit par
+`scriba -C`, puis lie les 45 objets du cœur qui restent (sans `scribacmd.c`
+ni `lmt_none.c`).
+
+Les autres `.c` du dépôt ne sont dans aucune cible : les onze extensions
+restantes (`zlib`, `curl`, `xml`, `gd`, `curses`, `mysql`, `psql`, `bdb`,
+`odbc`, `dyc`, `dbg`), la variante de liste de modules `lmt_cio`, les
+outils de référence (`tools/md5.c`, `tools/mt19937.c`), et quelques fichiers
+de diagnostic ou sources d'en-têtes (`testalloc`, `testconf`, `cftd`,
+`prepext`, `notimp`, `mynotimp`, `command`, `matchc`, `buildnum`).
+`tools/fork.c` a été retiré le 2026-10-24 (internes Cygwin inutilisables) ;
+les formes `basicdll`, `scribawx`, `lmt_wx` et `calldllbasic` l'avaient été
+juste avant. Le détail et les décisions sont dans
+[PROGRAMMES.md § 2.2](PROGRAMMES.md#22-sources-sans-cible--décision-daudit-2026-10-24).
+
+## 4. Ce qui est ignoré par Git
+
+| motif | pourquoi |
+|---|---|
+| `obj/` | objets intermédiaires, un sous-dossier par cible |
+| `dist/` | binaires et `scriba.conf`, un sous-dossier par cible |
+| `logs/` | journaux et fichier pid écrits par `sbhttpd` |
+| `*.o *.obj *.exe *.dll *.pdb *.ilk` | sorties de compilation, où qu'elles soient |
+| `__pycache__/`, `*.pyc` | Python |
+| `.vscode/`, `.idea/`, `*.swp`, `.DS_Store` | éditeurs |
+
+Règle : **le dépôt ne contient aucun binaire**. Un clone neuf doit tout
+reconstruire avec `python build.py --all`.
+
+## 5. Ce qui manque par rapport à l'amont, et pourquoi
+
+Comparaison avec le dossier `ScriptBasic-master` d'origine. Les fichiers
+`*.c` et `*.h` de la racine amont sont **tous** présents ici (46/46) ; ce qui
+manque est de l'outillage, de la documentation ou des binaires.
+
+| absent | nature | pourquoi |
+|---|---|---|
+| `html/`, `texi/` | manuels HTML/TeXinfo générés | produits, pas sources ; la source est dans les `interface.c` |
+| `docs/` de l'amont | documentation du projet (PROGRESS, PATCHES, MANUEL…) | remplacée par ces documents, propres à ce portage |
+| `Makefile*`, `make_*.jim`, `Makefile.nt.jam`, `configure.jim` | chaîne de build d'origine | remplacés par `build.py` |
+| `*.jam` de build (20 `manual.texi.jam`) | modèles de manuels | supprimés, voir [MODULES.md](MODULES.md) |
+| `headerer.pl`, `generrh.pl`, `esd*.pl`, `ssplit.pl`, `t2h.pl`… | chaîne Perl | l'aplatissement des en-têtes les a rendus inutiles |
+| `setup.pl`, `setup.cmd`, `install*`, `modinst.sh`, `modmake*.cmd` | installation | hors périmètre ; à réécrire si un installeur est voulu |
+| `*.def` (`linkedmodules.def`, `lmt_*.def`) | listes d'exports TinyCC | fabriquées pour TCC ; Zig n'en a pas besoin |
+| `obj/`, `bin*/`, `modules*/` de l'amont | binaires 32/64 bits | non versionnables, reconstruits ici |
+| `ZIP-SRC/`, `scriba-*.pl`, `scriba-rpm.spec` | empaquetage | à refaire le jour d'une release |
+| `test/*.pl`, `test/mktest.pl` | pilote d'essai Perl | remplacé par `tests/run.py` |
+| `variations/win32dll/`, `variations/wx/`, `lmt_wx.c`, `tools/calldllbasic.c` | formes historiques | retirées le 2026-10-24 : `basicdll` n'avait pas d'implémentation, `scribawx` demandait wxWidgets ([E21](ERRATA.md#e21), [E22](ERRATA.md#e22)) |
+| `examples/sibawa/*.cmd` | script Windows de l'exemple | inutile au portage |
+
+Les deux `.jam` encore présents dans `examples/sibawa/` (`sibawa.texi.jam`,
+`templates.txt.jam`) sont **volontairement** conservés : ce sont les données
+de l'application d'exemple SIBAWA, pas des modèles de documentation du build.
+Aucun outil du dépôt ne les lit ; les régénérer demande Jamal. Détail :
+[docs/README.md § 3.2](README.md#32-ce-qui-reste--2-fichiers-et-ce-quils-sont-vraiment).
+
+## 6. Provenance
+
+- code C, tests, exemples : distribution **ScriptBasic** de Peter Verhas
+  (LGPL 2.1), reprise telle quelle sauf les corrections listées dans
+  [EVOLUTIONS.md](EVOLUTIONS.md) ;
+- `src/extensions/re/regex.h`, `regex2.h`, `cclass.h`, `cname.h`, `utils.h`,
+  `engine.ci` : reconstitués lors du portage TCC (le moteur Spencer était
+  livré sans ses en-têtes) ; ils portent l'en-tête de licence d'origine ;
+- `src/variations/httpd/service.h` : écrit pour le portage, la distribution ne
+  le fournissait pas alors que `service.c` et `websrv.c` l'incluent ;
+- le reste (`build.py`, `tests/`, `webtest/`, docs) : écrit pour ce dépôt.
