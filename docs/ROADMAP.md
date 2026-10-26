@@ -184,7 +184,9 @@ sans cible (voir
       ou `zlib` ; `mysql` est la seule bibliothèque qui rend exécutable une
       application présente (SIBAWA). À rouvrir seulement si l'objectif devient
       le portage fidèle de la distribution.
-- [ ] **`odbc` en 64 bits** ([ERRATA E11](ERRATA.md#e11)).
+- [x] **`odbc` en 64 bits** ([ERRATA E11](ERRATA.md#e11)) : corrigé le
+      2026-10-26 (fusion, phase 2), construit et testé en 32 comme en 64
+      bits sous Windows ; reste Linux, bloqué à la liaison (`E42`).
 - [x] **`unix`** (ex-`ux`) : construit pour Linux/macOS avec `-include
       unistd.h -include sys/stat.h`, testé sous Linux x64 (`tests/unix.bas`).
       Reste à vérifier macOS par la CI, et `fork()` à la main (le test

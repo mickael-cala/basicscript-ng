@@ -1571,3 +1571,38 @@ produit par `-C` compilé en `-std=c23`, lié puis exécuté.
 | bibliothèques tierces ? | **aucune** pour l'interpréteur | les modules qui en dépendent restent optionnels |
 | modules liés en statique ? | seulement dans `sbhttpd` (`cgi`, `mt`) | c'est la liste de `lmt_httpd.c`, héritée du projet |
 | version de C ? | **`-std=c23`** | plus de K&R ni de `()` vide ; `_DEFAULT_SOURCE`/`_DARWIN_C_SOURCE` pour POSIX |
+
+## 2026-10-26 — la fusion, deuxième phase : les modules venus de ScriptBasic-master-ng
+
+Le noyau importé de scriba-zig construisait neuf modules sans dépendance
+tierce. La phase 2 de [PLAN.md](PLAN.md) en ajoute quatre, pris dans
+ScriptBasic-master-ng quand il portait une correction, sinon conservés
+tels quels :
+
+- **zlib** — les 15 `.c` et 11 `.h` de la 1.3.1 sont vendorisés dans
+  `src/vendor/zlib/` (intouchables) ; l'interface vient de -ng parce que
+  celle du noyau gardait le défaut B.10 : des données incompressibles
+  rendaient `ZLIB_ERROR_NOCOMPRESS` au lieu de doubler le tampon de sortie.
+- **odbc** — l'interface de -ng porte la correction `E11` (`SQLGetData`
+  rend un `SQLLEN*`) : le module se construit enfin en 64 bits, et le test
+  passe en 32 comme en 64. Deux découvertes en route : le test
+  `tests/odbc.bas` était un faux positif (son interception imprimait « OK »
+  pour n'importe quelle erreur, y compris un échec de chargement — durci
+  par une garde `fileexists`, cette grammaire n'ayant pas de `errnum`), et
+  la liaison Linux bute sur le sysroot de `zig cc` (`E42`, ouvert, borné).
+- **dyc** — l'ébauche x64 héritée du noyau ne compilait pas (`E41`,
+  écartée, récupérable au commit `82f4b41`) ; l'interface 32 bits de -ng
+  la remplace, filtre `ARCH 32`, et son test passe sous zig cc.
+- **curl** — en-têtes 8.21.0 et `.def` vendorisés, import fabriqué par
+  `zig dlltool`, liaison vers la `libcurl-4.dll` de MinGW (dans le PATH) ;
+  périmètre `windows-x64` (`E40`). Le vrai gain est `E43` : `free()` sur la
+  mémoire de libcurl corrompait le tas — `curl_free()` le corrige, et le
+  test `file://` complet passe (init, option, perform, refus d'URL, refus
+  CLOSEPOLICY).
+
+`build.py` gagne quatre clés de module (`include_dirs`, `libs` par famille
+d'OS, `arch`, `import_def`) ; `tests/run.py` gagne `MODULE_TESTS_SKIP` — le
+test d'un module absent d'une cible est sauté avec sa raison, et les sauts
+sortent du compte final (`24/24 (1 sauté)`) au lieu de gonfler le ratio.
+Campagnes du 2026-10-26 : `30/30` noyau sur windows-x86, windows-x64 et
+linux-x64 (WSL) ; `24/24` modules sur les deux Windows, `21/21` sous Linux.

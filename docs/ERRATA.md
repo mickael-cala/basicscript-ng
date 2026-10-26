@@ -46,6 +46,10 @@ surprise de terrain.
 | [E37](#e37) | le `if` d'une ligne refusait `ELSE`/`ELSEIF` | défaut | corrigé |
 | [E38](#e38) | un `.h` modifié ne déclenchait aucune recompilation : binaire qui plante | piège | corrigé |
 | [E39](#e39) | un `do … loop` nu était refusé à l'analyse | défaut | corrigé |
+| [E40](#e40) | `curl` : la DLL d'exécution n'existe qu'en 64 bits ici | limite | assumé |
+| [E41](#e41) | l'ébauche x64 de `dyc` ne compilait pas | défaut | écartée |
+| [E42](#e42) | `odbc` : `libodbc` invisible du sysroot zig sous Linux | limite | ouvert |
+| [E43](#e43) | `free()` sur la mémoire de libcurl : corruption de tas | défaut | corrigé |
 
 ---
 
@@ -1140,3 +1144,72 @@ types de labels différents.
 `exit do` ; les formes `loop while` et `loop until` sont inchangées.
 C'est le défaut trouvé pendant la passe `EXIT` (voir
 [EVOLUTIONS.md](EVOLUTIONS.md#2026-10-25--vingt-deuxième-passe--exit-quitte-les-boucles)).
+
+---
+
+## E40
+
+**Symptôme** — le module `curl` se construit et se charge, mais seulement
+pour `windows-x64` : aucune `libcurl-4.dll` 32 bits n'existe sur la machine
+de référence (la seule est celle de Git for Windows, x64, dans le PATH), et
+sous UNIX il n'y a pas de libcurl de développement (`libcurl.so.4` sans le
+lien `-l`).
+
+**Cause** — la DLL est une dépendance du système, jamais versionnée ; le
+périmètre du module suit les DLL réellement disponibles.
+
+**État** — assumé : cible fenêtrée `windows` + `arch 64` dans `build.py` ;
+le test est sauté avec raison sous `windows-x86` (`MODULE_TESTS_SKIP` de
+`tests/run.py`). Les en-têtes 8.21.0 et le `.def` sont vendorisés dans
+`src/vendor/curl/`, la bibliothèque d'import est fabriquée par
+`zig dlltool` à chaque construction.
+
+## E41
+
+**Symptôme** — le dépôt scriba-zig portait dans `src/extensions/dyc/` une
+ébauche de portage x64 de `dyc` (moteur à registres, espace d'ombre, pile
+alignée) : elle ne compile pas sous `zig cc` en C23 — une vingtaine
+d'erreurs, et des références à un atelier étranger (`PORTAGE_DYC64.md`,
+`--only`, `PROBES_LIVE` n'existent nulle part dans ce dépôt).
+
+**Cause** — fichier copié au stade d'ébauche depuis un autre arbre de
+travail, jamais achevé.
+
+**État** — écartée le 2026-10-26 : l'interface 32 bits de -ng (DynaCall
+historique, éprouvée) remplace la sienne, construite pour `windows-x86`,
+et `tests/dyc.bas` passe sous zig cc. L'ébauche reste récupérable dans
+l'historique git (commit `82f4b41`). `dyc` reste `ARCH 32` (`E10`).
+
+## E42
+
+**Symptôme** — `odbc` ne se lie pas pour linux : `unable to find dynamic
+system library "odbc"`. Le sysroot de `zig cc` en cross-compilation
+n'embarque ni `libodbc.so` ni les en-têtes ODBC, et le `libodbc.so` de la
+machine hôte (WSL) est hors de portée de l'éditeur de liens.
+
+**Cause** — l'ODBC n'appartient pas à la libc ; une liaison croisée ne voit
+que son sysroot.
+
+**État** — ouvert, effort borné : le module est livré `windows` seulement
+(construit et testé en 32 comme en 64 bits) ; les en-têtes unixODBC sont
+déjà vendorisés dans `src/vendor/odbc/` (la compilation linux passe
+entière), reste à résoudre la liaison — sysroot dédié, copie documentée de
+`libodbc.so.2`, ou construction native dans WSL. Le test est sauté avec
+raison sous linux et macOS.
+
+## E43
+
+**Symptôme** — `curl::escape` et `curl::unescape` corrompaient le tas
+(`0xC0000374`) : crash sans message, sortie perdue dans le tampon.
+
+**Cause** — l'interface libérait avec `free()` — le tas du module — la
+mémoire rendue par `curl_escape`/`curl_unescape` — le tas de
+`libcurl-4.dll`. Deux CRT différents ; c'est exactement le cas pour lequel
+libcurl fournit `curl_free()`. Le défaut, hérité de l'amont, n'avait jamais
+éclaté : dans -ng, la cible curl n'avait jamais été construite.
+
+**Correctif** — `curl_free(s)` aux deux sites, commenté sur place dans
+`src/extensions/curl/interface.c`.
+
+**Couverture** — `tests/curl.bas` (aller-retour escape/unescape), qui
+plantait avant correction et passe depuis.
