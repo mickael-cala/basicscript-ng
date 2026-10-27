@@ -107,6 +107,9 @@ static pFixSizeMemoryObject dim_Allocate(pMemoryObject pMo,
 
   pArray = memory_NewArray(pMo,0,aHigh[iDim]);
   if( pArray == NULL )return NULL;
+  /* DIM pose le contrat de bornes : hors de [0, aHigh[iDim]], l'acces
+     leve COMMAND_ERROR_SUBSCRIPT (phase 8.1, les sous-tableaux aussi). */
+  pArray->fArrayFixed = 1;
 
   if( iDim + 1 < nDim ){
     for( i=0 ; i <= aHigh[iDim] ; i++ ){

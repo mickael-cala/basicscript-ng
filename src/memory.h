@@ -20,13 +20,11 @@ typedef struct _FixSizeMemoryObject {
   unsigned long Size; 
   BYTE sType; 
               
-  BYTE vType; 
-  BYTE State; 
-  
-  
-  
-  
-  struct _FixSizeMemoryObject *next;     
+  BYTE vType;
+  BYTE State;
+  BYTE fArrayFixed; /* phase 8.1 : pose par DIM, refuse les indices hors bornes */
+
+  struct _FixSizeMemoryObject *next;
   union {
     struct _FixSizeMemoryObject *prev;   
     struct _FixSizeMemoryObject **rprev; 
@@ -186,6 +184,8 @@ pFixSizeMemoryObject memory_ReDimArray(pMemoryObject pMo,
 /*FEDNUF*/
 /*FUNDEF*/
 
+int memory_ArrayIndexOutOfBounds(pFixSizeMemoryObject p,
+                                 long Index);
 pFixSizeMemoryObject memory_CheckArrayIndex(pMemoryObject pMo,
                                             pFixSizeMemoryObject p,
                                             long Index);

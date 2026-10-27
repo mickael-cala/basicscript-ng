@@ -913,7 +913,14 @@ pFixSizeMemoryObject execute_EvaluateArray(pExecuteObject pEo,
 /*noverbatim
 CUT*/
 
-  return *execute_LeftValueArray(pEo,lExpressionRootNode,pMyMortal,piErrorCode);
+  /* phase 8.1 : l'acces peut echouer (hors bornes d'un tableau DIM) ;
+     ne pas dereferencer sans verifier l'erreur. */
+  {
+  pFixSizeMemoryObject *ppElement;
+  ppElement = execute_LeftValueArray(pEo,lExpressionRootNode,pMyMortal,piErrorCode);
+  if( *piErrorCode )return NULL;
+  return *ppElement;
+  }
   }
 
 
@@ -949,7 +956,12 @@ pFixSizeMemoryObject execute_EvaluateSarray(pExecuteObject pEo,
 /*noverbatim
 CUT*/
 
-  return *execute_LeftValueSarray(pEo,lExpressionRootNode,pMyMortal,piErrorCode);
+  {
+  pFixSizeMemoryObject *ppElement;
+  ppElement = execute_LeftValueSarray(pEo,lExpressionRootNode,pMyMortal,piErrorCode);
+  if( *piErrorCode )return NULL;
+  return *ppElement;
+  }
   }
 
 /*POD
@@ -1044,6 +1056,13 @@ CUT*/
         }
       *ppVar = pVar;
       }
+    /* phase 8.1 : un tableau pose par DIM refuse les indices hors de ses
+       bornes declarees (les tableaux a la volee, associatifs, restent
+       dynamiques). */
+    if( memory_ArrayIndexOutOfBounds((*ppVar),lIndex) ){
+      *piErrorCode = COMMAND_ERROR_SUBSCRIPT;
+      return NULL;
+      }
     memory_CheckArrayIndex(pEo->pMo,(*ppVar),lIndex);
     ppVar = (*ppVar)->Value.aValue+lIndex-(*ppVar)->ArrayLowLimit;
 
@@ -1127,6 +1146,7 @@ CUT*/
       break;
     case eNTYPE_ARR:
       ppVar = execute_LeftValueArray(pEo,nVariable,pMyMortal,piErrorCode);
+      if( *piErrorCode )return NULL;
       break;
     case eNTYPE_SAR:
       ppVar = execute_LeftValueSarray(pEo,nVariable,pMyMortal,piErrorCode);

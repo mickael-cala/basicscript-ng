@@ -140,7 +140,7 @@ char *en_error_messages[] ={
 "The provided string array is too short.",
 "Operation failed",
 "The provided buffer is too short.",
-NULL
+"Subscript is out of the declared bounds of the array.",
 };
 tErrorMessageArray ErrorMessageArray[]={
 "en",en_error_messages,

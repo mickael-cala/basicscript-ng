@@ -655,6 +655,7 @@ CUT*/
   aHigh = p->ArrayHighLimit;
   result = memory_NewArray(pMo,aLow,aHigh);
   if( result == NULL )return NULL;
+  result->fArrayFixed = p->fArrayFixed; /* la copie garde le contrat DIM */
   for( i=0 ; i <= aHigh-aLow ; i++ ){
     if( memory_IsUndef(p->Value.aValue[i]) )continue;
     switch(p->Value.aValue[i]->vType ){
@@ -714,6 +715,10 @@ CUT*/
     p->Value.aValue[i - LowIndex] = NULL;
   p->link.prev = p->next = NULL;
   p->State = STATE_IMMORTAL;
+  /* phase 8.1 : un tableau ne devient « a bornes fixes » que pose par
+     DIM (dim_Allocate pose le drapeau). Les tableaux a la volee restent
+     dynamiques — c'est l'idiome associatif. */
+  p->fArrayFixed = 0;
   return p;
   }
 
@@ -806,6 +811,23 @@ array.
 The function returns the pointer passed as parameter T<p> or NULL in case there is a
 memory allocation error.
 /*FUNCTION*/
+/*POD
+=H memory_ArrayIndexOutOfBounds()
+
+Phase 8.1 : rend vrai quand T<Index> sort des bornes declarees d'un
+tableau pose par DIM (drapeau fArrayFixed). Les tableaux a la volee
+(associatifs) ne sont jamais hors bornes — c'est leur idiome.
+/*FUNCTION*/
+int memory_ArrayIndexOutOfBounds(pFixSizeMemoryObject p,
+                                 long Index
+  ){
+/*noverbatim
+CUT*/
+  if( p == NULL || p->vType != VTYPE_ARRAY || ! p->fArrayFixed )return 0;
+  return Index < p->ArrayLowLimit || Index > p->ArrayHighLimit;
+  }
+
+
 pFixSizeMemoryObject memory_CheckArrayIndex(pMemoryObject pMo,
                                             pFixSizeMemoryObject p,
                                             long Index

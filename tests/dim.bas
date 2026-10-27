@@ -102,12 +102,21 @@ dim garde[1]
 check "nouvelle borne",             ubound(garde),          1
 check "les valeurs sont perdues",   isundef(garde[1]),      -1
 
-print "\n=== 6. DIM ne borne pas le tableau ===\n"
+print "\n=== 6. DIM borne le tableau (phase 8.1) ===\n"
 
 dim grand[2]
+on error goto HorsBornes
 grand[8] = 1
-check "l'acces au-dela etend",      ubound(grand),          8
-check "la case intermediaire",      isundef(grand[5]),      -1
+print "  ECHEC : l'ecriture hors bornes ne leve rien\n"
+echecs = echecs + 1
+goto ApresBornes
+HorsBornes:
+check "hors bornes leve 133",       error,                  133
+check "la borne ne bouge pas",      ubound(grand),          2
+' desarme : l'erreur pendante ne sera pas reporquee a la fin, et la
+' suite du test n'a plus rien a y attraper.
+on error goto null
+ApresBornes:
 
 print "\n=== 7. portee ===\n"
 
