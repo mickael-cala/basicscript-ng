@@ -108,10 +108,12 @@ NOTIMPLEMENTED;
     else
     switch( TYPE(ItemResult) ){
       case VTYPE_LONG:
-        sprintf(buffer,"%ld",LONGVALUE(ItemResult));
+        sprintf(buffer,"%lld",LONGVALUE(ItemResult));
         break;
       case VTYPE_DOUBLE:
-        sprintf(buffer,"%le",DOUBLEVALUE(ItemResult));
+        /* phase 8.2 : presentation lisible — 15 chiffres significatifs,
+           scientifique seulement pour les tres grandes/petites valeurs */
+        sprintf(buffer,"%.15g",DOUBLEVALUE(ItemResult));
         break;
       case VTYPE_STRING:
         s = STRINGVALUE(ItemResult);
@@ -124,7 +126,7 @@ NOTIMPLEMENTED;
           *buffer = (char)0;/* do not print anything afterwards */
         break;
       case VTYPE_ARRAY:
-        sprintf(buffer,"ARRAY@#%08X",LONGVALUE(ItemResult));
+        sprintf(buffer,"ARRAY@#%llX",(long long)LONGVALUE(ItemResult));
         break;
       }
 

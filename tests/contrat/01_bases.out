@@ -1,6 +1,6 @@
 entier  : 42
 negatif : -7
-reel    : 2.500000e+00
+reel    : 2.5
 chaine  : bonjour
 concat  : abc
 egal    : -1

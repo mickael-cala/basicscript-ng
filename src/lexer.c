@@ -578,6 +578,8 @@ int lex_ReadInput(pLexObject pLex
 CUT*/
   double intpart,fracpart,exppart,man;
   long hintpart; /* for hexadecimal calculation */
+  long long llint; /* phase 8.2 : accumulation exacte des litteraux entiers */
+  int deborde;
   int esig,ibase;
   int nch,ch,i,cStringStartCharacter,iErrorWasReported;
   pLexeme *plexLastLexeme;
@@ -937,7 +939,17 @@ SimpleString:
        number they should also accept a whole expression. Even though there is a pseudo
        terminal called number in the file synrax.def, but we never use it. */
     if( isdigit(ch) || ch == '.' ){
+      /* phase 8.2 : la partie entiere est accumulee en long long EXACTE
+         tant qu'elle tient ; au-dela, on bascule en double (la valeur
+         devient un reel, comme pour tout debordement). intpart reste en
+         double pour la partie fractionnaire et l'exposant. */
+      llint = 0;
+      deborde = 0;
       for( intpart = 0 ; isdigit(ch) ; ch = GETC() ){
+        if( ! deborde && llint <= (LLONG_MAX - (ch-'0')) / 10 )
+          llint = llint*10 + (ch-'0');
+        else
+          deborde = 1;
         intpart *= 10;
         intpart += ch-'0';
         }
@@ -1002,13 +1014,13 @@ SimpleString:
         }
       pfLexeme->next = NULL;
       if( i ){/* finally this is an integer */
-        /* The literal is accumulated in a double, so a value above LONG_MAX
-           used to be cast to long and silently saturated (3000000000 became
-           -2147483648 on a 32 bit long). Such a literal is now a real one,
-           which is what the arithmetic does on overflow anyway. */
-        if( intpart <= (double)LONG_MAX ){
+        /* phase 8.2 : le litteral decimal est accumule en long long
+           exact ; seul un litteral au-dela de LLONG_MAX devient un reel
+           (et la valeur est rendue exacte pour 9223372036854775808 = -2^63,
+           le seul cas limite representable). */
+        if( ! deborde ){
           pfLexeme->type = LEX_T_LONG;
-          pfLexeme->value.lValue = (long)intpart;
+          pfLexeme->value.lValue = llint;
           }else{
           pfLexeme->type = LEX_T_DOUBLE;
           pfLexeme->value.dValue = intpart;

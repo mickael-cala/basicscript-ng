@@ -502,7 +502,7 @@ NOTIMPLEMENTED;
   /* this is an operator and not a command, therefore we do not have our own mortal list */
   USE_CALLER_MORTALS;
 
-  RETURN_LONG_VALUE(LONG_MAX)
+  RETURN_LONG_VALUE(LLONG_MAX)
 
 #endif
 END
@@ -521,7 +521,7 @@ NOTIMPLEMENTED;
   /* this is an operator and not a command, therefore we do not have our own mortal list */
   USE_CALLER_MORTALS;
 
-  RETURN_LONG_VALUE(LONG_MIN)
+  RETURN_LONG_VALUE(LLONG_MIN)
 
 #endif
 END

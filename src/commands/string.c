@@ -2538,7 +2538,7 @@ NOTIMPLEMENTED;
 #else
 
   VARIABLE Op1;
-  unsigned long *plOptionValue;
+  long *plOptionValue; /* l'option est stockee signe : unsigned zero-etendait -2 en 4294967294 (phase 8.2) */
   char *buffer;
 
   /* this is an operator and not a command, therefore we do not have our own mortal list */

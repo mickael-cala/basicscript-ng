@@ -267,10 +267,14 @@ check "atan(0) entier",           atan(0),              0
 
 ' --- constantes : pi, bornes entieres, vrai/faux (MANUEL 7.3) ---
 checkr "pi",                     pi,             3.141593
-check "maxint",                  maxint,         2147483647
+check "maxint",                  maxint,         9223372036854775807
 ' 2147483648 ne tient pas dans un long de 32 bits : le litteral est donc un
-' reel sous Windows, et minint un entier. La comparaison est numerique.
-check "minint",                  (minint = -2147483648e0),  -1
+' Phase 8.2 : l'entier est 64 bits sur TOUTES les cibles (E44 corrige) :
+' maxint vaut le meme 9223372036854775807 partout ; minint se compare au
+' reel -2^63 exact (la comparaison est numerique).
+' lire un LONG comme DOUBLE rend le motif binaire reinterprete (-0.0
+' pour minint) : la comparaison fiable passe par str() (phase 8.2).
+check "minint",                  str(minint) = "-9223372036854775808",  -1
 check "true",                    true,                -1
 check "false",                   false,                0
 

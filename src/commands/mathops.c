@@ -75,13 +75,13 @@ static long longpow(long a,long b){
    the after-the-fact check that the multiplication used to do. That is why
    T<1000000*10000> used to render a wrapped value instead of a real one.
    All the divisions below are done on the operands, before multiplying. */
-static int multiplyLongExact(long a,long b,long *pResult){
+static int multiplyLongExact(long long a,long long b,long long *pResult){
   if( a == 0 || b == 0 ){
     *pResult = 0;
     return 1;
     }
   /* the only division that overflows is LONG_MIN/-1 */
-  if( ( a == LONG_MIN && b == -1 ) || ( b == LONG_MIN && a == -1 ) )return 0;
+  if( ( a == LLONG_MIN && b == -1 ) || ( b == LLONG_MIN && a == -1 ) )return 0;
   if( a > 0 ){
     if( b > 0 ){
       if( a > LONG_MAX/b )return 0;
@@ -154,7 +154,7 @@ NOTIMPLEMENTED;
   NODE nItem;
   VARIABLE Op1,Op2;
   double dResult;
-  long lResult,lop1,lop2;
+  long long lResult,lop1,lop2;
 
   /* this is an operator and not a command, therefore we do not have our own mortal list */
   USE_CALLER_MORTALS;
@@ -441,7 +441,7 @@ NOTIMPLEMENTED;
 
   NODE nItem;
   VARIABLE Op1,Op2;
-  long lop1,lop2;
+  long long lop1,lop2;
 
   /* this is an operator and not a command, therefore we do not have our own mortal list */
   USE_CALLER_MORTALS;
@@ -490,7 +490,7 @@ NOTIMPLEMENTED;
   NODE nItem;
   VARIABLE Op1,Op2;
   double dResult;
-  long lResult,lop1,lop2;
+  long long lResult,lop1,lop2;
 
   /* this is an operator and not a command, therefore we do not have our own mortal list */
   USE_CALLER_MORTALS;
@@ -561,7 +561,7 @@ NOTIMPLEMENTED;
   NODE nItem;
   VARIABLE Op1,Op2;
   double dResult;
-  long lResult,lop1,lop2;
+  long long lResult,lop1,lop2;
 
   /* this is an operator and not a command, therefore we do not have our own mortal list */
   USE_CALLER_MORTALS;
@@ -815,7 +815,7 @@ NOTIMPLEMENTED;
   NODE nItem;
   VARIABLE Op1,Op2;
   double dop1,dop2;
-  long lop1,lop2;
+  long long lop1,lop2;
 
   /* this is an operator and not a command, therefore we do not have our own mortal list */
   USE_CALLER_MORTALS;
@@ -870,7 +870,7 @@ NOTIMPLEMENTED;
   NODE nItem;
   VARIABLE Op1,Op2;
   double dop1,dop2,dResult;
-  long lop1,lop2;
+  long long lop1,lop2;
 
   /* this is an operator and not a command, therefore we do not have our own mortal list */
   USE_CALLER_MORTALS;

@@ -282,7 +282,7 @@ double execute_GetDoubleValue(pExecuteObject pEo,
 /*FEDNUF*/
 /*FUNDEF*/
 
-long execute_GetLongValue(pExecuteObject pEo,
+long long execute_GetLongValue(pExecuteObject pEo,
                           pFixSizeMemoryObject pVar);
 /*FEDNUF*/
 /*FUNDEF*/

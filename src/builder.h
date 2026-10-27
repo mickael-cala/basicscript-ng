@@ -36,7 +36,7 @@ typedef struct _cNODE {
     
     union {
       double dValue;        
-      long   lValue;        
+      long long lValue;     /* phase 8.2 (E44) */
       unsigned long sValue; 
       }Constant;
 

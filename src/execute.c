@@ -1303,7 +1303,7 @@ CUT*/
   switch( pVar->vType ){
     default: return NULL;
     case VTYPE_LONG: 
-      sprintf(buffer,"%ld",pVar->Value.lValue);
+      sprintf(buffer,"%lld",pVar->Value.lValue);
       break;
     case VTYPE_STRING:
       return pVar;
@@ -1343,7 +1343,6 @@ pFixSizeMemoryObject execute_Convert2Long(pExecuteObject pEo,
 /*noverbatim
 CUT*/
   char *s;
-  int lintpart;
   double intpart,fracpart,exppart,man;
   int i,esig,isig;
   unsigned long sLen;
@@ -1374,17 +1373,82 @@ CUT*/
       if( *s == '-' )isig = -1;
       if( sLen )
         if( *s == '-' || *s == '+' ){ s++; sLen--; }
-      for( lintpart = 0 ; sLen && isdigit(*s) ; s++,sLen-- ){
-        lintpart *= 10;
-        lintpart += *s -'0';
+
+      /* phase 8.2 : base explicite et prefixes. La valeur est accumulee
+         en long long exact ; seul le chemin decimal continue vers le
+         reel (fraction, exposant). En base explicite, tout ce qui n'est
+         pas un chiffre de la base termine le nombre. */
+      {
+      int base = 10;
+      long long valeur = 0;
+      int deborde = 0;
+      int chiffres = 0;
+      if( sLen > 2 && *s == '0' ){
+        int b = 0;
+        if( s[1] == 'x' || s[1] == 'X' )b = 16;
+        else if( s[1] == 'b' || s[1] == 'B' )b = 2;
+        else if( s[1] == 'o' || s[1] == 'O' )b = 8;
+        if( b ){ base = b; s += 2; sLen -= 2; }
         }
+      /* la forme amont base#chiffres : 16#FF, 2#1010, 8#17... */
+      {
+      const char *q = s;
+      unsigned long restant = sLen;
+      long long dec = 0;
+      int cdec = 0;
+      while( restant && isdigit(*q) ){
+        if( dec <= (LLONG_MAX - (*q-'0')) / 10 )dec = dec*10 + (*q-'0');
+        cdec++;
+        q++; restant--;
+        }
+      if( cdec && restant && *q == '#' && dec >= 2 && dec <= 36 ){
+        base = (int)dec;
+        s = (char *)q + 1; sLen = restant - 1;
+        }
+      }
+
+      {
+      static const char *alEnsemble = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+      while( sLen ){
+        int chiffre;
+        char c = *s;
+        if( c >= '0' && c <= '9' )chiffre = c - '0';
+        else if( c >= 'A' && c <= 'Z' )chiffre = c - 'A' + 10;
+        else if( c >= 'a' && c <= 'z' )chiffre = c - 'a' + 10;
+        else break;
+        if( chiffre >= base )break;
+        if( ! deborde && valeur <= (LLONG_MAX - chiffre) / base )
+          valeur = valeur*base + chiffre;
+        else
+          deborde = 1;
+        chiffres++;
+        s++; sLen--;
+        }
+      if( chiffres && base != 10 ){
+        /* base explicite : pas de fraction ni d'exposant */
+        pVar = memory_NewMortalLong(pEo->pMo,pMyMortal);
+        if( pVar == NULL )return NULL;
+        pVar->Value.lValue = isig * valeur;
+        return pVar;
+        }
+      if( deborde ){
+        /* au-dela du 64 bits : saturation documentee (aucun etat undef) */
+        pVar = memory_NewMortalLong(pEo->pMo,pMyMortal);
+        if( pVar == NULL )return NULL;
+        pVar->Value.lValue = isig * (long long)LLONG_MAX;
+        return pVar;
+        }
+      }
+
+      /* base 10 sans fraction ni exposant : la valeur exacte 64 bits */
       if( (!sLen) || (*s != '.' && *s != 'e' && *s != 'E') ){
         pVar = memory_NewMortalLong(pEo->pMo,pMyMortal);
         if( pVar == NULL )return NULL;
-        pVar->Value.lValue = isig*lintpart;
+        pVar->Value.lValue = isig*valeur;
         return pVar;
         }
-      intpart = lintpart;
+      /* chemin reel historique : fraction et exposant decimaux */
+      intpart = (double)valeur;
       fracpart = 0.0;
       if( sLen && *s == '.' ){
         s++;     /* step over the decimal dot */
@@ -1407,8 +1471,9 @@ CUT*/
         }else exppart = 0.0;
       pVar = memory_NewMortalLong(pEo->pMo,pMyMortal);
       if( pVar == NULL )return NULL;
-      pVar->Value.lValue = (long)(isig*(intpart + fracpart)*pow10(esig*exppart));
+      pVar->Value.lValue = (long long)(isig*(intpart + fracpart)*pow10(esig*exppart));
       return pVar;
+      } /* fin du bloc phase 8.2 (base explicite et prefixes) */
     case VTYPE_DOUBLE:
       pVar->vType = VTYPE_LONG;
       pVar->Value.lValue = (long)pVar->Value.dValue;
@@ -1815,7 +1880,7 @@ interchangeable. T<GETLONGVALUE> is returnig a T<long> while
 T<LONGVALUE> is a left value available to store a T<long>.
 
 /*FUNCTION*/
-long execute_GetLongValue(pExecuteObject pEo,
+long long execute_GetLongValue(pExecuteObject pEo,
                           pFixSizeMemoryObject pVar
   ){
 /*noverbatim
@@ -1831,7 +1896,7 @@ value as a long.
 
 CUT*/
   char *s;
-  long lintpart;
+  long long lintpart;
   double intpart,fracpart,exppart,man;
   int i,esig,isig;
   unsigned long sLen;
@@ -1939,7 +2004,7 @@ CUT*/
 
   /* if there are no more charaters after the digits */
   if( sLen == 0 )
-    return sig ? mantissa <= LONG_MAX : mantissa <= -(LONG_MIN);
+    return sig ? mantissa <= LLONG_MAX : mantissa <= -(LLONG_MIN);
 
   /* if this is not a correct number */
   if( *s != '.' && *s != 'e' && *s != 'E' )return 1;
@@ -1983,7 +2048,7 @@ CUT*/
   /* here we can be sure that the string is an integer number, but still it may be larger than LONG_MAX or smaller than LONG_MIN */
   mantissa += fracpart;
   mantissa *= pow10(esig *exponent);
-  return sig ? mantissa <= LONG_MAX : mantissa <= -(LONG_MIN);
+  return sig ? mantissa <= LLONG_MAX : mantissa <= -(LLONG_MIN);
   }
 
 /*POD

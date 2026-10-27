@@ -27,7 +27,7 @@ typedef struct _Lexeme {
   enum LexemeType type;   
   union {
     double dValue;        
-    long   lValue;        
+    long long lValue;     /* phase 8.2 : 64 bits partout (E44) */
     char  *sValue;        
     } value;
   long sLen;              

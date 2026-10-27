@@ -13,7 +13,7 @@ typedef struct _FixSizeMemoryObject {
 
   union _fsmoval{
     PBYTE  pValue; 
-    long   lValue; 
+    long long lValue; /* phase 8.2 : 64 bits sur TOUTES les cibles (E44) */
     double dValue; 
     struct _FixSizeMemoryObject **aValue;
     } Value;
