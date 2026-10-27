@@ -649,7 +649,8 @@ def build_modules(name, zig, opt, verbose, release=False):
             shim_so = objdir / f"shim-{mod}.so"
             if not shim_so.exists() or \
                     shim_so.stat().st_mtime < shim_c.stat().st_mtime:
-                cmd_sh = [zig, "cc", "-target", triple, "-shared", "-fPIC",
+                cmd_sh = [zig, "cc", "-target", triple] + COMMON + [
+                          "-shared", "-fPIC",
                           "-Xlinker", "-soname", "-Xlinker", soname,
                           "-o", str(shim_so), str(shim_c)]
                 proc = run(cmd_sh, verbose)
@@ -1074,7 +1075,8 @@ def build_libscriba(name, zig, opt, verbose):
         suffix = ".exe" if target_os(name) == "windows" else ""
         for hote in hotes:
             produit = edir / (hote.stem + suffix)
-            cmd = ([zig, "cc", "-target", triple] + spec["defines"] +
+            cmd = ([zig, "cc", "-target", triple] + COMMON +
+                   spec["defines"] +
                    [opt, "-I" + str(incdir), str(hote),
                     str(out), "-o", str(produit)] + list(spec["libs"]))
             proc = run(cmd, verbose)
