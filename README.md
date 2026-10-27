@@ -308,6 +308,8 @@ Tout ce qu'il faut pour reprendre le dépôt est dans [`docs/`](docs/README.md) 
 | [docs/MODULES.md](docs/MODULES.md) | les 20 modules et le remplacement des `.jam` |
 | [docs/MANUEL.md](docs/MANUEL.md) | le manuel du langage, engendré depuis le code |
 | [docs/ANNEXE-GRAMMAIRE.md](docs/ANNEXE-GRAMMAIRE.md) | la table des symboles de la grammaire, engendrée depuis `syntax.c` par `scripts/docs.py` |
+| [docs/ERREURS.md](docs/ERREURS.md) | la référence du traitement des erreurs (attraper, lire, `raisematherror`) |
+| [docs/ANNEXE-ERREURS.md](docs/ANNEXE-ERREURS.md) | la table des codes et messages, engendrée depuis `errcodes.h`/`errcodes.c` |
 | [docs/COMPATIBILITE.md](docs/COMPATIBILITE.md) | ce qu'on a cassé exprès, ce qu'on garantit, la procédure du jour du renommage |
 | [docs/EXEMPLES.md](docs/EXEMPLES.md) | l'état réel des 178 exemples amont, mesuré par `scripts/exemples.py` |
 | [docs/ERRATA.md](docs/ERRATA.md) | défauts connus et pièges (`E1`…`E47`) |

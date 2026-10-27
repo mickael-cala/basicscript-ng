@@ -25,6 +25,7 @@ RACINE = Path(__file__).resolve().parent.parent
 SYNTAX_C = RACINE / "src" / "syntax.c"
 SYNTAX_H = RACINE / "src" / "syntax.h"
 ANNEXE = RACINE / "docs" / "ANNEXE-GRAMMAIRE.md"
+ERREURS = RACINE / "docs" / "ANNEXE-ERREURS.md"
 DEBUT = "<!-- DEBUT TABLES ENGENDREES - scripts/docs.py -->"
 FIN = "<!-- FIN TABLES ENGENDREES -->"
 
@@ -95,17 +96,64 @@ def engendre(expression, instructions, defines, problemes):
     return "\n".join(l)
 
 
+def lire_erreurs():
+    """Rend [(code, [symboles], message)] depuis errcodes.h et errcodes.c.
+
+    errcodes.h definit les symboles (plusieurs noms peuvent partager un
+    numero : les familles BU_/READER_/PREPROC_ reprennent des codes du
+    coeur) ; errcodes.c est la table des messages, dans l'ordre des codes.
+    """
+    h = (RACINE / "src" / "errcodes.h").read_text(encoding="utf-8",
+                                                  errors="replace")
+    c = (RACINE / "src" / "errcodes.c").read_text(encoding="utf-8",
+                                                  errors="replace")
+    defines = re.findall(
+        r"#define\s+([A-Z0-9_]*ERROR_[A-Z0-9_]+)\s+(\d+)", h)
+    messages = re.findall(r'^"([^"]*)",?\s*$', c, re.M)
+    par_code = {}
+    for nom, numero in defines:
+        par_code.setdefault(int(numero), []).append(nom)
+    lignes = []
+    for code in range(0, min(len(messages), 10000)):
+        if code not in par_code:
+            continue
+        lignes.append((code, sorted(par_code[code]), messages[code]))
+    return lignes
+
+
+def engendre_erreurs(lignes):
+    """Rend l'annexe des erreurs entre marqueurs."""
+    l = ["<!-- DEBUT TABLE ERREURS ENGENDREE - scripts/docs.py -->", "",
+         "_Table engendree par `scripts/docs.py` depuis `src/errcodes.h` "
+         "et `src/errcodes.c`. Ne pas editer a la main : "
+         "`python scripts/docs.py --write`._", "",
+         "| code | symboles | message |", "|---|---|---|"]
+    for code, symboles, message in lignes:
+        premier = symboles[0]
+        autres = [s for s in symboles if s != premier]
+        cellule = f"`{premier}`"
+        if autres:
+            cellule += " (alias : " + ", ".join(f"`{s}`" for s in autres) + ")"
+        l.append(f"| {code} | {cellule} | {message} |")
+    l += ["", f"**{len(lignes)} codes references.** "
+          "Au-dela de MAX_ERROR_CODE (133) commence l'espace des erreurs "
+          "specifiques aux modules (`0x00080000` et plus), dont le message "
+          "est fourni par le module lui-meme (E46).", "", FIN, ""]
+    return "\n".join(l)
+
+
 def principal():
     ap = argparse.ArgumentParser(description="Regenere ou verifie "
-                                 "docs/ANNEXE-GRAMMAIRE.md depuis src/syntax.c.")
+                                 "les annexes engendrees (grammaire, erreurs).")
     g = ap.add_mutually_exclusive_group(required=True)
-    g.add_argument("--write", action="store_true", help="regenere l'annexe")
+    g.add_argument("--write", action="store_true", help="regenere les annexes")
     g.add_argument("--check", action="store_true",
                    help="verifie seulement, echoue si divergence")
     args = ap.parse_args()
 
     expression, instructions, defines, problemes = lire_syntaxe()
     contenu = engendre(expression, instructions, defines, problemes)
+    erreurs = engendre_erreurs(lire_erreurs())
 
     if problemes:
         for p in problemes:
@@ -116,16 +164,22 @@ def principal():
         if not ANNEXE.exists():
             print(f"  ECHEC  {ANNEXE.name} absent : lancez --write")
             return 1
-        if ANNEXE.read_text(encoding="utf-8") == contenu:
-            print("  annexe grammaire : a jour")
-            return 0
-        print("  ECHEC  docs/ANNEXE-GRAMMAIRE.md a diverge de src/syntax.c : "
-              "python scripts/docs.py --write")
-        return 1
+        if ANNEXE.read_text(encoding="utf-8") != contenu:
+            print("  ECHEC  docs/ANNEXE-GRAMMAIRE.md a diverge de src/syntax.c : "
+                  "python scripts/docs.py --write")
+            return 1
+        if ERREURS.exists() and ERREURS.read_text(encoding="utf-8") != erreurs:
+            print("  ECHEC  docs/ANNEXE-ERREURS.md a diverge de src/errcodes : "
+                  "python scripts/docs.py --write")
+            return 1
+        print("  annexes grammaire et erreurs : a jour")
+        return 0
 
     ANNEXE.write_text(contenu, encoding="utf-8", newline="")
     n = len(expression) + len(instructions)
     print(f"  ecrit  {ANNEXE.relative_to(RACINE)} ({n} symboles)")
+    ERREURS.write_text(erreurs, encoding="utf-8", newline="")
+    print(f"  ecrit  {ERREURS.relative_to(RACINE)}")
     return 0
 
 

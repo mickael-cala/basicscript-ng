@@ -15,6 +15,7 @@ produit ; ce document dit où elle s'arrête et comment la mesurer.
 | modules renommés : `nt`→`win`, `ux`→`unix` | EVOLUTIONS | noms honnêtes |
 | formes de grammaire non portées (`open` sans `for`, `sub` dans `module`…) | ERRATA E45 | pas de règle, pas de forme ; elles reviendront par la passe langage avec contrat et refus |
 | erreurs d'ABI documentées, non corrigées au prix de la compat | ERRATA E11, E33, E43 | juste avant facile |
+| division (entière) par zéro rendait `undef` en silence | phase 8.1 (2026-10-26) | le langage crie : erreur 3 trappable et lisible ; `raisematherror 0` restaure le silence ; `examples/math.bas` est le seul exemple passé de OK à erreur — assumé |
 
 ## 2. Ce qui reste acquis à l'ancien
 

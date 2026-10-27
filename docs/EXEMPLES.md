@@ -1,17 +1,17 @@
 <!-- DEBUT EXEMPLES ENGENDRES - scripts/exemples.py -->
 
-_Mesure du 2026-10-26 sur `windows-x64`, delai 5 s par exemple, configuration du depot fournie (include + modules construits), publication par `scripts/exemples.py --write`. Un exemple n'est jamais repare dans la copie de l'amont._
+_Mesure du 2026-10-27 sur `windows-x64`, delai 5 s par exemple, configuration du depot fournie (include + modules construits), publication par `scripts/exemples.py --write`. Un exemple n'est jamais repare dans la copie de l'amont._
 
 | verdict | exemples |
 |---|---|
 | `OK` | 87 |
 | `module` | 16 |
 | `include` | 48 |
-| `analyse` | 11 |
+| `analyse` | 12 |
 | `interaction` | 9 |
 | `execution` | 1 |
 | `ecarte` | 6 |
-| **total** | **178** |
+| **total** | **179** |
 
 `module` et `interaction` sont normaux (module non construit, saisie, reseau, serveur). `include` attend une declaration d'un module hors distribution (bdb, mysql...). Les `analyse` listent la face du langage que les exemples amont frappent - matiere de la passe langage (PLAN phase 8). Detail des exemples hors OK :
 
@@ -42,6 +42,7 @@ _Mesure du 2026-10-26 sur `windows-x64`, delai 5 s par exemple, configuration du
 | `examples/kakukk.bas` | analyse | (0): error &H16:The file can not be opened. |
 | `examples/listenv.bas` | module | module non construit |
 | `examples/mandel1.bas` | include | fichier d'inclusion absent |
+| `examples/math.bas` | analyse | (0): error &H3:Division by zero or other calculation error |
 | `examples/msgbox.bas` | ecarte | popup GUI bloquante |
 | `examples/mt.bas` | module | module non construit |
 | `examples/mtlock.bas` | module | module non construit |

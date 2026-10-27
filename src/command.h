@@ -62,6 +62,12 @@ extern "C" {
                      }\
                    RESULT = NULL; RETURN;
 
+/* Phase 8.1 : le pôle d'une fonction réelle (cotan(0), sqrt(-2)...) rend
+   undef, par l'idiome testé isundef(...) — sans consulter le drapeau
+   raisematherror, qui réserve le lever d'erreur à la division entière.
+   Sans do/while : les sites l'appellent nus, en fin de bloc. */
+#define RETURNUNDEF RESULT = NULL; RETURN;
+
 
 #define NONULOP(x) ASSERTOKE;if( memory_IsUndef(x) ){if((*RaiseError(pEo))&2 ){\
                      ERROR(COMMAND_ERROR_UNDEFOP);\

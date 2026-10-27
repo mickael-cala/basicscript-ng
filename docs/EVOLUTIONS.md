@@ -1606,3 +1606,31 @@ test d'un module absent d'une cible est sauté avec sa raison, et les sauts
 sortent du compte final (`24/24 (1 sauté)`) au lieu de gonfler le ratio.
 Campagnes du 2026-10-26 : `30/30` noyau sur windows-x86, windows-x64 et
 linux-x64 (WSL) ; `24/24` modules sur les deux Windows, `21/21` sous Linux.
+
+
+## 2026-10-26 — phase 8.1 : le langage crie
+
+La revue exécutée du langage (boucles, chaînes, nombres, tableaux,
+print — tout sondé par `scriba`, rien déduit) a confirmé la « daube »
+soupçonnée : la division par zéro rendait `undef` en silence et
+contaminait tout le programme ; les tableaux n'avaient aucune borne ;
+indexer un scalaire ne disait rien ; une variable mal tapée se lisait
+`undef` sans diagnostic.
+
+Cette passe pose la sémantique de référence des erreurs :
+
+- **division/modulo entière par zéro lève l'erreur 3**, trappable par
+  `on error` et lisible par `error`/`error$()` — le mécanisme amont
+  `raisematherror` existait, son défaut était 0 (silence) ; le défaut du
+  dépôt est désormais 1, et la configuration peut rendre le silence ;
+- **les pôles réels restent `undef`** (cotan(0)... par l'idiome
+  `isundef` testé) : les 21 sites de domaine de mathfunc et les chemins
+  réels de DIV/DIVI utilisent le nouveau `RETURNUNDEF`, sans drapeau ;
+- **la référence est engendrée** : `scripts/docs.py` produit
+  [ANNEXE-ERREURS.md](ANNEXE-ERREURS.md) (codes, symboles, messages)
+  depuis errcodes.h/.c, et [ERREURS.md](ERREURS.md) documente la
+  philosophie, le piégeage, la lecture et la clé `raisematherror` ;
+- le contrat `tests/contrat/09_erreurs.bas` verrouille la sémantique.
+
+Restent à la passe suivante : bornes de tableaux (ils s'étendent en
+silence), indexation d'un scalaire, `option explicit`.

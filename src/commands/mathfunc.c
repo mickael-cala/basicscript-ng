@@ -116,7 +116,7 @@ NOTIMPLEMENTED;
 
   dop1 = GETDOUBLEVALUE(Op1);
   if( dop1 <= 0.0 ){
-    ERRORUNDEF
+    RETURNUNDEF
     }
   RETURN_DOUBLE_VALUE_OR_LONG( log(dop1) )
 
@@ -146,7 +146,7 @@ NOTIMPLEMENTED;
 
   dop1 = GETDOUBLEVALUE(Op1);
   if( dop1 <= 0.0 ){
-    ERRORUNDEF
+    RETURNUNDEF
     }
   RETURN_DOUBLE_VALUE_OR_LONG( log10(dop1) )
 
@@ -202,7 +202,7 @@ NOTIMPLEMENTED;
 
   dop1 = GETDOUBLEVALUE(Op1);
   if( dop1 < -1 || dop1 > +1 ){
-    ERRORUNDEF
+    RETURNUNDEF
     }
   RETURN_DOUBLE_VALUE_OR_LONG( asin(dop1) )
 
@@ -232,7 +232,7 @@ NOTIMPLEMENTED;
 
   dop1 = GETDOUBLEVALUE(Op1);
   if( dop1 < -1 || dop1 > +1 ){
-    ERRORUNDEF
+    RETURNUNDEF
     }
   RETURN_DOUBLE_VALUE_OR_LONG( acos(dop1) )
 
@@ -395,7 +395,7 @@ NOTIMPLEMENTED;
     lop1 = GETLONGVALUE(Op1);
     /* we return undef or raise error based on OPTION setting */
     if( lop1 < 0 ){
-      ERRORUNDEF
+      RETURNUNDEF
       }
     /* calculate the square root of the argument */
     dResult = sqrt((double)lop1);
@@ -413,7 +413,7 @@ NOTIMPLEMENTED;
   dop1 = GETDOUBLEVALUE(Op1);
   /* we return undef or raise error based on OPTION setting */
   if( dop1 < 0 ){
-    ERRORUNDEF
+    RETURNUNDEF
     }
   /* if the argument was double then the result is double */
   RETURN_DOUBLE_VALUE( sqrt(dop1) )
@@ -1672,7 +1672,7 @@ NOTIMPLEMENTED;
   dop1 = GETDOUBLEVALUE(Op1);
   dop2 = GETDOUBLEVALUE(Op2);
   if( dop2 == 0.0 ){
-    ERRORUNDEF
+    RETURNUNDEF
     }
 
   RETURN_DOUBLE_VALUE_OR_LONG( tan(dop1/dop2) )
@@ -1712,7 +1712,7 @@ NOTIMPLEMENTED;
   dop1 = GETDOUBLEVALUE(Op1);
   dSin = sin(dop1);
   if( dSin == 0.0 ){
-    ERRORUNDEF
+    RETURNUNDEF
     }
 
   RETURN_DOUBLE_VALUE_OR_LONG( cos(dop1)/dSin )
@@ -1760,12 +1760,12 @@ NOTIMPLEMENTED;
   dop1 = GETDOUBLEVALUE(Op1);
   dop2 = GETDOUBLEVALUE(Op2);
   if( dop2 == 0.0 ){
-    ERRORUNDEF
+    RETURNUNDEF
     }
   dArg = dop1/dop2;
   dSin = sin(dArg);
   if( dSin == 0.0 ){
-    ERRORUNDEF
+    RETURNUNDEF
     }
 
   RETURN_DOUBLE_VALUE_OR_LONG( cos(dArg)/dSin )
@@ -1842,7 +1842,7 @@ NOTIMPLEMENTED;
   dop1 = GETDOUBLEVALUE(Op1);
   dCos = cos(dop1);
   if( dCos == 0.0 ){
-    ERRORUNDEF
+    RETURNUNDEF
     }
 
   RETURN_DOUBLE_VALUE_OR_LONG( 1.0/dCos )
@@ -1882,7 +1882,7 @@ NOTIMPLEMENTED;
   dop1 = GETDOUBLEVALUE(Op1);
   dSin = sin(dop1);
   if( dSin == 0.0 ){
-    ERRORUNDEF
+    RETURNUNDEF
     }
 
   RETURN_DOUBLE_VALUE_OR_LONG( 1.0/dSin )
@@ -1921,7 +1921,7 @@ NOTIMPLEMENTED;
 
   dop1 = GETDOUBLEVALUE(Op1);
   if( dop1 == 0.0 || ( dop1 > -1.0 && dop1 < 1.0 ) ){
-    ERRORUNDEF
+    RETURNUNDEF
     }
 
   RETURN_DOUBLE_VALUE_OR_LONG( acos(1.0/dop1) )
@@ -1960,7 +1960,7 @@ NOTIMPLEMENTED;
 
   dop1 = GETDOUBLEVALUE(Op1);
   if( dop1 == 0.0 || ( dop1 > -1.0 && dop1 < 1.0 ) ){
-    ERRORUNDEF
+    RETURNUNDEF
     }
 
   RETURN_DOUBLE_VALUE_OR_LONG( asin(1.0/dop1) )
@@ -2032,7 +2032,7 @@ NOTIMPLEMENTED;
 
   dop1 = GETDOUBLEVALUE(Op1);
   if( dop1 < 1.0 ){
-    ERRORUNDEF
+    RETURNUNDEF
     }
 
   RETURN_DOUBLE_VALUE_OR_LONG( acosh(dop1) )
@@ -2071,7 +2071,7 @@ NOTIMPLEMENTED;
 
   dop1 = GETDOUBLEVALUE(Op1);
   if( dop1 <= -1.0 || dop1 >= 1.0 ){
-    ERRORUNDEF
+    RETURNUNDEF
     }
 
   RETURN_DOUBLE_VALUE_OR_LONG( atanh(dop1) )
@@ -2110,7 +2110,7 @@ NOTIMPLEMENTED;
 
   dop1 = GETDOUBLEVALUE(Op1);
   if( dop1 <= 0.0 || dop1 > 1.0 ){
-    ERRORUNDEF
+    RETURNUNDEF
     }
 
   RETURN_DOUBLE_VALUE_OR_LONG( acosh(1.0/dop1) )
@@ -2149,7 +2149,7 @@ NOTIMPLEMENTED;
 
   dop1 = GETDOUBLEVALUE(Op1);
   if( dop1 == 0.0 ){
-    ERRORUNDEF
+    RETURNUNDEF
     }
 
   RETURN_DOUBLE_VALUE_OR_LONG( asinh(1.0/dop1) )
@@ -2189,7 +2189,7 @@ NOTIMPLEMENTED;
 
   dop1 = GETDOUBLEVALUE(Op1);
   if( dop1 >= -1.0 && dop1 <= 1.0 ){
-    ERRORUNDEF
+    RETURNUNDEF
     }
 
   RETURN_DOUBLE_VALUE_OR_LONG( atanh(1.0/dop1) )
@@ -2326,7 +2326,7 @@ NOTIMPLEMENTED;
   dop1 = GETDOUBLEVALUE(Op1);
   dTanh = tanh(dop1);
   if( dTanh == 0.0 ){
-    ERRORUNDEF
+    RETURNUNDEF
     }
 
   RETURN_DOUBLE_VALUE_OR_LONG( 1.0/dTanh )
@@ -2399,7 +2399,7 @@ NOTIMPLEMENTED;
   dop1 = GETDOUBLEVALUE(Op1);
   dSinh = sinh(dop1);
   if( dSinh == 0.0 ){
-    ERRORUNDEF
+    RETURNUNDEF
     }
 
   RETURN_DOUBLE_VALUE_OR_LONG( 1.0/dSinh )

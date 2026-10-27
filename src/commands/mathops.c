@@ -117,9 +117,14 @@ long *RaiseError(pExecuteObject pEo){
 
   plCache = (long *) PARAMPTR(CMD_DIV);
   if( plCache == NULL ){
+    /* Phase 8.1 « le langage crie » : le defaut est le bit 1 (0x01),
+       donc une division par zero LEVE COMMAND_ERROR_DIV (trappable par
+       on error, lisible par error et error$). La configuration peut
+       rendre le silence avec `raisematherror 0`, et les bits 2/4
+       (operande undef en commande / en expression) restent opt-in. */
     plCache = options_GetR(pEo,RAISEMATHERROR);
     if( plCache == NULL )
-      options_Set(pEo,RAISEMATHERROR,0);
+      options_Set(pEo,RAISEMATHERROR,0x00000001);
     plCache = options_GetR(pEo,RAISEMATHERROR);
     }
   return plCache;
@@ -830,7 +835,8 @@ NOTIMPLEMENTED;
     dop2 = GETDOUBLEVALUE(Op2);
 
     if( dop2 == 0.0 ){
-      ERRORUNDEF
+      /* pôle réel : undef (idiome isundef), pas d'erreur */
+      RETURNUNDEF
       }
     RETURN_LONG_VALUE( ((long)(dop1 / dop2)) )
     }
@@ -883,7 +889,8 @@ NOTIMPLEMENTED;
     dop1 = GETDOUBLEVALUE(Op1);
     dop2 = GETDOUBLEVALUE(Op2);
     if( dop2 == 0.0 ){
-      ERRORUNDEF
+      /* pôle réel : undef (idiome isundef), pas d'erreur */
+      RETURNUNDEF
       }
     RETURN_DOUBLE_VALUE_OR_LONG( dop1 / dop2 )
     }
