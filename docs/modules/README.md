@@ -5,6 +5,7 @@
 
 Pages engendrees depuis les commentaires des `interface.c`.
 
+- [bytes](bytes.md)
 - [cgi](cgi.md)
 - [cio](cio.md)
 - [curl](curl.md)

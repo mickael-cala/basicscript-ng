@@ -143,7 +143,7 @@ static long long pack_LisEntier(const unsigned char *src,
   }
 
 /*POD
-=section pack
+=section bytes
 =H pack::Pack
 @c Build a binary string out of the format and the values
 
@@ -156,7 +156,7 @@ trame = pack::Pack("u16be u16be f32le x2", id, 40001, 3.14)
 Rend la chaîne binaire : chaque jeton du format consomme une valeur
 (dans l'ordre), dans l'ordre d'octets demandé. Les jetons x ne
 consomment rien : ils bourrent de zéros. L'ordre par défaut est BE.
-*/
+CUT*/
 besFUNCTION(bytes_pack)
   VARIABLE vFmt;
   const char *pFmt;
@@ -231,7 +231,7 @@ besFUNCTION(bytes_pack)
 besEND
 
 /*POD
-=section pack
+=section bytes
 =H pack::Size
 @c Number of bytes of the format
 
@@ -242,7 +242,7 @@ taille = pack::Size("u16be f32le x2")   ' 8
 =noverbatim
 
 Rend le nombre d'octets total des jetons du format.
-*/
+CUT*/
 besFUNCTION(bytes_size)
   VARIABLE vFmt;
   const char *pFmt;
@@ -265,7 +265,7 @@ besFUNCTION(bytes_size)
 besEND
 
 /*POD
-=section pack
+=section bytes
 =H pack::Get
 @c The value of the i-th field of a binary string
 
@@ -278,7 +278,7 @@ valeur = pack::Get("u16be f32le", trame, 0)   ' premier champ
 Rend la valeur du champ numéro i (à partir de zéro) de la chaîne
 binaire : un entier pour les jetons u/i, un réel pour les f. Trame
 trop courte, champ de bourrage ou jeton inconnu : erreur 8.
-*/
+CUT*/
 besFUNCTION(bytes_get)
   VARIABLE vFmt, vBin, vInd;
   const char *pFmt;
@@ -343,7 +343,7 @@ besFUNCTION(bytes_get)
 besEND
 
 /*POD
-=section pack
+=section bytes
 =H pack::Crc16
 @c The CRC-16/MODBUS of a binary string
 
@@ -355,7 +355,7 @@ crc = pack::Crc16(trame)   ' le CRC du RTU, sur 16 bits
 
 Rend le CRC-16/MODBUS de la chaîne (polynôme réfléchi 0xA001, init
 0xFFFF) : la valeur attendue en fin de trame RTU, petit-boutiste.
-*/
+CUT*/
 besFUNCTION(bytes_crc16)
   VARIABLE vBin;
   const unsigned char *src;
@@ -383,7 +383,7 @@ besFUNCTION(bytes_crc16)
 besEND
 
 /*POD
-=section pack
+=section bytes
 =H pack::Asc
 @c The code of the first byte of a string
 
@@ -396,7 +396,7 @@ code = pack::Asc(mid$(trame,3,1))   ' le 3e octet, 0..255
 Rend le code du premier octet de la chaîne, 0 à 255. Une chaîne vide
 rend T<undef>. C'est le lecteur d'octet du langage : la chaîne est
 binaire-sûre, ce lecteur l'est aussi.
-*/
+CUT*/
 besFUNCTION(bytes_asc)
   VARIABLE v;
 
