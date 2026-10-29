@@ -80,10 +80,10 @@ extern "C" {
 
 #define RETURN_DOUBLE_VALUE_OR_LONG(x) \
                    dResult = (x);\
-                   if( dResult == floor(dResult) && fabs(dResult) < LONG_MAX ){\
+                   if( dResult == floor(dResult) && fabs(dResult) < 9.007199254740992e15 ){\
                      RESULT= NEWMORTALLONG;\
                      ASSERTNULL(RESULT);\
-                     LONGVALUE(RESULT) = ((long)dResult);\
+                     LONGVALUE(RESULT) = ((long long)dResult);\
                      RETURN;\
                      }\
                    RESULT = NEWMORTALDOUBLE;\

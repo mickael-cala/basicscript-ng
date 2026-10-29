@@ -328,6 +328,15 @@ MODULES = {
     # (libcurl-4.dll, dans le PATH). 64 bits seulement ici : aucune DLL
     # 32 bits sur la machine, et pas de libcurl de developpement sous UNIX
     # (ERRATA E40).
+    # bytes : la fabrication et la lecture d'octets (phase 8.2) — les
+    # trames binaires des protocoles (Modbus...) : entiers signes ou non
+    # de 8 a 64 bits, flottants IEEE, ordre d'octets explicite par champ,
+    # CRC-16/MODBUS. Zero dependance. Le nom "pack" etait pris : c'est
+    # une fonction native historique du langage.
+    "bytes": {
+        "sources": ["extensions/bytes/interface.c"],
+        "declare": "bytes.bas",
+    },
     "curl": {
         "sources": ["extensions/curl/interface.c"],
         "declare": "curl.bas",

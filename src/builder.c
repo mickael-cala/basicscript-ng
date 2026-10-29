@@ -48,6 +48,7 @@ CUT*/
 #include <stdio.h>
 
 #include "filesys.h"
+#include "memory.h" /* phase 8.2 : sizeof(FixSizeMemoryObject) dans le magic du cache */
 #include "report.h"
 #include "lexer.h"
 #include "sym.h"
@@ -489,6 +490,11 @@ CUT*/
   magic |= ((unsigned long)*s++) << 20;
   magic |= ((unsigned long)*s++) << 16;
   magic |= ((unsigned long)*s++) << 12;
+
+  /* phase 8.2 : le magic intègre la taille de l'union de valeur — un
+     cache écrit avant le passage 64 bits (sizeof different) est refuse
+     au lieu d'être relu silencieusement avec un decalage de champs. */
+  magic ^= (unsigned long)sizeof(FixSizeMemoryObject) * 0x9E3779B9UL;
 
   sVersionInfo.Build = SCRIPTBASIC_BUILD;
   sVersionInfo.Date = magic;

@@ -136,7 +136,7 @@ REFUS_ANALYSE = [("refus_directory.bas", "error &H77"),
 # du module t : c'est son nom historique, il porte deja l'en-tete du module.
 # cgi et mt etaient lies dans sbhttpd seulement ; ils sont desormais des
 # modules ordinaires et ont chacun leur test.
-MODULE_TESTS = ["hash", "re", "md5", "trial", "cgi", "mt", "zlib", "odbc"]
+MODULE_TESTS = ["hash", "re", "md5", "trial", "cgi", "mt", "zlib", "odbc", "bytes"]
 
 # Modules propres a une famille d'OS, dans le meme ordre que build.py : cio,
 # win, dyc et curl n'existent que sous Windows, unix (ex-ux) que sous

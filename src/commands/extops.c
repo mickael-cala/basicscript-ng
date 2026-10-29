@@ -51,14 +51,17 @@ COMMAND(EXTOPBG)
 END
 
 COMMAND(EXTOPDD)
-  /* << : decalage a gauche, sur des long. Le compteur est ramene a
-     0..largeur-1 ; au-dela, le resultat est 0. Un compteur negatif ne
-     decale pas. Le calcul se fait en unsigned long pour eviter le
-     debordement signe, qui serait un comportement indefini en C. */
+  /* << : decalage a gauche, sur des long long (phase 8.2 : l'entier du
+     langage est 64 bits sur toutes les cibles, LLP64 compris — ne pas
+     ecrire sizeof(unsigned long), qui fait 32 sous Windows). Le
+     compteur est ramene a 0..63 ; au-dela, le resultat est 0. Un
+     compteur negatif ne decale pas. Le calcul se fait en unsigned
+     long long pour eviter le debordement signe, qui serait un
+     comportement indefini en C. */
   NODE nItem;
   VARIABLE Op1,Op2;
-  unsigned long uValue;
-  long lShift;
+  unsigned long long uValue;
+  long long lShift;
 
   /* this is an operator and not a command, therefore we do not have our own mortal list */
   USE_CALLER_MORTALS;
@@ -70,15 +73,15 @@ COMMAND(EXTOPDD)
   Op2 = EVALUATEEXPRESSION(CAR(nItem));
   NONULOP(Op2)
 
-  uValue = (unsigned long)GETLONGVALUE(Op1);
+  uValue = (unsigned long long)GETLONGVALUE(Op1);
   lShift = GETLONGVALUE(Op2);
   if( lShift < 0 )lShift = 0;
-  if( lShift >= (long)(8*sizeof(unsigned long)) ){
+  if( lShift >= (long long)(8*sizeof(unsigned long long)) ){
     uValue = 0;
     }else{
     uValue <<= lShift;
     }
-  RETURN_LONG_VALUE((long)uValue)
+  RETURN_LONG_VALUE((long long)uValue)
 END
 
 COMMAND(EXTOPEE)
@@ -87,7 +90,7 @@ COMMAND(EXTOPEE)
      negatif : on decale le complement, puis on le recomplemente. */
   NODE nItem;
   VARIABLE Op1,Op2;
-  long lValue,lShift;
+  long long lValue,lShift;
 
   /* this is an operator and not a command, therefore we do not have our own mortal list */
   USE_CALLER_MORTALS;
@@ -102,7 +105,7 @@ COMMAND(EXTOPEE)
   lValue = GETLONGVALUE(Op1);
   lShift = GETLONGVALUE(Op2);
   if( lShift < 0 )lShift = 0;
-  if( lShift >= (long)(8*sizeof(long)) ){
+  if( lShift >= (long long)(8*sizeof(long long)) ){
     lValue = ( lValue < 0 ? -1 : 0 );
     }else if( lValue < 0 ){
     lValue = ~( (~lValue) >> lShift );
