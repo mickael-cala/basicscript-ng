@@ -53,6 +53,7 @@ NOTIMPLEMENTED;
   VARIABLE ExpressionResult,ArrayCopyTo;
   LEFTVALUE LetThisVariable;
   long refcount;
+  NODE nLValueVariable = PARAMETERNODE; /* phase 8.3 : la cible, AVANT NEXTPARAMETER */
 
   /* we get the pointer to the variable that points to the value */
   LetThisVariable = EVALUATELEFTVALUE(PARAMETERNODE);
@@ -69,6 +70,31 @@ NOTIMPLEMENTED;
      to be sure that no two variables point to the same value */
   ExpressionResult = execute_Evaluate(pEo,PARAMETERNODE,_pThisCommandMortals,&iErrorCode,1);
   ASSERTOKE;
+
+  /* phase 8.3 : la contrainte posee par DIM x AS type est verifiee a
+     chaque affectation, par le numero de serie de la variable cible.
+     Le node de la variable porte le serial ; l'objet d'execution porte
+     le tableau des contraintes (0 = aucune). Le bloc est ferme AVANT
+     les retours, pour que le goto des ERROR reste dans sa portee. */
+  {
+  NODE nVar = nLValueVariable;
+  if( nVar && (OPCODE(nVar) == eNTYPE_LVR || OPCODE(nVar) == eNTYPE_GVR) ){
+    long lSerial = pEo->CommandArray[nVar-1].Parameter.Variable.Serial;
+    int c = (pEo->pVarConstraint && lSerial >= 1 &&
+             lSerial <= pEo->cGlobalVariables)
+            ? pEo->pVarConstraint[lSerial] : 0;
+    if( c != 0 && ExpressionResult != NULL ){
+      int vt = TYPE(ExpressionResult);
+      if( c == VARC_INT && vt == VTYPE_DOUBLE &&
+          DOUBLEVALUE(ExpressionResult) != floor(DOUBLEVALUE(ExpressionResult)) )
+        ERROR(COMMAND_ERROR_TYPEMISMATCH);
+      if( c == VARC_INT && vt == VTYPE_STRING )
+        ERROR(COMMAND_ERROR_TYPEMISMATCH);
+      if( c == VARC_STR && vt == VTYPE_ARRAY )
+        ERROR(COMMAND_ERROR_TYPEMISMATCH);
+      }
+    }
+    } /* fin du bloc contrainte phase 8.3 */
 
   /* If this is not an expression then copy the value. */
   if( ExpressionResult == NULL || TYPE(ExpressionResult) != VTYPE_ARRAY ){
@@ -241,6 +267,82 @@ NOTIMPLEMENTED;
 
 #undef DIM_MAX_DIMENSIONS
 #undef DIM_MAX_INDEX
+#endif
+END
+
+/*POD
+=section array
+=display DIM ... AS
+=title DIM variable AS type
+
+Phase 8.3 : la variable declaree porte une contrainte de type,
+verifiee a CHAQUE affectation (erreur 134, trappable). Les types
+reconnus : integer, long (entier) ; real, double, number (numerique) ;
+string (toute valeur est convertible). La contrainte est posee sur la
+variable globale, par son numero de serie.
+/*FUNCTION*/
+int dim_TypeConstraint(const char *s,
+                       long lLen
+  ){
+  if( lLen == 7 && ! strncasecmp(s,"integer",7) )return VARC_INT;
+  if( lLen == 4 && ! strncasecmp(s,"long",4) )return VARC_INT;
+  if( lLen == 4 && ! strncasecmp(s,"real",4) )return VARC_NUM;
+  if( lLen == 6 && ! strncasecmp(s,"double",6) )return VARC_NUM;
+  if( lLen == 6 && ! strncasecmp(s,"number",6) )return VARC_NUM;
+  if( lLen == 6 && ! strncasecmp(s,"string",6) )return VARC_STR;
+  return -1;
+  }
+
+COMMAND(DIMAS)
+#if NOTIMP_DIMAS
+NOTIMPLEMENTED;
+#else
+  NODE nItem,nNode;
+  long lSerial;
+  int contrainte;
+
+  /* la regle : DIM variable AS type. A l'execution, PARAMETERNODE est
+     la chaine dont le premier node est la variable (LVR/GVR). La
+     contrainte de type, calculee a l'analyse par ex_IsCommandDIMAS,
+     est dans le node SUIVANT de la chaine runtime (l'element ASYMBOL
+     de la regle, pose par le builder via le marqueur sLen negatif). */
+  nItem = PARAMETERNODE;
+  nNode = CAR(nItem);
+  if( nNode == 0 || (OPCODE(nNode) != eNTYPE_LVR && OPCODE(nNode) != eNTYPE_GVR) )
+    ERROR(COMMAND_ERROR_ARGUMENT_TYPE);
+  lSerial = pEo->CommandArray[nNode-1].Parameter.Variable.Serial;
+
+  {
+  unsigned long nNext = pEo->CommandArray[_ActualNode-1]
+                          .Parameter.CommandArgument.next;
+  if( nNext < 1 || nNext > pEo->CommandArraySize )
+    ERROR(COMMAND_ERROR_ARGUMENT_TYPE);
+  contrainte = (int)pEo->CommandArray[nNext-1]
+                 .Parameter.CommandArgument.Argument.lLongValue;
+  }
+  if( contrainte < VARC_INT || contrainte > VARC_STR )
+    ERROR(COMMAND_ERROR_ARGUMENT_TYPE);
+
+  if( pEo->pVarConstraint == NULL ){
+    pEo->pVarConstraint = alloc_Alloc((pEo->cGlobalVariables+1)*sizeof(int),
+                                      pEo->pMemorySegment);
+    if( pEo->pVarConstraint == NULL )ERROR(COMMAND_ERROR_MEMORY_LOW);
+    memset(pEo->pVarConstraint,0,(pEo->cGlobalVariables+1)*sizeof(int));
+    }
+  if( lSerial < 1 || lSerial > pEo->cGlobalVariables )
+    ERROR(COMMAND_ERROR_ARGUMENT_RANGE);
+  pEo->pVarConstraint[lSerial] = contrainte;
+  /* la variable existe des maintenant, undef */
+  {
+  VARIABLE *ppVar;
+  switch( OPCODE(CAR(nItem)) ){
+    case eNTYPE_LVR: ppVar = &(pEo->LocalVariables->Value.aValue[lSerial-1]); break;
+    case eNTYPE_GVR: ppVar = &(pEo->GlobalVariables->Value.aValue[lSerial-1]); break;
+    default: ERROR(COMMAND_ERROR_ARGUMENT_TYPE);
+    }
+  if( *ppVar )memory_ReleaseVariable(pEo->pMo,*ppVar);
+  *ppVar = NULL;
+  }
 #endif
 END
 

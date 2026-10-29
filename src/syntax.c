@@ -558,6 +558,19 @@ LineSyntax COMMANDS[] = {
   { 0 ,  0 }
  }
 },
+/* phase 8.3 : DIM x AS type — la variable declaree porte une contrainte
+   de type verifiee a chaque affectation. La variable est simple (sans
+   indices) ; les tableaux restent declares par la regle DIM ci-dessus. */
+{ CMD_DIMAS , ex_IsCommandDIMAS, 
+ {
+  { EX_LEX_NSYMBOL , KEYWORDCODE_DIM },
+  { EX_LEX_LVALL , 0 },
+  { EX_LEX_NSYMBOL , KEYWORDCODE_AS },
+  { EX_LEX_ASYMBOL , 0 },
+  { EX_LEX_CHARACTER , '\n' },
+  { 0 ,  0 }
+ }
+},
 { CMD_DIM , ex_IsCommandDIM, 
  {
   { EX_LEX_NSYMBOL , KEYWORDCODE_DIM },
@@ -2564,7 +2577,7 @@ CommandFunctionType CommandFunction[]={
   NULL, /* 350 */
   COMMAND_JOIN, /* 351 */
   COMMAND_HEX, /* 352 */
-  NULL, /* 353 */
+  COMMAND_DIMAS, /* 353 */
   COMMAND_TXTMI, /* 354 */
   COMMAND_RAD2DEG, /* 355 */
   COMMAND_DEG2RAD, /* 356 */

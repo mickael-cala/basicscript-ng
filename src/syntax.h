@@ -112,7 +112,9 @@ void COMMAND_EXIT(pExecuteObject);
    elements undef. Les indices s'ecrivent entre crochets, comme partout dans
    le langage ; une dimension par crochet, et chaque dimension est allouee. */
 #define CMD_DIM 893
+#define CMD_DIMAS 353 /* phase 8.3 : DIM x AS type */
 void COMMAND_DIM(pExecuteObject);
+void COMMAND_DIMAS(pExecuteObject); /* phase 8.3 */
 #define CMD_MOD 415
 void COMMAND_MOD(pExecuteObject);
 #define CMD_RLOCK 417

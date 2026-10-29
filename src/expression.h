@@ -543,6 +543,9 @@ peNODE ex_IsCommandLET(peXobject pEx,
 /*FEDNUF*/
 /*FUNDEF*/
 
+peNODE ex_IsCommandDIMAS(peXobject pEx,
+                       pLineSyntax p,
+                       int *piFailure);
 peNODE ex_IsCommandDIM(peXobject pEx,
                        pLineSyntax p,
                        int *piFailure);

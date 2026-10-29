@@ -3815,3 +3815,91 @@ SYNTAX_ERROR:
   lex_RestorePosition(pEx->pLex,&pPosition);
   FABORT;
   }
+
+/* phase 8.3 : la reconnaissance de DIM x AS type. La regle attend une
+   variable simple (LVALL qui ne doit contenir qu'un element sans
+   indices) suivie de AS et du nom du type. Le nom du type est verifie
+   a l'execution par COMMAND(DIMAS) — ici, seule la forme est jugee.
+   Les echecs sont non fatals (ABORT) : la regle DIM des tableaux doit
+   pouvoir etre essayee ensuite sur la meme ligne. */
+peNODE ex_IsCommandDIMAS(peXobject pEx,
+                         pLineSyntax p,
+                         int *piFailure
+  ){
+  peNODE pCommandNode,pVariable,pArg;
+  peNODE_l pValues;
+  pLexeme pPosition;
+  int iT, jTrouve = -1;
+  static const char *aTypes[] = { "integer","long","real","double",
+                                  "number","string", NULL };
+
+  /* prescan : la regle DIMAS ne doit s'ouvrir que si le mot AS est
+     present sur la ligne. Sans lui, l'echec fatal de
+     ex_IsCommandThis apres un LVALL consomme corrompt l'etat du
+     lexer (et segfaulte) — et la regle DIM des tableaux ne serait
+     jamais essayee. */
+  {
+  int fAs = 0;
+  lex_SavePosition(pEx->pLex,&pPosition);
+  NextLexeme; /* le mot dim */
+  while( LexemeType && (LexemeType != LEX_T_CHARACTER || LexemeChar != '\n') ){
+    if( LexemeCode == KEYWORDCODE_AS ){
+      fAs = 1;
+      break;
+      }
+    NextLexeme;
+    }
+  lex_RestorePosition(pEx->pLex,&pPosition);
+  if( ! fAs ){
+    ABORT; /* pas de AS : c'est un DIM de tableau, regle suivante */
+    }
+  }
+  lex_SavePosition(pEx->pLex,&pPosition);
+  pCommandNode = ex_IsCommandThis(pEx,p,piFailure);
+  if( pCommandNode == NULL ){
+    lex_RestorePosition(pEx->pLex,&pPosition);
+    ABORT; /* non fatal : la regle DIM des tableaux suit */
+    }
+
+  pValues = pCommandNode->Parameter.CommandArgument.Argument.pNodeList;
+  if( pValues == NULL )goto SYNTAX_ERROR;
+  if( pValues->rest != NULL )goto SYNTAX_ERROR; /* une seule variable */
+
+  pVariable = pValues->actualm;
+  if( pVariable == NULL )goto SYNTAX_ERROR;
+  /* la variable est simple : LVR ou GVR, pas un acces tableau */
+  if( pVariable->OpCode != eNTYPE_LVR && pVariable->OpCode != eNTYPE_GVR )
+    goto SYNTAX_ERROR;
+
+  /* le nom du type : l'ASYMBOL de la regle est un node de la chaine
+     CommandArgument.next, avec son nom dans szStringValue. La
+     contrainte est calculee ICI, a l'analyse, et marquee dans le node :
+     sLen negatif code la contrainte ; le builder copiera lLongValue
+     tel quel, sans passer par la table des chaines (dont l'offset se
+     revele decale d'un octet pour les ASYMBOLs seconds). */
+  for( pArg = pCommandNode->Parameter.CommandArgument.next ; pArg ;
+       pArg = pArg->Parameter.CommandArgument.next ){
+    if( pArg->Parameter.CommandArgument.Argument.szStringValue == NULL )continue;
+    for( iT = 0 ; aTypes[iT] ; iT++ )
+      if( ! strncasecmp(pArg->Parameter.CommandArgument.Argument.szStringValue,
+                        aTypes[iT],strlen(aTypes[iT])) ){
+        jTrouve = iT;
+        break;
+        }
+    if( jTrouve >= 0 )break;
+    }
+  if( jTrouve < 0 )goto SYNTAX_ERROR;
+  for( pArg = pCommandNode->Parameter.CommandArgument.next ; pArg ;
+       pArg = pArg->Parameter.CommandArgument.next )
+    if( pArg->Parameter.CommandArgument.Argument.szStringValue ){
+      int c = (jTrouve < 2 ? VARC_INT : (jTrouve < 5 ? VARC_NUM : VARC_STR));
+      pArg->Parameter.CommandArgument.Argument.lLongValue = c;
+      pArg->Parameter.CommandArgument.sLen = -(c + 10);
+      pArg->Parameter.CommandArgument.Argument.szStringValue = NULL;
+      }
+
+  return pCommandNode;
+
+SYNTAX_ERROR:
+  ABORT;
+  }

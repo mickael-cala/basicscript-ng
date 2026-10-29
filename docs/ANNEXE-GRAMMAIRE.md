@@ -578,7 +578,7 @@ _Reference engendree par `scripts/docs.py` depuis `src/syntax.c`. Ne pas editer 
 
 - symboles d'expression : 475 (26 operateurs, 449 noms) ;
 - mots-cles d'instruction : 82 ;
-- codes CMD_ utilises : 284, definis dans syntax.h : 297 ;
+- codes CMD_ utilises : 284, definis dans syntax.h : 298 ;
 - incoherences : aucune.
 
 <!-- FIN TABLES ENGENDREES -->

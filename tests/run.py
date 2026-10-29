@@ -108,7 +108,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 
-TESTS = ["hello", "vars", "loops", "arrays", "dim", "functions", "operators",
+TESTS = ["hello", "vars", "loops", "arrays", "dim", "dimas", "functions", "operators",
          "commandes", "mathfunc", "trig", "nombres", "slif", "exit"]
 
 # Fichiers qui doivent etre refuses A L'ANALYSE : le lanceur exige le message
@@ -1409,6 +1409,74 @@ def check_grammar():
     return 0
 
 
+def run_explicit(exe, target):
+    """Verifie « option explicit » : la cle de configuration declarevars 1
+    transforme toute variable non declaree en erreur d'analyse (&H79),
+    et les declarations (global, const, local) la desarment.
+
+    Le binaire est copie dans un bac a sable avec SA configuration
+    declarevars (sous Windows, la conf se cherche a cote du binaire ;
+    sous UNIX, SCRIBACONF la designe — E19). Deux programmes :
+    l'un cree une variable a la volee (l'analyse doit crier), l'autre
+    declare tout (il doit passer et s'executer).
+    """
+    windows = (target or "").startswith("windows") or (
+        not target and sys.platform == "win32")
+    crie = ROOT / "tests" / "explicit_crie.bas"
+    passe = ROOT / "tests" / "explicit_passe.bas"
+    problems = []
+    with tempfile.TemporaryDirectory(prefix="scriba-explicit-") as temp:
+        tmp = Path(temp)
+        if windows:
+            bin_dir = tmp / "bin"
+            bin_dir.mkdir()
+            exe_copie = bin_dir / exe.name
+            shutil.copy2(exe, exe_copie)
+            conf_bin = bin_dir / "scriba.conf"
+        else:
+            conf_bin = tmp / "scriba.conf"
+            exe_copie = exe
+        conf_lsp = tmp / "explicit.conf.lsp"
+        conf_lsp.write_text("declarevars 1" + chr(10), encoding="utf-8", newline="")
+        built = subprocess.run(
+            [str(exe), "-f", str(conf_bin), "-k", str(conf_lsp)],
+            cwd=str(exe.parent), capture_output=True, text=True,
+            errors="replace", timeout=30)
+        if built.returncode != 0 or (windows and not conf_bin.is_file()):
+            return [f"configuration declarevars impossible : {tail(built.stdout + built.stderr)}"]
+
+        for label, script, doit_crier in (
+                ("non declaree", crie, True),
+                ("declaree", passe, False)):
+            cmd, cwd, env = command(exe_copie, target, script,
+                                    script.parent, conf_bin, None)
+            env = dict(env or os.environ)
+            if not windows:
+                env["SCRIBACONF"] = str(conf_bin)
+            proc = subprocess.run(cmd, cwd=cwd, env=env,
+                                  capture_output=True, text=True,
+                                  errors="replace", timeout=30)
+            sortie = proc.stdout + proc.stderr
+            if doit_crier:
+                if "&H79" not in sortie and "not declared" not in sortie:
+                    problems.append(f"explicit/{label} : l'analyse n'a pas crie")
+                if "ECHEC" in proc.stdout or "jamais atteint" in proc.stdout:
+                    problems.append(f"explicit/{label} : le programme a tourne")
+            else:
+                if proc.returncode != 0 or "fin propre" not in proc.stdout:
+                    problems.append(f"explicit/{label} : le programme declare n'a pas tourne")
+                if "error &H" in sortie or "ECHEC" in sortie:
+                    problems.append(f"explicit/{label} : erreur du rapporteur")
+    print("explicit : binaire + configuration declarevars 1")
+    if problems:
+        for pr in problems:
+            print(f"  ECHEC   {pr}")
+        return 1
+    print("  OK      non declaree crie a l'analyse (&H79)")
+    print("  OK      le programme declare passe proprement")
+    return 0
+
+
 def run_embed(exe, target):
     """Joue les hotes embed construits par --libscriba.
 
@@ -1546,6 +1614,8 @@ def main():
                     help="delai du test CGI POST, en secondes (defaut 30)")
     ap.add_argument("--contrat", action="store_true",
                     help="joue les contrats snapshot de tests/contrat/")
+    ap.add_argument("--explicit", action="store_true",
+                    help="verifie option explicit (declarevars 1)")
     ap.add_argument("--embed", action="store_true",
                     help="joue les hotes embed de dist/<cible>/embed/")
     ap.add_argument("--grammaire", action="store_true",
@@ -1611,6 +1681,8 @@ def main():
         return run_contrat(exe, target)
     if args.embed:
         return run_embed(exe, target)
+    if args.explicit:
+        return run_explicit(exe, target)
 
     extra = []
     if args.modules and target:

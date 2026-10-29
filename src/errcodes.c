@@ -141,6 +141,7 @@ char *en_error_messages[] ={
 "Operation failed",
 "The provided buffer is too short.",
 "Subscript is out of the declared bounds of the array.",
+"Type mismatch: the variable was declared by DIM AS.",
 };
 tErrorMessageArray ErrorMessageArray[]={
 "en",en_error_messages,

@@ -130,7 +130,8 @@ _Table engendree par `scripts/docs.py` depuis `src/errcodes.h` et `src/errcodes.
 | 123 | `EX_ERROR_GREDEF` | Operation failed |
 | 124 | `EX_ERROR_GLODEF` | The provided buffer is too short. |
 | 125 | `EX_ERROR_CONST_LVAL` | Subscript is out of the declared bounds of the array. |
+| 126 | `MEM_ERROR_INTERNAL001` | Type mismatch: the variable was declared by DIM AS. |
 
-**126 codes references.** Au-dela de MAX_ERROR_CODE (133) commence l'espace des erreurs specifiques aux modules (`0x00080000` et plus), dont le message est fourni par le module lui-meme (E46).
+**127 codes references.** Au-dela de MAX_ERROR_CODE (133) commence l'espace des erreurs specifiques aux modules (`0x00080000` et plus), dont le message est fourni par le module lui-meme (E46).
 
 <!-- FIN TABLES ENGENDREES -->

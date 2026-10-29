@@ -56,7 +56,31 @@ plus appartient aux modules, et le message est fourni par le module
 lui-même (E46 fixe la règle : ce message arrive toujours, sur les deux
 plateformes et les deux chemins).
 
-## 4. La clé `raisematherror` — l'échappatoire
+## 4. La contrainte de type : `DIM variable AS type` (phase 8.3)
+
+```basic
+dim total as integer
+total = 10          ' OK
+total = 2.5         ' erreur 134, trappable : Type mismatch
+```
+
+La variable declaree porte une contrainte verifiee a CHAQUE affectation.
+Les types : `integer`/`long` (entier — un reel exactement entier passe),
+`real`/`double`/`number` (numerique), `string` (tout passe). L'erreur
+134 (`COMMAND_ERROR_TYPEMISMATCH`) est trappable par `on error` et
+lisible par `error`/`error$()`. La contrainte est calculee a l'analyse
+(ex_IsCommandDIMAS marque le node), copiee par le builder et verifiee
+par COMMAND(LET).
+
+## 5. `option explicit` : `declarevars 1` en configuration
+
+La cle de configuration `declarevars 1` active le controle amont
+DeclareVars : toute variable non declaree (global, local, const) est
+une erreur d'analyse (&H79, EX_ERROR_UNDEF_GLOBAL) — le programme n'est
+pas execute. Defaut : 0, une variable non declaree cree un global
+(comportement historique, requis par les exemples amont).
+
+## 6. La clé `raisematherror` — l'échappatoire
 
 La configuration peut rendre le silence :
 
@@ -73,7 +97,7 @@ défaut du dépôt est **1** — les bits 2 et 4 restent opt-in parce que
 l'idiome `undef` qui se propage est utilisé par les tests et par les
 programmes existants.
 
-## 5. Le piège E3 : le code de sortie ne dit rien
+## 7. Le piège E3 : le code de sortie ne dit rien
 
 ScriptBasic rend **toujours 0**, même sur une erreur non interceptée :
 le diagnostic part dans le rapporteur (`fichier(ligne): error &H…`),
@@ -85,14 +109,14 @@ jamais dans le code de sortie. Conséquences :
   code de sortie POSIX ne peut pas le porter (POSIX n'en transmet que
   8 bits — E46).
 
-## 6. La position : `fichier(ligne)`
+## 8. La position : `fichier(ligne)`
 
 Le rapporteur précède chaque diagnostic du fichier et de la ligne :
 `tests/trig.bas(57): error &H3:...`. C'est la base du débogage, et la
 raison pour laquelle les contrats comparent la sortie octet par octet :
 une erreur qui bouge de ligne se voit.
 
-## 7. La table des codes (engendrée)
+## 9. La table des codes (engendrée)
 
 La liste complète — code, symbole(s) C, message — est engendrée depuis
 `src/errcodes.h` et `src/errcodes.c` :

@@ -351,7 +351,7 @@ CUT*/
         /* LastError garde le code : la reprise ne rend pas l'erreur
            inexistante, et `error` doit encore la nommer apres coup, comme
            avec `on error goto` (ERRATA E31). */
-        pEo->ErrorGoto = 0;   /* no error goto node */
+        pEo->ErrorGoto = 0;
         }else
       if( pEo->fErrorGoto == ONERROR_RESUME ){
         if( ! pEo->ErrorGoto ){
@@ -360,7 +360,7 @@ CUT*/
           }
         pEo->ErrorResume = 0; /* we resume the exection, we won't go back to anywhere */
         pEo->fErrorGoto = ONERROR_NOTHING; /* on error is switched off by default     */
-        pEo->ErrorGoto = 0;   /* no error goto node */
+        pEo->ErrorGoto = 0;
         pEo->fNextPC = 1;
         pEo->NextProgramCounter = pEo->ErrorGoto;
         }else
@@ -420,6 +420,20 @@ CUT*/
       *piErrorCode = EXE_ERROR_MEMORY_LOW;
       return;
       }
+    }
+  /* phase 8.3 : les contraintes DIM x AS type, par serial. La memoire
+     de pEo n'est pas zeroee par l'allocation : le champ est pose ici,
+     UNE fois par programme (pas dans les init par appel de fonction,
+     qui effaceraient les contraintes desordre). */
+  pEo->pVarConstraint = NULL;
+  if( pEo->pVarConstraint == NULL ){
+    pEo->pVarConstraint = alloc_Alloc((pEo->cGlobalVariables+1)*sizeof(int),
+                                      pEo->pMemorySegment);
+    if( pEo->pVarConstraint == NULL ){
+      *piErrorCode = EXE_ERROR_MEMORY_LOW;
+      return;
+      }
+    memset(pEo->pVarConstraint,0,(pEo->cGlobalVariables+1)*sizeof(int));
     }
   pEo->fWeAreCallingFuction = 0;
   pEo->lFunctionLevel = 0;

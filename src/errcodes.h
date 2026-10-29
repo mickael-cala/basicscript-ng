@@ -161,7 +161,8 @@ extern "C" {
 #define SCRIBA_ERROR_FAIL 131
 #define SCRIBA_ERROR_BUFFER_SHORT 132
 #define COMMAND_ERROR_SUBSCRIPT 133
-#define MAX_ERROR_CODE 134
+#define COMMAND_ERROR_TYPEMISMATCH 134
+#define MAX_ERROR_CODE 135
 typedef struct { char *language; char **array; } tErrorMessageArray;
 extern tErrorMessageArray ErrorMessageArray[];
 extern char  *en_error_messages[];

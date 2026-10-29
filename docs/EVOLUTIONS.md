@@ -1668,3 +1668,33 @@ scientifique invariable.
   modification de memory.h/execute.h impose la reconstruction des
   modules avant toute campagne — les DLL anciennes ecrivent 32 bits
   que le nouveau coeur lit 64.
+
+
+## 2026-10-29 — phase 8.3 : les declarations — DIM AS et option explicit
+
+- **DIM variable AS type** : la contrainte de type existe. Elle est
+  calculee a l'analyse (ex_IsCommandDIMAS reconnaît la forme, trouve le
+  nom du type dans la chaine des nodes de regle et marque la contrainte
+  dans le node — sLen negatif), copiee par le builder (le marqueur
+  court-circuite la table des chaines, dont l'offset se revele decale
+  d'un octet pour les seconds ASYMBOLs), verifiee par COMMAND(LET) a
+  chaque affectation par le numero de serie de la variable. Erreur 134
+  (COMMAND_ERROR_TYPEMISMATCH), trappable et lisible.
+- **option explicit** : le mecanisme amont DeclareVars existait entier
+  dans le compilateur (iDeclareVars, jamais pose) — il est expose par
+  la cle de configuration `declarevars 1`. Une variable non declaree
+  devient une erreur d'analyse (&H79). Defaut 0 : les 178 exemples
+  amont vivent de la creation implicite.
+- **DECOUVERTE DE FIABILITE** : le champ pVarConstraint de pExecuteObject
+  n'etait pas initialise (la struct n'est pas zeroee par alloc_Alloc) et
+  les init per-appel de fonction l'effacaient — d'ou des segfaults
+  aleatoires (heisenbug) sur les tests les plus simples. Regle posee :
+  un champ de pEo s'initialise dans execute_InitStructure SEULEMENT ; les
+  init per-appel n'y touchent pas. Et la regle de blast radius encore :
+  execute.h modifie = modules reconstruits.
+- **la grammaire multi-regles** : deux regles pour le meme mot-cle (DIM
+  et DIMAS) exigent un prescan : la deuxieme regle ne doit s'ouvrir que
+  si son mot-cle distinctif (AS) est present, sinon l'echec FATAL de la
+  premiere (apres un LVALL consommant) empeche la seconde d'etre
+  essayee. Et le piege du heredoc : LexemeSymbol est NULL pour les
+  mots-cles (l'identification est LexemeCode).

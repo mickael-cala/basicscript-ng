@@ -119,9 +119,19 @@ typedef struct _ExecuteObject {
   pModule modules;   
   struct _ExecuteObject *pEPo;
 
-  char *pszModuleError; 
+  char *pszModuleError;
 
-  pHookFunctions pHookers; 
+  int *pVarConstraint; /* phase 8.3 : contrainte par serial (0=aucune) */
+
+/* Les contraintes posees par DIM x AS type (phase 8.3) : verifiees a
+   chaque affectation, trappables (erreur 134). */
+#define VARC_NONE 0
+#define VARC_INT  1 /* entier : long (un double exact entier passe) */
+#define VARC_NUM  2 /* numerique : long ou double */
+#define VARC_STR  3 /* chaine : toute valeur est convertible */
+
+
+  pHookFunctions pHookers;
 
 
   LexNASymbol *pCSYMBOLS; 

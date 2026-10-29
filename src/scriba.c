@@ -1242,6 +1242,17 @@ CUT*/
 
   ex_init(pProgram->pEX);
 
+  /* phase 8.3 « option explicit » : la cle de configuration `declarevars`
+     active le controle amont DeclareVars — toute variable non declaree
+     (global, local, const) est une erreur a l'analyse. Defaut : 0, le
+     comportement historique ou une variable non declaree cree un global.
+     Pose APRES ex_init, qui remet le drapeau a zero. */
+  {
+  long lDeclareVars = 0;
+  if( pProgram->pCONF && ! cft_GetEx(pProgram->pCONF,"declarevars",NULL,NULL,&lDeclareVars,NULL,NULL) )
+    pProgram->pEX->iDeclareVars = (int)lDeclareVars;
+  }
+
   ex_Command_l(pProgram->pEX,&CommandList);
 
   pProgram->pEX->pCommandList = CommandList;

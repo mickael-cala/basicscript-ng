@@ -369,6 +369,13 @@ CUT*/
         case EX_LEX_STRING:
         case EX_LEX_SYMBOL:
         case EX_LEX_ASYMBOL:
+          if( Result->Parameter.CommandArgument.sLen < 0 ){
+            /* phase 8.3 : marqueur DIMAS — l'element porte une contrainte
+               deja calculee, copiee telle quelle (pas de table de chaines) */
+            pThis->Parameter.CommandArgument.Argument.lLongValue =
+              -(Result->Parameter.CommandArgument.sLen) - 10;
+            NEXT_ARGUMENT;
+            }
           pThis->Parameter.CommandArgument.Argument.szStringValue = 
              build_StringIndex(pBuild,Result->Parameter.CommandArgument.Argument.szStringValue,Result->Parameter.CommandArgument.sLen);
           NEXT_ARGUMENT;
