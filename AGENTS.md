@@ -28,7 +28,7 @@ tout travail.
 ```sh
 python build.py --target windows-x64            # l'interpreteur
 python build.py --all                           # les six cibles
-python build.py --target windows-x64 --modules  # hash, re, t, trial, cgi, mt, zlib, odbc (Windows), dyc (32 bits), curl (64 bits), cio et win
+python build.py --target windows-x64 --modules  # hash, re, t, trial, cgi, mt, zlib, odbc (Windows), bytes, dyc (32 bits), curl (64 bits), cio et win
 python build.py --target windows-x64 --modules --release  # sans trial
 python build.py --target windows-x64 --httpd     # le serveur (scriba d'abord)
 python build.py --target windows-x64 --standalone  # executable autonome (hello.bas)
@@ -37,7 +37,7 @@ python build.py --target windows-x64 --libscriba   # archive statique + hotes em
 python build.py --target windows-x64 --standalone tests/standalone_modules.bas --modules  # autonome a modules colles
 python build.py --target windows-x64 --re-engine   # essai C du moteur Spencer
 python tests/run.py --target windows-x64         # 31/31 attendu (manuel inclus ; 30/30 sous UNIX, E44)
-python tests/run.py --target windows-x64 --modules   # 24/24 attendu (dyc saute : 32 bits seulement)
+python tests/run.py --target windows-x64 --modules   # 26/26 attendu (dyc saute : 32 bits seulement)
 python tests/run.py --target windows-x64 --upstream  # 12 lances, 20 sautes
 python tests/run.py --target windows-x64 --upstream-all  # 15 lances, 17 sautes
 python tests/run.py --target windows-x64 --standalone  # hello_standalone, sans .bas

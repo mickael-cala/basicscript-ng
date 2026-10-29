@@ -97,6 +97,7 @@ bibliothèques partagées, dans `dist/<cible>/modules/` :
 | `odbc` | gestionnaire de pilotes ODBC (E11 corrigé, 32 et 64 bits) | `odbc.dll` (Windows) |
 | `dyc` | appel dynamique de DLL par nom (ABI 32 bits, E10) | `dyc.dll` (Windows 32 bits) |
 | `curl` | HTTP/HTTPS/FTP, liaison vers la libcurl du système (E40) | `curl.dll` (Windows 64 bits) |
+| `bytes` | fabrication et lecture d'octets : u/i 8-64 bits, flottants IEEE, ordre d'octets explicite, CRC-16/MODBUS | `bytes.*` |
 
 Les déclarations `hash.bas`, `re.bas`, `t.bas`, `cgi.bas`, `mt.bas`,
 `zlib.bas`, `odbc.bas`, `dyc.bas`, `curl.bas`, `cio.bas`, `win.bas` et

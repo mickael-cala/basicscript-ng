@@ -1634,3 +1634,37 @@ Cette passe pose la sémantique de référence des erreurs :
 
 Restent à la passe suivante : bornes de tableaux (ils s'étendent en
 silence), indexation d'un scalaire, `option explicit`.
+
+
+## 2026-10-26 — phase 8.2 : l'entier 64 bits portable, et le module bytes
+
+La revue exécutée avait montré deux misères : un entier qui dépendait de
+l'ABI de l'OS (`maxint` = 2147483647 sous Windows, 9223372036854775807
+sous Linux — E44), et des réels affichés `1.500000e+00` en notation
+scientifique invariable.
+
+- **l'union de valeur passe en `long long`** : memory.h, les lexemes
+  (lexer.h), les constantes des arbres (builder.h, expression.h),
+  l'arithmetique (mathops.c), le lexer (accumulation exacte, bascule
+  reel seulement au-dela de 2^63), `execute_GetLongValue` — la fonction
+  qui servait a TOUTES les lectures de valeur. E44 est corrige : le
+  meme programme rend le meme `maxint` sur les six cibles.
+- **print des reels en %.15g** : `1.5` s'affiche `1.5`, `0.1+0.2`
+  affiche `0.3`. `str$` garde son format historique, documente.
+- **les pieges attrapes au vol** : `extops.c` (les operateurs `<<`,
+  `>>` et composes) calait sur `sizeof(unsigned long)` — 32 bits sous
+  Windows LLP64, les shifts au-dela de 31 etaient faux ; le seuil du
+  rend `RETURN_DOUBLE_VALUE_OR_LONG` restait a 2^31 ; le magic des
+  caches bytecode derivait de `__DATE__` seul — il intègre desormais
+  `sizeof(FixSizeMemoryObject)`, un cache avant/apres le flip est
+  refuse au lieu d'etre relu silencieusement.
+- **le module bytes** : la fabrication et la lecture d'octets pour les
+  protocoles binaires — u8..u64 et i8..i64, f32/f64, ordre d'octets
+  explicite par champ (BE par defaut, l'ordre reseau), bourrage, et le
+  CRC-16/MODBUS de reference ("123456789" -> 0x4B37). C'est le socle
+  du module modbus (PLAN phase 8.6). Le nom "pack" etait pris : une
+  fonction native historique du langage le porte deja.
+- **la lecon de blast radius, enoncee et appliquee** : toute
+  modification de memory.h/execute.h impose la reconstruction des
+  modules avant toute campagne — les DLL anciennes ecrivent 32 bits
+  que le nouveau coeur lit 64.
